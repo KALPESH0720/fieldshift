@@ -63,7 +63,7 @@ docker compose --profile backend run --rm migrate
 docker compose --profile backend up -d
 ```
 
-The shareable container files are [Dockerfile](Dockerfile), [docker-compose.yml](docker-compose.yml), and [.dockerignore](.dockerignore). `.dockerignore` excludes `.env` and local virtual environments from image builds. Compose publishes Postgres on host port `5433`; containerized backend services use `postgres:5432` over the Compose network. Both addresses point to the same Compose PostGIS database.
+The shareable container files are [Dockerfile](Dockerfile), [docker-compose.yml](docker-compose.yml), and [.dockerignore](.dockerignore). `.dockerignore` excludes `.env` and local virtual environments from image builds. Compose publishes Postgres on host port `5434`; containerized backend services use `postgres:5432` over the Compose network. Both addresses point to the same Compose PostGIS database.
 
 After editing `.env` while the Docker stack is running, recreate the services that consume those settings:
 
@@ -101,7 +101,7 @@ alembic upgrade head
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-For host-run development, Compose exposes Postgres on **host port 5433** and Redis on `6379`. The container itself listens on Postgres port `5432`. The example host `DATABASE_URL` is `postgresql+asyncpg://postgres:postgres@localhost:5433/field_shift`; the API, Alembic, and local tools use that same host database URL. Containerized backend services override it with `postgresql+asyncpg://postgres:postgres@postgres:5432/field_shift`, which targets the same database through Compose networking.
+For host-run development, Compose exposes Postgres on **host port 5434** and Redis on **host port 6380** (container port `6379`). The container itself listens on Postgres port `5432`. The example host `DATABASE_URL` is `postgresql+asyncpg://postgres:postgres@localhost:5434/field_shift`, and the host `REDIS_URL` is `redis://localhost:6380/0`; the API, Alembic, and local tools use those host URLs. Containerized backend services override them with `postgresql+asyncpg://postgres:postgres@postgres:5432/field_shift` and `redis://redis:6379/0`, which target the same services through Compose networking.
 
 The default credentials and JWT value in `.env.example` are for local development only. Set a unique, randomly generated `JWT_SECRET_KEY` for any deployed environment. Configuration validation never prints secret values. It lists provider integrations that are not configured; those integrations are optional for local startup but their features need the corresponding settings.
 
@@ -109,7 +109,7 @@ The default credentials and JWT value in `.env.example` are for local developmen
 
 Run `alembic upgrade head` after starting the services and whenever new migrations are pulled. Check the current revision with `alembic current`; inspect available revisions with `alembic history`. Alembic reads `DATABASE_URL` through `config.settings`, so it targets the same instance as the app. Do not point the development API or migration command at production.
 
-Tests must use a separate database, never the development database. Create it once in the Compose Postgres instance with `docker compose exec postgres psql -U postgres -c "CREATE DATABASE field_shift_test;"`, then set `TEST_DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5433/field_shift_test` for the test process. The integration fixture drops and recreates tables in that database. PowerShell: `$env:TEST_DATABASE_URL='postgresql+asyncpg://postgres:postgres@localhost:5433/field_shift_test'; python -m pytest tests/integration tests/end_to_end`. Unix: `TEST_DATABASE_URL='postgresql+asyncpg://postgres:postgres@localhost:5433/field_shift_test' python -m pytest tests/integration tests/end_to_end`. This setting is isolated from `DATABASE_URL`, which remains the development database for the API and Alembic.
+Tests must use a separate database, never the development database. Create it once in the Compose Postgres instance with `docker compose exec postgres psql -U postgres -c "CREATE DATABASE field_shift_test;"`, then set `TEST_DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5434/field_shift_test` for the test process. The integration fixture drops and recreates tables in that database. PowerShell: `$env:TEST_DATABASE_URL='postgresql+asyncpg://postgres:postgres@localhost:5434/field_shift_test'; python -m pytest tests/integration tests/end_to_end`. Unix: `TEST_DATABASE_URL='postgresql+asyncpg://postgres:postgres@localhost:5434/field_shift_test' python -m pytest tests/integration tests/end_to_end`. This setting is isolated from `DATABASE_URL`, which remains the development database for the API and Alembic.
 
 ## API and background workers
 
@@ -125,6 +125,8 @@ PowerShell accepts the same Celery commands. Worker and beat both use `REDIS_URL
 Offline synchronization request/response fields, examples, conflict policy, transaction behavior, cursor paging, ID remapping, and recovery are documented in [docs/offline-sync.md](docs/offline-sync.md).
 
 Soil-card upload/OCR review, private storage and malware scanning, weather units/cache freshness, sowing alert approval rules, notification preferences, retry/dead-letter behavior, and staging verification are documented in [docs/soil-weather.md](docs/soil-weather.md).
+
+NASA AppEEARS/SMAP account setup, `.env` settings, on-demand sampling API, quality fields and provenance are documented in [docs/backend-integrations.md](docs/backend-integrations.md#nasa-smap-setup).
 
 ## Health and configuration
 
@@ -163,11 +165,11 @@ Each recommendation persists the request/plot/soil/history/price snapshot, exact
 
 Backend provider accounts, free-tier limits, credentials and access blockers are tracked in [`docs/backend-integrations.md`](docs/backend-integrations.md). Do not commit `.env` or send provider secrets in chat.
 
-- **Host port 5432 is occupied:** keep Compose at `5433:5432` and use host port `5433` in `DATABASE_URL`; do not change the container port.
+- **Host port 5432 or 5433 is occupied:** Compose publishes the container port `5432` on host port `5434`; use host port `5434` in `DATABASE_URL` and leave the container port unchanged.
 - **Database connection refused:** run `docker compose ps` and `docker compose logs postgres`; wait for the health check, then rerun validation and migrations.
 - **Host port 8000 is already in use:** do not run the Docker API and host `uvicorn` at the same time; stop one of them or change the published API port in Compose.
 - **Admin route says administration is not configured:** set a non-empty `ADMIN_API_KEY` in the local `.env`, then recreate the API container so it reloads the setting. Use the same value in the `X-Admin-Key` header.
-- **Redis connection refused or readiness 503:** run `docker compose ps` and `docker compose logs redis`; confirm `REDIS_URL=redis://localhost:6379/0` for a host process.
+- **Redis connection refused or readiness 503:** run `docker compose ps` and `docker compose logs redis`; confirm `REDIS_URL=redis://localhost:6380/0` for a host process.
 - **Migrations connect to an unexpected database:** inspect the active `DATABASE_URL` environment override and `.env`. Environment variables override `.env`; run `python -m config.validate` before `alembic upgrade head`.
 - **PostGIS extension errors:** use the configured `postgis/postgis:16-3.5` image, not a plain PostgreSQL image.
 - **Provider configuration warnings:** set the credentials for the provider feature you need. Missing optional provider configuration does not prevent local API startup.

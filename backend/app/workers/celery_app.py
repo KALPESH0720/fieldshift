@@ -13,6 +13,7 @@ celery_app = Celery(
         "app.workers.tasks.weather_alerts",
         "app.workers.tasks.reminders",
         "app.workers.tasks.soil_cards",
+        "app.workers.tasks.satellite_monitoring",
     ],
 )
 celery_app.conf.update(

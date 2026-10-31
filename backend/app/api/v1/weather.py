@@ -19,7 +19,6 @@ from app.schemas.weather import (
     WeatherForecastResponse, WeatherSnapshotHistoryItem,
 )
 from app.services.integrations.http import IntegrationUnavailable
-from app.services.integrations.weather_api import IMDAdapter
 from app.services.weather import forecast_for_plot
 
 router = APIRouter(prefix="/weather", tags=["weather and alerts"])
@@ -46,24 +45,6 @@ async def get_plot_forecast(
         return await forecast_for_plot(session, farmer, plot, redis)
     except IntegrationUnavailable as exc:
         raise HTTPException(status_code=503, detail="Weather provider is unavailable or returned invalid data") from exc
-
-
-@router.get("/plots/{plot_id}/official-warnings")
-async def get_plot_official_warnings(
-    plot_id: int,
-    farmer: Farmer = Depends(get_current_farmer),
-    session: AsyncSession = Depends(get_db),
-) -> dict:
-    """Return IMD's district warning records without deriving numeric forecasts."""
-    plot = await _owned_plot(session, plot_id, farmer.id)
-    if not plot.district:
-        raise HTTPException(status_code=422, detail="Plot district is required for official weather warnings")
-    try:
-        warnings = await IMDAdapter().district_warnings(plot.district)
-    except IntegrationUnavailable as exc:
-        raise HTTPException(status_code=503, detail="Official IMD warnings are unavailable") from exc
-    return {"plot_id": plot.id, "district": plot.district, "provider": "imd",
-            "warnings": warnings, "count": len(warnings)}
 
 
 @router.get("/plots/{plot_id}/snapshots", response_model=list[WeatherSnapshotHistoryItem])

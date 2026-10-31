@@ -13,10 +13,11 @@ from app.models.pest_host_rule import PestHostRule
 from app.models.plot import Plot
 from app.models.recommendation import RecommendationOutcome, RecommendationRun
 from app.models.season import Season
+from app.models.satellite_job import SatelliteJob
 from app.models.soil_test import SoilTest
 from app.models.soil_card_upload import SoilCardUpload
 from app.models.weather_snapshot import WeatherSnapshot
 from app.models.warehouse import Warehouse
 from app.models.sync import SyncChange, SyncOperationLog
 
-__all__ = ["Base", "Farmer", "FarmerPreferences", "Plot", "Season", "CropRecord", "CropRule", "CropRuleReview", "CropRuleAudit", "SoilTest", "SoilCardUpload", "WeatherSnapshot", "MarketPrice", "MinimumSupportPrice", "PestHostRule", "Alert", "SyncChange", "SyncOperationLog", "Group", "InputDealer", "Warehouse", "RecommendationRun", "RecommendationOutcome"]
+__all__ = ["Base", "Farmer", "FarmerPreferences", "Plot", "Season", "CropRecord", "CropRule", "CropRuleReview", "CropRuleAudit", "SoilTest", "SoilCardUpload", "WeatherSnapshot", "SatelliteJob", "MarketPrice", "MinimumSupportPrice", "PestHostRule", "Alert", "SyncChange", "SyncOperationLog", "Group", "InputDealer", "Warehouse", "RecommendationRun", "RecommendationOutcome"]

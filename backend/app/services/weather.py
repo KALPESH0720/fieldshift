@@ -78,9 +78,12 @@ def normalize_forecast(raw: dict | list) -> tuple[dict, dict]:
     if current_raw is not None:
         current_data, _ = normalize_forecast({"forecast": [current_raw], "units": payload.get("units", {})})
         current = current_data["forecast"][0]
-    return {"current": current, "forecast": normalized}, {
-        "rainfall": "mm", "temperature": "C", "wind_speed": "m/s",
-    }
+    return {"current": current, "forecast": normalized,
+            "hourly_data": payload.get("hourly_data", []),
+            "daily_data": payload.get("daily_data", []),
+            "variable_units": payload.get("variable_units", {})}, {
+                "rainfall": "mm", "temperature": "C", "wind_speed": "m/s",
+            }
 
 
 def location_key(latitude: float, longitude: float) -> str:
@@ -97,7 +100,10 @@ def _response(snapshot: WeatherSnapshot, plot_id: int, cached: bool) -> WeatherF
         longitude=snapshot.longitude, location_key=snapshot.location_key, units=snapshot.units,
         fetched_at=snapshot.fetched_at, expires_at=snapshot.expires_at,
         current=snapshot.forecast.get("current"),
-        forecast=snapshot.forecast.get("forecast", []), cached=cached,
+        forecast=snapshot.forecast.get("forecast", []),
+        hourly=snapshot.forecast.get("hourly_data", []),
+        daily=snapshot.forecast.get("daily_data", []),
+        variable_units=snapshot.forecast.get("variable_units", {}), cached=cached,
     )
 
 

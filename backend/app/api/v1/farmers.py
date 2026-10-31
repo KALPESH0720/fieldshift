@@ -95,7 +95,7 @@ async def delete_my_account(
     session: AsyncSession = Depends(get_db),
     redis: Redis = Depends(get_redis),
 ) -> Response:
-    # JWTs are short lived (15 minutes by default); this subject revocation makes
+    # JWTs expire after 60 minutes by default; this subject revocation makes
     # deletion and incident response effective immediately for outstanding tokens.
     await redis.set(f"auth:revoked_before:{farmer.phone}", str(int(datetime.now(UTC).timestamp())),
                     ex=settings.access_token_expire_minutes * 60)

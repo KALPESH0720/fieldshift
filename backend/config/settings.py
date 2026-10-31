@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     admin_api_key: SecretStr | None = None
     agronomist_reviewer_keys: dict[str, SecretStr] = Field(default_factory=dict)
     jwt_algorithm: str = "HS256"
-    access_token_expire_minutes: int = Field(default=15, gt=0, le=60)
+    access_token_expire_minutes: int = Field(default=60, ge=60, le=1440)
     otp_expire_seconds: int = Field(default=300, gt=0)
     otp_resend_cooldown_seconds: int = Field(default=60, gt=0)
     otp_attempt_limit: int = Field(default=5, ge=1, le=20)
@@ -43,8 +43,13 @@ class Settings(BaseSettings):
     whatsapp_gateway_url: str | None = None
     whatsapp_gateway_api_key: SecretStr | None = None
     whatsapp_sender_id: str | None = None
-    nasa_smap_url: str | None = None
-    nasa_earthdata_token: SecretStr | None = None
+    nasa_appeears_api_url: str = "https://appeears.earthdatacloud.nasa.gov/api/"
+    nasa_earthdata_username: str | None = None
+    nasa_earthdata_password: SecretStr | None = None
+    nasa_smap_product: str = "SPL3SMP_E.006"
+    nasa_smap_max_range_days: int = Field(default=90, ge=1, le=365)
+    nasa_smap_poll_interval_seconds: int = Field(default=5, ge=1, le=60)
+    nasa_smap_max_wait_seconds: int = Field(default=900, ge=10, le=1800)
     sentinel2_process_url: str | None = None
     sentinel2_token_url: str = "https://services.sentinel-hub.com/auth/realms/main/protocol/openid-connect/token"
     sentinel2_client_id: str | None = None
@@ -74,9 +79,6 @@ class Settings(BaseSettings):
     agmarknet_max_pages: int = Field(default=20, ge=1, le=100)
     weather_provider: str = "open_meteo"
     open_meteo_api_url: str = "https://api.open-meteo.com/v1/forecast"
-    imd_district_warning_api_url: str = "https://api.imd.gov.in/api/v1/districtwarning"
-    imd_api_key: SecretStr | None = None
-    imd_api_key_header: str = "x-api-key"
     weather_cache_seconds: int = Field(default=1800, ge=60, le=86400)
     weather_freshness_seconds: int = Field(default=3600, ge=60, le=172800)
     alert_max_attempts: int = Field(default=5, ge=1, le=20)
@@ -105,7 +107,7 @@ class Settings(BaseSettings):
         if self.otp_provider not in {"development", "sms"}:
             raise ValueError("OTP_PROVIDER must be development or sms")
         if self.weather_provider != "open_meteo":
-            raise ValueError("WEATHER_PROVIDER must be open_meteo; IMD is configured separately for official warnings")
+            raise ValueError("WEATHER_PROVIDER must be open_meteo")
         if self.environment.strip().lower() in {"production", "prod"}:
             secret = self.jwt_secret_key.get_secret_value()
             if len(secret) < 32 or secret.lower() in {
@@ -128,7 +130,7 @@ class Settings(BaseSettings):
             "Bhashini": (self.bhashini_user_id, self.bhashini_api_key, self.bhashini_pipeline_id),
             "SMS gateway": (self.sms_gateway_url, self.sms_gateway_api_key),
             "WhatsApp gateway": (self.whatsapp_gateway_url, self.whatsapp_gateway_api_key),
-            "NASA Earthdata": (self.nasa_smap_url, self.nasa_earthdata_token),
+            "NASA AppEEARS SMAP": (self.nasa_earthdata_username, self.nasa_earthdata_password),
             "Sentinel-2": (self.sentinel2_process_url, self.sentinel2_client_id, self.sentinel2_client_secret),
             "AgriStack": (self.agristack_base_url, self.agristack_client_id, self.agristack_client_secret),
             "Soil card OCR": (self.soil_card_ocr_url, self.soil_card_ocr_api_key),
@@ -136,7 +138,6 @@ class Settings(BaseSettings):
                                                   self.object_storage_secret_access_key),
             "ClamAV scanner": (self.clamav_host,),
             "Agmarknet": (self.agmarknet_api_url, self.agmarknet_resource_id),
-            "IMD weather": (self.imd_api_key,),
         }
         return [name for name, values in provider_settings.items() if not all(values)]
 

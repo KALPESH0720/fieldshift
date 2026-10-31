@@ -8,9 +8,9 @@ This is a backend-only completion plan. It covers the API, persistence, recommen
 
 ## Executive status
 
-The repository has a useful backend foundation and a working local FastAPI process. Core ORM models, migrations, typed settings, async DB/Redis clients, OTP/JWT code, farmer/plot/history endpoints, a recommendation pipeline, sync processing, integration adapters, and Celery task code exist. The previously recorded automated run was **40 passed and 5 skipped**; that is evidence of unit-level coverage, not proof of production readiness. The skipped database-dependent tests require a disposable PostGIS test database.
+The repository has a working FastAPI/PostGIS/Redis backend with health/config checks, development OTP, farmer lifecycle/export, plot/history CRUD, season administration, recommendation curation/economics, durable sync, soil-card review, Open-Meteo weather, market/MSP/pest context and Celery workflows. NASA SMAP now has a product-specific AppEEARS adapter and owner-scoped asynchronous API. Recent verification reported **56 passed and 35 skipped** without a configured `TEST_DATABASE_URL`; the migration parity and satellite API tests also passed against a fresh disposable PostGIS database. Provider-backed NASA extraction remains inactive until Earthdata Login credentials are configured.
 
-The implementation is **not complete against the V2 backend plan**. Major gaps include: OTP cannot be exercised without a configured SMS provider; several API modules are empty and not registered; recommendation/market/crop knowledge data has no production-grade source and curation workflow; Soil Health Card, weather, market, FPO, satellite and integration workflows are not exposed as APIs; models for groups, dealers and warehouses are not registered for migrations; contingency, intercropping, subsidies/PMFBY, human review, consent, data deletion, audit, backups, monitoring, and deployment readiness remain incomplete. Workers and adapters are code-level foundations whose live behavior still depends on provider credentials, real data, integration verification, and operational configuration.
+The backend is **not complete against the V2 plan**. Remaining major work includes pilot-specific agronomist-approved recommendation data and evaluation, FPO workflows, AgriStack consent, contingency sowing, Sentinel-2 anomaly analysis, dealer/warehouse registries, subsidies/PMFBY, wider audit/consent and production operations. External services require owner-supplied credentials, product authorization and live contract validation; this turn verified AppEEARS product metadata, not a credentialed time-series download.
 
 ## Repository audit: what is present
 
@@ -23,8 +23,8 @@ The implementation is **not complete against the V2 backend plan**. Major gaps i
 | Recommendations | Filters, rotation rules, scoring, reason construction and authenticated endpoint | Working baseline; requires reviewed, versioned agronomy and market inputs. Explicit minimum-repeat interval, rainfall/sowing-window risk, fertilizer savings/subsidies, confidence/source attribution, uncertain-case handoff and outcome-based calibration are not complete. |
 | Offline sync | Sync payload DTO, change log, endpoint and transaction-oriented engine | Foundation exists. Device/client contract, conflict policy acceptance, replay/idempotency, deleted-record/tombstone semantics, pagination/cursor durability and multi-device verification need completion. |
 | Speech and messaging | Bhashini adapter and STT/TTS/translation routes; SMS/WhatsApp adapters | Adapter/route code exists. Provider configuration, consent/preferences, delivery status, retry/dead-letter behavior, local test strategy and end-to-end provider verification remain. |
-| External data adapters | Weather, NASA SMAP, Sentinel-2, AgriStack and OCR service clients | Clients are present, but several corresponding route modules are empty. AgriStack consent flow, image upload/storage, normalized records and production provider verification are missing. |
-| Workers | Celery app and price, weather, reminders task modules with a beat schedule | Task/schedule code exists for three jobs. Live worker/beat deployment, operational monitoring, data-quality/source provenance and error/replay procedures need work. Satellite monitoring task code is present but not registered in Celery includes or periodic schedule. |
+| External data adapters | Open-Meteo, NASA AppEEARS SMAP, Sentinel-2, AgriStack, weather and OCR clients | Open-Meteo forecasts and owner-scoped NASA SMAP jobs are exposed. Sentinel-2 anomaly workflows and AgriStack consent remain incomplete; provider credentials and live NASA download verification remain external setup steps. |
+| Workers | Celery app with price, weather, reminders, soil-card and on-demand satellite task modules | Satellite SMAP work is registered for queued requests; it intentionally has no periodic schedule to avoid unrequested NASA calls. Live worker deployment/monitoring and satellite anomaly analysis remain. |
 | Additional ecosystem models | Group, InputDealer and Warehouse model files exist | They are not exported/registered in `app.models`; there are no complete API/workflow implementations. Subsidy/insurance and pest knowledge models are absent. |
 | Verification | Unit, integration and E2E test files exist | Local unit suite was previously run. PostGIS integration/E2E execution, real app startup with migrations, external adapter smoke checks and a repeatable CI pipeline remain to be completed. |
 
@@ -32,7 +32,7 @@ The implementation is **not complete against the V2 backend plan**. Major gaps i
 
 ### 1. Make development and deployment configuration deterministic
 
-- Keep Compose's published Postgres port, `.env` `DATABASE_URL`, Alembic, and application settings aligned. The current local fix uses host port `5433` to avoid the observed port-5432 collision; document this in `.env.example` and the setup instructions, and keep all connections pointing at the same Postgres instance.
+- Keep Compose's published Postgres port, `.env` `DATABASE_URL`, Alembic, and application settings aligned. The current local fix uses host port `5434` after `5432` and `5433` were occupied; document this in `.env.example` and setup instructions, and keep all connections pointing at the same Postgres instance.
 - Add a startup/config validation command that checks required settings and reports missing provider configuration without printing secret values. Fail clearly for invalid database URLs and weak production JWT secrets.
 - Add health/readiness endpoints: liveness should not require third parties; readiness should verify required DB/Redis dependencies with bounded timeouts.
 - Add a repeatable setup and migration guide covering Windows PowerShell and Unix shells, test database isolation, worker/beat startup, and common local failures.
@@ -100,7 +100,7 @@ The implementation is **not complete against the V2 backend plan**. Major gaps i
 - Connect weather ingestion to plot coordinates, persist forecast snapshots, and define what “sowing window compresses” means for each crop/region with agronomist approval.
 - Add alert deduplication, quiet hours, language/template selection, user opt-out, delivery receipts, retry/dead-letter records and replay tools for SMS/WhatsApp. Avoid duplicate notifications from hourly jobs.
 - Make the reminder schedule read farmer preferences and crop calendar data rather than broadcasting all due alerts indiscriminately.
-- Add provider contract tests and a staging smoke test for IMD/weather and messaging providers.
+- Open-Meteo contract coverage exists for the agricultural current/hourly/daily forecast fields, and a live seven-day request was verified. IMD is deferred; repeat the live smoke check before release and retain provider attribution.
 
 **Acceptance:** forecast updates produce deterministic, deduplicated alerts for opted-in users; failures are visible and retryable; users can inspect and change their preferences.
 
@@ -155,10 +155,9 @@ The implementation is **not complete against the V2 backend plan**. Major gaps i
 
 ### 15. Mid-season satellite alarms
 
-- Register `satellite_monitoring` task with Celery and define a schedule, job lock/idempotency, region/plot query strategy and rate limits. Current task code is not included in Celery's task include list or beat schedule.
-- Implement and register `app/api/v1/satellite.py` for plot observations, anomaly history and alert acknowledgement.
-- Persist Sentinel-2 indices/SMAP moisture observations with geometry, acquisition time, cloud/quality flags, processing version, provider provenance and confidence. Add anomaly baselines and thresholds reviewed by experts.
-- Map anomalies to actionable, cautious mitigation guidance; include opt-in messaging and human escalation. Test provider outages, missing scenes and cloudy imagery.
+- Implemented: Earthdata-authenticated AppEEARS point extraction for current SMAP Enhanced L3 9 km daily data; AM/PM soil-moisture and retrieval-quality fields; bounded task polling; owner-scoped job/result persistence; Celery registration; configurable date range and processing timeout.
+- Implemented: `POST /api/v1/satellite/plots/{plot_id}/smap/soil-moisture` queues a request, and `GET /api/v1/satellite/smap/jobs/{job_id}` returns status/results. NASA setup steps and `.env` names are in `docs/backend-integrations.md#nasa-smap-setup`.
+- Remaining: run a credentialed AppEEARS sample after the project owner configures Earthdata Login; add Sentinel-2 observations, anomaly baselines/thresholds, acknowledgement and reviewed guidance only after source/quality choices are approved.
 
 ### 16. Subsidy and PMFBY matching
 

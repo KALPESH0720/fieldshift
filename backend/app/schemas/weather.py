@@ -25,6 +25,11 @@ class WeatherForecastResponse(StrictSchema):
     expires_at: datetime
     current: WeatherForecastPoint | None = None
     forecast: list[WeatherForecastPoint]
+    hourly: list[dict] = Field(default_factory=list)
+    daily: list[dict] = Field(default_factory=list)
+    variable_units: dict[str, dict[str, str]] = Field(default_factory=dict)
+    attribution: str = "Weather data by Open-Meteo.com"
+    attribution_url: str = "https://open-meteo.com/"
     cached: bool = False
 
 
