@@ -1,0 +1,280 @@
+{
+  "request_id": "example-0001",
+  "status": "fast",
+  "grid_cell_id": "g0.1_185_738",
+  "versions": {
+    "model": "0.1.0",
+    "rules": "e16cc10b",
+    "params": "95e02224",
+    "layer": "synthetic-0"
+  },
+  "options": [
+    {
+      "rank": 1,
+      "crop_sequence": [
+        "tomato",
+        "chickpea"
+      ],
+      "seasons": [
+        "kharif-2027",
+        "rabi-2027"
+      ],
+      "scores": {
+        "soil": 0.525,
+        "return": 1.0,
+        "water_risk": 0.8959,
+        "pest": 0.7,
+        "total": 0.8183
+      },
+      "uncertainty": {
+        "pessimistic_total": 0.7319,
+        "top3_stability": 1.0
+      },
+      "economics": {
+        "net_return_per_acre": 83000.0,
+        "net_return_pessimistic_per_acre": 74886.32,
+        "fertilizer_saved_kg_per_acre": 0.0,
+        "fertilizer_saving_inr_per_acre": 0.0,
+        "price_basis": [
+          {
+            "crop": "tomato",
+            "used": "market",
+            "market": 1500.0,
+            "msp": null
+          },
+          {
+            "crop": "chickpea",
+            "used": "msp",
+            "market": null,
+            "msp": 5600.0
+          }
+        ]
+      },
+      "reason_codes": [
+        {
+          "code": "FAMILY_BREAK",
+          "params": {
+            "crop": "tomato",
+            "family": "Solanaceae",
+            "window_seasons": 3
+          },
+          "text_en": "Tomato has not been grown in this plant family for 3 seasons, which cuts pest carry-over."
+        },
+        {
+          "code": "FAMILY_BREAK",
+          "params": {
+            "crop": "chickpea",
+            "family": "Fabaceae",
+            "window_seasons": 3
+          },
+          "text_en": "Chickpea (gram) has not been grown in this plant family for 3 seasons, which cuts pest carry-over."
+        },
+        {
+          "code": "HIGHEST_NET_RETURN",
+          "params": {},
+          "text_en": "Highest expected net return among the options."
+        }
+      ],
+      "trade_off_code": {
+        "code": "LOWER_SOIL_BENEFIT",
+        "params": {},
+        "text_en": "Gives less benefit to the soil than the best option."
+      },
+      "confidence": "high",
+      "sources": [
+        "knowledge:e16cc10b",
+        "layer:synthetic-0",
+        "price:market",
+        "price:msp",
+        "rule:ALTERNATE_ROOT_DEPTH",
+        "rule:FAMILY_BREAK",
+        "rule:N_DEMANDING_AFTER_N_DEMANDING",
+        "rule:SAME_ROOT_DEPTH"
+      ]
+    },
+    {
+      "rank": 2,
+      "crop_sequence": [
+        "onion",
+        "chickpea"
+      ],
+      "seasons": [
+        "kharif-2027",
+        "rabi-2027"
+      ],
+      "scores": {
+        "soil": 0.575,
+        "return": 0.1892,
+        "water_risk": 0.9063,
+        "pest": 0.7,
+        "total": 0.5525
+      },
+      "uncertainty": {
+        "pessimistic_total": 0.4734,
+        "top3_stability": 1.0
+      },
+      "economics": {
+        "net_return_per_acre": 38000.0,
+        "net_return_pessimistic_per_acre": 30900.39,
+        "fertilizer_saved_kg_per_acre": 0.0,
+        "fertilizer_saving_inr_per_acre": 0.0,
+        "price_basis": [
+          {
+            "crop": "onion",
+            "used": "market",
+            "market": 1800.0,
+            "msp": null
+          },
+          {
+            "crop": "chickpea",
+            "used": "msp",
+            "market": null,
+            "msp": 5600.0
+          }
+        ]
+      },
+      "reason_codes": [
+        {
+          "code": "FAMILY_BREAK",
+          "params": {
+            "crop": "onion",
+            "family": "Amaryllidaceae",
+            "window_seasons": 3
+          },
+          "text_en": "Onion has not been grown in this plant family for 3 seasons, which cuts pest carry-over."
+        },
+        {
+          "code": "FAMILY_BREAK",
+          "params": {
+            "crop": "chickpea",
+            "family": "Fabaceae",
+            "window_seasons": 3
+          },
+          "text_en": "Chickpea (gram) has not been grown in this plant family for 3 seasons, which cuts pest carry-over."
+        },
+        {
+          "code": "LOW_WATER_RISK",
+          "params": {},
+          "text_en": "Water supply and temperature fit this plan well."
+        }
+      ],
+      "trade_off_code": {
+        "code": "LOWER_RETURN",
+        "params": {},
+        "text_en": "Expected return is lower than the best option."
+      },
+      "confidence": "high",
+      "sources": [
+        "knowledge:e16cc10b",
+        "layer:synthetic-0",
+        "price:market",
+        "price:msp",
+        "rule:ALTERNATE_ROOT_DEPTH",
+        "rule:FAMILY_BREAK",
+        "rule:N_DEMANDING_AFTER_N_DEMANDING"
+      ]
+    },
+    {
+      "rank": 3,
+      "crop_sequence": [
+        "sorghum",
+        "chickpea"
+      ],
+      "seasons": [
+        "kharif-2027",
+        "rabi-2027"
+      ],
+      "scores": {
+        "soil": 0.675,
+        "return": 0.1279,
+        "water_risk": 0.9272,
+        "pest": 0.5,
+        "total": 0.5462
+      },
+      "uncertainty": {
+        "pessimistic_total": 0.4672,
+        "top3_stability": 1.0
+      },
+      "economics": {
+        "net_return_per_acre": 34600.0,
+        "net_return_pessimistic_per_acre": 27500.39,
+        "fertilizer_saved_kg_per_acre": 0.0,
+        "fertilizer_saving_inr_per_acre": 0.0,
+        "price_basis": [
+          {
+            "crop": "sorghum",
+            "used": "market",
+            "market": 3200.0,
+            "msp": null
+          },
+          {
+            "crop": "chickpea",
+            "used": "msp",
+            "market": null,
+            "msp": 5600.0
+          }
+        ]
+      },
+      "reason_codes": [
+        {
+          "code": "FAMILY_BREAK",
+          "params": {
+            "crop": "chickpea",
+            "family": "Fabaceae",
+            "window_seasons": 3
+          },
+          "text_en": "Chickpea (gram) has not been grown in this plant family for 3 seasons, which cuts pest carry-over."
+        },
+        {
+          "code": "LEGUME_AFTER_CEREAL",
+          "params": {
+            "crop": "chickpea",
+            "previous_crop": "sorghum"
+          },
+          "text_en": "Chickpea (gram) fixes nitrogen and follows Sorghum (jowar), which helps the soil."
+        },
+        {
+          "code": "LOW_WATER_RISK",
+          "params": {},
+          "text_en": "Water supply and temperature fit this plan well."
+        }
+      ],
+      "trade_off_code": {
+        "code": "LOWER_RETURN_BETTER_SOIL",
+        "params": {},
+        "text_en": "Earns less this year, better soil next year."
+      },
+      "confidence": "high",
+      "sources": [
+        "knowledge:e16cc10b",
+        "layer:synthetic-0",
+        "price:market",
+        "price:msp",
+        "rule:ALTERNATE_ROOT_DEPTH",
+        "rule:FAMILY_BREAK",
+        "rule:FAMILY_CARRYOVER",
+        "rule:LEGUME_AFTER_CEREAL",
+        "rule:N_DEMANDING_AFTER_N_DEMANDING",
+        "rule:SAME_ROOT_DEPTH"
+      ]
+    }
+  ],
+  "excluded_first_season": [
+    {
+      "crop": "maize",
+      "code": "SAME_CROP_GAP",
+      "params": {
+        "required_gap_seasons": 2,
+        "seasons_since": 2
+      }
+    }
+  ],
+  "confidence": "high",
+  "needs_human_review": false,
+  "missing_inputs": [],
+  "notes": [
+    "KNOWLEDGE_NOT_REVIEWED",
+    "SYNTHETIC_CELL_DATA"
+  ],
+  "job_id": "f640460f-5d63-4f37-95b5-4a9fa49f2cf5"
+}

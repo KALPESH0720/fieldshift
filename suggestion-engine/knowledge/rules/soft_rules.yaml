@@ -1,0 +1,16 @@
+# DRAFT - illustrative weights, NOT agronomist-reviewed.
+# Soft rules adjust the soil and pest scores. Effects are added to a 0.5 neutral base and clamped to 0..1.
+version: 1
+status: draft
+soil_base:
+  n_effect: {fixes: 0.25, neutral: 0.0, demands: -0.10}
+  residue: {high: 0.10, medium: 0.0, low: -0.05}
+  root_depth: {deep: 0.05, medium: 0.0, shallow: 0.0}
+rules:
+  LEGUME_AFTER_CEREAL:           {dimension: soil, effect: 0.10}
+  N_DEMANDING_AFTER_LEGUME:      {dimension: soil, effect: 0.10}
+  ALTERNATE_ROOT_DEPTH:          {dimension: soil, effect: 0.05}
+  SAME_ROOT_DEPTH:               {dimension: soil, effect: -0.05}
+  N_DEMANDING_AFTER_N_DEMANDING: {dimension: soil, effect: -0.10}
+  FAMILY_BREAK:                  {dimension: pest, effect: 0.20, window_seasons: 3}
+  FAMILY_CARRYOVER:              {dimension: pest, effect: -0.20, window_seasons: 3}

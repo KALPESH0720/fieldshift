@@ -1,0 +1,21 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: sorghum
+name: "Sorghum (jowar)"
+family: Poaceae
+seasons: ['kharif', 'rabi']
+duration_days: 110
+root_depth: deep
+n_effect: demands
+n_credit_kg_per_acre: 0
+n_requirement_kg_per_acre: 24
+residue: high
+water_need_mm: 400
+temp_c: [8, 20, 34, 40]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [250, 400, 800, 1200]     # effective water supply: rain + stored soil water at sowing
+ph: [5.0, 5.5, 8.0, 9.0]
+heat_stress_days_tolerance: 30
+typical_yield_q_per_acre: 8
+pests: ['shoot fly', 'stem borer']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null

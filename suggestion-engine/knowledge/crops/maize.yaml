@@ -1,0 +1,21 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: maize
+name: "Maize"
+family: Poaceae
+seasons: ['kharif', 'rabi']
+duration_days: 105
+root_depth: medium
+n_effect: demands
+n_credit_kg_per_acre: 0
+n_requirement_kg_per_acre: 48
+residue: high
+water_need_mm: 500
+temp_c: [10, 18, 30, 38]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [400, 500, 900, 1500]     # effective water supply: rain + stored soil water at sowing
+ph: [5.0, 5.8, 7.5, 8.5]
+heat_stress_days_tolerance: 20
+typical_yield_q_per_acre: 20
+pests: ['fall armyworm', 'stem borer']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null

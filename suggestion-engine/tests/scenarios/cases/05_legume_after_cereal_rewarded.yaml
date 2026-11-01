@@ -1,0 +1,12 @@
+name: A legume after a cereal is rewarded and explained
+request:
+  location: {lat: 18.52, lon: 73.85}
+  season: rabi-2026
+  irrigation: full
+  soil: {ph: 7.2}
+  horizon_seasons: 1
+  crop_history:
+    - {season: kharif-2026, crop: maize}
+expect:
+  any_option_reason: LEGUME_AFTER_CEREAL
+  min_options: 1

@@ -1,0 +1,22 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: chickpea
+name: "Chickpea (gram)"
+family: Fabaceae
+seasons: ['rabi']
+duration_days: 105
+root_depth: deep
+n_effect: fixes
+n_credit_kg_per_acre: 8
+n_requirement_kg_per_acre: 0
+residue: medium
+water_need_mm: 250
+temp_c: [5, 15, 28, 35]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [120, 200, 450, 800]     # effective water supply: rain + stored soil water at sowing
+ph: [5.5, 6.0, 8.0, 9.0]
+heat_stress_days_tolerance: 10
+min_gap_same_family_seasons: 3
+typical_yield_q_per_acre: 5
+pests: ['pod borer', 'wilt']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null
