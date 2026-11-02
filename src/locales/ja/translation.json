@@ -1,0 +1,1077 @@
+{
+  "language": {
+    "english": "English",
+    "marathi": "Marathi",
+    "hindi": "Hindi"
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "Make Field Shift work your way",
+    "languageTitle": "言語",
+    "languageBody": "Choose the language you are most comfortable reading.",
+    "remindersTitle": "Farm reminders",
+    "remindersBody": "Get timely nudges for important work on your farm.",
+    "sowing": "Sowing window alerts",
+    "sowingBody": "A reminder when it is a good time to sow your next crop.",
+    "fertilizer": "Fertilizer reminders",
+    "fertilizerBody": "A simple reminder before your crop needs nutrients.",
+    "channels": "Send reminders by",
+    "sms": "SMS",
+    "whatsapp": "WhatsApp",
+    "listen": "聞く",
+    "stop": "停止",
+    "saved": "Preferences saved on this device",
+    "unavailable": "Voice playback is not available in this browser.",
+    "offline": "Offline Mode",
+    "offlineBody": "All your data is saved on this phone. Syncs automatically when online.",
+    "online": "Connected",
+    "onlineBody": "You are online • new data will sync in the background.",
+    "logOut": "Log Out",
+    "logOutBody": "You will be signed out and returned to the login screen.",
+    "about": "About Field Shift",
+    "version": "Version 0.1.0 • Beta",
+    "featureLanguage": "Feature 1 • Language Layer",
+    "featureReminders": "Feature 6 • Reminders",
+    "appVersion": "App Version",
+    "privacy": "Privacy & Data",
+    "privacyBody": "Your data stays on this phone",
+    "confirmLogout": "Tap again to confirm log out",
+    "textMessage": "Text message",
+    "chatMessage": "Chat message",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "back": "Go back",
+    "noLanguages": "言語が見つかりません",
+    "searchLanguages": "言語を検索",
+    "recentlyUsed": "最近使用した言語",
+    "imageCredits": "Image credits",
+    "imageCreditsBody": "Original crop illustrations made for Field Shift (CC0-equivalent).",
+    "imageCreditsIntro": "Crop photographs are sourced from Wikimedia Commons and Unsplash under open licenses (CC0, Public Domain, CC-BY, CC-BY-SA).",
+    "viewSource": "Source",
+    "accountTitle": "Account & Phone",
+    "accountSubtitle": "Farmer Profile",
+    "phoneLabel": "Phone number",
+    "unsyncedLogoutWarning": "You have {count} unsynced farm change(s) on this device. Logging out now will clear them before they sync.",
+    "cancelLogout": "Keep signed in"
+  },
+  "auth": {
+    "brandTagline": "Precision Agriculture Platform",
+    "brandQuote": "Smarter crops. Healthier soil. Stronger yields.",
+    "brandDescription": "Sign in with your mobile number to get crop advice, soil health cards, and live market prices.",
+    "statOffline": "Offline Ready",
+    "statOneTimeCode": "SMS Code Login",
+    "statProtected": "Protected Data",
+    "pillWeather": "Weather Alerts",
+    "pillCrops": "Crop Rotation",
+    "pillSoil": "Soil Health",
+    "brandFooter": "Field Shift • Built for farmers everywhere",
+    "demoBadge": "Demo",
+    "demoHint": "Demo mode: use code 123456",
+    "listenPrompt": "Listen",
+    "offlineLoginNotice": "You are offline. Connect to the internet to receive your SMS verification code.",
+    "sessionLoading": "Checking your session…",
+    "signedInAs": "Signed in as",
+    "continueToFarm": "Continue to Farm",
+    "notYouSwitch": "ご本人ではありませんか？ユーザーを切り替え",
+    "step1Badge": "Step 1 of 2 • Phone Number",
+    "phoneStepTitle": "電話番号を入力してください",
+    "phoneStepSubtitle": "We will send a 6-digit SMS code to sign you in. No password needed.",
+    "phoneLabel": "Mobile phone number",
+    "phonePlaceholder": "98765 43210",
+    "countryCodeLabel": "Select country dial code",
+    "searchCountry": "Search country or dial code",
+    "noCountryFound": "No country found",
+    "sendCode": "コードを送信",
+    "sendingCode": "Sending code…",
+    "step2Badge": "Step 2 of 2 • SMS Code",
+    "otpStepTitle": "6桁のコードを入力",
+    "otpStepSubtitle": "Type the one-time code sent by SMS to your phone.",
+    "codeSentTo": "Code sent to {phone}",
+    "changeNumber": "Change number",
+    "otpLabel": "6-digit verification code",
+    "otpDigitAria": "Digit {index} of {total}",
+    "verifyCode": "確認",
+    "verifyingCode": "Verifying…",
+    "resendIn": "Resend code in {seconds}s",
+    "resendCode": "Resend code",
+    "resendReadyAnnouncement": "You can now request a new verification code.",
+    "codeResentAnnouncement": "A new 6-digit code has been sent to {phone}.",
+    "callMeWithCode": "Call me with the code",
+    "phoneVerifiedBadge": "Phone Verified • New Farmer",
+    "profileStepTitle": "Tell us your name",
+    "profileStepSubtitle": "Your phone is verified. Add your name so we can personalize your farm plan.",
+    "nameLabel": "Your name",
+    "namePlaceholder": "e.g. Ramesh Naik",
+    "preferredLanguageLabel": "Preferred language",
+    "consentCheckboxLabel": "I agree to receive SMS login codes and farm alerts and accept the",
+    "privacyPolicyLink": "Privacy Notice",
+    "privacyNotice": "By continuing, you agree to receive one-time SMS login codes.",
+    "privacyModalTitle": "Privacy & SMS Notice",
+    "privacyModalPoint1": "Your phone number is used only to sign you in with one-time SMS codes and send farm alerts you enable.",
+    "privacyModalPoint2": "Your farm plots and soil records are stored securely and never sold to third parties.",
+    "privacyModalPoint3": "On a shared phone, tap 'Not you? Switch user' anytime to clear your farm data from this device.",
+    "completeSignUp": "Start using Field Shift",
+    "savingProfile": "Saving…",
+    "errors": {
+      "phoneRequired": "Please enter your mobile phone number.",
+      "phoneTooShort": "This phone number is too short for {country}.",
+      "phoneTooLong": "This phone number is too long for {country}.",
+      "phoneInvalidForCountry": "Please enter a valid mobile number for {country}.",
+      "codeIncomplete": "Please enter all 6 digits of the code.",
+      "wrongCode": "That code did not match. Please check the SMS and try again.",
+      "wrongCodeWithAttempts": "Wrong code. {remaining} attempts left.",
+      "expiredCode": "This code has expired. Tap 'Resend code' to get a new one.",
+      "tooManyAttempts": "Too many attempts. Please wait {minutes} minute(s) before trying again.",
+      "maxResendsReached": "Maximum code resends reached for now. Please wait a few minutes.",
+      "noNetwork": "No internet connection. Please check your signal and try again.",
+      "timeout": "The network is slow and the request timed out. Please try again.",
+      "serverError": "Could not reach the server right now. Please try again in a moment.",
+      "nameRequired": "Please enter your name to continue.",
+      "consentRequired": "Please agree to the privacy and SMS notice to continue."
+    }
+  },
+  "recommender": {
+    "listen": "Listen",
+    "explainScreen": "Explain Screen",
+    "listenSummary": "Listen to Summary",
+    "stopListening": "Stop listening",
+    "loadingHeader": "Your personalised plan is being built…",
+    "steps": [
+      [
+        "Analysing your soil history...",
+        "Checking nitrogen levels, previous crop residue & drainage"
+      ],
+      [
+        "Checking live APMC mandi prices...",
+        "Pulling today's rates from Panaji, Mapusa & Margao mandis"
+      ],
+      [
+        "Generating your optimal rotation plan...",
+        "Ranking crops by soil benefit, water need & expected profit"
+      ]
+    ],
+    "previousCrop": "Previous harvested crop",
+    "analysingPlot": "Analysing this plot",
+    "yourPlot": "your plot",
+    "defaultAreaUnit": "hectares",
+    "regionFallback": "your region",
+    "stepProgress": "Step {current} of {total}",
+    "seasons": {
+      "Rabi": "winter",
+      "Kharif": "monsoon",
+      "Zaid": "summer"
+    },
+    "stepTitles": {
+      "fieldDetails": "Reading your field details",
+      "soilHistory": "Analysing soil history",
+      "weather": "Checking the weather",
+      "cropFamilies": "Comparing crop families",
+      "market": "Checking market prices",
+      "rotationPlan": "Building your rotation plan"
+    },
+    "stepDetails": {
+      "fieldDetails": "Checking {plotName}, {area} {unit}, last crop {previousCrop}",
+      "soilHistory": "Looking at nutrients left by {previousCrop} and what your soil needs",
+      "weather": "Reading rainfall and temperature for the {season} season",
+      "cropFamilies": "Finding crops from a different family to rest the soil",
+      "market": "Looking at current prices near {region}",
+      "rotationPlan": "Ranking crops by profit, water use and soil health"
+    },
+    "fewResults": "Only {count} suitable crop(s) found for this season and previous crop. More will appear as new crops are added.",
+    "backToPlots": "Back to Farm Plots",
+    "pageTitle": "Crop Rotation Recommender",
+    "offlineReady": "Offline Ready",
+    "pageSubtitle": "Powered by ICAR agronomy guidelines & local soil replenishment models",
+    "screenOverviewSpeech": "Crop Rotation Recommender. Select your plot, upcoming season, and previously harvested crop to discover recommendations that restore soil fertility, cut fertilizer costs, and boost your net income.",
+    "step1Badge": "Step 1 • Field Parameters",
+    "tellUsTitle": "Tell us about your field",
+    "tellUsSubtitle": "Simple inputs. No complicated agronomic jargon.",
+    "formInstructionsSpeech": "Step 1. Choose which plot you are planning for. Then pick your upcoming season and the crop you harvested previously. Our offline calculation engine will rank the smartest next crops.",
+    "selectPlotLabel": "Select Farm Plot",
+    "plotsSavedCount": "{count} saved offline",
+    "noPlotsTitle": "No plots found in offline database",
+    "noPlotsSubtitle": "Add a quick test plot to preview the recommendation engine.",
+    "quickAddDemoPlot": "+ Quick Add Demo Plot",
+    "standardAcre": "Standard Acre",
+    "localVillage": "Local Village",
+    "upcomingSeasonLabel": "Upcoming Sowing Season",
+    "seasonNames": {
+      "Rabi": "Rabi",
+      "Kharif": "Kharif",
+      "Zaid": "Zaid"
+    },
+    "seasonRanges": {
+      "Rabi": "Winter (Oct – Mar)",
+      "Kharif": "Monsoon (Jul – Oct)",
+      "Zaid": "Summer (Mar – Jun)"
+    },
+    "chooseFromList": "Choose from list",
+    "otherCropBtn": "+ Other crop",
+    "customCropPlaceholder": "Type previous crop name (e.g., Pearl Millet, Barley)…",
+    "buildingPlan": "Building your plan…",
+    "calculateBestRotations": "Calculate Best Rotations",
+    "recommendedNextCrops": "Recommended Next Crops",
+    "optionsCount": "{count} Options",
+    "tailoredContext": "Tailored for {plot} • Following {previousCrop} in {season}",
+    "resultsSummaryIntro": "Here are the top ranked crop recommendations for {plot} following {previousCrop} in {season}.",
+    "resultsSummaryTop": "Rank 1 is {crop}. {reason} It saves {weight} of {fertilizer} on this plot and earns an estimated net return of {netReturn}.",
+    "optimalBalance": "Optimal Balance",
+    "whyThisCrop": "Why this crop? — In plain words",
+    "estimatedNetReturn": "Estimated Net Return",
+    "monoCropBase": "Mono-crop Base",
+    "thisRotation": "This Rotation",
+    "fertilizerReduction": "Fertilizer Reduction",
+    "soilRestored": "Soil Restored",
+    "chemicalBillCut": "Chemical Bill Cut:",
+    "selectCropBtn": "Select This Crop for Rotation",
+    "selectedForPlotBtn": "Selected for {plot} (Saved to Sync Queue)",
+    "demoPlotSavedToast": "Demo plot registered offline!",
+    "cropSelectedToast": "Selected {crop}! Plan saved to offline device storage.",
+    "cropSelectedFallbackToast": "Selected {crop} for this season.",
+    "durationRangeDays": "{min} – {max} days",
+    "plotUnit": "plot",
+    "perPlot": "per plot",
+    "netReturnDelta": "+{pct}% vs repeat crop",
+    "savesFertilizerKg": "Saves {kg} kg {fertilizer}",
+    "estimatedFertilizerSavings": "{amount} estimated savings",
+    "cardReturnSpeech": "Estimated net return is {netReturn}, up {gain} compared to repeating the same crop.",
+    "cardFertilizerSpeech": "Fertilizer savings: {weight} of {fertilizer}, saving about {savings}.",
+    "cardWaterSpeech": "Growing duration is {duration}, and water requirement is {waterNeed}.",
+    "fertilizerUrea": "Urea",
+    "rankTags": {
+      "bestFit": "#{rank} Best Rotation Fit",
+      "soilBalance": "#{rank} Strong Soil Balance",
+      "lowInput": "#{rank} Smart Low-Input Option"
+    },
+    "badges": {
+      "soilBalance": "Best Soil Balance",
+      "marketChoice": "Strong Market Demand",
+      "lowWater": "Water-Saving Pick"
+    },
+    "families": {
+      "legume": "Pulse / Legume",
+      "oilseed": "Oilseed",
+      "cereal": "Cereal Grain",
+      "cash": "Cash Crop",
+      "unknown": "Diverse Crop"
+    },
+    "rootDepths": {
+      "shallow": "shallow",
+      "medium": "medium-depth",
+      "deep": "deep"
+    },
+    "waterNeeds": {
+      "low1to2": "Low — only 1 to 2 light irrigations needed",
+      "low2": "Low — about 2 irrigations across the season",
+      "veryLowResidual": "Very low — thrives on residual soil moisture",
+      "veryLow2": "Very low — up to 2 light irrigations",
+      "moderate3": "Moderate — about 3 timely irrigations",
+      "moderate3to4": "Moderate — 3 to 4 irrigations at key stages",
+      "moderate4": "Moderate — about 4 irrigations across growth stages"
+    },
+    "reasons": {
+      "afterLegume": "{crop} makes full use of the natural nitrogen left in your soil by the previous pulse crop, cutting your {fertilizer} need by {kg} kg.",
+      "afterCereal": "{crop} naturally restores nitrogen after a heavy cereal harvest, cutting your {fertilizer} requirement by {kg} kg.",
+      "differentFamily": "Switching crop families with {crop} breaks pest and disease cycles while reducing {fertilizer} use by {kg} kg.",
+      "alternateRoots": "Its {currDepth} roots draw moisture and nutrients from a different soil layer than the previous {prevDepth}-rooted crop.",
+      "coverSoil": "Its canopy shades the topsoil well, conserving moisture and supporting healthy soil microbes."
+    }
+  },
+  "voice": {
+    "marathiFallback": "Marathi voice not installed. Using Hindi voice. For best results use Microsoft Edge.",
+    "noVoice": "No suitable voice is installed on this device.",
+    "testSample": "This is a voice test for Field Shift. Your selected language is ready for farm guidance.",
+    "testMarathi": "हा फील्ड शिफ्टसाठी आवाज चाचणी संदेश आहे. तुमची निवडलेली भाषा शेतीच्या मार्गदर्शनासाठी तयार आहे.",
+    "testHindi": "यह फील्ड शिफ्ट के लिए आवाज़ परीक्षण संदेश है। आपकी चुनी हुई भाषा खेती के मार्गदर्शन के लिए तैयार है।",
+    "voiceTest": "Voice test",
+    "testVoice": "Test voice",
+    "usingVoice": "Using voice",
+    "dismiss": "Dismiss",
+    "unsupported": "Voice playback is not supported on this device.",
+    "playbackError": "Voice playback could not continue. You can continue using the screen.",
+    "noVoiceForLanguage": "No {language} voice is installed on this device.",
+    "fallbackVoiceNotice": "{requested} voice is not installed on this device. Using {fallback} voice instead.",
+    "languageCodeLabel": "Language code",
+    "availableVoicesLabel": "Available voices"
+  },
+  "nav": {
+    "farm": "農場",
+    "suggest": "提案",
+    "soil": "土壌",
+    "market": "市場",
+    "scan": "スキャン",
+    "schemes": "制度"
+  },
+  "header": {
+    "demoRole": "Demo role",
+    "farmer": "農家",
+    "extension": "普及員",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode",
+    "settings": "設定"
+  },
+  "screenTitles": {
+    "farm": "マイファーム",
+    "recommender": "Crop Recommender",
+    "soil": "Soil Health Card",
+    "market": "Market Prices",
+    "pest": "Pest & Disease Scanner",
+    "group": "FPO Overview",
+    "schemes": "Government Schemes",
+    "settings": "設定"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "loading": "Loading language",
+    "languageLoadError": "This language could not be loaded. English is being shown.",
+    "areaUnit": "Area unit",
+    "primaryCrop": "Primary crop",
+    "selectPrimaryCrop": "Select primary crop",
+    "selectIntercrop": "Select intercrop or cover crop"
+  },
+  "addField": {
+    "title": "Add field",
+    "subtitle": "Capture your field and crop mix.",
+    "closeDialog": "Close add field dialog",
+    "fieldNameLabel": "Field name",
+    "fieldNamePlaceholder": "e.g. North Field",
+    "drawAreaOnMap": "Draw Area on Map",
+    "boundaryCaptured": "Boundary captured · {count} points",
+    "areaSizeLabel": "Area size",
+    "areaPlaceholder": "e.g. 2.5",
+    "areaInvalid": "Please enter a valid area greater than 0.",
+    "addIntercrop": "Add Intercrop",
+    "saveField": "Save Field",
+    "unitShortAc": "ac",
+    "unitFullAcres": "Acres",
+    "unitShortHa": "ha",
+    "unitFullHectares": "Hectares",
+    "unitShortGuntha": "guntha",
+    "unitFullGuntha": "Guntha",
+    "unitShortBigha": "bigha",
+    "unitFullBigha": "Bigha",
+    "unitShortSqm": "m²",
+    "unitFullSqm": "Square meters",
+    "unitShortSqft": "ft²",
+    "unitFullSqft": "Square feet"
+  },
+  "landRegistry": {
+    "consentLabel": "Official land records",
+    "importTitle": "Import verified land",
+    "country": "Country of the field",
+    "scopes": "This provider will share",
+    "authorize": "Authorize and Sync",
+    "syncing": "Syncing…",
+    "retry": "Retry sync",
+    "syncError": "We could not sync verified land records. Please try again.",
+    "authorizeMessage": "Authorize Field Shift to fetch verified parcel records from {agency}. You can revoke access later.",
+    "genericMessage": "Official verification is not yet available in your country. You can still map your field manually.",
+    "uploadDocument": "Upload a land title or lease",
+    "documentRequired": "Choose a land document first.",
+    "documentUploaded": "Document uploaded and pending review",
+    "providers": {
+      "agristack": "AgriStack",
+      "car": "CAR / SICAR",
+      "lpis": "LPIS / IACS",
+      "usda": "USDA FSA",
+      "australia": "State Cadastre",
+      "kenya": "National Land Information System",
+      "nigeria": "National Land Registry",
+      "indonesia": "National Land Agency",
+      "philippines": "Land Management Bureau",
+      "bangladesh": "Land Ministry Records",
+      "vietnam": "Land Registration Office",
+      "argentina": "Provincial Cadastre",
+      "generic": "Official land registry"
+    }
+  },
+  "verification": {
+    "verified": "AgriStack Verified",
+    "verifiedBy": "Verified by {agency}",
+    "unverified": "Self-Reported (Unverified)",
+    "verifiedTitle": "Boundary matches the government land record",
+    "unverifiedTitle": "Drawn by you. Not valid for subsidy or insurance claims."
+  },
+  "schemes": {
+    "linkToUnlock": "Link AgriStack to unlock verified eligibility",
+    "eligibleFields": "Eligible fields: {count} verified",
+    "eyebrow": "Financial Support & Subsidies",
+    "title": "Government Schemes",
+    "subtitle": "Verified income support, crop insurance, and organic farming grants for farmers.",
+    "financialBenefit": "Financial Benefit",
+    "perYear": "per year",
+    "perHectare": "per hectare",
+    "items": {
+      "pmKisan": {
+        "name": "PM-KISAN Samman Nidhi",
+        "focus": "Direct Income Support",
+        "badge": "Direct Benefit Transfer",
+        "benefit": "₹6,000 / year",
+        "description": "Provides ₹6,000 per year in three equal instalments directly into the bank accounts of eligible landholding farmer families.",
+        "action": "Check Eligibility"
+      },
+      "pmfby": {
+        "name": "Pradhan Mantri Fasal Bima Yojana",
+        "focus": "Crop Loss Insurance",
+        "badge": "Low Farmer Premium",
+        "benefit": "1.5% – 2% low premium cover",
+        "description": "Protects your harvest against drought, unseasonal rain, floods, and pest outbreaks with affordable seasonal premiums.",
+        "action": "Calculate Coverage"
+      },
+      "pkvy": {
+        "name": "Paramparagat Krishi Vikas Yojana",
+        "focus": "Organic Farming Grant",
+        "badge": "Soil Health & Organic",
+        "benefit": "₹50,000 / hectare (3 years)",
+        "description": "Supports farmers transitioning to organic inputs, bio-fertilizers, certification, and cluster-based direct marketing.",
+        "action": "Apply for Grant"
+      }
+    }
+  },
+  "weather": {
+    "title": "天気",
+    "locationFallback": "Selected location",
+    "selectPlot": "圃場を選択",
+    "listen": "Listen to weather summary",
+    "offline": "Offline · showing cached weather",
+    "updated": "Last updated {time}",
+    "refresh": "Refresh",
+    "retry": "Retry",
+    "error": "Weather could not be loaded",
+    "humidity": "湿度",
+    "pressureUnit": "hPa",
+    "temperatureUnit": "Temperature unit",
+    "windUnit": "Wind speed unit",
+    "hourly": "今後24時間",
+    "daily": "7日間の予報",
+    "farmingHint": "Farming conditions",
+    "now": "Now",
+    "feelsLike": "Feels like",
+    "rainChance": "Rain chance",
+    "metricTemperature": "Temperature",
+    "metricRain": "Rain",
+    "metricWind": "Wind",
+    "metricHumidity": "Humidity",
+    "metricSoilMoisture": "Soil moisture",
+    "lowShort": "Low",
+    "highShort": "High",
+    "emptyHourly": "Hourly forecast data is not available right now.",
+    "loadSampleForecast": "Load sample forecast",
+    "chartSummary": "Today: {minTemp} at {minTime} rising to {maxTemp} at {maxTime}, {rainChance}% chance of rain around {rainTime}.",
+    "clear": "晴れ",
+    "cloudy": "曇り",
+    "rain": "雨",
+    "snow": "Snow",
+    "storm": "嵐",
+    "unknown": "Unknown conditions",
+    "adviceSpray": "Good window for spraying",
+    "adviceAvoidSpray": "Avoid spraying: wind, rain, or humidity is high",
+    "adviceIrrigate": "Irrigation may be needed",
+    "adviceIrrigationWait": "Irrigation can wait for now",
+    "adviceHeavyRain": "Heavy rain is possible soon",
+    "adviceSowing": "Conditions look suitable for field work"
+  },
+  "dashboard": {
+    "farmOperations": "Farm operations",
+    "location": "Dicholi, Goa",
+    "totalFields": "Total Fields",
+    "totalFieldsNote": "+2 this month",
+    "activeCrops": "Active Crops",
+    "activeCropsNote": "Healthy growth",
+    "soilMoisture": "Soil Moisture",
+    "soilMoistureNote": "Optimal level",
+    "temperature": "Temperature",
+    "temperatureNote": "Normal range",
+    "fieldOverview": "Field Overview",
+    "fieldsAtGlance": "Your fields at a glance",
+    "expandMap": "Expand field map",
+    "openMap": "Open full-screen field map",
+    "addField": "Add field",
+    "noFields": "No fields yet. Import verified land records to get started.",
+    "recentAlerts": "Recent Alerts",
+    "alertsAttention": "Things that need your attention",
+    "today": "Today",
+    "brand": "Field Shift",
+    "closeMap": "Close map",
+    "actionsCount": "{count} actions",
+    "timeframe": {
+      "weekly": "This week",
+      "monthly": "This month"
+    },
+    "alerts": {
+      "moistureTitle": "Low soil moisture in North Block",
+      "moistureDetail": "Topsoil moisture dropped below 32%. Check your soil record or schedule light irrigation.",
+      "moistureAction": "Review soil health",
+      "tempTitle": "Warm afternoon temperatures ahead",
+      "tempDetail": "Afternoon highs near 34°C expected. Water sensitive crops early in the morning.",
+      "tempAction": "Check weather outlook",
+      "irrigationTitle": "Drip irrigation check completed",
+      "irrigationDetail": "Main valve pressure and field lines look healthy across active plots.",
+      "irrigationAction": "View field map"
+    }
+  },
+  "market": {
+    "live": "Live APMC Market",
+    "place": "Margao Mandi · Raw cashew",
+    "grade": "Cashew · Standard grade",
+    "open": "Market open",
+    "updated": "Indicative demo rates · Updated today",
+    "title": "Market Prices",
+    "subtitle": "Regional wholesale mandis · Live rates",
+    "searchPlaceholder": "Search crops or markets…",
+    "sortByLabel": "Sort crops",
+    "sortByChange": "Sort: Biggest change",
+    "sortByPrice": "Sort: Highest price",
+    "sortByName": "Sort: Name (A–Z)",
+    "myCropsFirst": "My crops first",
+    "myCropBadge": "My crop",
+    "allMarkets": "All Markets",
+    "priceVsLastWeek": "Price vs. Last Week",
+    "cropsCount": "{count} crops",
+    "aiInsightHeading": "AI Market Insight",
+    "aiSummaryRising": "{crop} prices are up {pct}% in {market}. Good time to sell — consider moving your stock this week.",
+    "aiSummaryFalling": "{crop} prices are down {pct}% in {market}. Hold stock if storage allows — prices may recover next week.",
+    "aiDataSourceNote": "Based on regional market arrivals · Updated today",
+    "alertSettingsLink": "Price alerts & notification settings",
+    "unitPerQuintal": "per quintal",
+    "units": {
+      "shortQuintal": "₹/qtl",
+      "perQuintal": "per quintal",
+      "shortKg": "₹/kg",
+      "perKg": "per kilogram",
+      "short100Nuts": "₹/100 nuts",
+      "per100Nuts": "per 100 nuts",
+      "shortDozen": "₹/dozen",
+      "perDozen": "per dozen"
+    }
+  },
+  "marketDetail": {
+    "viewCropAnalysis": "Full market analysis",
+    "backToMarket": "Back to market prices",
+    "loadError": "Could not load market details right now.",
+    "sampleDataBadge": "Sample data",
+    "vsYesterday": "vs yesterday",
+    "vsLastWeek": "vs last week",
+    "gradeLabel": "Grade",
+    "priceHistoryTitle": "Price History",
+    "averageLineLabel": "Period average",
+    "avgShort": "Avg",
+    "compareLastYear": "Compare with last year",
+    "modalPrice": "Modal price",
+    "dayRange": "Min–Max",
+    "lastYear": "Last year",
+    "keyStatsTitle": "Key Market Statistics",
+    "todayModal": "Today's modal price",
+    "avg30d": "30-day average",
+    "highLow52w": "52-week low – high",
+    "yearlySpread": "Annual range",
+    "volatility": "Price volatility",
+    "volatility_stable": "Stable",
+    "volatility_moderate": "Moderate",
+    "volatility_volatile": "Volatile",
+    "priceStability": "30-day stability",
+    "arrivalsToday": "Market arrivals",
+    "quintals": "quintals",
+    "nearbyMarketsTitle": "Nearby Market Comparison",
+    "nearbyMarketsSubtitle": "Sorted by highest modal price",
+    "bestPriceBadge": "Best price",
+    "analysisTitle": "Plain-Language Market Guidance",
+    "analysisSubtitle": "Rule-based summary from recent price trends",
+    "recSellNow": "Sell now",
+    "recHold": "Hold",
+    "recWait": "Wait",
+    "analysisRising": "{crop} prices rose {pct}% over the last 7 days.",
+    "analysisFalling": "{crop} prices dipped {pct}% over the last 7 days.",
+    "analysisSteady": "{crop} prices remained steady over the last 7 days.",
+    "analysisAboveAvg": "Current rates are {pct}% above the 30-day average.",
+    "analysisBelowAvg": "Current rates are {pct}% below the 30-day average.",
+    "recSellNowReason": "Prices are strong compared to the monthly average — selling a portion of ready stock now can lock in good returns.",
+    "recHoldReason": "Prices are near normal levels — you can sell in staggered lots or hold if dry storage is available.",
+    "recWaitReason": "Rates are currently soft — if your produce can be stored safely, waiting for arrivals to ease may improve prices.",
+    "seasonalTitle": "Seasonal Price Pattern (12 Months)",
+    "bestMonthsToSell": "Best months to sell: {months}",
+    "forecast7dTitle": "Next 7-Day Price Projection",
+    "estimateBadge": "Estimate",
+    "forecastRangeBody": "Projected modal price around {mid} (confidence band: {low} to {high}).",
+    "financialDisclaimer": "Indicative guidance based on historical mandi arrivals and trends. Verify final rates at your local market before transport.",
+    "farmingInfoTitle": "Farming & Income Outlook",
+    "farmingInfoSubtitle": "Agronomy reference & estimated returns at current price",
+    "personalizedIncomeBanner": "Your {area} ha of {crop} could earn about {amount} at today's market price.",
+    "growingSeason": "Growing season",
+    "season_kharif": "Kharif (Monsoon)",
+    "season_rabi": "Rabi (Winter)",
+    "season_zaid": "Zaid (Summer)",
+    "season_annual": "Year-round",
+    "season_perennial": "Perennial",
+    "cropDuration": "Crop duration",
+    "durationDaysValue": "{days} days",
+    "typicalYield": "Typical yield",
+    "expectedIncomeHa": "Expected gross/ha",
+    "storageTipsTitle": "Post-harvest & storage",
+    "storageTipsBody": "Dry produce to safe moisture levels, grade uniformly to remove damaged lots, and store in clean ventilated bags off the floor.",
+    "harvestTimingTitle": "Best time to harvest",
+    "harvestTimingBody": "Harvest during dry morning hours at physiological maturity so grain or fruit quality fetches top grade at the market.",
+    "inputsAndHelpTitle": "Inputs & Nearby Support",
+    "inputsAndHelpSubtitle": "Licensed seed/fertilizer dealers & price support",
+    "mspTitle": "Minimum Support Price (MSP)",
+    "mspBody": "Official reference floor price: {msp} per quintal",
+    "dealerStockSeedsFertilizer": "Certified seeds, NPK & micronutrients in stock",
+    "dealerStockBioInputs": "Organic manures, crop protection & storage bags",
+    "callDealer": "Call dealer",
+    "setAlertTitle": "Set Price Alert",
+    "setAlertSubtitle": "Get notified on this device when {crop} crosses your target price",
+    "alertCondition": "Alert condition",
+    "whenPriceAbove": "When price rises above",
+    "whenPriceBelow": "When price falls below",
+    "targetPriceLabel": "Target price",
+    "saveAlertBtn": "Set alert",
+    "alertSaved": "Price alert saved on this device and queued for sync.",
+    "invalidTargetPrice": "Please enter a valid target price greater than 0.",
+    "alertTriggeredTitle": "Price alert reached for {crop}: {price}",
+    "alertTriggeredBody": "Current price is {direction} your target of {target} in {market}.",
+    "alertTriggeredShort": "Target {target} reached",
+    "directionAbove": "at or above",
+    "directionBelow": "at or below",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites",
+    "share": "Share price",
+    "copiedToClipboard": "Market summary copied to clipboard",
+    "relatedCropsTitle": "Related Crops",
+    "viewPrice": "View price"
+  },
+  "alerts": {
+    "sowingCritical": "Sowing Window Critical: Monsoon Delayed",
+    "actionNeeded": "Action needed",
+    "sowingDetail": "You are 14 days past the optimal window for Paddy. To prevent yield loss, consider switching to a short-duration catch crop like Ragi (Finger Millet) or Cowpea.",
+    "dismiss": "Dismiss",
+    "updateCropPlan": "Update Crop Plan"
+  },
+  "crops": {
+    "search": "Search crops",
+    "noResults": "No crops found",
+    "listenTo": "Listen to {name}",
+    "rice": {
+      "name": "Rice",
+      "localName": "Paddy"
+    },
+    "wheat": {
+      "name": "Wheat",
+      "localName": "Wheat"
+    },
+    "maize": {
+      "name": "Maize",
+      "localName": "Maize"
+    },
+    "sorghum": {
+      "name": "Sorghum",
+      "localName": "Sorghum"
+    },
+    "millet": {
+      "name": "Millet",
+      "localName": "Millet"
+    },
+    "barley": {
+      "name": "Barley",
+      "localName": "Barley"
+    },
+    "oats": {
+      "name": "Oats",
+      "localName": "Oats"
+    },
+    "chickpea": {
+      "name": "Chickpea",
+      "localName": "Chana"
+    },
+    "lentil": {
+      "name": "Lentil",
+      "localName": "Masoor"
+    },
+    "pigeon-pea": {
+      "name": "Pigeon pea",
+      "localName": "Pigeon pea"
+    },
+    "moong": {
+      "name": "Moong bean",
+      "localName": "Moong"
+    },
+    "cowpea": {
+      "name": "Cowpea",
+      "localName": "Lobia"
+    },
+    "soybean": {
+      "name": "Soybean",
+      "localName": "Soybean"
+    },
+    "beans": {
+      "name": "Beans",
+      "localName": "Beans"
+    },
+    "peas": {
+      "name": "Peas",
+      "localName": "Peas"
+    },
+    "groundnut": {
+      "name": "Groundnut",
+      "localName": "Peanut"
+    },
+    "mustard": {
+      "name": "Mustard",
+      "localName": "Sarson"
+    },
+    "sunflower": {
+      "name": "Sunflower",
+      "localName": "Sunflower"
+    },
+    "sesame": {
+      "name": "Sesame",
+      "localName": "Sesame"
+    },
+    "rapeseed": {
+      "name": "Rapeseed",
+      "localName": "Rapeseed"
+    },
+    "potato": {
+      "name": "Potato",
+      "localName": "Potato"
+    },
+    "sweet-potato": {
+      "name": "Sweet potato",
+      "localName": "Sweet potato"
+    },
+    "cassava": {
+      "name": "Cassava",
+      "localName": "Cassava"
+    },
+    "yam": {
+      "name": "Yam",
+      "localName": "Yam"
+    },
+    "onion": {
+      "name": "Onion",
+      "localName": "Onion"
+    },
+    "garlic": {
+      "name": "Garlic",
+      "localName": "Garlic"
+    },
+    "tomato": {
+      "name": "Tomato",
+      "localName": "Tomato"
+    },
+    "brinjal": {
+      "name": "Brinjal",
+      "localName": "Eggplant"
+    },
+    "chilli": {
+      "name": "Chilli",
+      "localName": "Chilli"
+    },
+    "cabbage": {
+      "name": "Cabbage",
+      "localName": "Cabbage"
+    },
+    "cauliflower": {
+      "name": "Cauliflower",
+      "localName": "Cauliflower"
+    },
+    "okra": {
+      "name": "Okra",
+      "localName": "Okra"
+    },
+    "cucumber": {
+      "name": "Cucumber",
+      "localName": "Cucumber"
+    },
+    "pumpkin": {
+      "name": "Pumpkin",
+      "localName": "Pumpkin"
+    },
+    "cotton": {
+      "name": "Cotton",
+      "localName": "Cotton"
+    },
+    "sugarcane": {
+      "name": "Sugarcane",
+      "localName": "Sugarcane"
+    },
+    "jute": {
+      "name": "Jute",
+      "localName": "Jute"
+    },
+    "tea": {
+      "name": "Tea",
+      "localName": "Tea"
+    },
+    "coffee": {
+      "name": "Coffee",
+      "localName": "Coffee"
+    },
+    "tobacco": {
+      "name": "Tobacco",
+      "localName": "Tobacco"
+    },
+    "coconut": {
+      "name": "Coconut",
+      "localName": "Coconut"
+    },
+    "cashew": {
+      "name": "Cashew",
+      "localName": "Cashew"
+    },
+    "arecanut": {
+      "name": "Arecanut",
+      "localName": "Arecanut"
+    },
+    "banana": {
+      "name": "Banana",
+      "localName": "Banana"
+    },
+    "mango": {
+      "name": "Mango",
+      "localName": "Mango"
+    },
+    "papaya": {
+      "name": "Papaya",
+      "localName": "Papaya"
+    },
+    "citrus": {
+      "name": "Citrus",
+      "localName": "Citrus"
+    },
+    "apple": {
+      "name": "Apple",
+      "localName": "Apple"
+    },
+    "cocoa": {
+      "name": "Cocoa",
+      "localName": "Cocoa"
+    },
+    "oil-palm": {
+      "name": "Oil palm",
+      "localName": "Oil palm"
+    },
+    "rubber": {
+      "name": "Rubber",
+      "localName": "Rubber"
+    },
+    "alfalfa": {
+      "name": "Alfalfa",
+      "localName": "Alfalfa"
+    },
+    "napier-grass": {
+      "name": "Napier grass",
+      "localName": "Napier grass"
+    },
+    "paddy": {
+      "name": "Paddy",
+      "localName": "Paddy"
+    },
+    "areca-nut": {
+      "name": "Areca nut",
+      "localName": "Areca nut"
+    },
+    "vegetables": {
+      "name": "Vegetables",
+      "localName": "Vegetables"
+    },
+    "other": {
+      "name": "Other crop",
+      "localName": "Other crop"
+    },
+    "black-gram": {
+      "name": "Black gram",
+      "localName": "Urad"
+    },
+    "fenugreek": {
+      "name": "Fenugreek",
+      "localName": "Methi"
+    },
+    "grape": {
+      "name": "Grape",
+      "localName": "Grape"
+    },
+    "unavailableTitle": "Crop not available",
+    "unavailableBody": "This crop is not available in the app right now. Pick another crop from the market list.",
+    "backToMarket": "Back to market prices"
+  },
+  "advisory": {
+    "title": "Daily Farm Voice Advisory",
+    "badge": "Agronomy Update",
+    "summary": "Tap play to hear today’s field, weather, and market guidance in your selected language.",
+    "fullScript": "Good day! Clear morning hours make today ideal for checking soil moisture and inspecting leaves for early signs of pests. Cashew and pulse rates remain steady at regional mandis, so store dry produce in clean ventilated bags before transport.",
+    "playAria": "Listen to daily farm voice advisory",
+    "stopAria": "Stop daily farm voice advisory"
+  },
+  "notifications": {
+    "ariaRegion": "Farm notifications",
+    "types": {
+      "market": "Market",
+      "weather": "Weather",
+      "plot": "Field"
+    },
+    "marketRiseTitle": "{crop} prices up {pct}% in {market}",
+    "marketRiseBody": "Today’s rate is {price} {unit}, up {diff} from yesterday.",
+    "clearSkiesTitle": "Clear skies for the next {days} days",
+    "clearSkiesBody": "Low rain risk makes this a good window for weeding, drying harvest, or foliar nutrition.",
+    "soilHealthGoodTitle": "Soil moisture optimal at {moisture}%",
+    "soilHealthGoodBody": "Your fields have healthy moisture reserves ahead of {season} sowing.",
+    "ureaSubsidyTitle": "Fertilizer stock arrived at {market}",
+    "ureaSubsidyBody": "{bagKg} kg bags are available at the cooperative store for {price} per bag."
+  },
+  "soil": {
+    "title": "Soil Health Card",
+    "subtitle": "Import or enter your soil nutrient data",
+    "overviewSpeech": "Upload a photo of your printed Soil Health Card to extract nutrient values automatically, populate a sample laterite profile, or type your nitrogen, phosphorus, potassium, and pH readings manually.",
+    "currentReadingsIntro": "Current soil readings on screen",
+    "populateLateriteTitle": "Populate Laterite Profile",
+    "populateLateriteDesc": "Auto-fill with a realistic Goan laterite soil profile (pH 5.5, low N, moderate K).",
+    "lateriteActionsHeading": "Recommended Actions for Laterite Soil",
+    "lateriteTip1": "Agricultural lime application (500 to 800 kg per hectare) is recommended to raise soil pH.",
+    "lateriteTip2": "Apply farmyard manure or compost before sowing to boost organic carbon.",
+    "lateriteTip3": "Use split nitrogen fertilizer doses so heavy rain does not wash nutrients away.",
+    "cardPhotoLabel": "Soil Health Card Photo",
+    "ocrBadge": "AUTO-EXTRACT VIA OCR",
+    "extractingValues": "Extracting soil values…",
+    "extractingSubtext": "Reading N, P, K, and pH values into the form below",
+    "removePhoto": "Remove photo",
+    "valuesExtracted": "Values extracted",
+    "dropToUpload": "Drop to upload",
+    "uploadCardTitle": "Upload Soil Health Card",
+    "uploadCardSubtitle": "Tap to choose a photo, or drag and drop",
+    "supportedFormats": "JPG, PNG, HEIC supported",
+    "ocrExplain": "Uploading a photo extracts Nitrogen, Phosphorus, Potassium, and pH values from your printed Soil Health Card so you can review them below.",
+    "manualEntryTitle": "Manual Entry",
+    "manualEntrySubtitle": "Enter values from your Soil Health Card",
+    "primaryMacrosBadge": "Primary Macros",
+    "saveRecordBtn": "Save Soil Record Offline",
+    "storedLocallyNote": "Stored locally on your device · Will sync when online",
+    "savedOfflineToast": "Soil record saved offline!",
+    "units": {
+      "kgPerHa": "kilograms per hectare",
+      "dsPerM": "deciSiemens per metre"
+    },
+    "fields": {
+      "nitrogen": {
+        "label": "Nitrogen (N)",
+        "tip": "Available N; low below 280 kg/ha"
+      },
+      "phosphorus": {
+        "label": "Phosphorus (P)",
+        "tip": "Available P₂O₅; low below 25 kg/ha"
+      },
+      "potassium": {
+        "label": "Potassium (K)",
+        "tip": "Available K₂O; medium 150–250 kg/ha"
+      },
+      "ph": {
+        "label": "Soil pH",
+        "tip": "Ideal 6.0–7.5 for most crops"
+      },
+      "organicCarbon": {
+        "label": "Organic Carbon",
+        "tip": "High above 0.75%; low below 0.5%"
+      },
+      "ec": {
+        "label": "EC (Salinity)",
+        "tip": "Safe below 2 dS/m for most crops"
+      }
+    }
+  },
+  "pest": {
+    "title": "Pest & Disease Scanner",
+    "subtitle": "AI-powered crop diagnosis",
+    "overviewSpeech": "Take or upload a clear photo of affected leaves, stems, or fruits to identify crop pests and diseases and hear immediate organic and chemical treatment steps.",
+    "scanAnotherAria": "Scan another photo",
+    "takeOrUploadTitle": "Take or Upload a Photo",
+    "takeOrUploadSubtitle": "Point your camera at affected leaves, stems, or fruits",
+    "partLeaves": "Leaves",
+    "partStems": "Stems",
+    "partInsects": "Insects",
+    "tapToOpenCamera": "Tap to open camera",
+    "trySampleScan": "Try sample leaf scan",
+    "cropPhotoAlt": "Crop photo for analysis",
+    "analysingOverlay": "Analysing with AI model…",
+    "analysisComplete": "Analysis complete",
+    "removePhotoAria": "Remove photo",
+    "scanningStatusTitle": "AI model scanning your photo…",
+    "scanningStatusSubtitle": "Comparing against 4,000+ crop disease signatures",
+    "howItWorksTitle": "How it works",
+    "howStep1": "Take a clear photo of the affected plant part",
+    "howStep2": "Our AI scans for common diseases, pests, and nutrient deficiencies",
+    "howStep3": "Get instant step-by-step treatment advice — even offline",
+    "severity": {
+      "moderate": "Moderate",
+      "high": "High"
+    },
+    "severityBadge": "{severity} severity",
+    "detectedOn": "Detected on:",
+    "confidenceLabel": "{pct}% confidence",
+    "immediateActions": "Immediate Actions",
+    "treatmentOptions": "Treatment Options",
+    "organicTreatment": "Organic Treatment",
+    "chemicalTreatment": "Chemical Treatment",
+    "disclaimer": "Indicative AI diagnosis — consult your local agricultural officer before heavy chemical spraying.",
+    "resultSpeechIntro": "Diagnosis: {disease} detected on {crop}. Severity is {severity}, with {confidence} confidence.",
+    "diseases": {
+      "leafBlight": {
+        "name": "Bacterial Leaf Blight",
+        "description": "Bacterial leaf blight caused by Xanthomonas oryzae. Yellowing starts from leaf tips with wavy water-soaked margins and drying foliage.",
+        "immediate1": "Drain standing water from the field for 3 to 4 days to reduce humidity.",
+        "immediate2": "Avoid excess nitrogen top-dressing and overhead sprinkler irrigation.",
+        "immediate3": "Remove and destroy severely infected leaves away from irrigation channels.",
+        "organic1": "Spray 3% neem oil emulsion (30 ml per litre of water) every 7 days.",
+        "organic2": "Apply Pseudomonas fluorescens or Trichoderma viride at 5 grams per litre near the root zone.",
+        "organic3": "Support plant immunity with potash or wood ash at 500 kg per hectare.",
+        "chemical1": "Spray Copper oxychloride 50% WP at 2.5 to 3 grams per litre of water.",
+        "chemical2": "Where advised by an agronomist, combine with agricultural bactericide at recommended dosage.",
+        "chemical3": "Spray during dry morning or late afternoon hours only if over 25% foliage is affected."
+      },
+      "powderyMildew": {
+        "name": "Powdery Mildew",
+        "description": "Fungal infection affecting shoots, flower panicles, and young nuts, leaving a white powdery coating on leaf surfaces.",
+        "immediate1": "Prune and safely destroy heavily affected shoots and dry panicles.",
+        "immediate2": "Improve airflow and sunlight penetration by selective canopy thinning.",
+        "immediate3": "Apply sprays early in the morning or evening to prevent leaf scorch.",
+        "organic1": "Spray wettable sulphur 80% WP at 2 grams per litre of water.",
+        "organic2": "Use 0.5% potassium bicarbonate or baking soda solution (5 grams per litre) on early spots.",
+        "organic3": "Follow up with neem-based botanical spray every 5 to 7 days.",
+        "chemical1": "Spray Hexaconazole 5% EC at 2 ml per litre of water.",
+        "chemical2": "Alternatively apply Propiconazole 25% EC at 1 ml per litre.",
+        "chemical3": "Alternate fungicide groups between sprays to prevent fungal resistance."
+      }
+    }
+  },
+  "dealers": {
+    "title": "Nearby Seed & Fertilizer Dealers",
+    "subtitle": "Check live stock availability at licensed agri-input stores near your village.",
+    "searchAria": "Search dealers, locations, or stock",
+    "searchPlaceholder": "Search seed, urea, or town…",
+    "distanceAway": "{km} km away",
+    "callDealer": "Call Dealer",
+    "getDirections": "Get Directions",
+    "noResults": "No dealers matched \"{query}\". Try searching for seed, urea, or town name.",
+    "items": {
+      "mapusaKendra": {
+        "name": "Mapusa Krishi Seva Kendra",
+        "location": "Market Road, Mapusa, North Goa"
+      },
+      "dicholiAgro": {
+        "name": "Dicholi Taluka Agro Centre",
+        "location": "Bus Stand Circle, Bicholim, Goa"
+      },
+      "goaSeedCoop": {
+        "name": "Goa State Seed & Fertilizer Co-op",
+        "location": "Ponda Highway, Panaji, Goa"
+      }
+    },
+    "stock": {
+      "inStockRagi": "Ragi & Pulse Seeds: In Stock",
+      "outOfStockUrea": "Urea: Out of Stock",
+      "lowStockNeem": "Neem Oil: Low Stock",
+      "inStockUrea": "Urea: In Stock"
+    }
+  }
+}

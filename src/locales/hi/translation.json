@@ -1,0 +1,1079 @@
+{
+  "language": {
+    "english": "अंग्रेज़ी",
+    "marathi": "मराठी",
+    "hindi": "हिंदी"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "subtitle": "फील्ड शिफ्ट को अपनी तरह इस्तेमाल करें",
+    "languageTitle": "आपकी भाषा",
+    "languageBody": "पढ़ने के लिए अपनी पसंदीदा भाषा चुनें।",
+    "remindersTitle": "खेत की याद दिलाने वाली सूचनाएँ",
+    "remindersBody": "खेत के ज़रूरी कामों के लिए समय पर सूचना पाएँ।",
+    "sowing": "बुवाई समय की सूचनाएँ",
+    "sowingBody": "अगली फसल बोने का सही समय आने पर सूचना।",
+    "fertilizer": "खाद की सूचनाएँ",
+    "fertilizerBody": "फसल को पोषक तत्व देने से पहले आसान सूचना।",
+    "channels": "सूचनाएँ भेजें",
+    "sms": "एसएमएस",
+    "whatsapp": "व्हाट्सऐप",
+    "listen": "सुनें",
+    "stop": "रोकें",
+    "saved": "पसंद इस फोन पर सुरक्षित है",
+    "unavailable": "इस ब्राउज़र में आवाज़ उपलब्ध नहीं है।",
+    "offline": "ऑफ़लाइन मोड",
+    "offlineBody": "आपका सारा डेटा इस फोन में सुरक्षित है। ऑनलाइन होने पर अपने आप सिंक होगा।",
+    "online": "कनेक्टेड",
+    "onlineBody": "आप ऑनलाइन हैं • नया डेटा बैकग्राउंड में सिंक होगा।",
+    "logOut": "लॉग आउट",
+    "logOutBody": "आप साइन आउट होकर लॉगिन स्क्रीन पर पहुँचेंगे।",
+    "about": "फील्ड शिफ्ट के बारे में",
+    "version": "संस्करण 0.1.0 • बीटा",
+    "featureLanguage": "फीचर 1 • भाषा स्तर",
+    "featureReminders": "फीचर 6 • सूचनाएँ",
+    "appVersion": "ऐप संस्करण",
+    "privacy": "गोपनीयता और डेटा",
+    "privacyBody": "आपका डेटा इसी फोन में रहता है",
+    "confirmLogout": "लॉग आउट की पुष्टि के लिए फिर टैप करें",
+    "textMessage": "टेक्स्ट संदेश",
+    "chatMessage": "चैट संदेश",
+    "light": "लाइट",
+    "dark": "डार्क",
+    "system": "सिस्टम",
+    "back": "वापस जाएँ",
+    "noLanguages": "कोई भाषा नहीं मिली",
+    "searchLanguages": "भाषाएं खोजें",
+    "recentlyUsed": "हाल ही में उपयोग की गई",
+    "imageCredits": "फ़ोटो श्रेय",
+    "imageCreditsBody": "Original crop illustrations made for Field Shift (CC0-equivalent).",
+    "imageCreditsIntro": "फ़सलों की तस्वीरें विकिमीडिया कॉमन्स और अनस्प्लैश से खुले लाइसेंस (CC0, पब्लिक डोमेन, CC-BY, CC-BY-SA) के तहत ली गई हैं।",
+    "viewSource": "स्रोत देखें",
+    "accountTitle": "खाता और फ़ोन नंबर",
+    "accountSubtitle": "किसान प्रोफ़ाइल",
+    "phoneLabel": "फ़ोन नंबर",
+    "unsyncedLogoutWarning": "इस फ़ोन पर आपके {count} बदलाव अभी सिंक नहीं हुए हैं। अभी लॉग आउट करने से वे मिट जाएंगे।",
+    "cancelLogout": "लॉग इन रहें"
+  },
+  "auth": {
+    "brandTagline": "सटीक कृषि मंच",
+    "brandQuote": "बेहतर फ़सलें। स्वस्थ मिट्टी। अधिक उपज।",
+    "brandDescription": "फ़सल सलाह, मिट्टी स्वास्थ्य कार्ड और मंडी भाव पाने के लिए अपने मोबाइल नंबर से लॉग इन करें।",
+    "statOffline": "ऑफ़लाइन तैयार",
+    "statOneTimeCode": "SMS कोड लॉगिन",
+    "statProtected": "सुरक्षित डेटा",
+    "pillWeather": "मौसम अलर्ट",
+    "pillCrops": "फ़सल चक्र",
+    "pillSoil": "मिट्टी स्वास्थ्य",
+    "brandFooter": "Field Shift • किसानों के लिए निर्मित",
+    "demoBadge": "डेमो",
+    "demoHint": "डेमो मोड: कोड 123456 दर्ज करें",
+    "listenPrompt": "सुनें",
+    "offlineLoginNotice": "आप ऑफ़लाइन हैं। SMS कोड प्राप्त करने के लिए इंटरनेट से जुड़ें।",
+    "sessionLoading": "आपका सत्र जांचा जा रहा है…",
+    "signedInAs": "लॉग इन किया है:",
+    "continueToFarm": "खेत पर जाएं",
+    "notYouSwitch": "क्या यह आप नहीं हैं? उपयोगकर्ता बदलें",
+    "step1Badge": "चरण 1 / 2 • फ़ोन नंबर",
+    "phoneStepTitle": "अपना फ़ोन नंबर लिखें",
+    "phoneStepSubtitle": "हम आपको लॉग इन करने के लिए 6 अंकों का SMS कोड भेजेंगे। पासवर्ड की ज़रूरत नहीं है।",
+    "phoneLabel": "मोबाइल फ़ोन नंबर",
+    "phonePlaceholder": "98765 43210",
+    "countryCodeLabel": "देश का कोड चुनें",
+    "searchCountry": "देश या कोड खोजें",
+    "noCountryFound": "कोई देश नहीं मिला",
+    "sendCode": "कोड भेजें",
+    "sendingCode": "कोड भेजा जा रहा है…",
+    "step2Badge": "चरण 2 / 2 • SMS कोड",
+    "otpStepTitle": "6 अंकों का कोड लिखें",
+    "otpStepSubtitle": "अपने फ़ोन पर SMS द्वारा आया 6 अंकों का कोड दर्ज करें।",
+    "codeSentTo": "{phone} पर कोड भेजा गया",
+    "changeNumber": "नंबर बदलें",
+    "otpLabel": "6 अंकों का सत्यापन कोड",
+    "otpDigitAria": "अंक {index} कुल {total} में से",
+    "verifyCode": "सत्यापित करें",
+    "verifyingCode": "जांच हो रही है…",
+    "resendIn": "{seconds} सेकंड में कोड फिर भेजें",
+    "resendCode": "कोड फिर से भेजें",
+    "resendReadyAnnouncement": "अब आप नया सत्यापन कोड मांग सकते हैं।",
+    "codeResentAnnouncement": "{phone} पर नया 6 अंकों का कोड भेजा गया है।",
+    "callMeWithCode": "कॉल द्वारा कोड सुनें",
+    "phoneVerifiedBadge": "फ़ोन सत्यापित • नया किसान",
+    "profileStepTitle": "अपना नाम बताएं",
+    "profileStepSubtitle": "आपका फ़ोन नंबर सत्यापित हो गया है। अपनी खेती योजना के लिए अपना नाम लिखें।",
+    "nameLabel": "आपका नाम",
+    "namePlaceholder": "जैसे रमेश नाइक",
+    "preferredLanguageLabel": "पसंदीदा भाषा",
+    "consentCheckboxLabel": "मैं SMS लॉगिन कोड और खेती अलर्ट प्राप्त करने के लिए सहमत हूँ और स्वीकार करता हूँ",
+    "privacyPolicyLink": "गोपनीयता सूचना",
+    "privacyNotice": "आगे बढ़कर, आप एक बार का SMS लॉगिन कोड प्राप्त करने की सहमति देते हैं।",
+    "privacyModalTitle": "गोपनीयता और SMS सूचना",
+    "privacyModalPoint1": "आपका फ़ोन नंबर केवल SMS लॉगिन कोड और आपके द्वारा चुने गए कृषि अलर्ट भेजने के लिए उपयोग होता है।",
+    "privacyModalPoint2": "आपके खेत और मिट्टी का डेटा सुरक्षित रहता है और किसी तीसरे पक्ष को नहीं बेचा जाता।",
+    "privacyModalPoint3": "साझा फ़ोन पर अपना डेटा हटाने के लिए कभी भी \"उपयोगकर्ता बदलें\" दबाएं।",
+    "completeSignUp": "Field Shift शुरू करें",
+    "savingProfile": "सहेजा जा रहा है…",
+    "errors": {
+      "phoneRequired": "कृपया अपना मोबाइल फ़ोन नंबर लिखें।",
+      "phoneTooShort": "{country} के लिए यह फ़ोन नंबर छोटा है।",
+      "phoneTooLong": "{country} के लिए यह फ़ोन नंबर बहुत लंबा है।",
+      "phoneInvalidForCountry": "कृपया {country} के लिए सही मोबाइल नंबर लिखें।",
+      "codeIncomplete": "कृपया कोड के सभी 6 अंक लिखें।",
+      "wrongCode": "यह कोड सही नहीं है। कृपया SMS जांचें और फिर कोशिश करें।",
+      "wrongCodeWithAttempts": "गलत कोड। {remaining} प्रयास बाकी हैं।",
+      "expiredCode": "इस कोड का समय समाप्त हो गया है। नया कोड पाने के लिए \"कोड फिर से भेजें\" दबाएं।",
+      "tooManyAttempts": "बहुत अधिक प्रयास। कृपया फिर कोशिश करने से पहले {minutes} मिनट प्रतीक्षा करें।",
+      "maxResendsReached": "अभी के लिए अधिकतम कोड भेजे जा चुके हैं। कृपया कुछ मिनट प्रतीक्षा करें।",
+      "noNetwork": "इंटरनेट कनेक्शन नहीं है। कृपया अपना नेटवर्क जांचें और फिर कोशिश करें।",
+      "timeout": "नेटवर्क धीमा है और समय समाप्त हो गया। कृपया फिर कोशिश करें।",
+      "serverError": "अभी सर्वर से संपर्क नहीं हो सका। कृपया थोड़ी देर बाद कोशिश करें।",
+      "nameRequired": "आगे बढ़ने के लिए कृपया अपना नाम लिखें।",
+      "consentRequired": "आगे बढ़ने के लिए कृपया गोपनीयता और SMS सूचना स्वीकार करें।"
+    }
+  },
+  "recommender": {
+    "listen": "सुनें",
+    "explainScreen": "स्क्रीन समझाएँ",
+    "listenSummary": "सारांश सुनें",
+    "stopListening": "सुनना रोकें",
+    "loadingHeader": "आपकी व्यक्तिगत योजना तैयार हो रही है…",
+    "steps": [
+      [
+        "मिट्टी का इतिहास देख रहे हैं...",
+        "नाइट्रोजन, पिछली फसल के अवशेष और जल निकास जाँच रहे हैं"
+      ],
+      [
+        "बाज़ार के भाव देख रहे हैं...",
+        "पणजी, मापुसा और मडगाँव मंडियों के आज के भाव ला रहे हैं"
+      ],
+      [
+        "फसल चक्र योजना बना रहे हैं...",
+        "मिट्टी के लाभ, पानी की ज़रूरत और अनुमानित लाभ के अनुसार क्रम"
+      ]
+    ],
+    "previousCrop": "पिछली कटी हुई फ़सल",
+    "analysingPlot": "इस खेत का विश्लेषण हो रहा है",
+    "yourPlot": "आपका खेत",
+    "defaultAreaUnit": "हेक्टेयर",
+    "regionFallback": "आपका क्षेत्र",
+    "stepProgress": "चरण {current} / {total}",
+    "seasons": {
+      "Rabi": "सर्दी (रबी)",
+      "Kharif": "मानसून (खरीफ़)",
+      "Zaid": "गर्मी (ज़ायद)"
+    },
+    "stepTitles": {
+      "fieldDetails": "आपके खेत का विवरण पढ़ा जा रहा है",
+      "soilHistory": "मिट्टी के इतिहास का विश्लेषण",
+      "weather": "मौसम की जाँच",
+      "cropFamilies": "फ़सल परिवारों की तुलना",
+      "market": "मंडी भाव की जाँच",
+      "rotationPlan": "आपकी फ़सल चक्र योजना तैयार हो रही है"
+    },
+    "stepDetails": {
+      "fieldDetails": "{plotName}, {area} {unit}, पिछली फ़सल {previousCrop} की जाँच",
+      "soilHistory": "{previousCrop} के बाद बचे पोषक तत्व और मिट्टी की ज़रूरत का आकलन",
+      "weather": "{season} मौसम की बारिश और तापमान का मिलान",
+      "cropFamilies": "मिट्टी को आराम देने के लिए अलग परिवार की फ़सल चुनी जा रही है",
+      "market": "{region} के पास वर्तमान मंडी भाव देखे जा रहे हैं",
+      "rotationPlan": "मुनाफ़ा, पानी की बचत और मिट्टी स्वास्थ्य के आधार पर रैंकिंग"
+    },
+    "fewResults": "इस मौसम और पिछली फ़सल के लिए केवल {count} उपयुक्त फ़सलें मिलीं।",
+    "backToPlots": "खेतों पर वापस जाएँ",
+    "pageTitle": "फ़सल चक्र सलाहकार",
+    "offlineReady": "ऑफ़लाइन तैयार",
+    "pageSubtitle": "आईसीएआर कृषि दिशानिर्देशों और स्थानीय मिट्टी पोषण मॉडल पर आधारित",
+    "screenOverviewSpeech": "फ़सल चक्र सलाहकार। मिट्टी की उर्वरता बढ़ाने, खाद का खर्च घटाने और शुद्ध आय बढ़ाने के लिए अपना खेत, आगामी मौसम और पिछली फ़सल चुनें।",
+    "step1Badge": "चरण 1 • खेत की जानकारी",
+    "tellUsTitle": "अपने खेत के बारे में बताएँ",
+    "tellUsSubtitle": "सरल जानकारी भरें। कोई जटिल कृषि शब्दावली नहीं।",
+    "formInstructionsSpeech": "चरण 1। चुनें कि आप किस खेत के लिए योजना बना रहे हैं। फिर आगामी मौसम और पिछली बार काटी गई फ़सल चुनें। हमारा ऑफ़लाइन इंजन सबसे लाभकारी अगली फ़सलों को क्रमबद्ध करेगा।",
+    "selectPlotLabel": "अपना खेत चुनें",
+    "plotsSavedCount": "{count} ऑफ़लाइन सहेजे गए",
+    "noPlotsTitle": "ऑफ़लाइन डेटाबेस में कोई खेत नहीं मिला",
+    "noPlotsSubtitle": "सलाहकार इंजन देखने के लिए तुरंत एक डेमो खेत जोड़ें।",
+    "quickAddDemoPlot": "+ डेमो खेत जोड़ें",
+    "standardAcre": "मानक एकड़",
+    "localVillage": "स्थानीय गाँव",
+    "upcomingSeasonLabel": "आगामी बुवाई मौसम",
+    "seasonNames": {
+      "Rabi": "रबी",
+      "Kharif": "खरीफ़",
+      "Zaid": "ज़ायद"
+    },
+    "seasonRanges": {
+      "Rabi": "सर्दी (अक्टू – मार्च)",
+      "Kharif": "मानसून (जुलाई – अक्टू)",
+      "Zaid": "गर्मी (मार्च – जून)"
+    },
+    "chooseFromList": "सूची से चुनें",
+    "otherCropBtn": "+ अन्य फ़सल",
+    "customCropPlaceholder": "पिछली फ़सल का नाम लिखें (जैसे बाजरा, जौ)…",
+    "buildingPlan": "आपकी योजना बन रही है…",
+    "calculateBestRotations": "सर्वोत्तम फ़सल चक्र निकालें",
+    "recommendedNextCrops": "सुझाई गई अगली फ़सलें",
+    "optionsCount": "{count} विकल्प",
+    "tailoredContext": "{plot} के लिए • {season} में {previousCrop} के बाद",
+    "resultsSummaryIntro": "{season} मौसम में {previousCrop} के बाद {plot} के लिए शीर्ष फ़सल सुझाव इस प्रकार हैं।",
+    "resultsSummaryTop": "पहला स्थान {crop} को मिला है। {reason} इससे इस खेत पर {weight} {fertilizer} की बचत होती है और अनुमानित शुद्ध आय {netReturn} मिलती है।",
+    "optimalBalance": "सर्वोत्तम संतुलन",
+    "whyThisCrop": "यह फ़सल क्यों? — सरल शब्दों में",
+    "estimatedNetReturn": "अनुमानित शुद्ध आय",
+    "monoCropBase": "एक ही फ़सल दोहराना",
+    "thisRotation": "यह फ़सल चक्र",
+    "fertilizerReduction": "खाद की बचत",
+    "soilRestored": "मिट्टी सुधरी",
+    "chemicalBillCut": "रासायनिक खाद खर्च में बचत:",
+    "selectCropBtn": "फ़सल चक्र के लिए इसे चुनें",
+    "selectedForPlotBtn": "{plot} के लिए चयनित (सिंक कतार में सहेजा गया)",
+    "demoPlotSavedToast": "डेमो खेत ऑफ़लाइन दर्ज हो गया!",
+    "cropSelectedToast": "{crop} चुना गया! योजना ऑफ़लाइन सहेजी गई।",
+    "cropSelectedFallbackToast": "इस मौसम के लिए {crop} चुना गया।",
+    "durationRangeDays": "{min} – {max} दिन",
+    "plotUnit": "खेत",
+    "perPlot": "प्रति खेत",
+    "netReturnDelta": "दोहराव फ़सल से +{pct}%",
+    "savesFertilizerKg": "{kg} किग्रा {fertilizer} की बचत",
+    "estimatedFertilizerSavings": "लगभग {amount} की बचत",
+    "cardReturnSpeech": "अनुमानित शुद्ध आय {netReturn} है, जो एक ही फ़सल दोहराने की तुलना में {gain} अधिक है।",
+    "cardFertilizerSpeech": "खाद की बचत: {weight} {fertilizer}, जिससे लगभग {savings} बचते हैं।",
+    "cardWaterSpeech": "फ़सल अवधि {duration} है, और पानी की आवश्यकता: {waterNeed}।",
+    "fertilizerUrea": "यूरिया",
+    "rankTags": {
+      "bestFit": "#{rank} सर्वोत्तम फ़सल चक्र",
+      "soilBalance": "#{rank} मज़बूत मिट्टी संतुलन",
+      "lowInput": "#{rank} कम लागत विकल्प"
+    },
+    "badges": {
+      "soilBalance": "सर्वोत्तम मिट्टी संतुलन",
+      "marketChoice": "मज़बूत मंडी माँग",
+      "lowWater": "पानी बचाने वाली फ़सल"
+    },
+    "families": {
+      "legume": "दलहन / फलीदार",
+      "oilseed": "तिलहन",
+      "cereal": "अनाज",
+      "cash": "नकदी फ़सल",
+      "unknown": "विविध फ़सल"
+    },
+    "rootDepths": {
+      "shallow": "उथली",
+      "medium": "मध्यम गहराई वाली",
+      "deep": "गहरी"
+    },
+    "waterNeeds": {
+      "low1to2": "कम — केवल 1 से 2 हल्की सिंचाई पर्याप्त",
+      "low2": "कम — पूरे मौसम में लगभग 2 सिंचाई",
+      "veryLowResidual": "बहुत कम — मिट्टी की बची नमी में अच्छी बढ़वार",
+      "veryLow2": "बहुत कम — अधिकतम 2 हल्की सिंचाई",
+      "moderate3": "मध्यम — समय पर लगभग 3 सिंचाई",
+      "moderate3to4": "मध्यम — मुख्य अवस्थाओं पर 3 से 4 सिंचाई",
+      "moderate4": "मध्यम — बढ़वार के दौरान लगभग 4 सिंचाई"
+    },
+    "reasons": {
+      "afterLegume": "{crop} पिछली दलहनी फ़सल द्वारा मिट्टी में छोड़े गए प्राकृतिक नाइट्रोजन का पूरा लाभ उठाती है, जिससे {fertilizer} की ज़रूरत {kg} किग्रा कम होती है।",
+      "afterCereal": "अनाज की कटाई के बाद {crop} मिट्टी में प्राकृतिक नाइट्रोजन वापस जोड़ती है, जिससे {fertilizer} की खपत {kg} किग्रा घटती है।",
+      "differentFamily": "{crop} के साथ फ़सल परिवार बदलने से कीट और रोग चक्र टूटता है और {fertilizer} में {kg} किग्रा की बचत होती है।",
+      "alternateRoots": "इसकी {currDepth} जड़ें पिछली {prevDepth} जड़ों वाली फ़सल से अलग मिट्टी की परत से नमी और पोषण लेती हैं।",
+      "coverSoil": "इसकी पत्तियाँ ऊपरी मिट्टी को ढककर नमी बचाती हैं और लाभकारी जीवाणुओं को बढ़ाती हैं।"
+    }
+  },
+  "voice": {
+    "marathiFallback": "मराठी आवाज इंस्टॉल नहीं है। हिंदी आवाज़ का उपयोग हो रहा है। बेहतर परिणामों के लिए Microsoft Edge इस्तेमाल करें।",
+    "noVoice": "इस डिवाइस पर कोई उपयुक्त आवाज़ इंस्टॉल नहीं है।",
+    "testSample": "यह फील्ड शिफ्ट के लिए आवाज़ परीक्षण संदेश है। आपकी चुनी हुई भाषा खेती के मार्गदर्शन के लिए तैयार है।",
+    "testMarathi": "यह फील्ड शिफ्ट के लिए आवाज़ परीक्षण संदेश है। आपकी चुनी हुई भाषा खेती के मार्गदर्शन के लिए तैयार है।",
+    "testHindi": "यह फील्ड शिफ्ट के लिए आवाज़ परीक्षण संदेश है। आपकी चुनी हुई भाषा खेती के मार्गदर्शन के लिए तैयार है।",
+    "voiceTest": "आवाज़ परीक्षण",
+    "testVoice": "आवाज़ जाँचें",
+    "usingVoice": "उपयोग की गई आवाज़",
+    "dismiss": "बंद करें",
+    "unsupported": "इस डिवाइस पर आवाज़ प्लेबैक समर्थित नहीं है।",
+    "playbackError": "आवाज़ प्लेबैक जारी नहीं रह सका। आप स्क्रीन का उपयोग जारी रख सकते हैं।",
+    "noVoiceForLanguage": "इस डिवाइस पर {language} आवाज़ उपलब्ध नहीं है।",
+    "fallbackVoiceNotice": "इस डिवाइस पर {requested} आवाज़ इंस्टॉल नहीं है। इसके स्थान पर {fallback} आवाज़ का उपयोग किया जा रहा है।",
+    "languageCodeLabel": "भाषा कोड",
+    "availableVoicesLabel": "उपलब्ध आवाज़ें"
+  },
+  "nav": {
+    "farm": "खेत",
+    "suggest": "सुझाव",
+    "soil": "मिट्टी",
+    "market": "बाज़ार",
+    "scan": "जाँच",
+    "schemes": "योजनाएँ"
+  },
+  "header": {
+    "demoRole": "डेमो भूमिका",
+    "farmer": "किसान",
+    "extension": "विस्तार अधिकारी",
+    "lightMode": "लाइट मोड पर जाएँ",
+    "darkMode": "डार्क मोड पर जाएँ",
+    "settings": "सेटिंग्स"
+  },
+  "screenTitles": {
+    "farm": "मेरा खेत",
+    "recommender": "फसल चक्र सुझाव",
+    "soil": "मृदा स्वास्थ्य कार्ड",
+    "market": "बाज़ार भाव",
+    "pest": "कीट और रोग स्कैनर",
+    "group": "FPO अवलोकन",
+    "schemes": "सरकारी योजनाएँ",
+    "settings": "सेटिंग्स"
+  },
+  "common": {
+    "close": "बंद करें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएँ",
+    "loading": "भाषा लोड हो रही है",
+    "languageLoadError": "यह भाषा लोड नहीं हो सकी। अंग्रेज़ी दिखाई जा रही है।",
+    "areaUnit": "क्षेत्रफल इकाई",
+    "primaryCrop": "मुख्य फ़सल",
+    "selectPrimaryCrop": "मुख्य फ़सल चुनें",
+    "selectIntercrop": "सह-फ़सल या कवर फ़सल चुनें"
+  },
+  "addField": {
+    "title": "खेत जोड़ें",
+    "subtitle": "अपने खेत और फसल की जानकारी दर्ज करें।",
+    "closeDialog": "खेत जोड़ने की विंडो बंद करें",
+    "fieldNameLabel": "खेत का नाम",
+    "fieldNamePlaceholder": "जैसे उत्तरी खेत",
+    "drawAreaOnMap": "मानचित्र पर क्षेत्र बनाएं",
+    "boundaryCaptured": "सीमा दर्ज हुई · {count} बिंदु",
+    "areaSizeLabel": "क्षेत्रफल",
+    "areaPlaceholder": "e.g. 2.5",
+    "areaInvalid": "कृपया 0 से अधिक सही क्षेत्रफल दर्ज करें।",
+    "addIntercrop": "अंतर-फसल जोड़ें",
+    "saveField": "खेत सहेजें",
+    "unitShortAc": "एकड़",
+    "unitFullAcres": "एकड़",
+    "unitShortHa": "हे.",
+    "unitFullHectares": "हेक्टेयर",
+    "unitShortGuntha": "गुंठा",
+    "unitFullGuntha": "गुंठा",
+    "unitShortBigha": "बीघा",
+    "unitFullBigha": "बीघा",
+    "unitShortSqm": "वर्ग मी.",
+    "unitFullSqm": "वर्ग मीटर",
+    "unitShortSqft": "वर्ग फ़ीट",
+    "unitFullSqft": "वर्ग फ़ीट"
+  },
+  "landRegistry": {
+    "consentLabel": "आधिकारिक भूमि रिकॉर्ड",
+    "importTitle": "सत्यापित भूमि आयात करें",
+    "country": "खेत का देश",
+    "scopes": "यह प्रदाता साझा करेगा",
+    "authorize": "अनुमति दें और सिंक करें",
+    "syncing": "सिंक हो रहा है…",
+    "retry": "फिर प्रयास करें",
+    "syncError": "सत्यापित भूमि रिकॉर्ड सिंक नहीं हो सके।",
+    "authorizeMessage": "{agency} से सत्यापित पार्सल रिकॉर्ड पाने के लिए Field Shift को अनुमति दें।",
+    "genericMessage": "आपके देश में आधिकारिक सत्यापन अभी उपलब्ध नहीं है। आप अपना खेत मैन्युअल रूप से मैप कर सकते हैं।",
+    "uploadDocument": "भूमि स्वामित्व या लीज़ दस्तावेज़ अपलोड करें",
+    "documentRequired": "पहले भूमि दस्तावेज़ चुनें।",
+    "documentUploaded": "दस्तावेज़ अपलोड हुआ; समीक्षा लंबित है",
+    "providers": {
+      "agristack": "AgriStack",
+      "car": "CAR / SICAR",
+      "lpis": "LPIS / IACS",
+      "usda": "USDA FSA",
+      "australia": "राज्य कैडस्ट्रे",
+      "kenya": "राष्ट्रीय भूमि सूचना प्रणाली",
+      "nigeria": "राष्ट्रीय भूमि रजिस्ट्री",
+      "indonesia": "राष्ट्रीय भूमि एजेंसी",
+      "philippines": "भूमि प्रबंधन ब्यूरो",
+      "bangladesh": "भूमि मंत्रालय रिकॉर्ड",
+      "vietnam": "भूमि पंजीकरण कार्यालय",
+      "argentina": "प्रांतीय कैडस्ट्रे",
+      "generic": "आधिकारिक भूमि रजिस्ट्री"
+    }
+  },
+  "verification": {
+    "verified": "AgriStack सत्यापित",
+    "verifiedBy": "{agency} द्वारा सत्यापित",
+    "unverified": "स्वयं-रिपोर्टेड (असत्यापित)",
+    "verifiedTitle": "सीमा सरकारी भूमि रिकॉर्ड से मेल खाती है",
+    "unverifiedTitle": "यह सीमा आपने खींची है। सब्सिडी या बीमा दावे के लिए मान्य नहीं है।"
+  },
+  "schemes": {
+    "linkToUnlock": "सत्यापित पात्रता पाने के लिए AgriStack लिंक करें",
+    "eligibleFields": "पात्र खेत: {count} सत्यापित",
+    "unsupported": "इस डिवाइस पर आवाज़ प्लेबैक उपलब्ध नहीं है।",
+    "playbackError": "आवाज़ प्लेबैक जारी नहीं रह सका। आप स्क्रीन का उपयोग जारी रख सकते हैं।",
+    "eyebrow": "आर्थिक सहायता एवं सब्सिडी",
+    "title": "सरकारी कृषि योजनाएँ",
+    "subtitle": "किसानों के लिए सत्यापित आय सहायता, फ़सल बीमा और जैविक खेती अनुदान।",
+    "financialBenefit": "आर्थिक लाभ",
+    "perYear": "प्रति वर्ष",
+    "perHectare": "प्रति हेक्टेयर",
+    "items": {
+      "pmKisan": {
+        "name": "पीएम-किसान सम्मान निधि",
+        "focus": "प्रत्यक्ष आय सहायता",
+        "badge": "सीधे बैंक खाते में (DBT)",
+        "benefit": "₹6,000 / वर्ष",
+        "description": "पात्र भूमिधारी किसान परिवारों के बैंक खातों में तीन समान किस्तों में प्रति वर्ष ₹6,000 की सीधी सहायता।",
+        "action": "पात्रता जाँचें"
+      },
+      "pmfby": {
+        "name": "प्रधानमंत्री फ़सल बीमा योजना",
+        "focus": "फ़सल नुकसान बीमा",
+        "badge": "कम किसान प्रीमियम",
+        "benefit": "1.5% – 2% कम प्रीमियम सुरक्षा",
+        "description": "सूखा, बेमौसम बारिश, बाढ़ और कीट प्रकोप से होने वाले फ़सल नुकसान के विरुद्ध किफ़ायती बीमा सुरक्षा।",
+        "action": "बीमा राशि देखें"
+      },
+      "pkvy": {
+        "name": "परम्परागत कृषि विकास योजना",
+        "focus": "जैविक खेती अनुदान",
+        "badge": "मृदा स्वास्थ्य एवं जैविक",
+        "benefit": "₹50,000 / हेक्टेयर (3 वर्ष)",
+        "description": "जैविक खाद, जैव-उर्वरक, प्रमाणीकरण और समूह आधारित सीधी बिक्री अपनाने वाले किसानों के लिए अनुदान सहायता।",
+        "action": "अनुदान हेतु आवेदन करें"
+      }
+    }
+  },
+  "weather": {
+    "title": "मौसम",
+    "locationFallback": "चयनित स्थान",
+    "selectPlot": "खेत चुनें",
+    "listen": "मौसम सारांश सुनें",
+    "offline": "ऑफ़लाइन · सहेजा गया मौसम दिख रहा है",
+    "updated": "अंतिम अपडेट {time}",
+    "refresh": "ताज़ा करें",
+    "retry": "पुनः प्रयास करें",
+    "error": "मौसम की जानकारी लोड नहीं हो सकी",
+    "humidity": "नमी",
+    "pressureUnit": "hPa",
+    "temperatureUnit": "तापमान इकाई",
+    "windUnit": "हवा की गति इकाई",
+    "hourly": "अगले 24 घंटे",
+    "daily": "7-दिन का पूर्वानुमान",
+    "farmingHint": "खेती के लिए स्थिति",
+    "now": "अभी",
+    "feelsLike": "महसूस होता है",
+    "rainChance": "बारिश की संभावना",
+    "metricTemperature": "तापमान",
+    "metricRain": "बारिश",
+    "metricWind": "हवा",
+    "metricHumidity": "नमी",
+    "metricSoilMoisture": "मिट्टी की नमी",
+    "lowShort": "न्यूनतम",
+    "highShort": "अधिकतम",
+    "emptyHourly": "अभी घंटेवार मौसम पूर्वानुमान उपलब्ध नहीं है।",
+    "loadSampleForecast": "नमूना मौसम पूर्वानुमान लोड करें",
+    "chartSummary": "आज: {minTime} पर {minTemp} से बढ़कर {maxTime} पर {maxTemp}, {rainTime} के आसपास {rainChance}% बारिश की संभावना।",
+    "clear": "साफ़ आसमान",
+    "cloudy": "बादल छाए रहेंगे",
+    "rain": "बारिश",
+    "snow": "बर्फ़बारी",
+    "storm": "तेज़ आँधी-तूफ़ान",
+    "unknown": "अज्ञात मौसम स्थिति",
+    "adviceSpray": "छिड़काव के लिए उपयुक्त समय",
+    "adviceAvoidSpray": "छिड़काव से बचें: तेज़ हवा, बारिश या अधिक नमी है",
+    "adviceIrrigate": "सिंचाई की आवश्यकता हो सकती है",
+    "adviceIrrigationWait": "अभी सिंचाई रुककर की जा सकती है",
+    "adviceHeavyRain": "जल्द भारी बारिश की संभावना है",
+    "adviceSowing": "खेत के काम और बुवाई के लिए मौसम अनुकूल है"
+  },
+  "dashboard": {
+    "farmOperations": "कृषि संचालन",
+    "location": "डिचोली, गोवा",
+    "totalFields": "कुल खेत",
+    "totalFieldsNote": "इस महीने +2",
+    "activeCrops": "सक्रिय फ़सलें",
+    "activeCropsNote": "स्वस्थ बढ़वार",
+    "soilMoisture": "मिट्टी की नमी",
+    "soilMoistureNote": "उत्तम स्तर",
+    "temperature": "तापमान",
+    "temperatureNote": "सामान्य सीमा",
+    "fieldOverview": "खेतों का अवलोकन",
+    "fieldsAtGlance": "आपके खेत एक नज़र में",
+    "expandMap": "खेत का नक्शा बड़ा करें",
+    "openMap": "पूरे स्क्रीन पर खेत का नक्शा खोलें",
+    "addField": "खेत जोड़ें",
+    "noFields": "अभी कोई खेत नहीं जुड़ा है। शुरू करने के लिए सत्यापित भूमि रिकॉर्ड आयात करें।",
+    "recentAlerts": "हाल की चेतावनियाँ",
+    "alertsAttention": "वे बातें जिन पर ध्यान देना ज़रूरी है",
+    "today": "आज",
+    "brand": "फ़ील्ड शिफ़्ट",
+    "closeMap": "नक्शा बंद करें",
+    "actionsCount": "{count} कार्य",
+    "timeframe": {
+      "weekly": "इस सप्ताह",
+      "monthly": "इस महीने"
+    },
+    "alerts": {
+      "moistureTitle": "उत्तरी ब्लॉक में मिट्टी की नमी कम है",
+      "moistureDetail": "ऊपरी मिट्टी की नमी 32% से नीचे आ गई है। मिट्टी रिकॉर्ड देखें या हल्की सिंचाई करें।",
+      "moistureAction": "मिट्टी स्वास्थ्य देखें",
+      "tempTitle": "दोपहर में तापमान बढ़ने की संभावना",
+      "tempDetail": "दोपहर का अधिकतम तापमान 34°C के आसपास रहने का अनुमान है। संवेदनशील फ़सलों में सुबह जल्दी पानी दें।",
+      "tempAction": "मौसम पूर्वानुमान देखें",
+      "irrigationTitle": "ड्रिप सिंचाई जाँच पूरी हुई",
+      "irrigationDetail": "सभी सक्रिय खेतों में मुख्य वाल्व का दबाव और पाइपलाइन सामान्य हैं।",
+      "irrigationAction": "खेत का नक्शा देखें"
+    }
+  },
+  "market": {
+    "live": "लाइव एपीएमसी मंडी",
+    "place": "मडगाँव मंडी · कच्चा काजू",
+    "grade": "काजू · मानक श्रेणी",
+    "open": "मंडी खुली है",
+    "updated": "संकेतक डेमो भाव · आज अपडेट किया गया",
+    "title": "मंडी भाव",
+    "subtitle": "क्षेत्रीय मंडी · ताज़ा भाव",
+    "searchPlaceholder": "फसल या मंडी खोजें…",
+    "sortByLabel": "फ़सलें क्रमबद्ध करें",
+    "sortByChange": "क्रम: सबसे बड़ा बदलाव",
+    "sortByPrice": "क्रम: सबसे अधिक भाव",
+    "sortByName": "क्रम: नाम अनुसार",
+    "myCropsFirst": "मेरी फसलें पहले",
+    "myCropBadge": "मेरी फ़सल",
+    "allMarkets": "सभी मंडियां",
+    "priceVsLastWeek": "पिछले सप्ताह की तुलना में भाव",
+    "cropsCount": "{count} फ़सलें",
+    "aiInsightHeading": "एआई मंडी सलाह",
+    "aiSummaryRising": "{market} में {crop} के भाव {pct}% बढ़े हैं। बेचने का अच्छा समय है — इस सप्ताह माल निकालने पर विचार करें।",
+    "aiSummaryFalling": "{market} में {crop} के भाव {pct}% घटे हैं। यदि भंडारण सुरक्षित है तो थोड़ा रुकें — अगले सप्ताह भाव सुधर सकते हैं।",
+    "aiDataSourceNote": "क्षेत्रीय मंडी आवक पर आधारित · आज अपडेट किया गया",
+    "alertSettingsLink": "भाव अलर्ट और सूचना सेटिंग्स",
+    "unitPerQuintal": "प्रति क्विंटल",
+    "units": {
+      "shortQuintal": "₹/क्विंटल",
+      "perQuintal": "प्रति क्विंटल",
+      "shortKg": "₹/किग्रा",
+      "perKg": "प्रति किलोग्राम",
+      "short100Nuts": "₹/100 नग",
+      "per100Nuts": "प्रति 100 नग",
+      "shortDozen": "₹/दर्जन",
+      "perDozen": "प्रति दर्जन"
+    }
+  },
+  "marketDetail": {
+    "viewCropAnalysis": "पूरा मंडी विश्लेषण",
+    "backToMarket": "मंडी भाव पर वापस जाएँ",
+    "loadError": "अभी मंडी विवरण लोड नहीं हो सका।",
+    "sampleDataBadge": "नमूना डेटा",
+    "vsYesterday": "कल की तुलना में",
+    "vsLastWeek": "पिछले सप्ताह से",
+    "gradeLabel": "श्रेणी",
+    "priceHistoryTitle": "भाव इतिहास",
+    "averageLineLabel": "अवधि औसत",
+    "avgShort": "औसत",
+    "compareLastYear": "पिछले वर्ष से तुलना करें",
+    "modalPrice": "मॉडल भाव",
+    "dayRange": "न्यूनतम–अधिकतम",
+    "lastYear": "पिछला वर्ष",
+    "keyStatsTitle": "मुख्य मंडी आंकड़े",
+    "todayModal": "आज का मॉडल भाव",
+    "avg30d": "30-दिन का औसत",
+    "highLow52w": "52-सप्ताह न्यूनतम – अधिकतम",
+    "yearlySpread": "वार्षिक सीमा",
+    "volatility": "भाव में उतार-चढ़ाव",
+    "volatility_stable": "स्थिर",
+    "volatility_moderate": "मध्यम",
+    "volatility_volatile": "अस्थिर",
+    "priceStability": "30-दिन की स्थिरता",
+    "arrivalsToday": "मंडी आवक",
+    "quintals": "क्विंटल",
+    "nearbyMarketsTitle": "आस-पास की मंडियों से तुलना",
+    "nearbyMarketsSubtitle": "उच्चतम मॉडल भाव के अनुसार क्रमबद्ध",
+    "bestPriceBadge": "सर्वोत्तम भाव",
+    "analysisTitle": "सरल भाषा में मंडी सलाह",
+    "analysisSubtitle": "हाल के भाव रुझानों पर आधारित सरल सारांश",
+    "recSellNow": "अभी बेचें",
+    "recHold": "रोकें",
+    "recWait": "प्रतीक्षा करें",
+    "analysisRising": "पिछले 7 दिनों में {crop} के भाव {pct}% बढ़े हैं।",
+    "analysisFalling": "पिछले 7 दिनों में {crop} के भाव {pct}% गिरे हैं।",
+    "analysisSteady": "पिछले 7 दिनों में {crop} के भाव स्थिर रहे हैं।",
+    "analysisAboveAvg": "वर्तमान भाव 30-दिन के औसत से {pct}% ऊपर हैं।",
+    "analysisBelowAvg": "वर्तमान भाव 30-दिन के औसत से {pct}% नीचे हैं।",
+    "recSellNowReason": "मासिक औसत की तुलना में भाव मज़बूत हैं — तैयार उपज का कुछ हिस्सा अभी बेचने से अच्छा मुनाफ़ा मिल सकता है।",
+    "recHoldReason": "भाव सामान्य स्तर के पास हैं — आप किस्तों में बेच सकते हैं या सूखा भंडारण होने पर रोक सकते हैं।",
+    "recWaitReason": "अभी भाव नरम हैं — यदि उपज सुरक्षित रखी जा सकती है तो आवक घटने तक प्रतीक्षा करने से बेहतर दाम मिल सकते हैं।",
+    "seasonalTitle": "मौसमी भाव पैटर्न (12 महीने)",
+    "bestMonthsToSell": "बेचने के सर्वोत्तम महीने: {months}",
+    "forecast7dTitle": "अगले 7 दिनों का भाव अनुमान",
+    "estimateBadge": "अनुमान",
+    "forecastRangeBody": "अनुमानित मॉडल भाव लगभग {mid} (संभावित सीमा: {low} से {high})।",
+    "financialDisclaimer": "मंडी की ऐतिहासिक आवक और रुझानों पर आधारित संकेतक मार्गदर्शन। ढुलाई से पहले अपनी स्थानीय मंडी में अंतिम भाव अवश्य जाँचें।",
+    "farmingInfoTitle": "खेती और आय अनुमान",
+    "farmingInfoSubtitle": "कृषि संदर्भ और वर्तमान भाव पर अनुमानित आय",
+    "personalizedIncomeBanner": "आज के मंडी भाव पर आपके {area} हेक्टेयर {crop} से लगभग {amount} की आय हो सकती है।",
+    "growingSeason": "बुवाई का मौसम",
+    "season_kharif": "खरीफ़ (मानसून)",
+    "season_rabi": "रबी (सर्दी)",
+    "season_zaid": "ज़ायद (गर्मी)",
+    "season_annual": "साल भर",
+    "season_perennial": "बहुवर्षीय",
+    "cropDuration": "फ़सल अवधि",
+    "durationDaysValue": "{days} दिन",
+    "typicalYield": "सामान्य उपज",
+    "expectedIncomeHa": "अनुमानित सकल आय/हे.",
+    "storageTipsTitle": "कटाई के बाद देखभाल और भंडारण",
+    "storageTipsBody": "उपज को सुरक्षित नमी स्तर तक सुखाएँ, खराब दानों को अलग करके एकसमान श्रेणी बनाएँ और ज़मीन से ऊपर साफ़ हवादार बोरियों में रखें।",
+    "harvestTimingTitle": "कटाई का सर्वोत्तम समय",
+    "harvestTimingBody": "पूरी परिपक्वता पर सुबह के सूखे समय में कटाई करें ताकि मंडी में उच्चतम श्रेणी का भाव मिले।",
+    "inputsAndHelpTitle": "कृषि सामग्री और नज़दीकी सहायता",
+    "inputsAndHelpSubtitle": "लाइसेंस प्राप्त बीज/खाद विक्रेता और मूल्य सहायता",
+    "mspTitle": "न्यूनतम समर्थन मूल्य (MSP)",
+    "mspBody": "आधिकारिक संदर्भ समर्थन मूल्य: {msp} प्रति क्विंटल",
+    "dealerStockSeedsFertilizer": "प्रमाणित बीज, एनपीके और सूक्ष्म पोषक तत्व उपलब्ध",
+    "dealerStockBioInputs": "जैविक खाद, फ़सल सुरक्षा और भंडारण बोरियाँ",
+    "callDealer": "विक्रेता को कॉल करें",
+    "setAlertTitle": "भाव अलर्ट सेट करें",
+    "setAlertSubtitle": "जब {crop} आपके तय भाव को पार करे तो इस फ़ोन पर सूचना पाएँ",
+    "alertCondition": "अलर्ट की शर्त",
+    "whenPriceAbove": "जब भाव इससे ऊपर जाए",
+    "whenPriceBelow": "जब भाव इससे नीचे आए",
+    "targetPriceLabel": "लक्षित भाव",
+    "saveAlertBtn": "अलर्ट सेट करें",
+    "alertSaved": "भाव अलर्ट इस डिवाइस पर सहेजा गया।",
+    "invalidTargetPrice": "कृपया 0 से अधिक मान्य लक्षित भाव दर्ज करें।",
+    "alertTriggeredTitle": "{crop} का लक्षित भाव पूरा हुआ: {price}",
+    "alertTriggeredBody": "{market} में वर्तमान भाव आपके लक्ष्य {target} से {direction} है।",
+    "alertTriggeredShort": "लक्ष्य {target} पूरा हुआ",
+    "directionAbove": "बराबर या ऊपर",
+    "directionBelow": "बराबर या नीचे",
+    "addToFavourites": "पसंदीदा में जोड़ें",
+    "removeFromFavourites": "पसंदीदा से हटाएँ",
+    "share": "भाव साझा करें",
+    "copiedToClipboard": "मंडी सारांश क्लिपबोर्ड पर कॉपी हो गया",
+    "relatedCropsTitle": "संबंधित फसलें",
+    "viewPrice": "भाव देखें"
+  },
+  "alerts": {
+    "sowingCritical": "बुवाई का समय अत्यंत महत्वपूर्ण: मानसून में देरी",
+    "actionNeeded": "तुरंत ध्यान दें",
+    "sowingDetail": "धान की बुवाई के सर्वोत्तम समय से 14 दिन बीत चुके हैं। उपज के नुकसान से बचने के लिए रागी या लोबिया जैसी कम अवधि की फ़सल पर विचार करें।",
+    "dismiss": "बंद करें",
+    "updateCropPlan": "फ़सल योजना अपडेट करें"
+  },
+  "crops": {
+    "search": "फ़सल खोजें",
+    "noResults": "कोई फ़सल नहीं मिली",
+    "listenTo": "{name} सुनें",
+    "rice": {
+      "name": "चावल",
+      "localName": "धान"
+    },
+    "wheat": {
+      "name": "गेहूँ",
+      "localName": "गेहूँ"
+    },
+    "maize": {
+      "name": "मक्का",
+      "localName": "मक्का"
+    },
+    "sorghum": {
+      "name": "ज्वार",
+      "localName": "ज्वार"
+    },
+    "millet": {
+      "name": "बाजरा",
+      "localName": "बाजरा"
+    },
+    "barley": {
+      "name": "जौ",
+      "localName": "जौ"
+    },
+    "oats": {
+      "name": "जई",
+      "localName": "जई"
+    },
+    "chickpea": {
+      "name": "चना",
+      "localName": "देसी चना"
+    },
+    "lentil": {
+      "name": "मसूर",
+      "localName": "मसूर दाल"
+    },
+    "pigeon-pea": {
+      "name": "अरहर",
+      "localName": "तूर दाल"
+    },
+    "moong": {
+      "name": "मूँग",
+      "localName": "हरी मूँग"
+    },
+    "cowpea": {
+      "name": "लोबिया",
+      "localName": "चवला"
+    },
+    "soybean": {
+      "name": "सोयाबीन",
+      "localName": "सोयाबीन"
+    },
+    "beans": {
+      "name": "राजमा / सेम",
+      "localName": "फ़राशबीन"
+    },
+    "peas": {
+      "name": "मटर",
+      "localName": "हरी मटर"
+    },
+    "groundnut": {
+      "name": "मूँगफली",
+      "localName": "मूँगफली"
+    },
+    "mustard": {
+      "name": "सरसों",
+      "localName": "राई / सरसों"
+    },
+    "sunflower": {
+      "name": "सूरजमुखी",
+      "localName": "सूरजमुखी"
+    },
+    "sesame": {
+      "name": "तिल",
+      "localName": "तिल"
+    },
+    "rapeseed": {
+      "name": "तोरिया",
+      "localName": "पीली सरसों"
+    },
+    "potato": {
+      "name": "आलू",
+      "localName": "आलू"
+    },
+    "sweet-potato": {
+      "name": "शकरकंद",
+      "localName": "शकरकंद"
+    },
+    "cassava": {
+      "name": "कसावा",
+      "localName": "साबूदाना कंद"
+    },
+    "yam": {
+      "name": "जिमीकंद",
+      "localName": "सूरन"
+    },
+    "onion": {
+      "name": "प्याज़",
+      "localName": "प्याज़"
+    },
+    "garlic": {
+      "name": "लहसुन",
+      "localName": "लहसुन"
+    },
+    "tomato": {
+      "name": "टमाटर",
+      "localName": "टमाटर"
+    },
+    "brinjal": {
+      "name": "बैंगन",
+      "localName": "बैंगन"
+    },
+    "chilli": {
+      "name": "मिर्च",
+      "localName": "हरी मिर्च"
+    },
+    "cabbage": {
+      "name": "पत्ता गोभी",
+      "localName": "बंद गोभी"
+    },
+    "cauliflower": {
+      "name": "फूल गोभी",
+      "localName": "फूल गोभी"
+    },
+    "okra": {
+      "name": "भिंडी",
+      "localName": "भिंडी"
+    },
+    "cucumber": {
+      "name": "खीरा",
+      "localName": "ककड़ी / खीरा"
+    },
+    "pumpkin": {
+      "name": "कद्दू",
+      "localName": "सीताफल / कद्दू"
+    },
+    "cotton": {
+      "name": "कपास",
+      "localName": "कपास"
+    },
+    "sugarcane": {
+      "name": "गन्ना",
+      "localName": "ईख / गन्ना"
+    },
+    "jute": {
+      "name": "जूट",
+      "localName": "पटसन"
+    },
+    "tea": {
+      "name": "चाय",
+      "localName": "चाय पत्ती"
+    },
+    "coffee": {
+      "name": "कॉफ़ी",
+      "localName": "कॉफ़ी"
+    },
+    "tobacco": {
+      "name": "तंबाकू",
+      "localName": "तंबाकू"
+    },
+    "coconut": {
+      "name": "नारियल",
+      "localName": "नारियल"
+    },
+    "cashew": {
+      "name": "काजू",
+      "localName": "काजू"
+    },
+    "arecanut": {
+      "name": "सुपारी",
+      "localName": "सुपारी"
+    },
+    "banana": {
+      "name": "केला",
+      "localName": "केला"
+    },
+    "mango": {
+      "name": "आम",
+      "localName": "आम"
+    },
+    "papaya": {
+      "name": "पपीता",
+      "localName": "पपीता"
+    },
+    "citrus": {
+      "name": "नींबू वर्गीय फल",
+      "localName": "संतरा / नींबू"
+    },
+    "apple": {
+      "name": "सेब",
+      "localName": "सेब"
+    },
+    "cocoa": {
+      "name": "कोको",
+      "localName": "कोको"
+    },
+    "oil-palm": {
+      "name": "ऑयल पाम",
+      "localName": "ताड़ तेल"
+    },
+    "rubber": {
+      "name": "रबर",
+      "localName": "रबर"
+    },
+    "alfalfa": {
+      "name": "रिज़का",
+      "localName": "लूसर्न चारा"
+    },
+    "napier-grass": {
+      "name": "नेपियर घास",
+      "localName": "हाथी घास"
+    },
+    "paddy": {
+      "name": "धान",
+      "localName": "धान"
+    },
+    "areca-nut": {
+      "name": "सुपारी",
+      "localName": "सुपारी"
+    },
+    "vegetables": {
+      "name": "सब्ज़ियाँ",
+      "localName": "मौसमी सब्ज़ियाँ"
+    },
+    "other": {
+      "name": "अन्य फ़सल",
+      "localName": "अन्य फ़सल"
+    },
+    "black-gram": {
+      "name": "उड़द",
+      "localName": "उड़द दाल"
+    },
+    "fenugreek": {
+      "name": "मेथी",
+      "localName": "मेथी"
+    },
+    "grape": {
+      "name": "अंगूर",
+      "localName": "अंगूर"
+    },
+    "unavailableTitle": "फ़सल उपलब्ध नहीं है",
+    "unavailableBody": "यह फ़सल अभी ऐप में उपलब्ध नहीं है। मंडी सूची से दूसरी फ़सल चुनें।",
+    "backToMarket": "मंडी भाव पर वापस जाएँ"
+  },
+  "advisory": {
+    "title": "दैनिक कृषि आवाज़ सलाह",
+    "badge": "कृषि अपडेट",
+    "summary": "अपनी चुनी हुई भाषा में आज की खेत, मौसम और मंडी सलाह सुनने के लिए प्ले दबाएँ।",
+    "fullScript": "नमस्कार किसान साथियों! आज सुबह का साफ़ मौसम मिट्टी की नमी जाँचने और पत्तियों पर कीटों के शुरुआती लक्षण देखने के लिए बहुत उपयुक्त है। क्षेत्रीय मंडियों में काजू और दलहन के भाव स्थिर बने हुए हैं, इसलिए उपज को मंडी ले जाने से पहले अच्छी तरह सुखाकर हवादार बोरियों में रखें।",
+    "playAria": "दैनिक कृषि आवाज़ सलाह सुनें",
+    "stopAria": "दैनिक कृषि आवाज़ सलाह रोकें"
+  },
+  "notifications": {
+    "ariaRegion": "कृषि सूचनाएँ",
+    "types": {
+      "market": "मंडी",
+      "weather": "मौसम",
+      "plot": "खेत"
+    },
+    "marketRiseTitle": "{market} मंडी में {crop} के भाव {pct}% बढ़े",
+    "marketRiseBody": "आज का भाव {price} {unit} है, जो कल से {diff} अधिक है।",
+    "clearSkiesTitle": "अगले {days} दिनों तक आसमान साफ़ रहेगा",
+    "clearSkiesBody": "बारिश की संभावना कम है — निराई-गुड़ाई, फ़सल सुखाने या पर्ण छिड़काव के लिए अच्छा समय है।",
+    "soilHealthGoodTitle": "मिट्टी की नमी {moisture}% पर उत्तम है",
+    "soilHealthGoodBody": "{season} बुवाई से पहले आपके खेतों में पर्याप्त नमी मौजूद है।",
+    "ureaSubsidyTitle": "{market} केंद्र पर खाद का नया स्टॉक पहुँचा",
+    "ureaSubsidyBody": "सहकारी केंद्र पर {bagKg} किलो की बोरी {price} प्रति बोरी की दर से उपलब्ध है।"
+  },
+  "soil": {
+    "title": "मृदा स्वास्थ्य कार्ड",
+    "subtitle": "अपनी मिट्टी के पोषक तत्वों का डेटा अपलोड या दर्ज करें",
+    "overviewSpeech": "अपने छपे हुए मृदा स्वास्थ्य कार्ड की फ़ोटो अपलोड करके पोषक मान स्वतः निकालें, नमूना लैटराइट मिट्टी प्रोफ़ाइल भरें, या नाइट्रोजन, फ़ॉस्फ़ोरस, पोटाश और पीएच मान स्वयं दर्ज करें।",
+    "currentReadingsIntro": "स्क्रीन पर दर्ज वर्तमान मिट्टी मान",
+    "populateLateriteTitle": "लैटराइट मिट्टी प्रोफ़ाइल भरें",
+    "populateLateriteDesc": "गोवा की वास्तविक लैटराइट मिट्टी के मान स्वतः भरें (पीएच 5.5, कम नाइट्रोजन, मध्यम पोटाश)।",
+    "lateriteActionsHeading": "लैटराइट मिट्टी के लिए सुझाए गए उपाय",
+    "lateriteTip1": "मिट्टी का पीएच सुधारने के लिए प्रति हेक्टेयर 500 से 800 किग्रा कृषि चूने का प्रयोग करें।",
+    "lateriteTip2": "जैविक कार्बन बढ़ाने के लिए बुवाई से पहले गोबर की खाद या कम्पोस्ट मिलाएँ।",
+    "lateriteTip3": "भारी बारिश में पोषक तत्व बहने से बचाने के लिए नाइट्रोजन खाद को किस्तों में दें।",
+    "cardPhotoLabel": "मृदा स्वास्थ्य कार्ड की फ़ोटो",
+    "ocrBadge": "ओसीआर द्वारा स्वतः पठन",
+    "extractingValues": "मिट्टी के मान पढ़े जा रहे हैं…",
+    "extractingSubtext": "नाइट्रोजन, फ़ॉस्फ़ोरस, पोटाश और पीएच नीचे फ़ॉर्म में भरे जा रहे हैं",
+    "removePhoto": "फ़ोटो हटाएँ",
+    "valuesExtracted": "मान निकाल लिए गए",
+    "dropToUpload": "अपलोड करने के लिए यहाँ छोड़ें",
+    "uploadCardTitle": "मृदा स्वास्थ्य कार्ड अपलोड करें",
+    "uploadCardSubtitle": "फ़ोटो चुनने के लिए टैप करें या खींचकर लाएँ",
+    "supportedFormats": "JPG, PNG, HEIC समर्थित",
+    "ocrExplain": "फ़ोटो अपलोड करने पर आपके छपे कार्ड से नाइट्रोजन, फ़ॉस्फ़ोरस, पोटाश और पीएच मान स्वतः पढ़कर नीचे दिखाए जाएँगे।",
+    "manualEntryTitle": "मैनुअल प्रविष्टि",
+    "manualEntrySubtitle": "अपने मृदा स्वास्थ्य कार्ड से मान दर्ज करें",
+    "primaryMacrosBadge": "मुख्य पोषक तत्व",
+    "saveRecordBtn": "मृदा रिकॉर्ड ऑफ़लाइन सहेजें",
+    "storedLocallyNote": "आपके फ़ोन पर सुरक्षित · इंटरनेट मिलने पर स्वतः सिंक होगा",
+    "savedOfflineToast": "मृदा रिकॉर्ड ऑफ़लाइन सहेजा गया!",
+    "units": {
+      "kgPerHa": "किलोग्राम प्रति हेक्टेयर",
+      "dsPerM": "डेसीसीमेंस प्रति मीटर"
+    },
+    "fields": {
+      "nitrogen": {
+        "label": "नाइट्रोजन (N)",
+        "tip": "उपलब्ध नाइट्रोजन; 280 किग्रा/हे. से कम यानी न्यून"
+      },
+      "phosphorus": {
+        "label": "फ़ॉस्फ़ोरस (P)",
+        "tip": "उपलब्ध फ़ॉस्फ़ोरस; 25 किग्रा/हे. से कम यानी न्यून"
+      },
+      "potassium": {
+        "label": "पोटैशियम / पोटाश (K)",
+        "tip": "उपलब्ध पोटाश; मध्यम 150–250 किग्रा/हे."
+      },
+      "ph": {
+        "label": "मिट्टी का पीएच (pH)",
+        "tip": "अधिकांश फ़सलों के लिए 6.0–7.5 उपयुक्त"
+      },
+      "organicCarbon": {
+        "label": "जैविक कार्बन",
+        "tip": "0.75% से अधिक उच्च; 0.5% से कम न्यून"
+      },
+      "ec": {
+        "label": "विद्युत चालकता (लवणता)",
+        "tip": "2 dS/m से कम अधिकांश फ़सलों के लिए सुरक्षित"
+      }
+    }
+  },
+  "pest": {
+    "title": "कीट एवं रोग स्कैनर",
+    "subtitle": "एआई आधारित फ़सल रोग पहचान",
+    "overviewSpeech": "प्रभावित पत्तियों, तनों या फलों की साफ़ फ़ोटो लें या अपलोड करें, और कीट या रोग की पहचान के साथ तुरंत जैविक व रासायनिक उपचार सुनें।",
+    "scanAnotherAria": "दूसरी फ़ोटो स्कैन करें",
+    "takeOrUploadTitle": "फ़ोटो लें या अपलोड करें",
+    "takeOrUploadSubtitle": "प्रभावित पत्तियों, तनों या फलों पर कैमरा केंद्रित करें",
+    "partLeaves": "पत्तियाँ",
+    "partStems": "तने",
+    "partInsects": "कीट",
+    "tapToOpenCamera": "कैमरा खोलने के लिए टैप करें",
+    "trySampleScan": "नमूना पत्ती स्कैन आज़माएँ",
+    "cropPhotoAlt": "जाँच के लिए फ़सल की फ़ोटो",
+    "analysingOverlay": "एआई मॉडल से जाँच हो रही है…",
+    "analysisComplete": "जाँच पूर्ण",
+    "removePhotoAria": "फ़ोटो हटाएँ",
+    "scanningStatusTitle": "एआई मॉडल आपकी फ़ोटो जाँच रहा है…",
+    "scanningStatusSubtitle": "4,000 से अधिक फ़सल रोग लक्षणों से मिलान हो रहा है",
+    "howItWorksTitle": "यह कैसे काम करता है",
+    "howStep1": "प्रभावित पौधे के हिस्से की साफ़ फ़ोटो लें",
+    "howStep2": "हमारा एआई प्रमुख रोगों, कीटों और पोषक कमियों की पहचान करता है",
+    "howStep3": "ऑफ़लाइन होने पर भी तुरंत चरणबद्ध उपचार सलाह पाएँ",
+    "severity": {
+      "moderate": "मध्यम",
+      "high": "गंभीर"
+    },
+    "severityBadge": "{severity} गंभीरता",
+    "detectedOn": "पहचानी गई फ़सल:",
+    "confidenceLabel": "{pct}% सटीकता",
+    "immediateActions": "तुरंत करने योग्य कार्य",
+    "treatmentOptions": "उपचार के विकल्प",
+    "organicTreatment": "जैविक उपचार",
+    "chemicalTreatment": "रासायनिक उपचार",
+    "disclaimer": "यह संकेतक एआई पहचान है — तेज़ रासायनिक छिड़काव से पहले अपने स्थानीय कृषि अधिकारी से सलाह अवश्य लें।",
+    "resultSpeechIntro": "जाँच परिणाम: {crop} की फ़सल पर {disease} पहचाना गया। गंभीरता {severity} है और सटीकता {confidence} है।",
+    "diseases": {
+      "leafBlight": {
+        "name": "जीवाणु पत्ती झुलसा (लीफ़ ब्लाइट)",
+        "description": "ज़ैन्थोमोनास ओराइज़ी जीवाणु से होने वाला पत्ती झुलसा रोग। पत्तियों के सिरों से पीलापन शुरू होकर किनारे जले व सूखे दिखाई देते हैं।",
+        "immediate1": "नमी कम करने के लिए 3 से 4 दिनों तक खेत से खड़ा पानी निकाल दें।",
+        "immediate2": "ऊपर से फव्वारा सिंचाई और अतिरिक्त यूरिया देने से बचें।",
+        "immediate3": "गंभीर रूप से संक्रमित पत्तियों को सिंचाई नाली से दूर हटाकर नष्ट करें।",
+        "organic1": "हर 7 दिन में 3% नीम तेल घोल (30 मिली प्रति लीटर पानी) का छिड़काव करें।",
+        "organic2": "जड़ क्षेत्र के पास ट्राइकोडर्मा विरिडी या स्यूडोमोनास 5 ग्राम प्रति लीटर की दर से दें।",
+        "organic3": "पौधों की रोग प्रतिरोधक क्षमता बढ़ाने के लिए पोटाश या लकड़ी की राख (500 किग्रा/हे.) डालें।",
+        "chemical1": "कॉपर ऑक्सीक्लोराइड 50% WP का 2.5 से 3 ग्राम प्रति लीटर पानी में घोलकर छिड़काव करें।",
+        "chemical2": "कृषि विशेषज्ञ की सलाह अनुसार अनुशंसित जीवाणुनाशक निर्धारित मात्रा में मिलाएँ।",
+        "chemical3": "जब 25% से अधिक पत्तियाँ प्रभावित हों तभी सूखे मौसम में सुबह या शाम छिड़काव करें।"
+      },
+      "powderyMildew": {
+        "name": "चूर्णिल आसिता (पाउडरी मिल्ड्यू)",
+        "description": "नई टहनियों, फूलों के गुच्छों और छोटे फलों पर लगने वाला फफूँद रोग, जिसमें पत्तियों पर सफ़ेद पाउडर जैसी परत दिखती है।",
+        "immediate1": "अधिक प्रभावित टहनियों और सूखे फूल गुच्छों की छँटाई करके सुरक्षित रूप से नष्ट करें।",
+        "immediate2": "हवा और धूप के प्रवेश के लिए घनी शाखाओं की हल्की छँटाई करें।",
+        "immediate3": "पत्तियों को जलने से बचाने के लिए छिड़काव सुबह जल्दी या शाम को करें।",
+        "organic1": "घुलनशील गंधक (सल्फ़र 80% WP) 2 ग्राम प्रति लीटर पानी में मिलाकर छिड़काव करें।",
+        "organic2": "शुरुआती धब्बों पर 0.5% बेकिंग सोडा घोल (5 ग्राम प्रति लीटर पानी) का छिड़काव करें।",
+        "organic3": "हर 5 से 7 दिन में नीम आधारित वानस्पतिक अर्क का छिड़काव दोहराएँ।",
+        "chemical1": "हेक्साकोनाज़ोल 5% EC का 2 मिली प्रति लीटर पानी की दर से छिड़काव करें।",
+        "chemical2": "विकल्प के रूप में प्रोपिकोनाज़ोल 25% EC को 1 मिली प्रति लीटर पानी में मिलाकर छिड़कें।",
+        "chemical3": "फफूँद में प्रतिरोध रोकने के लिए अगली बार अलग समूह के फफूँदनाशक का उपयोग करें।"
+      }
+    }
+  },
+  "dealers": {
+    "title": "नज़दीकी बीज एवं खाद विक्रेता",
+    "subtitle": "अपने गाँव के पास लाइसेंस प्राप्त कृषि केंद्रों में लाइव स्टॉक उपलब्धता देखें।",
+    "searchAria": "विक्रेता, स्थान या स्टॉक खोजें",
+    "searchPlaceholder": "बीज, यूरिया या शहर खोजें…",
+    "distanceAway": "{km} किमी दूर",
+    "callDealer": "विक्रेता को कॉल करें",
+    "getDirections": "रास्ता देखें",
+    "noResults": "\"{query}\" से मेल खाता कोई विक्रेता नहीं मिला। बीज, यूरिया या शहर का नाम खोजें।",
+    "items": {
+      "mapusaKendra": {
+        "name": "मापुसा कृषि सेवा केंद्र",
+        "location": "मार्केट रोड, मापुसा, उत्तरी गोवा"
+      },
+      "dicholiAgro": {
+        "name": "डिचोली तालुका एग्रो सेंटर",
+        "location": "बस स्टैंड सर्कल, बिचोलिम, गोवा"
+      },
+      "goaSeedCoop": {
+        "name": "गोवा राज्य बीज एवं उर्वरक सहकारी समिति",
+        "location": "फोंडा हाईवे, पणजी, गोवा"
+      }
+    },
+    "stock": {
+      "inStockRagi": "रागी व दलहन बीज: उपलब्ध",
+      "outOfStockUrea": "यूरिया: स्टॉक समाप्त",
+      "lowStockNeem": "नीम तेल: सीमित स्टॉक",
+      "inStockUrea": "यूरिया: उपलब्ध"
+    }
+  }
+}
