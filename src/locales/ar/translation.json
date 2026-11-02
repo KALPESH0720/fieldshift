@@ -239,6 +239,12 @@
     "cardFertilizerSpeech": "توفير الأسمدة: {weight} من {fertilizer}، مما يوفر حوالي {savings}.",
     "cardWaterSpeech": "مدة النمو {duration}، واحتياج المياه: {waterNeed}.",
     "fertilizerUrea": "اليوريا",
+    "pmfbyInsuredRabi": "مؤمَّن عبر PMFBY (قسط 1.5%)",
+    "pmfbyInsuredKharif": "مؤمَّن عبر PMFBY (قسط 2%)",
+    "nfsmSubsidyEligible": "مؤهل لدعم NFSM",
+    "includesSubsidyAndPmfby": "يشمل +{subsidy} دعم NFSM و−{premium} قسط PMFBY",
+    "includesPmfbyPremium": "يشمل −{premium} قسط تأمين المزارع PMFBY",
+    "includesNfsmSubsidy": "يشمل +{subsidy} دعم البقوليات NFSM",
     "rankTags": {
       "bestFit": "#{rank} أفضل توافق للدورة الزراعية",
       "soilBalance": "#{rank} توازن ممتاز للتربة",
@@ -344,6 +350,11 @@
     "areaPlaceholder": "e.g. 2.5",
     "areaInvalid": "يرجى إدخال مساحة صحيحة أكبر من 0.",
     "addIntercrop": "إضافة محصول بيني",
+    "removeIntercrop": "إزالة المحصول المتداخل",
+    "recommendedCompanions": "المحاصيل المرافقة الموصى بها",
+    "recommendedCompanionsHint": "أفضل التوليفات الزراعية لمحصول {crop}:",
+    "matchScore": "توافق {score}%",
+    "selectedPairingBenefit": "{primary} + {companion} · {benefit} (توافق {score}%)",
     "saveField": "حفظ الحقل",
     "unitShortAc": "فدان",
     "unitFullAcres": "أفدنة",
@@ -429,6 +440,41 @@
         "description": "يدعم المزارعين المتحولين إلى المدخلات العضوية والأسمدة الحيوية والتوثيق والتسويق المباشر.",
         "action": "التقديم على المنحة"
       }
+    },
+    "modal": {
+      "closeAria": "إغلاق نافذة الأهلية",
+      "eligibleBannerTitle": "مؤهل — تم استيفاء شروط البرنامج",
+      "eligibleBannerSubtitle": "{count} قطعة أرض موثقة بإجمالي {area} هكتار مؤهلة لهذا البرنامج.",
+      "pendingBannerTitle": "الأهلية غير مكتملة",
+      "pendingBannerSubtitle": "أكمل المعايير المتبقية أدناه لتفعيل المزايا الموثقة.",
+      "criteriaHeading": "قائمة التحقق من الأهلية",
+      "matchedPlotsHeading": "الحقول الموثقة المؤهلة",
+      "verifiedPlotPill": "موثق",
+      "plotAreaHa": "{area} هكتار",
+      "noVerifiedPlotsHint": "اربط سجل الأرض الرسمي في صفحة مزرعتي لتوثيق الملكية وتفاصيل المحصول.",
+      "goToFarmLink": "الذهاب إلى مزرعتي",
+      "openOfficialPortal": "زيارة البوابة الرسمية ({domain})",
+      "critVerifiedTitle": "سجل أرض موثق (AgriStack)",
+      "critVerifiedPass": "تم العثور على {count} حقل موثق في سجلاتك المحلية.",
+      "critVerifiedFail": "لم يتم العثور على حقل موثق. قم باستيراد سجل AgriStack في صفحة مزرعتي.",
+      "critCropPmfbyTitle": "محصول موسمي مشمول بالتأمين (الأرز، البقوليات، البذور الزيتية، الحبوب)",
+      "critCropPmfbyPass": "المحاصيل المطابقة المزروعة: {crops}.",
+      "critCropPmfbyFail": "حدد محصولاً موسمياً مشمولاً مثل الأرز أو القمح أو الماش أو الخردل.",
+      "critCropPkvyTitle": "محصول مؤهل للزراعة العضوية أو زراعة متداخلة",
+      "critCropPkvyPass": "محاصيل التحول العضوي المطابقة: {crops}.",
+      "critCropPkvyFail": "أضف حقول البستنة أو البقوليات أو الدخن أو الزراعة المتداخلة المؤهلة للتحول العضوي.",
+      "critCropPmKisanTitle": "حيازة أرض زراعية صالحة للزراعة",
+      "critCropPmKisanPass": "تم تسجيل {count} حقل صالح للزراعة (إجمالي {area} هكتار).",
+      "critCropPmKisanFail": "أضف أو استورد حقلاً زراعياً واحداً على الأقل بمساحة صالحة.",
+      "critCombinedPmfbyTitle": "حقل موثق مرتبط بمحصول مشمول",
+      "critCombinedPmfbyPass": "{count} حقل موثق جاهز للتغطية المدعومة (1.5% ربيع / 2% خريف).",
+      "critCombinedPmfbyFail": "يتطلب حقلاً موثقاً يزرع محصولاً مشمولاً في PMFBY.",
+      "critCombinedPkvyTitle": "مساحة مجموعة عضوية موثقة (حتى سقف 20 هكتاراً)",
+      "critCombinedPkvyPass": "تم توثيق {area} هكتار ضمن سقف منحة PKVY البالغ 20 هكتاراً.",
+      "critCombinedPkvyFail": "يتطلب حقلاً موثقاً واحداً على الأقل (حتى 20 هكتاراً) بمحصول مؤهل.",
+      "critCombinedPmKisanTitle": "قطعة أرض جاهزة للتحويل المباشر للمنافع (DBT)",
+      "critCombinedPmKisanPass": "{count} قطعة أرض موثقة جاهزة لتوثيق دعم ₹6,000 سنوياً.",
+      "critCombinedPmKisanFail": "اربط قطعة أرض موثقة لتأكيد أهلية التحويل المباشر."
     }
   },
   "weather": {
@@ -491,6 +537,8 @@
     "openMap": "فتح خريطة الحقول بملء الشاشة",
     "addField": "إضافة حقل",
     "noFields": "لا توجد حقول بعد. استورد سجلات الأراضي الموثقة للبدء.",
+    "cropPairLabel": "{primary} + {intercrop}",
+    "intercropBadge": "+ {crop} متداخل",
     "recentAlerts": "التنبيهات الأخيرة",
     "alertsAttention": "أمور تحتاج إلى انتباهك",
     "today": "اليوم",
@@ -654,12 +702,12 @@
     "noResults": "لم يتم العثور على محاصيل",
     "listenTo": "استمع إلى {name}",
     "rice": {
-      "name": "أرز",
-      "localName": "أرز مقشور"
+      "name": "الأرز",
+      "localName": "الأرز"
     },
     "wheat": {
-      "name": "قمح",
-      "localName": "قمح"
+      "name": "القمح",
+      "localName": "القمح"
     },
     "maize": {
       "name": "ذرة",
@@ -682,12 +730,12 @@
       "localName": "شوفان"
     },
     "chickpea": {
-      "name": "حمص",
-      "localName": "حمص بلدي"
+      "name": "الحمص",
+      "localName": "الحمص"
     },
     "lentil": {
-      "name": "عدس",
-      "localName": "عدس أحمر"
+      "name": "العدس",
+      "localName": "العدس"
     },
     "pigeon-pea": {
       "name": "بسلة هندية",
@@ -718,8 +766,8 @@
       "localName": "فستق العبيد"
     },
     "mustard": {
-      "name": "خردل",
-      "localName": "بذور الخردل"
+      "name": "الخردل",
+      "localName": "الخردل"
     },
     "sunflower": {
       "name": "دوار الشمس",
@@ -1072,6 +1120,83 @@
       "outOfStockUrea": "اليوريا: غير متوفرة حالياً",
       "lowStockNeem": "زيت النيم: كمية محدودة",
       "inStockUrea": "اليوريا: متوفرة"
+    }
+  },
+  "group": {
+    "eyebrow": "مساحة الإرشاد الزراعي",
+    "title": "نظرة عامة على جمعية المزارعين",
+    "coopName": "جمعية ديتشولي التعاونية",
+    "roleBadge": "مشرف / مرشد زراعي",
+    "listenSummaryAria": "الاستماع إلى ملخص الطلب المجمع للجمعية",
+    "totalFarmers": "إجمالي المزارعين",
+    "totalFarmersDetail": "{plots} حقول في {villages} قرى",
+    "mappedArea": "المساحة المسجلة",
+    "hectaresUnit": "هكتار",
+    "hectaresSpoken": "هكتار",
+    "mappedAreaDetail": "{plots} حقول نشطة للأعضاء",
+    "bulkSeedDemand": "الطلب الجماعي للبذور",
+    "kgUnit": "كغ",
+    "topSeedDetail": "{firstCrop} {firstKg} كغ · {secondCrop} {secondKg} كغ",
+    "singleSeedDetail": "{firstCrop} {firstKg} كغ",
+    "bulkUreaDemand": "الطلب الجماعي لليوريا",
+    "ureaBagsDetail": "{bags} أكياس (45 كغ) مطلوبة لهذه الدورة",
+    "cropDemandTitle": "طلب البذور واليوريا حسب المحصول",
+    "cropDemandSubtitle": "مجمّع من مساحات حقول الأعضاء ومعدلات البذار والتسميد القياسية",
+    "cropAreaLabel": "{ha} هكتار مسجل",
+    "cropSeedRate": "بذور: {kg} كغ ({rate} كغ/هكتار)",
+    "cropUreaRate": "يوريا: {kg} كغ ({rate} كغ/هكتار)",
+    "directoryTitle": "دليل المزارعين",
+    "directorySubtitle": "متابعة حقول الأعضاء وتنسيق الطلبات الجماعية للبذور والأسمدة.",
+    "onTrackCount": "{count} في المسار الصحيح",
+    "attentionCount": "{count} بحاجة إلى متابعة",
+    "colFarmerName": "اسم المزارع",
+    "colVillage": "القرية",
+    "colPrimaryCrops": "المحاصيل الرئيسية",
+    "colMappedArea": "المساحة المسجلة",
+    "colInputDemand": "طلب المدخلات",
+    "colStatus": "الحالة",
+    "plotCountSingle": "حقل {count}",
+    "plotCountPlural": "{count} حقول",
+    "rowSeedUrea": "{seed} كغ بذور · {urea} كغ يوريا",
+    "procurementTitle": "تقدير المشتريات",
+    "procurementDetail": "القيمة المتوقعة للشراء الجماعي للبذور واليوريا",
+    "attentionPlotsTitle": "مزارعون بحاجة إلى متابعة",
+    "attentionPlotsDetail": "تأخر الزراعة أو انتظار تسليم المدخلات",
+    "activeVillagesTitle": "القرى النشطة",
+    "activeVillagesDetail": "المشاركة في هذه الدورة التعاونية",
+    "summarySpeech": "{title}، {coop}. يوجد {farmers} مزارعين أعضاء في {villages} قرى بمساحة {area} {areaUnit} موزعة على {plots} حقول. يبلغ الطلب الجماعي للبذور {seed} ويتصدره محصول {topCrop} بكمية {topCropSeed}. ويبلغ الطلب الجماعي لليوريا {urea} أي {bags} أكياس. القيمة التقديرية للشراء الجماعي هي {procurement}.",
+    "status": {
+      "onTrack": "منتظم",
+      "sowingDelayed": "زراعة متأخرة",
+      "inputsPending": "مدخلات معلقة"
+    },
+    "members": {
+      "ramesh": "راميش نايك",
+      "savitri": "سافيتري غاونكار",
+      "mohan": "موهان كورغاونكار",
+      "anita": "أنيتا شيرودكار",
+      "vishnu": "فيشنو نايك",
+      "laxmi": "لاكشمي باراب",
+      "prakash": "براكاش ديساي"
+    },
+    "villages": {
+      "dicholi": "ديتشولي",
+      "amona": "أمونا",
+      "sanquelim": "سانكليم",
+      "mulgao": "مولغاو",
+      "honda": "هوندا",
+      "mayem": "مايم",
+      "narva": "نارفا"
+    }
+  },
+  "intercrop": {
+    "benefits": {
+      "nitrogenFixation": "تثبيت النيتروجين",
+      "weedSuppression": "مكافحة الأعشاب الضارة",
+      "canopyMoisture": "حفظ الرطوبة والمظلة النباتية",
+      "shadeSynergy": "تكامل الظل",
+      "moistureCover": "غطاء الرطوبة المتبقية",
+      "pestDeterrence": "مكافحة طبيعية للآفات"
     }
   }
 }

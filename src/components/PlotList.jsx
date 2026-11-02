@@ -14,6 +14,7 @@ import DashboardMap from './DashboardMap';
 import WeatherPanel from './WeatherPanel';
 import CropImage from './CropImage';
 import { getCropDisplayName, getCropOrUnknown, resolveKnownCrop } from '../data/crops';
+import { getIntercropPairingRule } from '../services/intercropRules';
 import {
     ArrowDownRight,
     ArrowRight,
@@ -23,6 +24,7 @@ import {
     Droplets,
     Maximize2,
     Plus,
+    Sprout,
     Thermometer,
     TriangleAlert,
     Wheat,
@@ -513,22 +515,81 @@ export default function PlotList() {
                                 {savedPlots.map((plot) => {
                                     const plotCrop = getCropOrUnknown(plot.primaryCrop, plot.primaryCrop);
                                     const isGenericLabel = /^(mixed agriculture|arable land|cereal|vegetables|tree crop)$/i.test(String(plot.primaryCrop || '').trim());
-                                    const cropLabel = plotCrop.isUnknown
+                                    const primaryCropLabel = plotCrop.isUnknown
                                         ? (plot.primaryCrop && !isGenericLabel ? String(plot.primaryCrop).replace(/-/g, ' ') : '')
                                         : getCropDisplayName(plotCrop, t);
+
+                                    const rawIntercrop = String(plot.intercrop || '').trim();
+                                    const intercropObj = rawIntercrop ? getCropOrUnknown(rawIntercrop, rawIntercrop) : null;
+                                    const intercropLabel = intercropObj
+                                        ? (intercropObj.isUnknown ? rawIntercrop.replace(/-/g, ' ') : getCropDisplayName(intercropObj, t))
+                                        : '';
+                                    const hasIntercrop = Boolean(intercropLabel);
+                                    const companionKnownCrop = hasIntercrop ? resolveKnownCrop(rawIntercrop) : null;
+                                    const pairingRule = hasIntercrop
+                                        ? getIntercropPairingRule(plot.primaryCrop, rawIntercrop)
+                                        : null;
+
+                                    const cropLabel =
+                                        primaryCropLabel && hasIntercrop
+                                            ? t('dashboard.cropPairLabel', {
+                                                  primary: primaryCropLabel,
+                                                  intercrop: intercropLabel,
+                                              })
+                                            : primaryCropLabel || intercropLabel;
+
                                     return (
-                                        <div key={plot.id} className="rounded-xl bg-slate-50 p-3 dark:bg-slate-950">
-                                            <div className="flex items-center justify-between gap-2.5">
-                                                <div className="flex items-center gap-2.5 min-w-0">
-                                                    <CropImage cropId={plot.primaryCrop || null} size="sm" />
-                                                    <div className="min-w-0">
-                                                        <p className="truncate text-sm font-bold text-slate-900 dark:text-slate-100">{plot.name}</p>
-                                                        <p className="mt-0.5 truncate text-[11px] text-slate-500 dark:text-slate-400">
+                                        <div key={plot.id} className="rounded-xl border border-slate-200/60 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950">
+                                            <div className="flex flex-wrap items-start justify-between gap-2">
+                                                <div className="flex min-w-[155px] flex-1 items-start gap-2.5">
+                                                    <div className="relative shrink-0">
+                                                        <CropImage
+                                                            cropId={plot.primaryCrop || rawIntercrop || null}
+                                                            size="sm"
+                                                        />
+                                                        {hasIntercrop && plot.primaryCrop && companionKnownCrop?.hasPhoto && (
+                                                            <img
+                                                                src={companionKnownCrop.thumb}
+                                                                alt={intercropLabel}
+                                                                loading="lazy"
+                                                                decoding="async"
+                                                                className="absolute -bottom-1 -end-1 h-5 w-5 rounded-md object-cover ring-2 ring-slate-50 dark:ring-slate-950"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <div className="min-w-0 flex-1">
+                                                        <p className="truncate text-sm font-bold text-slate-900 dark:text-slate-100">
+                                                            {plot.name}
+                                                        </p>
+                                                        <p className="mt-0.5 line-clamp-2 break-words text-[11px] font-medium text-slate-600 dark:text-slate-400">
                                                             {[cropLabel, plot.surveyNumber].filter(Boolean).join(' · ')}
                                                         </p>
+                                                        {hasIntercrop && (
+                                                            <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+                                                                <span className="inline-flex max-w-full items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/15 dark:text-emerald-300">
+                                                                    <Sprout size={11} className="shrink-0" />
+                                                                    <span className="truncate">
+                                                                        {t('dashboard.intercropBadge', {
+                                                                            crop: intercropLabel,
+                                                                        })}
+                                                                    </span>
+                                                                </span>
+                                                                {pairingRule && (
+                                                                    <span className="inline-flex max-w-full items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/15 dark:text-amber-300">
+                                                                        <span className="truncate">
+                                                                            {t(pairingRule.benefitKey)}
+                                                                        </span>
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
-                                                <VerificationBadge isVerified={plot.isVerified || plot.provenance?.verified} providerName={plot.providerId} />
+                                                <VerificationBadge
+                                                    className="shrink-0"
+                                                    isVerified={plot.isVerified || plot.provenance?.verified}
+                                                    providerName={plot.providerId}
+                                                />
                                             </div>
                                         </div>
                                     );

@@ -39,11 +39,28 @@ export function getPlotAreaHectares(plot) {
     return numericArea;
 }
 
-export function runOfflineRotationEngine(season, previousCrop, areaHectares = 1, isCropAvailable = () => true) {
+export const NFSM_SUBSIDY_PER_HECTARE = 5000;
+
+export const PMFBY_PREMIUM_RATES = {
+    Rabi: 0.015,
+    Kharif: 0.02,
+};
+
+const SUBSIDIZED_FAMILIES = new Set(['legume', 'pulse']);
+
+export function runOfflineRotationEngine(
+    season,
+    previousCrop,
+    areaHectares = 1,
+    isCropAvailable = () => true,
+    isVerified = false,
+) {
+    const cropFilter = typeof isCropAvailable === 'function' ? isCropAvailable : () => true;
+    const verifiedPlot = typeof isCropAvailable === 'boolean' ? isCropAvailable : Boolean(isVerified);
     const previous = getPreviousCropProfile(previousCrop);
     const safeArea = Number.isFinite(Number(areaHectares)) && Number(areaHectares) > 0 ? Number(areaHectares) : 1;
     // Rules that refer to crops without a proper photo are ignored (catalog is data-driven).
-    const rules = CROP_RULES.filter((crop) => isCropAvailable(crop.id));
+    const rules = CROP_RULES.filter((crop) => cropFilter(crop.id));
     const candidates = rules
         .filter((crop) => crop.seasons.includes(season))
         .filter((crop) => crop.family !== previous.family)
@@ -76,11 +93,26 @@ export function runOfflineRotationEngine(season, previousCrop, areaHectares = 1,
         'recommender.badges.lowWater',
     ];
 
+    const isRabiSeason = season === 'Rabi';
+    const pmfbyPremiumRate = isRabiSeason ? PMFBY_PREMIUM_RATES.Rabi : PMFBY_PREMIUM_RATES.Kharif;
+    const pmfbyPremiumRatePct = isRabiSeason ? 1.5 : 2;
+
     return selected.map((crop, index) => {
         const fertilizerReductionKg = Math.round(crop.ureaReductionPerHectare * safeArea * 10) / 10;
         const fertilizerSavingsInr = Math.round(fertilizerReductionKg * 24);
-        const netReturn = Math.round(crop.baseReturnPerHectare * safeArea);
-        const baselineReturn = Math.round(netReturn * 0.84);
+
+        const rawBaseReturn = Math.round(crop.baseReturnPerHectare * safeArea);
+        const baselineReturn = Math.max(1, Math.round(rawBaseReturn * 0.84));
+
+        const pmfbyPremiumInr = verifiedPlot
+            ? Math.round(crop.baseReturnPerHectare * pmfbyPremiumRate * safeArea)
+            : 0;
+        const nfsmSubsidyEligible = SUBSIDIZED_FAMILIES.has(crop.family);
+        const subsidyBonusInr = nfsmSubsidyEligible
+            ? Math.round(NFSM_SUBSIDY_PER_HECTARE * safeArea)
+            : 0;
+
+        const netReturn = Math.max(0, rawBaseReturn - pmfbyPremiumInr + subsidyBonusInr);
         const percentageGain = Math.round(((netReturn - baselineReturn) / baselineReturn) * 100);
 
         const nitrogenReasonKey = previous.family === 'legume'
@@ -105,9 +137,16 @@ export function runOfflineRotationEngine(season, previousCrop, areaHectares = 1,
             currRootDepthKey: `recommender.rootDepths.${crop.rootDepth}`,
             durationMinDays: crop.durationRange[0],
             durationMaxDays: crop.durationRange[1],
+            baseReturn: rawBaseReturn,
             netReturn,
             baselineReturn,
             percentageGain,
+            pmfbyInsured: verifiedPlot,
+            pmfbySeasonType: isRabiSeason ? 'Rabi' : 'Kharif',
+            pmfbyPremiumRatePct,
+            pmfbyPremiumInr,
+            nfsmSubsidyEligible,
+            subsidyBonusInr,
             fertilizerReductionKg,
             fertilizerSavingsInr,
         };

@@ -48,6 +48,8 @@ import {
     Award,
     Microscope,
     TrendingUp,
+    ShieldCheck,
+    Landmark,
 } from 'lucide-react';
 
 // ── Lucide icon map for dynamic loading step icons ────────────────────────────
@@ -92,6 +94,10 @@ export default function Recommender() {
         }
         return plots[0];
     }, [plots, selectedPlotId]);
+
+    const isCurrentPlotVerified = Boolean(
+        currentPlot?.isVerified === true || currentPlot?.provenance?.verified === true,
+    );
 
     const activePreviousCropRaw =
         isCustomCropActive && customCrop.trim() ? customCrop.trim() : previousCrop;
@@ -180,9 +186,36 @@ export default function Recommender() {
                 amount: `₹${formatSpeakableNumber(crop.fertilizerSavingsInr, speechLocale, 0)}`,
             });
 
+            const pmfbyBadgeLabel = crop.pmfbyInsured
+                ? crop.pmfbySeasonType === 'Rabi'
+                    ? t('recommender.pmfbyInsuredRabi')
+                    : t('recommender.pmfbyInsuredKharif')
+                : null;
+            const nfsmBadgeLabel = crop.nfsmSubsidyEligible
+                ? t('recommender.nfsmSubsidyEligible')
+                : null;
+
+            const profitAdjustmentNote =
+                crop.pmfbyInsured && crop.nfsmSubsidyEligible
+                    ? t('recommender.includesSubsidyAndPmfby', {
+                          subsidy: `₹${formatSpeakableNumber(crop.subsidyBonusInr, speechLocale, 0)}`,
+                          premium: `₹${formatSpeakableNumber(crop.pmfbyPremiumInr, speechLocale, 0)}`,
+                      })
+                    : crop.pmfbyInsured
+                      ? t('recommender.includesPmfbyPremium', {
+                            premium: `₹${formatSpeakableNumber(crop.pmfbyPremiumInr, speechLocale, 0)}`,
+                        })
+                      : crop.nfsmSubsidyEligible
+                        ? t('recommender.includesNfsmSubsidy', {
+                              subsidy: `₹${formatSpeakableNumber(crop.subsidyBonusInr, speechLocale, 0)}`,
+                          })
+                        : null;
+
             const speechParts = [
                 translatedCropName,
                 rankTag,
+                ...(pmfbyBadgeLabel ? [pmfbyBadgeLabel] : []),
+                ...(nfsmBadgeLabel ? [nfsmBadgeLabel] : []),
                 plainReason,
                 t('recommender.cardReturnSpeech', {
                     netReturn: netReturnSpoken,
@@ -214,6 +247,9 @@ export default function Recommender() {
                 netReturnDelta,
                 fertilizerSavedLabel,
                 fertilizerCostSavings,
+                pmfbyBadgeLabel,
+                nfsmBadgeLabel,
+                profitAdjustmentNote,
                 speechParts,
             };
         });
@@ -289,6 +325,7 @@ export default function Recommender() {
                 activePrev,
                 getPlotAreaHectares(currentPlot),
                 isRealCropId,
+                isCurrentPlotVerified,
             );
             setCustomCalculations(results);
             setIsCalculating(false);
@@ -875,7 +912,23 @@ export default function Recommender() {
                                                                 {crop.translatedLocalName}
                                                             </span>
                                                         </div>
-                                                        <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                                        {(crop.pmfbyBadgeLabel || crop.nfsmBadgeLabel) && (
+                                                            <div className="mt-2 flex flex-wrap items-center gap-2">
+                                                                {crop.pmfbyBadgeLabel && (
+                                                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/15 dark:text-emerald-300">
+                                                                        <ShieldCheck size={13} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+                                                                        <span>{crop.pmfbyBadgeLabel}</span>
+                                                                    </span>
+                                                                )}
+                                                                {crop.nfsmBadgeLabel && (
+                                                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/15 dark:text-amber-300">
+                                                                        <Landmark size={13} className="shrink-0 text-amber-600 dark:text-amber-400" />
+                                                                        <span>{crop.nfsmBadgeLabel}</span>
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                        <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1.5">
                                                             <span className="flex items-center gap-1">
                                                                 <Calendar size={13} className="text-emerald-600" />
                                                                 {crop.duration}
@@ -930,6 +983,11 @@ export default function Recommender() {
                                                         <div className="text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight mt-1">
                                                             {crop.netReturnFormatted}
                                                         </div>
+                                                        {crop.profitAdjustmentNote && (
+                                                            <p className="mt-1.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+                                                                {crop.profitAdjustmentNote}
+                                                            </p>
+                                                        )}
                                                     </div>
 
                                                     <div className="mt-3">

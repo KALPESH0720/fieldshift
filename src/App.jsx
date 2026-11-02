@@ -172,23 +172,23 @@ function AppHeader({
   };
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 bg-white px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] dark:border-slate-800 dark:bg-slate-900 sm:px-6">
-      <div className="flex items-center gap-2">
-        <span className="text-base font-black tracking-tight text-slate-900 dark:text-white">
+    <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white px-3 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] dark:border-slate-800 dark:bg-slate-900 sm:px-6">
+      <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+        <span className="truncate text-sm font-black tracking-tight text-slate-900 dark:text-white sm:text-base">
           {title}
         </span>
         {isMock && (
-          <span className="rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-900 dark:border-amber-500/40 dark:bg-amber-950 dark:text-amber-200">
+          <span className="shrink-0 rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-900 dark:border-amber-500/40 dark:bg-amber-950 dark:text-amber-200">
             {t('auth.demoBadge')}
           </span>
         )}
       </div>
 
-      <div className="flex items-center gap-2">
-        {/* Farmer / Extension toggle — ONLY shown if the server says the user has the extension role */}
+      <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* Farmer / Extension toggle — visible on mobile & desktop when user has extension role */}
         {canSwitchToExtension && (
           <div
-            className="hidden items-center rounded-xl border border-slate-200 bg-slate-50 p-1 sm:flex dark:border-slate-700 dark:bg-slate-800"
+            className="flex items-center rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800"
             role="group"
             aria-label={t('header.demoRole')}
           >
@@ -196,7 +196,7 @@ function AppHeader({
               type="button"
               onClick={() => onToggleRole('farmer')}
               aria-pressed={userRole === 'farmer'}
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-bold transition ${
+              className={`rounded-lg px-2 py-1 text-[11px] font-bold transition sm:px-2.5 sm:py-1.5 sm:text-xs ${
                 userRole === 'farmer'
                   ? 'bg-white text-emerald-700 shadow-sm dark:bg-slate-700 dark:text-emerald-300'
                   : 'text-slate-500 dark:text-slate-400'
@@ -208,7 +208,7 @@ function AppHeader({
               type="button"
               onClick={() => onToggleRole('extension')}
               aria-pressed={userRole === 'extension'}
-              className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-bold transition ${
+              className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-bold transition sm:px-2.5 sm:py-1.5 sm:text-xs ${
                 userRole === 'extension'
                   ? 'bg-white text-emerald-700 shadow-sm dark:bg-slate-700 dark:text-emerald-300'
                   : 'text-slate-500 dark:text-slate-400'
@@ -474,7 +474,7 @@ function AppShell() {
           element={
             <ProtectedRoute>
               <DashboardFrame
-                title={t('screenTitles.farm')}
+                title={userRole === 'farmer' ? t('screenTitles.farm') : t('screenTitles.group')}
                 isDarkMode={isDarkMode}
                 userRole={userRole}
                 onToggleRole={handleRoleChange}

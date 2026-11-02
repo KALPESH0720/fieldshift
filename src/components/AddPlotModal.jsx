@@ -3,10 +3,16 @@ import { createPortal } from 'react-dom';
 import { area as turfArea } from '@turf/area';
 import { polygon as turfPolygon } from '@turf/helpers';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Leaf, MapPin, Plus, X } from 'lucide-react';
+import { Check, ChevronDown, Leaf, MapPin, Plus, Sparkles, X } from 'lucide-react';
+import CropImage from './CropImage';
 import CropPicker from './CropPicker';
 import useScrollLock from '../hooks/useScrollLock';
 import { useTranslation } from '../context/LanguageContext';
+import { getCropDisplayName } from '../data/crops';
+import {
+  getIntercropPairingRule,
+  getRecommendedIntercrops,
+} from '../services/intercropRules';
 
 const EMPTY_FORM = {
   fieldName: '',
@@ -69,6 +75,19 @@ export default function AddPlotModal({
   const activeUnit = useMemo(
     () => areaUnits.find((u) => u.value === form.areaUnit) || areaUnits[0],
     [areaUnits, form.areaUnit],
+  );
+
+  const recommendedIntercrops = useMemo(
+    () => getRecommendedIntercrops(form.primaryCrop),
+    [form.primaryCrop],
+  );
+
+  const activePairingRule = useMemo(
+    () =>
+      showIntercrop && form.primaryCrop && form.intercrop
+        ? getIntercropPairingRule(form.primaryCrop, form.intercrop)
+        : null,
+    [form.intercrop, form.primaryCrop, showIntercrop],
   );
 
   useEffect(() => {
@@ -136,6 +155,9 @@ export default function AddPlotModal({
       intercrop: showIntercrop ? form.intercrop : '',
       coordinates,
     });
+    setForm(EMPTY_FORM);
+    setShowIntercrop(false);
+    setCoordinates([]);
     onClose();
   };
 
@@ -275,9 +297,87 @@ export default function AddPlotModal({
 
               <CropPicker
                 value={form.primaryCrop}
-                onChange={(value) => setForm((current) => ({ ...current, primaryCrop: value }))}
+                onChange={(value) =>
+                  setForm((current) => ({
+                    ...current,
+                    primaryCrop: value,
+                    intercrop: current.intercrop === value ? '' : current.intercrop,
+                  }))
+                }
                 label={t('common.primaryCrop')}
               />
+
+              {recommendedIntercrops.length > 0 && (
+                <div className="rounded-xl border border-emerald-200/80 bg-emerald-50/50 p-3 dark:border-emerald-800/60 dark:bg-slate-800/70">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-300">
+                    <Sparkles size={14} className="shrink-0 text-amber-500" />
+                    <span>{t('addField.recommendedCompanions')}</span>
+                  </div>
+                  <p className="mt-0.5 text-[11px] font-medium text-slate-600 dark:text-slate-400">
+                    {t('addField.recommendedCompanionsHint', {
+                      crop: getCropDisplayName(form.primaryCrop, t),
+                    })}
+                  </p>
+                  <div className="mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {recommendedIntercrops.map((rule) => {
+                      const isCompanionSelected =
+                        showIntercrop && form.intercrop === rule.companionCropId;
+                      const companionName = getCropDisplayName(rule.companionCropId, t);
+                      const benefitBadgeClass =
+                        rule.accent === 'amber'
+                          ? 'bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-200'
+                          : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200';
+
+                      return (
+                        <button
+                          key={rule.companionCropId}
+                          type="button"
+                          onClick={() => {
+                            if (isCompanionSelected) {
+                              setForm((current) => ({ ...current, intercrop: '' }));
+                            } else {
+                              setShowIntercrop(true);
+                              setForm((current) => ({
+                                ...current,
+                                intercrop: rule.companionCropId,
+                              }));
+                            }
+                          }}
+                          className={`flex items-center gap-2.5 rounded-xl border p-2 text-start transition focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+                            isCompanionSelected
+                              ? 'border-emerald-500 bg-white ring-2 ring-emerald-400/50 dark:border-emerald-400 dark:bg-slate-900'
+                              : 'border-slate-200 bg-white/90 hover:border-emerald-300 dark:border-slate-700 dark:bg-slate-900/90'
+                          }`}
+                        >
+                          <CropImage cropId={rule.companionCropId} size="xs" />
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="truncate text-xs font-bold text-slate-900 dark:text-slate-100">
+                                {companionName}
+                              </span>
+                              <span className="shrink-0 text-[10px] font-extrabold text-emerald-700 dark:text-emerald-300">
+                                {t('addField.matchScore', { score: rule.benefitScore })}
+                              </span>
+                            </div>
+                            <span
+                              className={`mt-1 inline-block max-w-full truncate rounded-full px-2 py-0.5 text-[10px] font-bold ${benefitBadgeClass}`}
+                            >
+                              {t(rule.benefitKey)}
+                            </span>
+                          </div>
+                          {isCompanionSelected && (
+                            <Check
+                              size={14}
+                              aria-hidden="true"
+                              className="shrink-0 rounded-full bg-emerald-600 p-0.5 text-white"
+                            />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               {!showIntercrop ? (
                 <button
@@ -289,12 +389,44 @@ export default function AddPlotModal({
                   <span>{t('addField.addIntercrop')}</span>
                 </button>
               ) : (
-                <CropPicker
-                  value={form.intercrop}
-                  onChange={(value) => setForm((current) => ({ ...current, intercrop: value }))}
-                  exclude={[form.primaryCrop]}
-                  label={t('common.selectIntercrop')}
-                />
+                <div className="space-y-2.5 rounded-xl border border-slate-200 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-950/60">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                      {t('common.selectIntercrop')}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowIntercrop(false);
+                        setForm((current) => ({ ...current, intercrop: '' }));
+                      }}
+                      className="text-xs font-bold text-slate-500 underline underline-offset-2 transition hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400"
+                    >
+                      {t('addField.removeIntercrop')}
+                    </button>
+                  </div>
+
+                  {activePairingRule && (
+                    <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/15 dark:text-emerald-200">
+                      <Sparkles size={14} className="shrink-0 text-amber-500" />
+                      <span className="min-w-0 break-words">
+                        {t('addField.selectedPairingBenefit', {
+                          primary: getCropDisplayName(form.primaryCrop, t),
+                          companion: getCropDisplayName(form.intercrop, t),
+                          benefit: t(activePairingRule.benefitKey),
+                          score: activePairingRule.benefitScore,
+                        })}
+                      </span>
+                    </div>
+                  )}
+
+                  <CropPicker
+                    value={form.intercrop}
+                    onChange={(value) => setForm((current) => ({ ...current, intercrop: value }))}
+                    exclude={[form.primaryCrop]}
+                    recommendedCrops={recommendedIntercrops}
+                  />
+                </div>
               )}
             </div>
 

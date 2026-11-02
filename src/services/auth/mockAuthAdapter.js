@@ -58,32 +58,39 @@ function writeChallenges(challengesMap) {
   }
 }
 
-function getRolesForPhone(phoneE164) {
-  const configuredExtensionPhones = String(import.meta.env.VITE_MOCK_EXTENSION_PHONES || '')
-    .split(',')
-    .map((item) => item.trim())
-    .filter(Boolean);
-
-  const isExtension = configuredExtensionPhones.includes(phoneE164);
-  const roles = [
+function getRolesForPhone() {
+  // In demo/mock mode, grant both 'farmer' and 'extension' roles by default
+  // so the Farmer / Extension workspace toggle is always active during demos.
+  return [
     {
       code: 'farmer',
       scope: 'global',
       groupId: null,
       permissions: ['plots:read', 'plots:write', 'soil:read', 'soil:write'],
     },
-  ];
-
-  if (isExtension) {
-    roles.push({
+    {
       code: 'extension',
       scope: 'group',
       groupId: 'fpo-dicholi-01',
       permissions: ['group:read', 'farmers:read'],
-    });
-  }
+    },
+  ];
+}
 
-  return roles;
+function ensureMockUserRoles(user) {
+  if (!user || typeof user !== 'object') return user;
+  const existingRoles = Array.isArray(user.roles) ? user.roles : [];
+  const hasFarmer = existingRoles.some(
+    (r) => (typeof r === 'string' ? r : r?.code) === 'farmer',
+  );
+  const hasExtension = existingRoles.some(
+    (r) => (typeof r === 'string' ? r : r?.code) === 'extension',
+  );
+  if (hasFarmer && hasExtension) return user;
+  return {
+    ...user,
+    roles: getRolesForPhone(user.phoneE164),
+  };
 }
 
 export const mockAuthAdapter = {
@@ -203,12 +210,12 @@ export const mockAuthAdapter = {
 
     // Existing registered user -> log in immediately
     if (existingUser && existingUser.displayName && existingUser.profileComplete !== false) {
-      const updatedUser = {
+      const updatedUser = ensureMockUserRoles({
         ...existingUser,
         preferredLocale: profile?.preferredLocale || existingUser.preferredLocale || 'en',
         updatedAt: new Date().toISOString(),
         lastLoginAt: new Date().toISOString(),
-      };
+      });
       users[targetPhone] = updatedUser;
       writeMockUsers(users);
       challenge.consumedAt = Date.now();
@@ -319,7 +326,7 @@ export const mockAuthAdapter = {
         smsMessages: true,
         acceptedAt: nowIso,
       },
-      roles: existing?.roles || getRolesForPhone(resolvedPhone),
+      roles: getRolesForPhone(resolvedPhone),
       createdAt: existing?.createdAt || nowIso,
       updatedAt: nowIso,
       lastLoginAt: nowIso,
@@ -345,7 +352,11 @@ export const mockAuthAdapter = {
       if (!raw) return { user: null, csrfToken: null };
       const parsed = JSON.parse(raw);
       if (parsed && parsed.phoneE164 && parsed.displayName) {
-        return { user: parsed, csrfToken: 'mock-csrf-token' };
+        const hydratedUser = ensureMockUserRoles(parsed);
+        if (hydratedUser !== parsed) {
+          window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(hydratedUser));
+        }
+        return { user: hydratedUser, csrfToken: 'mock-csrf-token' };
       }
       return { user: null, csrfToken: null };
     } catch {

@@ -239,6 +239,12 @@
     "cardFertilizerSpeech": "Ahorro de fertilizante: {weight} de {fertilizer}, ahorrando unos {savings}.",
     "cardWaterSpeech": "La duración del cultivo es de {duration} y la necesidad de agua es {waterNeed}.",
     "fertilizerUrea": "Urea",
+    "pmfbyInsuredRabi": "Asegurado por PMFBY (prima 1,5%)",
+    "pmfbyInsuredKharif": "Asegurado por PMFBY (prima 2%)",
+    "nfsmSubsidyEligible": "Elegible para subsidio NFSM",
+    "includesSubsidyAndPmfby": "Incluye +{subsidy} de subsidio NFSM y −{premium} de prima PMFBY",
+    "includesPmfbyPremium": "Incluye −{premium} de prima PMFBY del agricultor",
+    "includesNfsmSubsidy": "Incluye +{subsidy} de subsidio NFSM para legumbres",
     "rankTags": {
       "bestFit": "#{rank} Mejor rotación",
       "soilBalance": "#{rank} Gran equilibrio del suelo",
@@ -344,6 +350,11 @@
     "areaPlaceholder": "e.g. 2.5",
     "areaInvalid": "Introduce una superficie válida mayor que 0.",
     "addIntercrop": "Añadir cultivo intercalado",
+    "removeIntercrop": "Quitar cultivo intercalado",
+    "recommendedCompanions": "Cultivos acompañantes recomendados",
+    "recommendedCompanionsHint": "Mejores combinaciones agronómicas para {crop}:",
+    "matchScore": "{score}% compatible",
+    "selectedPairingBenefit": "{primary} + {companion} · {benefit} ({score}% compatible)",
     "saveField": "Guardar parcela",
     "unitShortAc": "ac",
     "unitFullAcres": "Acres",
@@ -429,6 +440,41 @@
         "description": "Apoya la transición a insumos orgánicos, biofertilizantes, certificación y comercialización directa.",
         "action": "Solicitar subvención"
       }
+    },
+    "modal": {
+      "closeAria": "Cerrar diálogo de elegibilidad",
+      "eligibleBannerTitle": "Elegible — Criterios del programa cumplidos",
+      "eligibleBannerSubtitle": "{count} parcela(s) verificada(s) con un total de {area} ha califican para este programa.",
+      "pendingBannerTitle": "Elegibilidad incompleta",
+      "pendingBannerSubtitle": "Completa los criterios restantes a continuación para desbloquear los beneficios verificados.",
+      "criteriaHeading": "Lista de verificación de elegibilidad",
+      "matchedPlotsHeading": "Parcelas verificadas que califican",
+      "verifiedPlotPill": "Verificada",
+      "plotAreaHa": "{area} ha",
+      "noVerifiedPlotsHint": "Vincula tu registro oficial de tierras en Mi Granja para verificar la propiedad y los cultivos.",
+      "goToFarmLink": "Ir a Mi Granja",
+      "openOfficialPortal": "Visitar portal oficial ({domain})",
+      "critVerifiedTitle": "Registro de tierras verificado (AgriStack)",
+      "critVerifiedPass": "{count} parcela(s) verificada(s) encontrada(s) en tus registros locales.",
+      "critVerifiedFail": "No se encontró ninguna parcela verificada. Importa un registro AgriStack en Mi Granja.",
+      "critCropPmfbyTitle": "Cultivo asegurable notificado (arroz, legumbres, oleaginosas, cereales)",
+      "critCropPmfbyPass": "Cultivos coincidentes: {crops}.",
+      "critCropPmfbyFail": "Asigna un cultivo estacional notificado como arroz, trigo, frijol mungo o mostaza.",
+      "critCropPkvyTitle": "Cultivo elegible orgánico o cultivo intercalado",
+      "critCropPkvyPass": "Cultivos de transición orgánica coincidentes: {crops}.",
+      "critCropPkvyFail": "Añade parcelas hortícolas, de legumbres, mijo o con cultivo intercalado elegibles para conversión orgánica.",
+      "critCropPmKisanTitle": "Superficie agrícola cultivable registrada",
+      "critCropPmKisanPass": "{count} campo(s) cultivable(s) registrado(s) ({area} ha en total).",
+      "critCropPmKisanFail": "Añade o importa al menos una parcela agrícola cultivable con superficie válida.",
+      "critCombinedPmfbyTitle": "Parcela verificada vinculada a cultivo notificado",
+      "critCombinedPmfbyPass": "{count} parcela(s) verificada(s) lista(s) para cobertura subsidiada (1,5% Rabi / 2% Kharif).",
+      "critCombinedPmfbyFail": "Requiere una parcela verificada que cultive un cultivo notificado por PMFBY.",
+      "critCombinedPkvyTitle": "Superficie de grupo orgánico verificada (límite de 20 ha)",
+      "critCombinedPkvyPass": "{area} ha verificadas dentro del límite de subvención PKVY de 20 ha.",
+      "critCombinedPkvyFail": "Requiere al menos una parcela verificada (hasta 20 ha) con un cultivo elegible.",
+      "critCombinedPmKisanTitle": "Parcela lista para transferencia directa (DBT)",
+      "critCombinedPmKisanPass": "{count} parcela(s) verificada(s) lista(s) para verificación DBT de ₹6.000/año.",
+      "critCombinedPmKisanFail": "Vincula una parcela verificada para confirmar la titularidad DBT."
     }
   },
   "weather": {
@@ -491,6 +537,8 @@
     "openMap": "Abrir mapa a pantalla completa",
     "addField": "Añadir campo",
     "noFields": "Aún no hay campos. Importa registros verificados para comenzar.",
+    "cropPairLabel": "{primary} + {intercrop}",
+    "intercropBadge": "+ {crop} intercalado",
     "recentAlerts": "Alertas recientes",
     "alertsAttention": "Asuntos que requieren tu atención",
     "today": "Hoy",
@@ -655,7 +703,7 @@
     "listenTo": "Escuchar {name}",
     "rice": {
       "name": "Arroz",
-      "localName": "Arroz cáscara"
+      "localName": "Arroz"
     },
     "wheat": {
       "name": "Trigo",
@@ -1072,6 +1120,83 @@
       "outOfStockUrea": "Urea: Agotado",
       "lowStockNeem": "Aceite de neem: Pocas unidades",
       "inStockUrea": "Urea: Disponible"
+    }
+  },
+  "group": {
+    "eyebrow": "Espacio de Extensión",
+    "title": "Resumen de la FPO",
+    "coopName": "Sociedad Cooperativa de Dicholi",
+    "roleBadge": "Admin / Agente de Extensión",
+    "listenSummaryAria": "Escuchar resumen agregado de demanda de la FPO",
+    "totalFarmers": "Total de Agricultores",
+    "totalFarmersDetail": "{plots} parcelas en {villages} aldeas",
+    "mappedArea": "Área Mapeada",
+    "hectaresUnit": "ha",
+    "hectaresSpoken": "hectáreas",
+    "mappedAreaDetail": "{plots} parcelas activas de socios",
+    "bulkSeedDemand": "Demanda Grupal de Semillas",
+    "kgUnit": "kg",
+    "topSeedDetail": "{firstCrop} {firstKg} kg · {secondCrop} {secondKg} kg",
+    "singleSeedDetail": "{firstCrop} {firstKg} kg",
+    "bulkUreaDemand": "Demanda Grupal de Urea",
+    "ureaBagsDetail": "{bags} sacos (45 kg) requeridos este ciclo",
+    "cropDemandTitle": "Demanda Grupal de Semillas y Urea por Cultivo",
+    "cropDemandSubtitle": "Agregada según el tamaño de parcelas y tasas estándar de siembra y fertilización",
+    "cropAreaLabel": "{ha} ha mapeadas",
+    "cropSeedRate": "Semilla: {kg} kg ({rate} kg/ha)",
+    "cropUreaRate": "Urea: {kg} kg ({rate} kg/ha)",
+    "directoryTitle": "Directorio de Agricultores",
+    "directorySubtitle": "Supervise las parcelas de los socios y coordine pedidos grupales de semillas y fertilizantes.",
+    "onTrackCount": "{count} al día",
+    "attentionCount": "{count} requieren atención",
+    "colFarmerName": "Agricultor",
+    "colVillage": "Aldea",
+    "colPrimaryCrops": "Cultivos Principales",
+    "colMappedArea": "Área Mapeada",
+    "colInputDemand": "Demanda de Insumos",
+    "colStatus": "Estado",
+    "plotCountSingle": "{count} parcela",
+    "plotCountPlural": "{count} parcelas",
+    "rowSeedUrea": "{seed} kg semilla · {urea} kg urea",
+    "procurementTitle": "Estimación de Compra",
+    "procurementDetail": "Valor estimado de compra grupal de semilla y urea",
+    "attentionPlotsTitle": "Agricultores que Requieren Atención",
+    "attentionPlotsDetail": "Siembra retrasada o entrega de insumos pendiente",
+    "activeVillagesTitle": "Aldeas Activas",
+    "activeVillagesDetail": "Participando en este ciclo de la FPO",
+    "summarySpeech": "{title}, {coop}. {farmers} agricultores socios en {villages} aldeas con {area} {areaUnit} mapeadas en {plots} parcelas. La demanda grupal de semillas es de {seed}, liderada por {topCrop} con {topCropSeed}. La demanda grupal de urea es de {urea}, equivalente a {bags} sacos. El valor estimado de compra grupal es {procurement}.",
+    "status": {
+      "onTrack": "Al día",
+      "sowingDelayed": "Siembra retrasada",
+      "inputsPending": "Insumos pendientes"
+    },
+    "members": {
+      "ramesh": "Ramesh Naik",
+      "savitri": "Savitri Gaonkar",
+      "mohan": "Mohan Korgaonkar",
+      "anita": "Anita Shirodkar",
+      "vishnu": "Vishnu Naik",
+      "laxmi": "Laxmi Parab",
+      "prakash": "Prakash Dessai"
+    },
+    "villages": {
+      "dicholi": "Dicholi",
+      "amona": "Amona",
+      "sanquelim": "Sanquelim",
+      "mulgao": "Mulgao",
+      "honda": "Honda",
+      "mayem": "Mayem",
+      "narva": "Narva"
+    }
+  },
+  "intercrop": {
+    "benefits": {
+      "nitrogenFixation": "Fijación de nitrógeno",
+      "weedSuppression": "Control de malezas",
+      "canopyMoisture": "Retención de humedad y dosel",
+      "shadeSynergy": "Sinergia de sombra",
+      "moistureCover": "Cobertura de humedad residual",
+      "pestDeterrence": "Control natural de plagas"
     }
   }
 }

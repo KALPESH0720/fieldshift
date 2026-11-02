@@ -58,6 +58,7 @@ const componentFiles = [
   'src/components/DealerDirectory.jsx',
   'src/components/MarketInsights.jsx',
   'src/components/MarketCropDetail.jsx',
+  'src/components/GroupDashboard.jsx',
 ];
 const usedKeys = [];
 for (const file of componentFiles) {
