@@ -75,7 +75,8 @@ class KnowledgeBase:
         hard_f, soft_f = directory / "rules" / "hard_rules.yaml", directory / "rules" / "soft_rules.yaml"
         hard = yaml.safe_load(hard_f.read_text(encoding="utf-8"))["rules"]
         soft = yaml.safe_load(soft_f.read_text(encoding="utf-8"))
-        return cls(crops, hard, soft, hash_files(crop_files), hash_files([hard_f, soft_f]))
+        sim_files = sorted((directory / "simulation").glob("*.yaml"))  # simulation parameters affect cached results
+        return cls(crops, hard, soft, hash_files(crop_files + sim_files), hash_files([hard_f, soft_f]))
 
     def crop(self, crop_id: str) -> Optional[Crop]:
         return self.crops.get(crop_id)

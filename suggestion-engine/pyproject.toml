@@ -12,17 +12,21 @@ dependencies = [
   "uvicorn>=0.27",
   "pydantic>=2.5",
   "pyyaml>=6.0",
+  "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "httpx>=0.27", "jsonschema>=4.20", "ruff>=0.4"]
+# batch side: raster soil data, NetCDF climate projections, Vertex pipelines, Google Cloud clients
+data = ["rasterio>=1.3", "xarray>=2024.1", "h5netcdf>=1.3", "h5py>=3.10", "s3fs>=2024.1"]
+pipelines = ["kfp>=2.7", "google-cloud-aiplatform>=1.50", "google-cloud-storage>=2.14", "google-cloud-secret-manager>=2.18"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 
 [tool.ruff]
 line-length = 100

@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
-      - run: pip install -e ".[dev]"
-      - run: ruff check src tests
+      - run: pip install -e ".[dev,data,pipelines]"
+      - run: ruff check src tests pipelines scripts
       # includes unit, integration, contract and the scenario suite
       - run: pytest -q

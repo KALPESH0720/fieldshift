@@ -215,7 +215,9 @@ class CellFeatures(BaseModel):
     synthetic: bool = False                         # True for development fixtures
     soil_class: Optional[str] = None
     soil_ph: Optional[float] = None
-    soil_organic_carbon: Optional[float] = None
+    soil_organic_carbon: Optional[float] = None     # g/kg, 0-30 cm (SoilGrids unit after conversion)
+    sand_pct: Optional[float] = None                # 0-30 cm, used for soil hydraulic properties
+    clay_pct: Optional[float] = None
     seasons: dict[str, SeasonClimate] = Field(default_factory=dict)  # keyed by 'kharif', 'rabi', ...
     drought_frequency: Optional[float] = None       # SMAP-based, 0..1
     ndvi_cv: Optional[float] = None
@@ -237,6 +239,11 @@ class Job(BaseModel):
     cell_id: str
     status: Literal["queued", "running", "done", "failed"] = "queued"
     sequences: list[str] = Field(default_factory=list)
+    # What the deep tier needs to re-run the request (the cache key is a hash and cannot be inverted):
+    start_season: Optional[str] = None
+    irrigation: Optional[Irrigation] = None
+    soil_class: Optional[str] = None
+    scenario: Optional[str] = None
     error: Optional[str] = None
     created_at: str = Field(default_factory=utcnow)
     updated_at: str = Field(default_factory=utcnow)

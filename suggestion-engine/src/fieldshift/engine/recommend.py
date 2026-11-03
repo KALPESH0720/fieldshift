@@ -100,7 +100,9 @@ class Engine:
         if status == "fast" and top:
             job, created = self.store.create_job_if_absent(
                 Job(cache_key=cache_key, request_id=req.request_id, cell_id=cell.cell_id,
-                    sequences=[sequence_key(r.seq.crops) for r in ranked[:10]]))
+                    sequences=[sequence_key(r.seq.crops) for r in ranked[:10]],
+                    start_season=req.season, irrigation=req.irrigation, soil_class=soil_class,
+                    scenario=s.scenario))
             job_id = job.job_id
             if created and self.launcher:
                 self.launcher(job)

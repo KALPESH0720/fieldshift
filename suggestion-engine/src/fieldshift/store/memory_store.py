@@ -1,11 +1,11 @@
 """In-memory Store for development and tests. Replace with the shared database later."""
 from __future__ import annotations
 
-import json
 import threading
 from pathlib import Path
 from typing import Optional
 
+from ..common import io
 from .models import ActionLog, Alert, CellFeatures, Indicator, Job, RecommendRequest, utcnow
 
 
@@ -21,10 +21,11 @@ class MemoryStore:
         self._requests: dict[str, RecommendRequest] = {}
 
     @classmethod
-    def from_cells_file(cls, path: Path | None) -> "MemoryStore":
-        if path is None or not Path(path).exists():
+    def from_cells_file(cls, path: "str | Path | None") -> "MemoryStore":
+        """Load a cells.json (local path or gs:// URI). A missing file gives an empty store."""
+        if path is None or not io.exists(str(path)):
             return cls()
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = io.read_json(str(path))
         return cls([CellFeatures.model_validate(c) for c in data["cells"]])
 
     # layers
