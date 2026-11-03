@@ -1,0 +1,532 @@
+[
+  {
+    "cropId": "rice",
+    "subject": "Ripe golden paddy rice panicles in the field",
+    "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/LPCC-666-Pan%C3%ADcules_d%27arr%C3%B2s_indica.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:LPCC-666-Pan%C3%ADcules_d%27arr%C3%B2s_indica.jpg",
+    "author": "Miquel Pujol Palol (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/LPCC-666-Pan%C3%ADcules_d%27arr%C3%B2s_indica.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:LPCC-666-Panícules d'arròs indica.jpg"
+  },
+  {
+    "cropId": "wheat",
+    "subject": "Close-up of ripe wheat ears in sunlight",
+    "sourceUrl": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1574323347407-f5e1ad6d020b",
+    "author": "Paz Arando (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "maize",
+    "subject": "Fresh yellow sweet corn cobs with husks",
+    "sourceUrl": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1551754655-cd27e38d2076",
+    "author": "Virgil Cayasa (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "sorghum",
+    "subject": "Red-gold sorghum grain head in field",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Sorghum_bicolor03.jpg/960px-Sorghum_bicolor03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Sorghum_bicolor03.jpg",
+    "author": "No machine-readable author provided. Pethan assumed (based on copyright claims). (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0"
+  },
+  {
+    "cropId": "millet",
+    "subject": "Pearl and finger millet grain spikes",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Grain_millet%2C_early_grain_fill%2C_Tifton%2C_7-3-02.jpg/960px-Grain_millet%2C_early_grain_fill%2C_Tifton%2C_7-3-02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Grain_millet%2C_early_grain_fill%2C_Tifton%2C_7-3-02.jpg",
+    "author": "Wikimedia Commons Contributor",
+    "license": "Public domain"
+  },
+  {
+    "cropId": "barley",
+    "subject": "Bearded barley spikes ready for harvest",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg/960px-Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Barley_(Hordeum_vulgare)_-_United_States_National_Arboretum_-_24_May_2009.jpg",
+    "author": "Cliff from Arlington, Virginia, USA (Wikimedia Commons)",
+    "license": "CC BY 2.0"
+  },
+  {
+    "cropId": "oats",
+    "subject": "Rolled oat grains and oat panicles",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Avena_sativa_L.jpg/960px-Avena_sativa_L.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Avena_sativa_L.jpg",
+    "author": "Sendelbach (talk) (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Avena_sativa_L.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Avena sativa L.jpg"
+  },
+  {
+    "cropId": "chickpea",
+    "subject": "Dried chana / chickpea legumes in bowl",
+    "sourceUrl": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1515543904379-3d757afe72e4",
+    "author": "Deryn Macey (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "lentil",
+    "subject": "Red and brown masoor lentils close-up",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/3_types_of_lentil.png/960px-3_types_of_lentil.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:3_types_of_lentil.png",
+    "author": "User:Justinc (Wikimedia Commons)",
+    "license": "CC BY-SA 2.5",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/3_types_of_lentil.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:3 types of lentil.png"
+  },
+  {
+    "cropId": "pigeon-pea",
+    "subject": "Pigeon pea (tur / arhar) pods and seeds",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Cajanus_cajan_Steve_Hurst_1.jpg/960px-Cajanus_cajan_Steve_Hurst_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Cajanus_cajan_Steve_Hurst_1.jpg",
+    "author": "Wikimedia Commons Contributor (Wikimedia Commons)",
+    "license": "Public domain",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Cajanus_cajan_Steve_Hurst_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Cajanus cajan Steve Hurst 1.jpg"
+  },
+  {
+    "cropId": "moong",
+    "subject": "Whole green gram (moong beans)",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Mung_beans_%28Vigna_radiata%29.jpg/960px-Mung_beans_%28Vigna_radiata%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Mung_beans_(Vigna_radiata).jpg",
+    "author": "Ivar Leidus (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0"
+  },
+  {
+    "cropId": "cowpea",
+    "subject": "Black-eyed cowpea (lobia) seeds",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Lobia.jpg/960px-Lobia.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lobia.jpg",
+    "author": "HeraldDesa at English Wikipedia (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0"
+  },
+  {
+    "cropId": "soybean",
+    "subject": "Harvested yellow soybeans",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Soybean.USDA.jpg/960px-Soybean.USDA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Soybean.USDA.jpg",
+    "author": "Wikimedia Commons Contributor",
+    "license": "Public domain"
+  },
+  {
+    "cropId": "beans",
+    "subject": "Assorted dry and fresh garden beans",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Kidney_beans.jpg/960px-Kidney_beans.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Kidney_beans.jpg",
+    "author": "Sanjay Acharya (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Kidney_beans.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Kidney beans.jpg"
+  },
+  {
+    "cropId": "peas",
+    "subject": "Fresh green peas in open pods",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Doperwt_rijserwt_peulen_Pisum_sativum.jpg/960px-Doperwt_rijserwt_peulen_Pisum_sativum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Doperwt_rijserwt_peulen_Pisum_sativum.jpg",
+    "author": "Rasbak (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Doperwt_rijserwt_peulen_Pisum_sativum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Doperwt rijserwt peulen Pisum sativum.jpg"
+  },
+  {
+    "cropId": "groundnut",
+    "subject": "Raw groundnuts (peanuts) in shells",
+    "sourceUrl": "https://images.unsplash.com/photo-1567892737950-30c4db37cd89?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1567892737950-30c4db37cd89",
+    "author": "Vladislav Nikonov (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "mustard",
+    "subject": "Blooming yellow mustard (sarson) crop",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Mustard_Flower-1.jpg/960px-Mustard_Flower-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Mustard_Flower-1.jpg",
+    "author": "Trikutdas (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Mustard_Flower-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Mustard Flower-1.jpg"
+  },
+  {
+    "cropId": "sunflower",
+    "subject": "Bright yellow sunflower head in field",
+    "sourceUrl": "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1597848212624-a19eb35e2651",
+    "author": "Aaron Burden (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "sesame",
+    "subject": "Sesame seeds and capsules",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Til_%28Urdu-_%D8%A7%D8%B1%D8%AF%D9%88-_%D8%AA%D9%84%29_%281964323022%29.jpg/960px-Til_%28Urdu-_%D8%A7%D8%B1%D8%AF%D9%88-_%D8%AA%D9%84%29_%281964323022%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Til_(Urdu-_%D8%A7%D8%B1%D8%AF%D9%88-_%D8%AA%D9%84)_(1964323022).jpg",
+    "author": "Dinesh Valke from Thane, India (Wikimedia Commons)",
+    "license": "CC BY-SA 2.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Til_%28Urdu-_%D8%A7%D8%B1%D8%AF%D9%88-_%D8%AA%D9%84%29_%281964323022%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Til (Urdu- اردو- تل) (1964323022).jpg"
+  },
+  {
+    "cropId": "rapeseed",
+    "subject": "Flowering yellow rapeseed field",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Rapeseed_field_%28Brassica_napus%29_in_Germany.JPG/960px-Rapeseed_field_%28Brassica_napus%29_in_Germany.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rapeseed_field_(Brassica_napus)_in_Germany.JPG",
+    "author": "Vincent van Zeijst (Wikimedia Commons)",
+    "license": "CC BY 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/Rapeseed_field_%28Brassica_napus%29_in_Germany.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Rapeseed field (Brassica napus) in Germany.JPG"
+  },
+  {
+    "cropId": "potato",
+    "subject": "Freshly harvested farm potatoes",
+    "sourceUrl": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1518977676601-b53f82aba655",
+    "author": "Rodrigo Dos Reis (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "sweet-potato",
+    "subject": "Red-skinned sweet potato tubers",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Ipomoea_batatas_006.JPG/960px-Ipomoea_batatas_006.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_006.JPG",
+    "author": "Llez (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0"
+  },
+  {
+    "cropId": "cassava",
+    "subject": "Fresh cassava (tapioca) roots",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Cassava_Plant.jpg/960px-Cassava_Plant.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Cassava_Plant.jpg",
+    "author": "CyberTroopers (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Cassava_Plant.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Cassava Plant.jpg"
+  },
+  {
+    "cropId": "yam",
+    "subject": "Harvested tropical yam tubers",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Yam_at_monday_market_kaduna_state_01.jpg/960px-Yam_at_monday_market_kaduna_state_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Yam_at_monday_market_kaduna_state_01.jpg",
+    "author": "Dorcas Atule (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0"
+  },
+  {
+    "cropId": "onion",
+    "subject": "Red and copper onions at market",
+    "sourceUrl": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1618512496248-a07fe83aa8cb",
+    "author": "vivek kumar (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "garlic",
+    "subject": "Whole white garlic bulbs",
+    "sourceUrl": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1540148426945-6cf22a6b2383",
+    "author": "team voyas (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "tomato",
+    "subject": "Ripe red tomatoes on the vine",
+    "sourceUrl": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1592924357228-91a4daadcfea",
+    "author": "Josephine Baran (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "brinjal",
+    "subject": "Glossy purple brinjal (eggplant)",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Starr-070730-7856-Solanum_melongena-round_purple_variety-Foodland_Pukalani-Maui_%2824890475795%29.jpg/960px-Starr-070730-7856-Solanum_melongena-round_purple_variety-Foodland_Pukalani-Maui_%2824890475795%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Starr-070730-7856-Solanum_melongena-round_purple_variety-Foodland_Pukalani-Maui_(24890475795).jpg",
+    "author": "Forest and Kim Starr (Wikimedia Commons)",
+    "license": "CC BY 3.0 us",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Starr-070730-7856-Solanum_melongena-round_purple_variety-Foodland_Pukalani-Maui_%2824890475795%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Starr-070730-7856-Solanum melongena-round purple variety-Foodland Pukalani-Maui (24890475795).jpg"
+  },
+  {
+    "cropId": "chilli",
+    "subject": "Fresh red and green chilli peppers",
+    "sourceUrl": "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1588252303782-cb80119abd6d",
+    "author": "Timothy L Brock (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "cabbage",
+    "subject": "Fresh green leafy cabbage head",
+    "sourceUrl": "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1594282486552-05b4d80fbb9f",
+    "author": "danilo.alvesd (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "cauliflower",
+    "subject": "White cauliflower head with green leaves",
+    "sourceUrl": "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1568584711075-3d021a7c3ca3",
+    "author": "Irene Kredenets (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "okra",
+    "subject": "Fresh green okra (bhindi) pods",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Hong_Kong_Okra_Aug_25_2012.JPG/960px-Hong_Kong_Okra_Aug_25_2012.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Okra_Aug_25_2012.JPG",
+    "author": "Earth100 (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Hong_Kong_Okra_Aug_25_2012.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Hong Kong Okra Aug 25 2012.JPG"
+  },
+  {
+    "cropId": "cucumber",
+    "subject": "Fresh green cucumbers",
+    "sourceUrl": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1449300079323-02e209d9d3a6",
+    "author": "Harshal S. Hirve (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "pumpkin",
+    "subject": "Ripe orange farm pumpkins",
+    "sourceUrl": "https://images.unsplash.com/photo-1570586437263-ab629fccc818?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1570586437263-ab629fccc818",
+    "author": "Marius Ciocirlan (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "cotton",
+    "subject": "Open white cotton bolls on plant",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/CottonPlant.JPG/960px-CottonPlant.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:CottonPlant.JPG",
+    "author": "Wikimedia Commons Contributor (Wikimedia Commons)",
+    "license": "Public domain",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/CottonPlant.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:CottonPlant.JPG"
+  },
+  {
+    "cropId": "sugarcane",
+    "subject": "Freshly cut sugarcane stalks",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Starr-070206-4144-Saccharum_officinarum-stalks-Ukumehame-Maui_%2824585957540%29.jpg/960px-Starr-070206-4144-Saccharum_officinarum-stalks-Ukumehame-Maui_%2824585957540%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Starr-070206-4144-Saccharum_officinarum-stalks-Ukumehame-Maui_(24585957540).jpg",
+    "author": "Forest and Kim Starr (Wikimedia Commons)",
+    "license": "CC BY 3.0 us",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Starr-070206-4144-Saccharum_officinarum-stalks-Ukumehame-Maui_%2824585957540%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Starr-070206-4144-Saccharum officinarum-stalks-Ukumehame-Maui (24585957540).jpg"
+  },
+  {
+    "cropId": "jute",
+    "subject": "Golden jute fiber and green stalks",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Jute_-_Kolkata_2003-10-31_00538.JPG/960px-Jute_-_Kolkata_2003-10-31_00538.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Jute_-_Kolkata_2003-10-31_00538.JPG",
+    "author": "Biswarup Ganguly (Wikimedia Commons)",
+    "license": "CC BY 3.0"
+  },
+  {
+    "cropId": "tea",
+    "subject": "Fresh green tea leaves on plantation bush",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Csinensis.jpg/960px-Csinensis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Csinensis.jpg",
+    "author": "AxelBoldt at en.wikipedia (Wikimedia Commons)",
+    "license": "Public domain",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Csinensis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Csinensis.jpg"
+  },
+  {
+    "cropId": "coffee",
+    "subject": "Ripe red coffee cherries and roasted beans",
+    "sourceUrl": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1447933601403-0c6688de566e",
+    "author": "Mike Kenneally (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "tobacco",
+    "subject": "Broad green tobacco leaves in field",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Ripe_tobacco_leaf_3037.JPG/960px-Ripe_tobacco_leaf_3037.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Ripe_tobacco_leaf_3037.JPG",
+    "author": "Pollinator (Wikimedia Commons)",
+    "license": "CC BY 2.5"
+  },
+  {
+    "cropId": "coconut",
+    "subject": "Halved fresh coconut showing white kernel",
+    "sourceUrl": "https://images.unsplash.com/photo-1580984969071-a8da5656c2fb?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1580984969071-a8da5656c2fb",
+    "author": "Tijana Drndarski (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "cashew",
+    "subject": "Cashew nuts and ripe cashew apples",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Ripe_Cashew_apple_with_Nuts_Anacardium_occidentale_Goa_IMG_7907_%281%29.JPG/960px-Ripe_Cashew_apple_with_Nuts_Anacardium_occidentale_Goa_IMG_7907_%281%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Ripe_Cashew_apple_with_Nuts_Anacardium_occidentale_Goa_IMG_7907_(1).JPG",
+    "author": "Dr. Raju Kasambe (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0"
+  },
+  {
+    "cropId": "arecanut",
+    "subject": "Ripe orange-yellow areca nut bunch on palm",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Bago%2C_mercado_23.jpg/960px-Bago%2C_mercado_23.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bago%2C_mercado_23.jpg",
+    "author": "LBM1948 (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0"
+  },
+  {
+    "cropId": "banana",
+    "subject": "Ripe yellow bananas in bunch",
+    "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Banana_bunch_Chinawal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Banana_bunch_Chinawal.jpg",
+    "author": "ABHIJEET (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Banana_bunch_Chinawal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Banana bunch Chinawal.jpg"
+  },
+  {
+    "cropId": "mango",
+    "subject": "Ripe golden Alphonso mangoes",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/MangoAlphonso04_Asit.jpg/960px-MangoAlphonso04_Asit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:MangoAlphonso04_Asit.jpg",
+    "author": "Asit K. Ghosh Thaumaturgist (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/MangoAlphonso04_Asit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:MangoAlphonso04 Asit.jpg"
+  },
+  {
+    "cropId": "papaya",
+    "subject": "Ripe halved papaya showing orange flesh",
+    "sourceUrl": "https://images.unsplash.com/photo-1617112848923-cc2234396a8d?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1617112848923-cc2234396a8d",
+    "author": "Any Lane (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "citrus",
+    "subject": "Fresh ripe oranges and citrus leaves",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/CSIRO_ScienceImage_2313_Valencia_Oranges.jpg/960px-CSIRO_ScienceImage_2313_Valencia_Oranges.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_2313_Valencia_Oranges.jpg",
+    "author": "Plant Industry, CSIRO (Wikimedia Commons)",
+    "license": "CC BY 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8e/CSIRO_ScienceImage_2313_Valencia_Oranges.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:CSIRO ScienceImage 2313 Valencia Oranges.jpg"
+  },
+  {
+    "cropId": "apple",
+    "subject": "Crisp red orchard apples",
+    "sourceUrl": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1560806887-1e4cd0b6cbd6",
+    "author": "Matheus Cenali (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "cocoa",
+    "subject": "Ripe cocoa pods and cacao beans",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Matadecacao.jpg/960px-Matadecacao.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Matadecacao.jpg",
+    "author": "Luisovalles (Wikimedia Commons)",
+    "license": "CC BY 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Matadecacao.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Matadecacao.jpg"
+  },
+  {
+    "cropId": "oil-palm",
+    "subject": "Fresh red oil palm fruit bunch",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Bunch_of_Palm_fruits_%28Banga%29.jpg/960px-Bunch_of_Palm_fruits_%28Banga%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bunch_of_Palm_fruits_(Banga).jpg",
+    "author": "Victorpeter001 (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/Bunch_of_Palm_fruits_%28Banga%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Bunch of Palm fruits (Banga).jpg"
+  },
+  {
+    "cropId": "rubber",
+    "subject": "Latex tapping on a rubber plantation tree",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Tapped_rubber_tree.jpg/960px-Tapped_rubber_tree.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Tapped_rubber_tree.jpg",
+    "author": "Irvin calicut (Wikimedia Commons)",
+    "license": "Public domain",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Tapped_rubber_tree.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Tapped rubber tree.jpg"
+  },
+  {
+    "cropId": "alfalfa",
+    "subject": "Green alfalfa (lucerne) forage in bloom",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Medicago_sativa_SKFabaceae.jpg/960px-Medicago_sativa_SKFabaceae.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Medicago_sativa_SKFabaceae.jpg",
+    "author": "SriMesh (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Medicago_sativa_SKFabaceae.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Medicago sativa SKFabaceae.jpg"
+  },
+  {
+    "cropId": "napier-grass",
+    "subject": "Tall lush green Napier fodder grass",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Starr_061211-2254_Pennisetum_purpureum.jpg/960px-Starr_061211-2254_Pennisetum_purpureum.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Starr_061211-2254_Pennisetum_purpureum.jpg",
+    "author": "Forest &amp; Kim Starr (Wikimedia Commons)",
+    "license": "CC BY 3.0"
+  },
+  {
+    "cropId": "black-gram",
+    "subject": "Whole black gram (urad dal) pulses",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Black_gram.jpg/960px-Black_gram.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Black_gram.jpg",
+    "author": "Sanjay Acharya (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Black_gram.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Black gram.jpg"
+  },
+  {
+    "cropId": "fenugreek",
+    "subject": "Fresh green fenugreek (methi) leaves and seeds",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Fenugreek_seeds.jpg/960px-Fenugreek_seeds.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Fenugreek_seeds.jpg",
+    "author": "Sanjay Acharya (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Fenugreek_seeds.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:Fenugreek seeds.jpg"
+  },
+  {
+    "cropId": "grape",
+    "subject": "Ripe grape cluster on vineyard vine",
+    "sourceUrl": "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1537640538966-79f369143f8f",
+    "author": "Nacho Domínguez Argenta (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "paddy",
+    "subject": "Lush green and golden paddy field ears",
+    "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/A_grain_paddy%2C_tamil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:A_grain_paddy,_tamil.jpg",
+    "author": "த*உழவன் (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/A_grain_paddy%2C_tamil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "commonsTitle": "File:A grain paddy, tamil.jpg"
+  },
+  {
+    "cropId": "areca-nut",
+    "subject": "Harvested areca nuts (supari)",
+    "sourceUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Areca_Palm_Seeds_Forming_Coorg_Feb24_A7C_09499.jpg/960px-Areca_Palm_Seeds_Forming_Coorg_Feb24_A7C_09499.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Areca_Palm_Seeds_Forming_Coorg_Feb24_A7C_09499.jpg",
+    "author": "This Photo was taken by Timothy A. Gonsalves. Feel free to use my photos, but pl (Wikimedia Commons)",
+    "license": "CC BY-SA 4.0"
+  },
+  {
+    "cropId": "vegetables",
+    "subject": "Basket of fresh mixed farm vegetables",
+    "sourceUrl": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1540420773420-3366772f4999",
+    "author": "Nadine Primeau (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  },
+  {
+    "cropId": "other",
+    "subject": "Green young crop seedlings in fertile soil",
+    "sourceUrl": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80",
+    "pageUrl": "https://unsplash.com/photos/photo-1464226184884-fa280b87c399",
+    "author": "Karsten Würth (Unsplash)",
+    "license": "Unsplash License (CC0-equivalent)"
+  }
+]

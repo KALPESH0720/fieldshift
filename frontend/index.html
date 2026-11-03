@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- ═══ PWA CORE META TAGS ════════════════════════════════════ -->
+    <!-- Web App Manifest — drives the "Add to Home Screen" prompt  -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Theme color for browser chrome (Android status bar, etc.)  -->
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- iOS Safari PWA support                                      -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Field Shift" />
+
+    <!-- SEO & Social                                                -->
+    <meta name="description" content="Field Shift — Smart offline-first crop rotation and soil management for Indian farmers." />
+    <!-- ════════════════════════════════════════════════════════════ -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Field Shift — Smart Farm Advisor</title>
+    <script>
+      (() => {
+        const stored = localStorage.getItem('fieldshift-theme') || localStorage.getItem('field-shift-theme');
+        const theme = stored === 'dark' || stored === 'light'
+          ? stored
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.style.colorScheme = theme;
+        const language = localStorage.getItem('fieldshift-language') || (navigator.languages || [navigator.language, 'en']).find(Boolean) || 'en';
+        const base = language.toLowerCase().split('-')[0];
+        const rtl = ['ar', 'fa', 'he', 'ur', 'ps', 'ku'].includes(base);
+        const script = ['hi', 'mr', 'ne', 'mai', 'bho', 'kok'].includes(base) ? 'Devanagari'
+          : ['zh'].includes(base) ? 'Han'
+          : ['ja'].includes(base) ? 'Japanese'
+          : ['ko'].includes(base) ? 'Korean'
+          : ['ar', 'fa', 'ur', 'ps', 'ku'].includes(base) ? 'Arabic'
+          : ['he'].includes(base) ? 'Hebrew'
+          : 'Latin';
+        document.documentElement.lang = language === 'mr' ? 'mr-IN' : language === 'hi' ? 'hi-IN' : language;
+        document.documentElement.dir = rtl ? 'rtl' : 'ltr';
+        document.documentElement.dataset.script = script;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
