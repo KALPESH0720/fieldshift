@@ -1,0 +1,40 @@
+{
+  "location": {
+    "region": "Goa",
+    "latitude": 15.4909,
+    "longitude": 73.8278
+  },
+  "weather": {
+    "rainfall_mm": 2200,
+    "temperature_mean_c": 27.5,
+    "temperature_max_c": 33.0,
+    "temperature_min_c": 22.0
+  },
+  "soil": {
+    "ph": 6.2,
+    "organic_carbon": 1.1,
+    "clay": 35.0,
+    "sand": 40.0,
+    "silt": 25.0,
+    "texture": "loam"
+  },
+  "satellite": {
+    "ndvi": 0.62,
+    "source": "sample"
+  },
+  "crop_history": [
+    {
+      "season": "Kharif-2024",
+      "crop": "rice"
+    },
+    {
+      "season": "Rabi-2024",
+      "crop": "groundnut"
+    }
+  ],
+  "metadata": {
+    "dataset": "FieldShift pilot sample",
+    "synthetic": true,
+    "note": "Demo data only; not real-time NASA observations."
+  }
+}

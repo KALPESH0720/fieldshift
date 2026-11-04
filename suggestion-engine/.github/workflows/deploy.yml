@@ -1,0 +1,31 @@
+
+name: Deploy FieldShift
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            docker pull ghcr.io/${{ github.repository_owner }}/fieldshift-engine:latest
+            docker stop fieldshift-engine || true
+            docker rm fieldshift-engine || true
+            docker run -d \
+              --name fieldshift-engine \
+              --restart unless-stopped \
+              -p 8000:8000 \
+              ghcr.io/${{ github.repository_owner }}/fieldshift-engine:latest

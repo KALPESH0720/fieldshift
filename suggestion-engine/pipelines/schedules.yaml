@@ -1,0 +1,49 @@
+
+version: 1
+
+project: FieldShift
+
+pipelines:
+
+  p1_grid_layers:
+    enabled: true
+    description: Prepare spatial agricultural data layers
+    frequency: on_demand
+
+  p2_simulation:
+    enabled: true
+    description: Run crop simulation models
+    frequency: on_demand
+    depends_on:
+      - p1_grid_layers
+
+  p3_monitor:
+    enabled: true
+    description: Monitor anomalies and agricultural conditions
+    frequency: daily
+    depends_on:
+      - p1_grid_layers
+
+  p4_learning:
+    enabled: true
+    description: Update crop priors and recommendation weights
+    frequency: weekly
+    depends_on:
+      - p3_monitor
+
+  p5_optimizer:
+    enabled: true
+    description: Optimize feasible crop recommendations
+    frequency: on_demand
+    depends_on:
+      - p2_simulation
+      - p4_learning
+
+master_pipeline:
+  enabled: true
+  stages:
+    - p1_grid_layers
+    - p2_simulation
+    - p3_monitor
+    - p4_learning
+    - p5_optimizer

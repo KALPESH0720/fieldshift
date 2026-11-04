@@ -1,0 +1,82 @@
+
+app:
+  name: FieldShift
+  environment: production
+
+pipeline:
+  name: fieldshift
+  execution_mode: pipeline
+  stages:
+    - p1_grid_layers
+    - p2_simulation
+    - p3_monitor
+    - p4_learning
+    - p5_optimizer
+
+data:
+  fixtures_directory: tests/fixtures
+
+logging:
+  level: INFO
+  config_file: infra/config/logging.yaml
+
+monitoring:
+  enabled: true
+  healthcheck:
+    interval_seconds: 30
+    timeout_seconds: 5
+
+execution:
+  grid_input:
+    latitude: 15.49
+    longitude: 73.82
+    weather:
+      rainfall_mm: 200
+      temperature_c: 28
+
+  crops:
+    - rice
+    - groundnut
+
+  simulator: "REPLACE_WITH_REAL_SIMULATOR_MODULE:FUNCTION"
+
+  simulation_config:
+    season: kharif
+    model: custom
+
+  monitor_checks: {}
+  monitor_inputs: {}
+
+  baseline_scores:
+    rice: 0.70
+    groundnut: 0.75
+
+  farmer_feedback:
+    rice: [0.8, 0.9]
+    groundnut: [0.7, 0.8]
+
+  candidate_data:
+    - crop: rice
+      score: 0.8
+      water_requirement_mm: 1200
+      soil_suitability: 0.9
+      family: grass
+      expected_return: 100
+      nitrogen_benefit: 0.2
+
+    - crop: groundnut
+      score: 0.75
+      water_requirement_mm: 600
+      soil_suitability: 0.85
+      family: legume
+      expected_return: 150
+      nitrogen_benefit: 0.8
+
+  optimization_constraints:
+    available_water_mm: 1500
+    minimum_soil_suitability: 0.3
+    maximum_crops: 2
+    minimum_crop_diversity: 1
+    forbidden_crops: []
+    required_crops: []
+    avoid_same_family_consecutive: true

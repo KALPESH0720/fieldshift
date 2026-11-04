@@ -1,0 +1,28 @@
+
+services:
+  fieldshift:
+    build:
+      context: ../..
+      dockerfile: infra/deployment/Dockerfile
+
+    image: fieldshift:latest
+    container_name: fieldshift-app
+
+    env_file:
+      - ../.env
+
+    environment:
+      APP_NAME: FieldShift
+      APP_ENV: production
+      LOG_LEVEL: INFO
+      PYTHONPATH: /app/src:/app
+      FIELDSHIFT_CONFIG_PATH: infra/config/app.yaml
+      FIELDSHIFT_OUTPUT_PATH: outputs/fieldshift_result.json
+
+    volumes:
+      - fieldshift_outputs:/app/outputs
+
+    restart: "no"
+
+volumes:
+  fieldshift_outputs:
