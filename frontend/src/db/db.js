@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Offline Data Store
+ * Feature: Creates the Dexie-powered local database for plots, soil records, weather cache, and queued sync data.
+ * Impact: It allows the app to work with local farm data even when connectivity is weak or absent.
+ * Importance: Offline storage is a critical requirement for field-first usage in rural and low-bandwidth environments.
+ */
+
 import Dexie from 'dexie';
 
 // Initialize the offline database for the Field Shift PWA

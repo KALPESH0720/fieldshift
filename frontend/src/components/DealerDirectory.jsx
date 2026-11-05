@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Dealer Directory
+ * Feature: Maps local agri-input dealers and service providers so farmers can find trusted suppliers and support near their fields.
+ * Impact: This brings practical supply-chain help into the app and reduces friction in farmer purchasing and service access.
+ * Importance: It strengthens the product's real-world usefulness by connecting advisory insights to local service access.
+ */
+
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Navigation, Phone, Search } from 'lucide-react';

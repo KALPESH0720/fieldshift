@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Soil Data Import Flow
+ * Feature: Supports soil-test data import and review so the recommendation engine can use field-specific nutrient and quality information.
+ * Impact: This grounds the app's recommendations in actual soil conditions instead of generic advice.
+ * Importance: Soil data is essential for accurate agronomy because it directly affects crop suitability and productivity.
+ */
+
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Weather Decision Panel
+ * Feature: Displays local weather conditions and forecast context for field planning and agronomic decision-making.
+ * Impact: Weather data can alter irrigation, pest risk, and farm activity timing, so this helps users act at the right time.
+ * Importance: Environmental awareness is critical for crop health and efficient field operations.
+ */
+
 import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import {
   CloudRain,

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Crop Image Renderer
+ * Feature: Displays crop photos, fallback visuals, and optimized thumbnails across recommendations and crop detail screens.
+ * Impact: Strong visual context improves user confidence and makes crop selection and identification easier.
+ * Importance: Good crop visuals increase trust and usability, especially for users who rely on field recognition rather than text alone.
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import { LandPlot, Leaf, Volume2 } from 'lucide-react';
 import useVoice from '../hooks/useVoice';

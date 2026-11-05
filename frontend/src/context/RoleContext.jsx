@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Role and Access Context
+ * Feature: Stores the active user role, enforces extension-role access rules, and keeps role preference aligned with verified permissions.
+ * Impact: It ensures the same app can serve both farmer and extension workflows without exposing features beyond a user's allowed role.
+ * Importance: Role gating is essential to real-world deployments where different stakeholders need different operational capabilities.
+ */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { useAuth, userHasRole } from './AuthContext';

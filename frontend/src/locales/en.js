@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: English Translation Pack
+ * Feature: Contains the default English user-facing text for navigation, actions, and farm workflows.
+ * Impact: It ensures the app is understandable in the default language for onboarding and daily use.
+ * Importance: Clear language support is essential for product usability and accessibility.
+ */
+
 export default {
   language: { english: 'English', marathi: 'Marathi', hindi: 'Hindi' },
   settings: {

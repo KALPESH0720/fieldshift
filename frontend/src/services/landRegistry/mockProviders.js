@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Land Registry Demo Providers
+ * Feature: Supplies mock registry and verification data for demo workflows and land-document testing.
+ * Impact: This helps validate consent and registry flows without depending on live external services.
+ * Importance: The mock layer keeps development and presentation work resilient while the integration matures.
+ */
+
 import { CROPS, resolveKnownCrop } from '../../data/crops';
 
 const CENTERS = {

@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Speech Text Formatter
+ * Feature: Cleans translated UI strings into natural speech-ready text and formats currency, numbers, units, and percentages for voice guidance.
+ * Impact: This powers accessibility and voice-driven advice, making recommendations easier to hear and understand in the farmer's preferred language.
+ * Importance: Voice-first guidance is a major usability advantage in field conditions where visual reading is limited or unsafe.
+ */
 // Speech formatting helpers: joins translated segments, strips emojis/icons/markdown,
 // and formats numbers, currency, units, percentages, temperatures, and dates
 // in a natural speakable form using Intl with the active BCP-47 speech locale.

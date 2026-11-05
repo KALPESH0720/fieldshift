@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Theme and Appearance Context
+ * Feature: Persists the chosen light/dark mode or system preference and applies it to the document root for a consistent visual experience.
+ * Impact: This keeps the product readable and comfortable across day/night use, which matters in field conditions and for accessibility-sensitive users.
+ * Importance: Appearance consistency is a core usability requirement for a daily operational tool used outdoors and at long work sessions.
+ */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 

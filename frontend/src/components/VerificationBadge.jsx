@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Trust and Verification Badge
+ * Feature: Displays a verification indicator to show that key actions, entities, or data sources have been validated.
+ * Impact: This strengthens trust in recommendations, field records, and user-facing quality indicators.
+ * Importance: Confidence in app outputs is essential when decisions affect yields, compliance, and farmer investments.
+ */
+
 import { CheckCircle2, Info } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';
 

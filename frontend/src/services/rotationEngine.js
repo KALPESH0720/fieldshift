@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Rotation Logic Engine
+ * Feature: Calculates crop rotation suitability and sequence recommendations based on crop history and agronomic patterns.
+ * Impact: It helps the system recommend sustainable, soil-preserving crop cycles rather than one-off crop suggestions.
+ * Importance: Rotation planning is central to long-term farm productivity and a key differentiator for the product.
+ */
+
 export const CROP_RULES = [
     { id: 'chickpea', family: 'legume', rootDepth: 'medium', seasons: ['Rabi'], durationRange: [100, 110], waterNeedKey: 'recommender.waterNeeds.low1to2', baseReturnPerHectare: 120000, ureaReductionPerHectare: 86, fertilizerKey: 'recommender.fertilizerUrea', waterSavingsPct: 45, soilHealthScore: 96 },
     { id: 'mustard', family: 'oilseed', rootDepth: 'deep', seasons: ['Rabi'], durationRange: [90, 105], waterNeedKey: 'recommender.waterNeeds.low2', baseReturnPerHectare: 129500, ureaReductionPerHectare: 44, fertilizerKey: 'recommender.fertilizerUrea', waterSavingsPct: 35, soilHealthScore: 84 },

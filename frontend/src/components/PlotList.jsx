@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Plot Overview List
+ * Feature: Lists farm plots, their attributes, and relevant crop/field status so users can manage multiple holdings in one place.
+ * Impact: It centralizes plot management and makes farm operations easier to track at scale.
+ * Importance: This makes the app useful for both small and multi-plot farming use cases.
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Not Found State
+ * Feature: Displays a graceful fallback screen when a user navigates to an unknown route or dead-end page.
+ * Impact: It keeps the app experience stable and reduces confusion during navigation issues.
+ * Importance: Good fallback states preserve trust and prevent users from feeling stranded inside the product.
+ */
+
 import { Link } from 'react-router-dom';
 import { ArrowLeft, SearchX } from 'lucide-react';
 

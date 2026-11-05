@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: App Bootstrap
+ * Feature: Bootstraps React, initializes the global providers, and clears stale PWA cache artifacts before the app loads.
+ * Impact: This ensures the app starts with the correct provider context and avoids stale cached assets causing mismatched UI behavior or broken images.
+ * Importance: It is essential for reliable startup, consistency across sessions, and a smooth offline-first experience.
+ */
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import 'leaflet/dist/leaflet.css'

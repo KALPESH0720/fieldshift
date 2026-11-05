@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Application Shell
+ * Feature: Coordinates the app-wide routing, authenticated session flow, role switching, theme handling, and bottom navigation for the FieldShift farmer experience.
+ * Impact: This is the central orchestration layer that keeps every feature screen connected to the same user context, permissions, and navigation state.
+ * Importance: It is the backbone of the frontend and determines how the product feels as a unified experience across dashboards, recommendations, and field management tools.
+ */
+
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import {
   BrowserRouter as Router,

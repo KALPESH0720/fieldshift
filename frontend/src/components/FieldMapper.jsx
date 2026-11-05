@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Field Mapping Module
+ * Feature: Handles field boundary capture, mapping, and spatial measurement for plot-level monitoring and crop decisions.
+ * Impact: It converts land information into measurable field units and helps the app compute more accurate recommendations.
+ * Importance: Field mapping is a foundational workflow because it links digital planning with actual land operations.
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { area as turfArea } from '@turf/area';

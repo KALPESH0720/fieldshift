@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Market Data Service
+ * Feature: Normalizes regional crop prices and market performance metrics for the UI's insights and detail screens.
+ * Impact: It powers features that help farmers decide when and what to plant, hold, or sell.
+ * Importance: This bridges agronomy and economics, making the product useful for profit-oriented decisions.
+ */
+
 import { db } from '../db/db';
 import { CROPS, getCropById, resolveKnownCrop } from '../data/crops';
 import { getSavedCountry } from './landRegistry/registry';

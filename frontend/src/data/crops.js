@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Crop Catalog
+ * Feature: Defines the crop master data, names, local labels, and agronomic metadata used by the recommendation engine and UI.
+ * Impact: This acts as the shared source of truth for crop selection, recommendations, and market integration.
+ * Importance: A consistent crop dataset is essential because many features depend on naming, matching, and crop metadata.
+ */
+
 import cropCreditsData from './crop-credits.json';
 import cropAvailability from './crops-with-images.json';
 

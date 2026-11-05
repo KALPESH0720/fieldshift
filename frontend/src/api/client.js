@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Shared API Client
+ * Feature: Centralizes HTTP requests, shared headers, timeout behavior, and consistent error handling for backend communication.
+ * Impact: It reduces duplicate request logic and keeps API calls predictable across feature modules.
+ * Importance: This improves reliability when the app grows and makes debugging and future backend upgrades easier.
+ */
+
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/+$/, '');
 const DEFAULT_TIMEOUT_MS = 15000;
 const DEVICE_ID_KEY = 'fieldshift-device-id';

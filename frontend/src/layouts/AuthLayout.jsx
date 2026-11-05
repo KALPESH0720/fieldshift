@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Authentication Layout
+ * Feature: Provides the shared frame for login and auth-related screens with consistent branding and page structure.
+ * Impact: It keeps the auth experience consistent and visually aligned with the rest of the app.
+ * Importance: A dedicated auth layout creates a reliable entry experience for every user session.
+ */
+
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   Leaf,

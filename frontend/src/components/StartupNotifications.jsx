@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Startup Informational Alerts
+ * Feature: Shows onboarding and context-aware reminders that help users learn the app's key features when they first land on the dashboard.
+ * Impact: This improves product education and reduces confusion for first-time users.
+ * Importance: Strong onboarding is essential for adoption, especially for less-technical users in field conditions.
+ */
+
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {

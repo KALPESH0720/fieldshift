@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Market Intelligence Panel
+ * Feature: Summarizes crop prices, trends, and buying zones to help users judge local market opportunities.
+ * Impact: It translates raw market data into actionable insight for farm planning and profitability decisions.
+ * Importance: Market insight is a major differentiator because it connects agronomy with economic outcomes.
+ */
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';

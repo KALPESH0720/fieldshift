@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Scroll Lock Hook
+ * Feature: Prevents background page scrolling when modal overlays or onboarding drawers are open.
+ * Impact: This keeps the mobile experience focused and avoids visual jank while important flows are active.
+ * Importance: Modal focus control is necessary for clear, accessible interaction patterns.
+ */
+
 import { useEffect } from 'react';
 
 let lockCount = 0;

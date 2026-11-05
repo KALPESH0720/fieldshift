@@ -1,4 +1,9 @@
 /**
+ * FieldShift frontend: Land Registry Domain Types
+ * Feature: Defines the shared contract for land-registry providers and verified parcel records used by consent and validation flows.
+ * Impact: This gives the frontend a stable data model for farmer land verification, reducing ambiguity as different registry integrations are plugged in.
+ * Importance: Structured land verification is critical for trust, compliance, and accurate field operations in regulated agricultural systems.
+ *
  * @typedef {Object} LandRegistryProvider
  * @property {string} id
  * @property {string[]} countryCodes

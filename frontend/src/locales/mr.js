@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Marathi Translation Pack
+ * Feature: Adds Marathi translations for the app's key interactions and agricultural guidance.
+ * Impact: It makes the app more relevant and usable in Marathi-speaking regions and among diverse user groups.
+ * Importance: Regional language support is necessary for broad adoption and smoother field use.
+ */
+
 import en from './en';
 
 export default {

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Global Styling Layer
+ * Feature: Defines the shared design system, dark mode handling, typography, and cross-language layout adjustments used across the whole frontend.
+ * Impact: This file gives the product a consistent visual identity and supports region-aware typography for multilingual farmer use cases.
+ * Importance: Without this layer, the app would lose consistency, readability, and accessibility across devices and languages.
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 

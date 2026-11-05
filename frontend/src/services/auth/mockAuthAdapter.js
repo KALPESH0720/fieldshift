@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Mock Authentication Adapter
+ * Feature: Simulates the auth backend for demos and offline development without external dependencies.
+ * Impact: This allows rapid prototyping and testing of authenticated flows in real frontend work.
+ * Importance: Mocking improves developer velocity while preserving realistic app behavior and workflows.
+ */
+
 import { ApiClientError } from '../../api/client';
 
 export const MOCK_OTP_CODE = '123456';

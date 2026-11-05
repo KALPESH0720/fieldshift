@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Scheme Information Hub
+ * Feature: Consolidates government agriculture schemes, financial programs, and compliance support into one accessible screen.
+ * Impact: This increases discoverability of public support and helps farmers access programs relevant to their operations.
+ * Importance: Government program visibility adds a practical welfare and support layer to the farming assistant.
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';

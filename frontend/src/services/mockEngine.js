@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Mock Product Data Engine
+ * Feature: Provides demo content for startup notifications, recommendation loading states, and scenario-based product copy while the backend integrations are still being wired.
+ * Impact: It keeps the UI realistic and testable during prototype and pilot phases, allowing stakeholders to experience the full product flow without live services.
+ * Importance: This file acts as the product's prototype data backbone and is crucial for demos, onboarding, and validating UX before live backend deployment.
+ */
 // ============================================================
 //  src/services/mockEngine.js
 //  Field Shift PWA — Mock Data Engine

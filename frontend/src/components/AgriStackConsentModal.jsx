@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: AgriStack Consent Flow
+ * Feature: Captures farmer consent before sharing land, crop, or identity data with government and digital agriculture services.
+ * Impact: This ensures compliance and transparency while enabling data-backed agricultural services and scheme integrations.
+ * Importance: The consent layer is essential for trust, legal compliance, and wider product adoption in public-sector agricultural workflows.
+ */
+
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';

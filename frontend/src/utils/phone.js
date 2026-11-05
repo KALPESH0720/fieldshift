@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Phone and Country Utilities
+ * Feature: Formats numbers and applies country-specific validation so user identity and communication are consistent.
+ * Impact: This reduces sign-in issues and ensures phone data stays normalized across the app.
+ * Importance: Accurate identity and contact handling are fundamental to trusted login and account recovery flows.
+ */
+
 import {
   AsYouType,
   getCountries,

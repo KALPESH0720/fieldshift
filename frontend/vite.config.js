@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Vite Build Config
+ * Feature: Configures the React app, Tailwind integration, and offline-first PWA caching behavior for the frontend build.
+ * Impact: This defines the production build and the service worker strategy that supports offline installation and caching.
+ * Importance: The build configuration directly shapes performance, installability, and resilience in field conditions.
+ */
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';

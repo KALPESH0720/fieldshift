@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Authentication API Adapter
+ * Feature: Provides the real backend interface for account login, session creation, and user profile operations used by the auth system.
+ * Impact: This adapter connects the app to the backend identity layer and keeps authentication logic separated from UI code.
+ * Importance: Security and session continuity depend on this layer because it is the path between the farmer dashboard and authenticated services.
+ */
+
 import { apiRequest, setCsrfToken } from './client';
 
 export const realAuthAdapter = {

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Plot Creation Modal
+ * Feature: Lets users create or edit farm plots with the metadata needed for field planning, recommendation logic, and area calculations.
+ * Impact: This turns raw land data into structured operational records that drive crop planning, soil analysis, and reporting.
+ * Importance: It is a core user entry point for translating on-ground farm information into app intelligence.
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { area as turfArea } from '@turf/area';

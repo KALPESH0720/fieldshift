@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Crop Selection UI
+ * Feature: Presents crop options and filters so users can select the crop they want to analyze, compare, or recommend.
+ * Impact: This turns the crop catalog into a decision-making tool by making the selection flow fast and understandable.
+ * Importance: Crop selection sits at the heart of recommendations, planning, and value insight features.
+ */
+
 import { useMemo, useState } from 'react';
 import { Check, Search, Sparkles } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';

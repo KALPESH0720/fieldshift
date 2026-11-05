@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Market Crop Detail Screen
+ * Feature: Shows price trends, crop performance, and regional buying information for a selected commodity.
+ * Impact: Farmers can compare current market conditions and decide when and what to sell or plant.
+ * Importance: This is critical for economic decision support and makes the app useful beyond agronomy advice.
+ */
+
 import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';

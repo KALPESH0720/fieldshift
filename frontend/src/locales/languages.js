@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Locale Catalog and RTL Metadata
+ * Feature: Defines the supported locales, native labels, writing direction, and speech-language metadata for the app's globalized interface.
+ * Impact: This supports multilingual adoption, correct text rendering for right-to-left languages, and smoother localization across different regions.
+ * Importance: A strong localization layer is essential for farmer accessibility, trust, and adoption in diverse agricultural markets.
+ */
 // Supported language metadata. Locale files are loaded lazily when available;
 // missing locales safely fall back to English until reviewed translations land.
 const definitions = [

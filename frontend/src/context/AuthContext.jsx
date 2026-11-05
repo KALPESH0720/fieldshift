@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Authentication and Session State
+ * Feature: Owns signed-in user lifecycle, OTP challenge handling, role-aware session restoration, cache cleanup, and per-user data isolation across the app.
+ * Impact: It keeps the farmer experience secure, consistent across reloads, and resilient when the app is used offline or after switching devices.
+ * Importance: This context is the trust boundary of the product; without it, access control, data ownership, and continuity across the dashboard would break.
+ */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { db } from '../db/db';

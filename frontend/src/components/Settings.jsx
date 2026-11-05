@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Settings Center
+ * Feature: Lets users manage language, theme, role view, reminders, and app preferences.
+ * Impact: This keeps the app personalized and easier to use across devices, regions, and user roles.
+ * Importance: Customization improves adoption and makes the product accessible to diverse farming contexts.
+ */
+
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';

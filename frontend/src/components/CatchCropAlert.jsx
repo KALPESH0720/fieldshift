@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Catch Crop Notification
+ * Feature: Warns farmers about catch-crop opportunities or seasonal windows that improve soil health and farm resilience.
+ * Impact: It gives actionable agronomic guidance to improve rotation and reduce land fallow during the off-season.
+ * Importance: This feature helps the product move beyond static crop recommendations into proactive seasonal planning.
+ */
+
 import { motion } from 'framer-motion';
 import { AlertTriangle, ArrowRight, Sprout, Timer } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Voice Action Button
+ * Feature: Adds a reusable button for activating voice interaction or spoken guidance from the UI.
+ * Impact: This supports hands-free navigation and makes the app more accessible in field conditions where attention is limited.
+ * Importance: Voice control improves usability and inclusivity for on-the-go agricultural workflows.
+ */
+
 import { useEffect, useMemo } from 'react';
 import { Square, Volume2, VolumeX } from 'lucide-react';
 import useVoice from '../../hooks/useVoice';

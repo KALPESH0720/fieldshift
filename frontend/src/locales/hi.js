@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Hindi Translation Pack
+ * Feature: Provides Hindi labels and instructions for the FieldShift interface and decision-support actions.
+ * Impact: This supports a major regional audience and improves adoption in Hindi-speaking farming communities.
+ * Importance: Localization in local languages directly improves trust and usability for the target users.
+ */
+
 import en from './en';
 
 export default {

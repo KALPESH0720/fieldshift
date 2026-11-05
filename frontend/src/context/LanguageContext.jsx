@@ -1,3 +1,9 @@
+/*
+ * FieldShift frontend: Internationalization and Locale Switching
+ * Feature: Loads localized UI bundles, detects user language preferences, manages recent language selections, and applies the correct script direction and fonts for accessibility.
+ * Impact: This enables farmers and extension workers to use the app in their preferred language, improving comprehension, trust, and adoption in multilingual rural settings.
+ * Importance: Localization is a core product capability for inclusive deployment across India and regional agricultural ecosystems.
+ */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { DEFAULT_LANGUAGE, getLanguage, SUPPORTED_LANGUAGES } from '../locales/languages';

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Intercrop Rule Engine
+ * Feature: Defines agronomic rules for compatible or beneficial crop combinations in a rotation strategy.
+ * Impact: It helps the app recommend smarter multi-crop systems that improve soil health and reduce risk.
+ * Importance: Crop combination logic is a differentiating feature because it moves recommendations beyond single-crop planning.
+ */
+
 import { cropIdFromName, isRealCropId } from '../data/crops';
 
 /**

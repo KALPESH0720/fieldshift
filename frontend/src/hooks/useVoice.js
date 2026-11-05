@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Voice Interaction Hook
+ * Feature: Wraps browser speech APIs for reading guidance aloud and providing voice-based interaction support.
+ * Impact: It enables hands-free assistance and improves accessibility for agricultural field tasks.
+ * Importance: Voice support is especially important in contexts where users cannot constantly look at a phone screen.
+ */
+
 import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { useTranslation } from '../context/LanguageContext';
 import { getLanguage, SPEECH_FALLBACKS } from '../locales/languages';

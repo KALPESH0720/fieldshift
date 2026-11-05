@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Farm Overview Map
+ * Feature: Visualizes field locations, areas, and geo-spatial context in a map-based operating overview.
+ * Impact: It helps farmers understand where plots sit in relation to each other and how the wider farm is structured.
+ * Importance: Spatial awareness improves planning, land documentation, and monitoring for agricultural operations.
+ */
+
 import { useEffect, useMemo } from 'react';
 import { MapContainer, Polygon, TileLayer, Tooltip, useMap } from 'react-leaflet';
 import { Browser, latLngBounds } from 'leaflet';

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Pest and Disease Scanner
+ * Feature: Provides crop-health scanning and diagnosis guidance for identifying issues affecting field productivity.
+ * Impact: This helps farmers intervene earlier and minimize yield loss caused by pests or disease outbreaks.
+ * Importance: Early detection is one of the app's most valuable operational tools because it directly protects revenue and crop health.
+ */
+
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {

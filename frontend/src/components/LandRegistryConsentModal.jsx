@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Land Registry Consent Dialog
+ * Feature: Requests explicit consent for land-document verification and registry-linked field services.
+ * Impact: It protects user trust while enabling legal and documentation workflows tied to land governance.
+ * Importance: This ensures the app can extend into formal land and compliance use cases without undermining consent and transparency.
+ */
+
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Login Screen
+ * Feature: Provides the sign-in experience for farmers and extension staff, including demo-mode handling and role-aware entry.
+ * Impact: This is the gateway into personalized dashboards, permissions, and saved farm records.
+ * Importance: Authentication is the first critical interaction that gives users access to every decision-support workflow.
+ */
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';

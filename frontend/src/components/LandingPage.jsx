@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Product Landing Experience
+ * Feature: Introduces the app's purpose, farmer-facing benefits, and entry points into key workflows such as crop planning and soil monitoring.
+ * Impact: It creates a strong first impression and helps users quickly understand the product's value.
+ * Importance: The landing experience directly affects onboarding, conversion, and continued engagement.
+ */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';

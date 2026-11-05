@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Group Dashboard
+ * Feature: Displays aggregated farmer group activity, collective crop insights, and coordination views for shared agricultural planning.
+ * Impact: It supports cooperative or extension-led decision-making at a scale above individual plots.
+ * Importance: This widens the value of the product from individual farming to community and advisory-driven productivity.
+ */
+
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {

@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Install Experience
+ * Feature: Prompts users to install the app as a PWA so it behaves like a native mobile experience.
+ * Impact: This improves retention, offline reliability, and ease of use on phones used heavily by farmers.
+ * Importance: A stronger install experience increases the app's accessibility and makes it useful in low-connectivity settings.
+ */
+
 ﻿import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, X, Smartphone, Wifi } from 'lucide-react';

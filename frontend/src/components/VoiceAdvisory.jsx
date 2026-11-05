@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Voice Advisory Experience
+ * Feature: Uses speech synthesis and prompts to provide spoken guidance, tips, and reading assistance for farmers.
+ * Impact: This makes the app more accessible and more usable while users are working in the field.
+ * Importance: Voice support extends product reach and lowers barriers for users who prefer or require non-text interactions.
+ */
+
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Mic, Play, Square } from 'lucide-react';

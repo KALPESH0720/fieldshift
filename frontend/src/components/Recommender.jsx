@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Crop Recommendation Engine
+ * Feature: Delivers agronomic recommendations using crop data, soil context, rotation logic, and user-selected field conditions.
+ * Impact: This is the primary decision-support experience, guiding farmers toward better crop choice and seasonal planning.
+ * Importance: It represents the app's core business value because it transforms raw field information into practical guidance.
+ */
+
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';

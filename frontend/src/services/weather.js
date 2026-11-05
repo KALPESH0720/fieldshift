@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Weather Data Service
+ * Feature: Fetches and transforms weather information used for field monitoring, alerts, and planning support.
+ * Impact: It gives the app timely environmental context that influences irrigation, crop health, and operational timing.
+ * Importance: Weather-backed guidance improves both practical field decisions and recommendation accuracy.
+ */
+
 import { db } from '../db/db';
 
 const WEATHER_CACHE_ID = 'dashboard-weather';

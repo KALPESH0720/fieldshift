@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Reusable Select Control
+ * Feature: Provides a consistent, themed dropdown UI for selecting crops, countries, and other structured choices.
+ * Impact: It reduces UI inconsistency and speeds users through form-heavy actions in the app.
+ * Importance: Stable input controls are important for accurate farmer data entry and clean workflow experiences.
+ */
+
 import { ChevronDown } from 'lucide-react';
 
 export default function Select({ className = '', wrapperClassName = '', children, ...props }) {

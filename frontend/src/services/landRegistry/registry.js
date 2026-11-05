@@ -1,3 +1,10 @@
+/*
+ * FieldShift frontend: Land Registry Data Service
+ * Feature: Stores and retrieves land ownership and document metadata needed for registry-linked features.
+ * Impact: It gives the app a way to persist land-document context and support compliance-driven workflows.
+ * Importance: This is key for trusted field identity and legal grade assurance in agriculture operations.
+ */
+
 import { getMockProviders } from './mockProviders';
 
 const COUNTRY_KEY = 'fieldshift-country';
