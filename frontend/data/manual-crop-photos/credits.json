@@ -1,0 +1,5 @@
+{
+  "_comment": "Optional manual crop photograph credits. Drop <cropId>.jpg or <cropId>.png into data/manual-crop-photos/ and add an entry under 'crops' below.",
+  "crops": {}
+}
+
