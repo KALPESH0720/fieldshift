@@ -1,0 +1,92 @@
+# Catalogue of codes the engine emits. The frontend renders local-language text from `code` + `params`.
+# `text_en` is a plain English template used for testing only. Crop ids in params named
+# `crop` / `previous_crop` are replaced by display names when rendering text_en.
+version: 1
+codes:
+  # ---- reasons ----
+  LEGUME_AFTER_CEREAL:
+    kind: reason
+    params: [crop, previous_crop]
+    text_en: "{crop} fixes nitrogen and follows {previous_crop}, which helps the soil."
+  N_DEMANDING_AFTER_LEGUME:
+    kind: reason
+    params: [crop, previous_crop]
+    text_en: "{crop} makes use of the nitrogen left by {previous_crop}."
+  ALTERNATE_ROOT_DEPTH:
+    kind: reason
+    params: [crop, previous_crop]
+    text_en: "{crop} roots reach a different depth than {previous_crop}, so the whole soil profile is used."
+  FAMILY_BREAK:
+    kind: reason
+    params: [crop, family, window_seasons]
+    text_en: "{crop} has not been grown in this plant family for {window_seasons} seasons, which cuts pest carry-over."
+  FERTILIZER_SAVING:
+    kind: reason
+    params: [crop, saved_kg]
+    text_en: "About {saved_kg} kg of nitrogen per acre can be saved for {crop}."
+  HIGHEST_NET_RETURN:
+    kind: reason
+    params: []
+    text_en: "Highest expected net return among the options."
+  LOW_WATER_RISK:
+    kind: reason
+    params: []
+    text_en: "Water supply and temperature fit this plan well."
+  SOIL_BUILDING:
+    kind: reason
+    params: []
+    text_en: "Includes a nitrogen-fixing crop that builds the soil."
+  # ---- trade-offs ----
+  LOWER_RETURN:
+    kind: trade_off
+    params: []
+    text_en: "Expected return is lower than the best option."
+  LOWER_RETURN_BETTER_SOIL:
+    kind: trade_off
+    params: []
+    text_en: "Earns less this year, better soil next year."
+  LOWER_SOIL_BENEFIT:
+    kind: trade_off
+    params: []
+    text_en: "Gives less benefit to the soil than the best option."
+  HIGHER_WATER_RISK:
+    kind: trade_off
+    params: []
+    text_en: "More exposed to dry spells or heat than the best option."
+  HIGHER_PEST_RISK:
+    kind: trade_off
+    params: []
+    text_en: "More pest and disease carry-over than the best option."
+  LESS_RELIABLE_IN_DRY_YEAR:
+    kind: trade_off
+    params: []
+    text_en: "Result falls noticeably in a dry year."
+  NO_MAJOR_TRADE_OFF:
+    kind: trade_off
+    params: []
+    text_en: "No major trade-off compared with the other options."
+  # ---- exclusions (why a crop was left out) ----
+  SEASON_MISMATCH:
+    kind: exclusion
+    params: [season]
+    text_en: "{crop} is not grown in the {season} season."
+  UNSUITABLE_TEMPERATURE:
+    kind: exclusion
+    params: [value]
+    text_en: "{crop} does not suit the temperature of this season."
+  UNSUITABLE_RAINFALL:
+    kind: exclusion
+    params: [value]
+    text_en: "{crop} does not suit the water supply without irrigation."
+  UNSUITABLE_PH:
+    kind: exclusion
+    params: [value]
+    text_en: "{crop} does not suit the soil pH."
+  FAMILY_GAP:
+    kind: exclusion
+    params: [family, required_gap_seasons, seasons_since, previous_crop]
+    text_en: "{crop} is in the same plant family as {previous_crop} grown {seasons_since} season(s) ago; it needs a gap of {required_gap_seasons}."
+  SAME_CROP_GAP:
+    kind: exclusion
+    params: [required_gap_seasons, seasons_since]
+    text_en: "{crop} was grown {seasons_since} season(s) ago; it needs a gap of {required_gap_seasons}."

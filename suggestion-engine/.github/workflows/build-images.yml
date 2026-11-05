@@ -1,0 +1,16 @@
+name: build-images
+# Builds the images to prove the Dockerfiles work. Pushing to Artifact Registry is not set up here:
+# add authentication and a push step once the Google Cloud project exists.
+on:
+  pull_request:
+    paths: ["docker/**", "src/**", "pyproject.toml", "knowledge/**"]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: [engine, pipeline-base]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f docker/${{ matrix.image }}.Dockerfile -t fieldshift-${{ matrix.image }}:ci .

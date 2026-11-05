@@ -1,0 +1,1049 @@
+openapi: 3.1.0
+info:
+  title: Field Shift suggestion engine
+  version: 0.1.0
+paths:
+  /v1/health:
+    get:
+      summary: Health
+      operationId: health_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/recommend:
+    post:
+      summary: Recommend
+      operationId: recommend_v1_recommend_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/rescore:
+    post:
+      summary: Rescore
+      description: 'What-if: same request, new weights or flags. Cached indicators
+        are reused, nothing is recomputed.'
+      operationId: rescore_v1_rescore_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RescoreRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/jobs/{job_id}:
+    get:
+      summary: Get Job
+      operationId: get_job_v1_jobs__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/alerts:
+    get:
+      summary: Alerts
+      description: Alerts written by the season monitor (pipeline P3), by cell id
+        or by point.
+      operationId: alerts_v1_alerts_get
+      parameters:
+      - name: cell_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cell Id
+      - name: lat
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 90
+            minimum: -90
+          - type: 'null'
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 180
+            minimum: -180
+          - type: 'null'
+          title: Lon
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alert'
+                title: Response Alerts V1 Alerts Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/actions:
+    post:
+      summary: Log Action
+      description: Record what the farmer actually did. Pseudonymous plot id only.
+      operationId: log_action_v1_actions_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionLog'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/actions/{plot_id}:
+    delete:
+      summary: Delete Actions
+      description: Called when the backend deletes a farmer's data.
+      operationId: delete_actions_v1_actions__plot_id__delete
+      parameters:
+      - name: plot_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Plot Id
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/optimize:
+    post:
+      summary: Optimize
+      description: Multi-field optimizer (pipeline P5). Planned for Phase 3; the contract
+        will be added with it.
+      operationId: optimize_v1_optimize_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      responses:
+        '501':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/indicators:
+    post:
+      summary: Put Indicators
+      operationId: put_indicators_v1_indicators_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndicatorsIn'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ActionLog:
+      properties:
+        plot_id:
+          type: string
+          title: Plot Id
+        cell_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cell Id
+        request_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Request Id
+        season:
+          type: string
+          title: Season
+        followed_option_rank:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Followed Option Rank
+        planted_crop:
+          type: string
+          title: Planted Crop
+        sowing_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Sowing Date
+        yield_q_per_acre:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Yield Q Per Acre
+        cost_per_acre:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Cost Per Acre
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        logged_at:
+          type: string
+          title: Logged At
+      additionalProperties: false
+      type: object
+      required:
+      - plot_id
+      - season
+      - planted_crop
+      title: ActionLog
+      description: 'What the farmer actually did. Pseudonymous: no names, phone numbers
+        or exact locations.'
+    Alert:
+      properties:
+        cell_id:
+          type: string
+          title: Cell Id
+        crop:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Crop
+        type:
+          type: string
+          title: Type
+        severity:
+          type: string
+          enum:
+          - info
+          - watch
+          - act
+          title: Severity
+          default: info
+        valid_from:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Valid From
+        valid_to:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Valid To
+        code:
+          type: string
+          title: Code
+        params:
+          additionalProperties: true
+          type: object
+          title: Params
+      type: object
+      required:
+      - cell_id
+      - type
+      - code
+      title: Alert
+      description: Written by pipeline P3 (season monitor).
+    CostItem:
+      properties:
+        crop:
+          type: string
+          title: Crop
+        cost_per_acre:
+          type: number
+          minimum: 0.0
+          title: Cost Per Acre
+        expected_yield_q_per_acre:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Expected Yield Q Per Acre
+      type: object
+      required:
+      - crop
+      - cost_per_acre
+      title: CostItem
+    Economics:
+      properties:
+        net_return_per_acre:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Net Return Per Acre
+        net_return_pessimistic_per_acre:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Net Return Pessimistic Per Acre
+        fertilizer_saved_kg_per_acre:
+          type: number
+          title: Fertilizer Saved Kg Per Acre
+          default: 0.0
+        fertilizer_saving_inr_per_acre:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Fertilizer Saving Inr Per Acre
+        price_basis:
+          items:
+            $ref: '#/components/schemas/PriceBasis'
+          type: array
+          title: Price Basis
+      type: object
+      title: Economics
+    Excluded:
+      properties:
+        crop:
+          type: string
+          title: Crop
+        code:
+          type: string
+          title: Code
+        params:
+          additionalProperties: true
+          type: object
+          title: Params
+      type: object
+      required:
+      - crop
+      - code
+      title: Excluded
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HistoryItem:
+      properties:
+        season:
+          type: string
+          title: Season
+        crop:
+          type: string
+          title: Crop
+      type: object
+      required:
+      - season
+      - crop
+      title: HistoryItem
+    Indicator:
+      properties:
+        sequence:
+          type: string
+          title: Sequence
+        water_score_median:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Water Score Median
+        water_score_pessimistic:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Water Score Pessimistic
+        yield_factor_pessimistic:
+          type: number
+          maximum: 1.5
+          minimum: 0.0
+          title: Yield Factor Pessimistic
+      type: object
+      required:
+      - sequence
+      - water_score_median
+      - water_score_pessimistic
+      - yield_factor_pessimistic
+      title: Indicator
+      description: Simulation output (pipeline P2) for one crop sequence in one cache
+        entry.
+    IndicatorsIn:
+      properties:
+        cache_key:
+          type: string
+          title: Cache Key
+        job_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Job Id
+        indicators:
+          items:
+            $ref: '#/components/schemas/Indicator'
+          type: array
+          title: Indicators
+          default: []
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      additionalProperties: false
+      type: object
+      required:
+      - cache_key
+      title: IndicatorsIn
+      description: Posted by the deep-tier pipeline (P2) when a job finishes.
+    Job:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+        cache_key:
+          type: string
+          title: Cache Key
+        request_id:
+          type: string
+          title: Request Id
+        cell_id:
+          type: string
+          title: Cell Id
+        status:
+          type: string
+          enum:
+          - queued
+          - running
+          - done
+          - failed
+          title: Status
+          default: queued
+        sequences:
+          items:
+            type: string
+          type: array
+          title: Sequences
+        start_season:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Start Season
+        irrigation:
+          anyOf:
+          - type: string
+            enum:
+            - rainfed
+            - limited
+            - full
+          - type: 'null'
+          title: Irrigation
+        soil_class:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Soil Class
+        scenario:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scenario
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        created_at:
+          type: string
+          title: Created At
+        updated_at:
+          type: string
+          title: Updated At
+      type: object
+      required:
+      - cache_key
+      - request_id
+      - cell_id
+      title: Job
+    Location:
+      properties:
+        lat:
+          type: number
+          maximum: 90.0
+          minimum: -90.0
+          title: Lat
+        lon:
+          type: number
+          maximum: 180.0
+          minimum: -180.0
+          title: Lon
+      type: object
+      required:
+      - lat
+      - lon
+      title: Location
+    Option:
+      properties:
+        rank:
+          type: integer
+          title: Rank
+        crop_sequence:
+          items:
+            type: string
+          type: array
+          title: Crop Sequence
+        seasons:
+          items:
+            type: string
+          type: array
+          title: Seasons
+        scores:
+          $ref: '#/components/schemas/ScoreSet'
+        uncertainty:
+          $ref: '#/components/schemas/Uncertainty'
+        economics:
+          $ref: '#/components/schemas/Economics'
+        reason_codes:
+          items:
+            $ref: '#/components/schemas/ReasonCodeOut'
+          type: array
+          title: Reason Codes
+        trade_off_code:
+          anyOf:
+          - $ref: '#/components/schemas/ReasonCodeOut'
+          - type: 'null'
+        confidence:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          title: Confidence
+        sources:
+          items:
+            type: string
+          type: array
+          title: Sources
+      type: object
+      required:
+      - rank
+      - crop_sequence
+      - seasons
+      - scores
+      - uncertainty
+      - economics
+      - reason_codes
+      - confidence
+      - sources
+      title: Option
+    Preferences:
+      properties:
+        weights:
+          $ref: '#/components/schemas/Weights'
+        flags:
+          items:
+            type: string
+          type: array
+          title: Flags
+      type: object
+      title: Preferences
+    PriceBasis:
+      properties:
+        crop:
+          type: string
+          title: Crop
+        used:
+          anyOf:
+          - type: string
+            enum:
+            - msp
+            - market
+          - type: 'null'
+          title: Used
+        market:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Market
+        msp:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Msp
+      type: object
+      required:
+      - crop
+      title: PriceBasis
+    PriceItem:
+      properties:
+        crop:
+          type: string
+          title: Crop
+        price:
+          type: number
+          exclusiveMinimum: 0.0
+          title: Price
+        unit:
+          type: string
+          title: Unit
+          default: INR/quintal
+        source:
+          type: string
+          enum:
+          - msp
+          - market
+          title: Source
+          default: market
+        date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date
+      type: object
+      required:
+      - crop
+      - price
+      title: PriceItem
+    ReasonCodeOut:
+      properties:
+        code:
+          type: string
+          title: Code
+        params:
+          additionalProperties: true
+          type: object
+          title: Params
+        text_en:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text En
+      type: object
+      required:
+      - code
+      title: ReasonCodeOut
+    RecommendRequest:
+      properties:
+        request_id:
+          type: string
+          title: Request Id
+        location:
+          $ref: '#/components/schemas/Location'
+        season:
+          type: string
+          title: Season
+        language:
+          type: string
+          title: Language
+          default: en
+        crop_history:
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          type: array
+          title: Crop History
+        soil:
+          $ref: '#/components/schemas/Soil'
+        irrigation:
+          type: string
+          enum:
+          - rainfed
+          - limited
+          - full
+          title: Irrigation
+          default: rainfed
+        preferences:
+          $ref: '#/components/schemas/Preferences'
+        prices:
+          items:
+            $ref: '#/components/schemas/PriceItem'
+          type: array
+          title: Prices
+        costs:
+          items:
+            $ref: '#/components/schemas/CostItem'
+          type: array
+          title: Costs
+        fertilizer_n_price_per_kg:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Fertilizer N Price Per Kg
+        horizon_seasons:
+          anyOf:
+          - type: integer
+            maximum: 3.0
+            minimum: 1.0
+          - type: 'null'
+          title: Horizon Seasons
+      additionalProperties: false
+      type: object
+      required:
+      - location
+      - season
+      title: RecommendRequest
+    RecommendResponse:
+      properties:
+        request_id:
+          type: string
+          title: Request Id
+        status:
+          type: string
+          enum:
+          - fast
+          - refined
+          title: Status
+        grid_cell_id:
+          type: string
+          title: Grid Cell Id
+        versions:
+          $ref: '#/components/schemas/Versions'
+        options:
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+          title: Options
+        excluded_first_season:
+          items:
+            $ref: '#/components/schemas/Excluded'
+          type: array
+          title: Excluded First Season
+        confidence:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          title: Confidence
+        needs_human_review:
+          type: boolean
+          title: Needs Human Review
+        missing_inputs:
+          items:
+            type: string
+          type: array
+          title: Missing Inputs
+        notes:
+          items:
+            type: string
+          type: array
+          title: Notes
+        job_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Job Id
+      type: object
+      required:
+      - request_id
+      - status
+      - grid_cell_id
+      - versions
+      - options
+      - confidence
+      - needs_human_review
+      title: RecommendResponse
+    RescoreRequest:
+      properties:
+        request_id:
+          type: string
+          title: Request Id
+        weights:
+          anyOf:
+          - $ref: '#/components/schemas/Weights'
+          - type: 'null'
+        flags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Flags
+      additionalProperties: false
+      type: object
+      required:
+      - request_id
+      title: RescoreRequest
+      description: 'What-if: re-rank a previous request with new weights/flags. No
+        data is recomputed.'
+    ScoreSet:
+      properties:
+        soil:
+          type: number
+          title: Soil
+        return:
+          type: number
+          title: Return
+        water_risk:
+          type: number
+          title: Water Risk
+        pest:
+          type: number
+          title: Pest
+        total:
+          type: number
+          title: Total
+      type: object
+      required:
+      - soil
+      - return
+      - water_risk
+      - pest
+      - total
+      title: ScoreSet
+    Soil:
+      properties:
+        texture:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Texture
+        ph:
+          anyOf:
+          - type: number
+            maximum: 14.0
+            minimum: 0.0
+          - type: 'null'
+          title: Ph
+        organic_carbon:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Organic Carbon
+      type: object
+      title: Soil
+    Uncertainty:
+      properties:
+        pessimistic_total:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Pessimistic Total
+        top3_stability:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Top3 Stability
+      type: object
+      title: Uncertainty
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Versions:
+      properties:
+        model:
+          type: string
+          title: Model
+        rules:
+          type: string
+          title: Rules
+        params:
+          type: string
+          title: Params
+        layer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Layer
+      type: object
+      required:
+      - model
+      - rules
+      - params
+      title: Versions
+    Weights:
+      properties:
+        soil:
+          type: number
+          minimum: 0.0
+          title: Soil
+          default: 0.3
+        return:
+          type: number
+          minimum: 0.0
+          title: Return
+          default: 0.3
+        water_risk:
+          type: number
+          minimum: 0.0
+          title: Water Risk
+          default: 0.25
+        pest:
+          type: number
+          minimum: 0.0
+          title: Pest
+          default: 0.15
+      additionalProperties: false
+      type: object
+      title: Weights

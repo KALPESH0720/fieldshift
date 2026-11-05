@@ -1,0 +1,139 @@
+{
+  "request_id": "example-0001",
+  "location": {
+    "lat": 18.52,
+    "lon": 73.85
+  },
+  "season": "kharif-2027",
+  "language": "mr",
+  "crop_history": [
+    {
+      "season": "rabi-2026",
+      "crop": "wheat"
+    },
+    {
+      "season": "kharif-2026",
+      "crop": "maize"
+    }
+  ],
+  "soil": {
+    "texture": "clay_loam",
+    "ph": 7.2
+  },
+  "irrigation": "rainfed",
+  "preferences": {
+    "weights": {
+      "soil": 0.3,
+      "return": 0.4,
+      "water_risk": 0.2,
+      "pest": 0.1
+    },
+    "flags": [
+      "low_water"
+    ]
+  },
+  "prices": [
+    {
+      "crop": "soybean",
+      "price": 4800,
+      "unit": "INR/quintal",
+      "source": "msp",
+      "date": "2026-10-01"
+    },
+    {
+      "crop": "pigeonpea",
+      "price": 7500,
+      "unit": "INR/quintal",
+      "source": "msp",
+      "date": "2026-10-01"
+    },
+    {
+      "crop": "sorghum",
+      "price": 3200,
+      "unit": "INR/quintal",
+      "source": "market",
+      "date": "2026-10-15"
+    },
+    {
+      "crop": "chickpea",
+      "price": 5600,
+      "unit": "INR/quintal",
+      "source": "msp",
+      "date": "2026-10-01"
+    },
+    {
+      "crop": "wheat",
+      "price": 2400,
+      "unit": "INR/quintal",
+      "source": "msp",
+      "date": "2026-10-01"
+    },
+    {
+      "crop": "maize",
+      "price": 2200,
+      "unit": "INR/quintal",
+      "source": "market",
+      "date": "2026-10-15"
+    },
+    {
+      "crop": "groundnut",
+      "price": 6300,
+      "unit": "INR/quintal",
+      "source": "msp",
+      "date": "2026-10-15"
+    },
+    {
+      "crop": "onion",
+      "price": 1800,
+      "unit": "INR/quintal",
+      "source": "market",
+      "date": "2026-10-15"
+    },
+    {
+      "crop": "tomato",
+      "price": 1500,
+      "unit": "INR/quintal",
+      "source": "market",
+      "date": "2026-10-15"
+    }
+  ],
+  "costs": [
+    {
+      "crop": "soybean",
+      "cost_per_acre": 12000
+    },
+    {
+      "crop": "pigeonpea",
+      "cost_per_acre": 14000
+    },
+    {
+      "crop": "sorghum",
+      "cost_per_acre": 9000
+    },
+    {
+      "crop": "chickpea",
+      "cost_per_acre": 10000
+    },
+    {
+      "crop": "wheat",
+      "cost_per_acre": 13000
+    },
+    {
+      "crop": "maize",
+      "cost_per_acre": 16000
+    },
+    {
+      "crop": "groundnut",
+      "cost_per_acre": 15000
+    },
+    {
+      "crop": "onion",
+      "cost_per_acre": 52000
+    },
+    {
+      "crop": "tomato",
+      "cost_per_acre": 70000
+    }
+  ],
+  "fertilizer_n_price_per_kg": 15
+}

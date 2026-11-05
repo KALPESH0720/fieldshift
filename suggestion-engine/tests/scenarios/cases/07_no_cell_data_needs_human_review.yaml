@@ -1,0 +1,9 @@
+name: A location with no grid-cell data is sent to a human advisor
+request:
+  location: {lat: 10.0, lon: 77.0}
+  season: kharif-2027
+  irrigation: rainfed
+expect:
+  missing_includes: [climate_layer]
+  confidence_at_most: low
+  needs_human_review: true

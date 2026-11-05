@@ -1,0 +1,11 @@
+name: A history crop missing from the crop table is flagged, not ignored
+request:
+  location: {lat: 18.52, lon: 73.85}
+  season: kharif-2027
+  irrigation: rainfed
+  soil: {ph: 7.2}
+  crop_history:
+    - {season: rabi-2026, crop: quinoa}
+expect:
+  notes_include: ["UNKNOWN_HISTORY_CROP:quinoa"]
+  min_options: 1

@@ -1,0 +1,12 @@
+name: Rainfed wheat in rabi is excluded where water supply is too low
+request:
+  location: {lat: 18.52, lon: 73.85}
+  season: rabi-2026
+  irrigation: rainfed
+  soil: {ph: 7.2}
+  crop_history:
+    - {season: kharif-2026, crop: maize}
+expect:
+  excluded_includes: [wheat]
+  first_crop_never: [wheat]
+  min_options: 1

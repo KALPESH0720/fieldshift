@@ -1,0 +1,22 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: tomato
+name: "Tomato"
+family: Solanaceae
+seasons: ['kharif', 'rabi']
+duration_days: 120
+root_depth: medium
+n_effect: demands
+n_credit_kg_per_acre: 0
+n_requirement_kg_per_acre: 50
+residue: low
+water_need_mm: 500
+temp_c: [10, 18, 27, 35]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [300, 400, 800, 1200]     # effective water supply: rain + stored soil water at sowing
+ph: [5.0, 6.0, 7.5, 8.5]
+heat_stress_days_tolerance: 12
+min_gap_same_family_seasons: 3
+typical_yield_q_per_acre: 90
+pests: ['fruit borer', 'early blight', 'wilt']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null

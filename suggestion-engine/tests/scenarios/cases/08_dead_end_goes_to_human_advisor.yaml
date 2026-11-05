@@ -1,0 +1,13 @@
+name: When every crop is blocked (rainfed rabi after soybean) the case goes to a human advisor
+request:
+  location: {lat: 18.52, lon: 73.85}
+  season: rabi-2026
+  irrigation: rainfed
+  soil: {ph: 7.2}
+  crop_history:
+    - {season: kharif-2026, crop: soybean}
+expect:
+  excluded_includes: [wheat, chickpea]
+  notes_include: [NO_FEASIBLE_OPTION]
+  needs_human_review: true
+  confidence_at_most: low

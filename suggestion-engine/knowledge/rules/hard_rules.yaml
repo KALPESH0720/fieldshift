@@ -1,0 +1,12 @@
+# DRAFT - illustrative rules, NOT agronomist-reviewed.
+# Hard rules exclude an option. Each rule needs a source and agronomist sign-off before release.
+version: 1
+status: draft
+rules:
+  SAME_CROP_GAP:
+    min_gap_seasons: 2          # the same crop may not be grown again within this many seasons
+    source: "placeholder"
+  FAMILY_GAP:
+    default_gap_seasons: 1      # no same-family crop in the previous N seasons (per-crop override in crop file)
+    exempt_families: [Poaceae]  # grasses are exempt from the family-share rule (SARE manual, Mohler)
+    source: "placeholder; SARE manual guideline"

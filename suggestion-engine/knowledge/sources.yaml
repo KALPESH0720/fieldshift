@@ -1,0 +1,13 @@
+# Every rule and parameter needs a source and a date. Filled in with the agronomist.
+status: draft
+entries:
+  - id: placeholder-crop-table
+    covers: knowledge/crops/*.yaml
+    source: "illustrative values written by the developer for engine testing"
+    reviewed_by: null
+    date: 2026-10-31
+  - id: placeholder-rules
+    covers: knowledge/rules/*.yaml
+    source: "general guidelines summarised in the research compilation (SARE manual, Palka et al.)"
+    reviewed_by: null
+    date: 2026-10-31
