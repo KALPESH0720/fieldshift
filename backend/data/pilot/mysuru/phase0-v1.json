@@ -1,0 +1,43 @@
+{
+  "pilot_id": "mysuru-kannada-v1",
+  "dataset_version": "1.0.0",
+  "district": "Mysuru",
+  "language": "kn",
+  "curation_status": "draft_only",
+  "release_note": "Source-backed crop vocabulary and scope only. Quantitative advice and economics remain empty until local agronomist review.",
+  "crops": [
+    {
+      "crop_name": "Finger millet",
+      "crop_family": "Poaceae",
+      "display_name": "ರಾಗಿ",
+      "source_title": "Agro-advisory Bulletin for Mysuru District, UAS Bengaluru and IMD",
+      "source_url": "https://www.uasbangalore.edu.in/wp-content/uploads/2025/10/GKMS-E-17.10.2025-Mysore-District.pdf",
+      "source_version": "2025-10-17",
+      "source_note": "October sowing bulletin lists Indaf-7, Indaf-9, KMR-301 and GPU-45; this is source metadata, not a complete recommendation.",
+      "varieties": ["Indaf-7", "Indaf-9", "KMR-301", "GPU-45"],
+      "effective_seasons": ["October"]
+    },
+    {
+      "crop_name": "Field bean",
+      "crop_family": "Fabaceae",
+      "display_name": "ಅವರೆ",
+      "source_title": "Agro-advisory Bulletin for Mysuru District, UAS Bengaluru and IMD",
+      "source_url": "https://www.uasbangalore.edu.in/wp-content/uploads/2025/10/GKMS-E-17.10.2025-Mysore-District.pdf",
+      "source_version": "2025-10-17",
+      "source_note": "October sowing bulletin lists HA-3, HA-4 and HA-5; this is source metadata, not a complete recommendation.",
+      "varieties": ["HA-3", "HA-4", "HA-5"],
+      "effective_seasons": ["October"]
+    },
+    {
+      "crop_name": "Maize",
+      "crop_family": "Poaceae",
+      "display_name": "ಮೆಕ್ಕೆಜೋಳ",
+      "source_title": "Agro-advisory Bulletin for Mysuru District, UAS Bengaluru and IMD",
+      "source_url": "https://www.uasbangalore.edu.in/wp-content/uploads/2025/10/GKMS-E-17.10.2025-Mysore-District.pdf",
+      "source_version": "2025-10-17",
+      "source_note": "Bulletin includes a maize tasseling-stage advisory and a JCET-3 fodder maize listing; grain-crop yield and economics are not inferred.",
+      "varieties": ["JCET-3 (fodder maize listing only)"],
+      "effective_seasons": ["October"]
+    }
+  ]
+}
