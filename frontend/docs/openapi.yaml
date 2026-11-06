@@ -1,0 +1,1899 @@
+openapi: 3.1.0
+info:
+  title: Field Shift API
+  version: 0.1.0-draft
+  summary: Draft backend contract derived from the Field Shift PWA integration blueprint.
+  description: |
+    Base path is /api/v1. Authenticated requests use secure HttpOnly cookies.
+    Mutating cookie-authenticated requests also require X-CSRF-Token. Lists use
+    cursor pagination. Errors use ErrorEnvelope. All ownership/group scope checks
+    are server-side. This draft is a proposal, not an implemented API.
+servers:
+  - url: https://api.example.org/api/v1
+    description: Replace with deployed API URL
+  - url: /api/v1
+    description: Same-origin reverse proxy
+tags:
+  - name: Auth
+  - name: Profile
+  - name: Plots
+  - name: Land Registry
+  - name: Recommendations
+  - name: Soil
+  - name: Pest
+  - name: Market
+  - name: Weather
+  - name: Schemes
+  - name: Dealers
+  - name: Notifications
+  - name: Groups
+  - name: Catalog
+  - name: Files
+  - name: Sync
+security:
+  - sessionCookie: []
+paths:
+  /auth/otp/request:
+    post:
+      tags: [Auth]
+      operationId: requestOtp
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OtpRequest' }
+      responses:
+        '202':
+          description: |
+            Challenge accepted for login or new-farmer sign-up. Response must not
+            disclose whether the E.164 phone number is already registered.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OtpChallenge' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /auth/otp/verify:
+    post:
+      tags: [Auth]
+      operationId: verifyOtp
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OtpVerifyRequest' }
+      responses:
+        '200':
+          description: |
+            OTP verified and session established; server sets HttpOnly access and
+            refresh cookies. Returns isNewUser=true when the farmer record was newly
+            created or still requires profile completion (displayName, preferredLocale, consents).
+          headers:
+            Set-Cookie:
+              description: Secure, HttpOnly, SameSite session cookies.
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      operationId: refreshSession
+      security:
+        - refreshCookie: []
+      responses:
+        '200':
+          description: Refresh token rotated; access and refresh cookies set.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logout
+      responses:
+        '204':
+          description: Refresh session revoked and cookies cleared.
+        'default': { $ref: '#/components/responses/ApiError' }
+  /me:
+    get:
+      tags: [Profile]
+      operationId: getMe
+      responses:
+        '200':
+          description: Current user and scoped roles.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CurrentUserResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    patch:
+      tags: [Profile]
+      operationId: updateMe
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProfilePatch' }
+      responses:
+        '200':
+          description: Updated profile.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /me/preferences:
+    get:
+      tags: [Profile]
+      operationId: getPreferences
+      responses:
+        '200':
+          description: Current profile preferences.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Preference' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    put:
+      tags: [Profile]
+      operationId: putPreferences
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PreferenceInput' }
+      responses:
+        '200':
+          description: Saved preferences.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Preference' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /plots:
+    get:
+      tags: [Plots]
+      operationId: listPlots
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: q, in: query, schema: { type: string } }
+        - { name: village, in: query, schema: { type: string } }
+        - { name: isVerified, in: query, schema: { type: boolean } }
+        - { name: source, in: query, schema: { type: string } }
+        - { name: updatedSince, in: query, schema: { type: string, format: date-time } }
+        - { name: bbox, in: query, description: west,south,east,north; WGS84., schema: { type: string } }
+      responses:
+        '200':
+          description: Owned or authorized plots.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlotPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    post:
+      tags: [Plots]
+      operationId: createPlot
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+        - { $ref: '#/components/parameters/IdempotencyKey' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PlotCreate' }
+      responses:
+        '201':
+          description: Created plot.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Plot' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /plots/{plotId}:
+    parameters:
+      - { $ref: '#/components/parameters/PlotId' }
+    get:
+      tags: [Plots]
+      operationId: getPlot
+      responses:
+        '200':
+          description: Plot detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Plot' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    patch:
+      tags: [Plots]
+      operationId: updatePlot
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PlotPatch' }
+      responses:
+        '200':
+          description: Updated plot.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Plot' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    delete:
+      tags: [Plots]
+      operationId: deletePlot
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      responses:
+        '204': { description: Plot tombstone recorded. }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /plots/{plotId}/seasons:
+    parameters:
+      - { $ref: '#/components/parameters/PlotId' }
+    get:
+      tags: [Plots]
+      operationId: listPlotSeasons
+      parameters:
+        - { name: year, in: query, schema: { type: integer } }
+        - { name: status, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Crop assignments for plot.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlotSeasonPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    post:
+      tags: [Plots]
+      operationId: createPlotSeason
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+        - { $ref: '#/components/parameters/IdempotencyKey' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PlotSeasonCreate' }
+      responses:
+        '201':
+          description: Crop assignment saved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlotSeason' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /plots/{plotId}/seasons/{assignmentId}:
+    parameters:
+      - { $ref: '#/components/parameters/PlotId' }
+      - { name: assignmentId, in: path, required: true, schema: { type: string, format: uuid } }
+    patch:
+      tags: [Plots]
+      operationId: updatePlotSeason
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PlotSeasonPatch' }
+      responses:
+        '200':
+          description: Assignment updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlotSeason' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /land-registries/providers:
+    get:
+      tags: [Land Registry]
+      operationId: listRegistryProviders
+      parameters:
+        - { name: countryCode, in: query, required: true, schema: { type: string, minLength: 2, maxLength: 2 } }
+      responses:
+        '200':
+          description: Available provider capabilities for country.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProviderPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /land-registries/consents:
+    post:
+      tags: [Land Registry]
+      operationId: startRegistryConsent
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ConsentCreate' }
+      responses:
+        '201':
+          description: Consent flow created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ConsentStartResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /land-registries/callbacks/{providerId}:
+    post:
+      tags: [Land Registry]
+      operationId: registryProviderCallback
+      security: []
+      parameters:
+        - { name: providerId, in: path, required: true, schema: { type: string } }
+        - { name: X-Provider-Signature, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProviderCallback' }
+      responses:
+        '202': { description: Callback verified and processing queued. }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /land-registries/consents/{consentId}:
+    parameters:
+      - { name: consentId, in: path, required: true, schema: { type: string, format: uuid } }
+    delete:
+      tags: [Land Registry]
+      operationId: revokeRegistryConsent
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, maxLength: 500 }
+      responses:
+        '204': { description: Consent revoked; provider revocation may complete asynchronously. }
+        'default': { $ref: '#/components/responses/ApiError' }
+    get:
+      tags: [Land Registry]
+      operationId: getRegistryConsent
+      responses:
+        '200':
+          description: Consent status and scope.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LandRegistryConsent' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /land-registries/consents/{consentId}/parcels:
+    parameters:
+      - { name: consentId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Land Registry]
+      operationId: listRegistryParcels
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200':
+          description: Parcels available through this consent.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ParcelPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /plots/import-land-parcels:
+    post:
+      tags: [Land Registry]
+      operationId: importLandParcels
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+        - { $ref: '#/components/parameters/IdempotencyKey' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ParcelImportRequest' }
+      responses:
+        '200':
+          description: Existing or new parcels imported idempotently.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ParcelImportResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /recommendations:
+    post:
+      tags: [Recommendations]
+      operationId: createRecommendation
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+        - { $ref: '#/components/parameters/IdempotencyKey' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RecommendationRequest' }
+      responses:
+        '200':
+          description: Recommendation calculated synchronously.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Recommendation' }
+        '202':
+          description: Recommendation job accepted.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobAccepted' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /recommendations/{recommendationId}:
+    get:
+      tags: [Recommendations]
+      operationId: getRecommendation
+      parameters:
+        - { name: recommendationId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Recommendation and ranked crop results.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Recommendation' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /soil-records:
+    get:
+      tags: [Soil]
+      operationId: listSoilRecords
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: plotId, in: query, schema: { type: string, format: uuid } }
+        - { name: from, in: query, schema: { type: string, format: date-time } }
+        - { name: to, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200':
+          description: Soil record page.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SoilRecordPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    post:
+      tags: [Soil]
+      operationId: createSoilRecord
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+        - { $ref: '#/components/parameters/IdempotencyKey' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SoilRecordCreate' }
+      responses:
+        '201':
+          description: Soil measurements saved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SoilRecord' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /soil-records/{soilRecordId}:
+    parameters:
+      - { name: soilRecordId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      tags: [Soil]
+      operationId: getSoilRecord
+      responses:
+        '200':
+          description: Soil record detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SoilRecord' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    patch:
+      tags: [Soil]
+      operationId: updateSoilRecord
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SoilRecordPatch' }
+      responses:
+        '200':
+          description: Corrected soil record.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SoilRecord' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    delete:
+      tags: [Soil]
+      operationId: deleteSoilRecord
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      responses:
+        '204': { description: Tombstone recorded. }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /soil-records/ocr:
+    post:
+      tags: [Soil]
+      operationId: startSoilOcr
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SoilOcrRequest' }
+      responses:
+        '202':
+          description: OCR job accepted.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobAccepted' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /jobs/{jobId}:
+    get:
+      tags: [Soil, Pest]
+      operationId: getJob
+      parameters:
+        - { name: jobId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Job status; result appears when done.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Job' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /pest-scans:
+    get:
+      tags: [Pest]
+      operationId: listPestScans
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: plotId, in: query, schema: { type: string, format: uuid } }
+        - { name: status, in: query, schema: { type: string } }
+        - { name: from, in: query, schema: { type: string, format: date-time } }
+        - { name: to, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200':
+          description: Pest scan page.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PestScanPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+    post:
+      tags: [Pest]
+      operationId: startPestScan
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PestScanRequest' }
+      responses:
+        '202':
+          description: Scan queued.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobAccepted' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /pest-scans/{scanId}:
+    get:
+      tags: [Pest]
+      operationId: getPestScan
+      parameters:
+        - { name: scanId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Diagnosis and reviewed advice.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PestScan' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /market/prices:
+    get:
+      tags: [Market]
+      operationId: listMarketPrices
+      security: []
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: countryCode, in: query, required: true, schema: { type: string, minLength: 2, maxLength: 2 } }
+        - { name: state, in: query, schema: { type: string } }
+        - { name: district, in: query, schema: { type: string } }
+        - { name: market, in: query, schema: { type: string } }
+        - { name: cropId, in: query, schema: { type: string } }
+        - { name: variety, in: query, schema: { type: string } }
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: unit, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Market price page and source freshness.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MarketPricePage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /market/prices/{cropId}/history:
+    get:
+      tags: [Market]
+      operationId: getCropMarketHistory
+      security: []
+      parameters:
+        - { name: cropId, in: path, required: true, schema: { type: string } }
+        - { name: range, in: query, schema: { type: string, enum: [7D, 30D, 90D, 1Y], default: 30D } }
+        - { name: countryCode, in: query, schema: { type: string, minLength: 2, maxLength: 2 } }
+        - { name: market, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Historical price series, key statistics, nearby market comparison, and rule-based seasonal analysis.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cropId: { type: string }
+                  range: { type: string }
+                  currentPrice: { type: number }
+                  unit: { type: string }
+                  history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date: { type: string, format: date }
+                        price: { type: number }
+                        lastYearPrice: { type: number }
+                        minPrice: { type: number }
+                        maxPrice: { type: number }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /market/markets:
+    get:
+      tags: [Market]
+      operationId: listRegionalMarkets
+      security: []
+      parameters:
+        - { name: countryCode, in: query, schema: { type: string, minLength: 2, maxLength: 2 } }
+      responses:
+        '200':
+          description: Available regional wholesale agricultural markets and latest crop prices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  markets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        name: { type: string }
+                        region: { type: string }
+                        distanceKm: { type: number }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /market/alerts:
+    get:
+      tags: [Market]
+      operationId: listPriceAlerts
+      responses:
+        '200':
+          description: Active and triggered crop price alerts for the authenticated farmer.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: string }
+                    cropId: { type: string }
+                    targetPrice: { type: number }
+                    direction: { type: string, enum: [above, below] }
+                    active: { type: boolean }
+        'default': { $ref: '#/components/responses/ApiError' }
+    post:
+      tags: [Market]
+      operationId: createPriceAlert
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [cropId, targetPrice, direction]
+              properties:
+                cropId: { type: string }
+                targetPrice: { type: number, minimum: 0.01 }
+                direction: { type: string, enum: [above, below] }
+                market: { type: string }
+      responses:
+        '201':
+          description: Price alert saved.
+        'default': { $ref: '#/components/responses/ApiError' }
+  /weather/forecast:
+    get:
+      tags: [Weather]
+      parameters:
+        - { name: plotId, in: query, schema: { type: string, format: uuid } }
+        - { name: lat, in: query, schema: { type: number, minimum: -90, maximum: 90 } }
+        - { name: lon, in: query, schema: { type: number, minimum: -180, maximum: 180 } }
+        - { name: days, in: query, schema: { type: integer, minimum: 1, maximum: 14, default: 7 } }
+        - { name: locale, in: query, schema: { type: string } }
+        - { name: temperatureUnit, in: query, schema: { type: string, enum: [C, F] } }
+        - { name: windUnit, in: query, schema: { type: string } }
+        - { name: precipitationUnit, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Forecast, advisories, provider timestamp and stale flag.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WeatherForecast' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /weather/cache:
+    get:
+      tags: [Weather]
+      parameters:
+        - { name: plotId, in: query, schema: { type: string, format: uuid } }
+        - { name: lat, in: query, schema: { type: number } }
+        - { name: lon, in: query, schema: { type: number } }
+      responses:
+        '200':
+          description: Last available cached forecast.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WeatherForecast' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /schemes:
+    get:
+      tags: [Schemes]
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: countryCode, in: query, required: true, schema: { type: string } }
+        - { name: cropId, in: query, schema: { type: string } }
+        - { name: status, in: query, schema: { type: string } }
+        - { name: locale, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Scheme catalog page.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SchemePage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /schemes/{schemeId}:
+    get:
+      tags: [Schemes]
+      security: []
+      parameters:
+        - { name: schemeId, in: path, required: true, schema: { type: string } }
+        - { name: locale, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Scheme detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Scheme' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /schemes/{schemeId}/eligibility:
+    post:
+      tags: [Schemes]
+      parameters:
+        - { name: schemeId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plotId: { type: string, format: uuid }
+              additionalProperties: false
+      responses:
+        '200':
+          description: Eligibility assessment and missing requirements.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EligibilityResult' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /dealers:
+    get:
+      tags: [Dealers]
+      security: []
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: lat, in: query, required: true, schema: { type: number, minimum: -90, maximum: 90 } }
+        - { name: lon, in: query, required: true, schema: { type: number, minimum: -180, maximum: 180 } }
+        - { name: radiusKm, in: query, schema: { type: number, minimum: 0, maximum: 500, default: 50 } }
+        - { name: inputProduct, in: query, schema: { type: string } }
+        - { name: cropId, in: query, schema: { type: string } }
+        - { name: q, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Nearby dealers, with computed distance and inventory timestamp.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DealerPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /dealers/{dealerId}:
+    get:
+      tags: [Dealers]
+      security: []
+      parameters:
+        - { name: dealerId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Dealer detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Dealer' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /notifications:
+    get:
+      tags: [Notifications]
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: unread, in: query, schema: { type: boolean } }
+        - { name: type, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: User notification page.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NotificationPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /notifications/{notificationId}:
+    patch:
+      tags: [Notifications]
+      operationId: updateNotification
+      parameters:
+        - { name: notificationId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                readAt: { type: [string, 'null'], format: date-time }
+                dismissedAt: { type: [string, 'null'], format: date-time }
+              additionalProperties: false
+      responses:
+        '200':
+          description: Notification state updated.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Notification' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /push-subscriptions:
+    post:
+      tags: [Notifications]
+      operationId: registerPushSubscription
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PushSubscription' }
+      responses:
+        '201': { description: Subscription registered. }
+        'default': { $ref: '#/components/responses/ApiError' }
+    delete:
+      tags: [Notifications]
+      operationId: deletePushSubscription
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [endpoint]
+              properties:
+                endpoint: { type: string, format: uri }
+      responses:
+        '204': { description: Subscription removed. }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /groups:
+    get:
+      tags: [Groups]
+      operationId: listMyGroups
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200':
+          description: Groups visible to current user.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GroupPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /groups/{groupId}/dashboard:
+    get:
+      tags: [Groups]
+      operationId: getGroupDashboard
+      parameters:
+        - { name: groupId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Authorized server-computed group KPIs.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GroupDashboard' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /groups/{groupId}/farmers:
+    get:
+      tags: [Groups]
+      operationId: listGroupFarmers
+      parameters:
+        - { name: groupId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: q, in: query, schema: { type: string } }
+        - { name: village, in: query, schema: { type: string } }
+        - { name: cropId, in: query, schema: { type: string } }
+        - { name: status, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Farmer summaries authorized for this group.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FarmerPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /crops:
+    get:
+      tags: [Catalog]
+      security: []
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: locale, in: query, schema: { type: string } }
+        - { name: family, in: query, schema: { type: string } }
+        - { name: season, in: query, schema: { type: string } }
+        - { name: countryCode, in: query, schema: { type: string } }
+        - { name: updatedSince, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200':
+          description: Versioned crop catalog.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CropPage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /crop-rules:
+    get:
+      tags: [Catalog]
+      security: []
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: cropId, in: query, schema: { type: string } }
+        - { name: family, in: query, schema: { type: string } }
+        - { name: season, in: query, schema: { type: string } }
+        - { name: countryCode, in: query, schema: { type: string } }
+        - { name: updatedSince, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200':
+          description: Versioned offline-capable rules.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CropRulePage' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /translations/{locale}:
+    get:
+      tags: [Catalog]
+      security: []
+      parameters:
+        - { name: locale, in: path, required: true, schema: { type: string } }
+        - { name: namespaces, in: query, schema: { type: string, description: Comma-separated namespace names. } }
+      responses:
+        '200':
+          description: Localized dictionary and version.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TranslationBundle' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /files/presign:
+    post:
+      tags: [Files]
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/FilePresignRequest' }
+      responses:
+        '201':
+          description: Private single-use or short-lived upload URL.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FilePresignResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /files/{fileId}/complete:
+    post:
+      tags: [Files]
+      parameters:
+        - { name: fileId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sha256: { type: string }
+              additionalProperties: false
+      responses:
+        '200':
+          description: Upload verified and asset ready.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/FileAsset' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /sync/push:
+    post:
+      tags: [Sync]
+      parameters:
+        - { $ref: '#/components/parameters/CsrfToken' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SyncPushRequest' }
+      responses:
+        '200':
+          description: Per-mutation acknowledgement, conflict or retry result.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SyncPushResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+  /sync/pull:
+    get:
+      tags: [Sync]
+      parameters:
+        - { name: cursor, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 500, default: 100 } }
+      responses:
+        '200':
+          description: Account-scoped delta including tombstones.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SyncPullResponse' }
+        'default': { $ref: '#/components/responses/ApiError' }
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: fs_access
+      description: Short-lived JWT access cookie; Secure, HttpOnly, SameSite.
+    refreshCookie:
+      type: apiKey
+      in: cookie
+      name: fs_refresh
+      description: Rotating refresh cookie; Secure, HttpOnly, SameSite.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      schema: { type: string }
+    Limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 25 }
+    PlotId:
+      name: plotId
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    CsrfToken:
+      name: X-CSRF-Token
+      in: header
+      required: true
+      schema: { type: string }
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string, format: uuid }
+  responses:
+    ApiError:
+      description: Standard error. Possible HTTP statuses are 400, 401, 403, 404, 409, 413, 415, 422, 429, 500 and 503.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+  schemas:
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, requestId]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            requestId: { type: string }
+            details: { type: object, additionalProperties: true }
+            retryAfterSeconds: { type: integer }
+    OtpRequest:
+      type: object
+      required: [phoneE164, purpose]
+      properties:
+        phoneE164:
+          type: string
+          pattern: '^\+[1-9]\d{6,14}$'
+          description: Mobile number in strict E.164 format (e.g. +919876543210).
+        purpose:
+          type: string
+          enum: [login]
+          default: login
+          description: Unified login and sign-up flow; server decides whether the number is new.
+        channel:
+          type: string
+          enum: [sms, voice]
+          default: sms
+        locale:
+          type: string
+          description: Preferred locale for the localized SMS template.
+    OtpChallenge:
+      type: object
+      required: [challengeId, expiresInSeconds, resendAfterSeconds]
+      properties:
+        challengeId: { type: string, format: uuid }
+        expiresInSeconds: { type: integer, example: 300 }
+        resendAfterSeconds: { type: integer, example: 30 }
+        voiceAvailable: { type: boolean, default: false }
+    OtpVerifyRequest:
+      type: object
+      required: [challengeId, phoneE164, code]
+      properties:
+        challengeId: { type: string, format: uuid }
+        phoneE164:
+          type: string
+          pattern: '^\+[1-9]\d{6,14}$'
+        code:
+          type: string
+          pattern: '^\d{6}$'
+          minLength: 6
+          maxLength: 6
+        profile:
+          $ref: '#/components/schemas/ProfilePatch'
+    SessionResponse:
+      type: object
+      required: [user, csrfToken, isNewUser]
+      properties:
+        user: { $ref: '#/components/schemas/User' }
+        csrfToken: { type: string }
+        isNewUser:
+          type: boolean
+          description: True when this phone number was newly created or still requires name/consent completion.
+    AcceptedResponse:
+      type: object
+      required: [accepted]
+      properties:
+        accepted: { type: boolean, const: true }
+    User:
+      type: object
+      required: [id, phoneE164, status, countryCode, preferredLocale, roles, createdAt, updatedAt]
+      properties:
+        id: { type: string, format: uuid }
+        displayName: { type: [string, 'null'] }
+        phoneE164:
+          type: string
+          pattern: '^\+[1-9]\d{6,14}$'
+        status: { type: string, enum: [pending, active, disabled] }
+        countryCode: { type: string }
+        preferredLocale: { type: string }
+        roles:
+          type: array
+          items: { $ref: '#/components/schemas/Role' }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    Role:
+      type: object
+      required: [code, scope, permissions]
+      properties:
+        code: { type: string, enum: [farmer, extension, admin] }
+        scope: { type: string, enum: [global, group] }
+        groupId: { type: [string, 'null'], format: uuid }
+        permissions:
+          type: array
+          items: { type: string }
+    CurrentUserResponse:
+      type: object
+      required: [user]
+      properties:
+        user: { $ref: '#/components/schemas/User' }
+    ProfilePatch:
+      type: object
+      properties:
+        displayName: { type: string, minLength: 1, maxLength: 120 }
+        preferredLocale: { type: string }
+        countryCode: { type: string, minLength: 2, maxLength: 2 }
+        smsOptIn: { type: boolean }
+        privacyConsent: { type: boolean }
+      additionalProperties: false
+    PreferenceInput:
+      type: object
+      properties:
+        locale: { type: string }
+        theme: { type: string, enum: [system, light, dark] }
+        areaUnit: { type: string }
+        temperatureUnit: { type: string, enum: [C, F] }
+        windUnit: { type: string }
+        precipitationUnit: { type: string }
+        sowingReminder: { type: boolean }
+        fertilizerReminder: { type: boolean }
+        notificationChannels:
+          type: array
+          uniqueItems: true
+          items: { type: string, enum: [push, sms, whatsapp] }
+      additionalProperties: false
+    Preference:
+      allOf:
+        - { $ref: '#/components/schemas/PreferenceInput' }
+        - type: object
+          required: [userId, updatedAt]
+          properties:
+            userId: { type: string, format: uuid }
+            updatedAt: { type: string, format: date-time }
+    GeoJSON:
+      type: object
+      required: [type, coordinates]
+      properties:
+        type: { type: string, enum: [Polygon, MultiPolygon] }
+        coordinates:
+          type: array
+          description: GeoJSON coordinate arrays in [longitude, latitude] order.
+          items: {}
+    PlotCreate:
+      type: object
+      required: [clientMutationId, name, area, areaUnit, areaHectares, source]
+      properties:
+        clientMutationId: { type: string, format: uuid }
+        name: { type: string, minLength: 1, maxLength: 120 }
+        area: { type: number, exclusiveMinimum: 0 }
+        areaUnit: { type: string, enum: [acre, hectare, guntha, sqm, sqft] }
+        areaHectares: { type: number, exclusiveMinimum: 0 }
+        village: { type: [string, 'null'] }
+        primaryCropId: { type: [string, 'null'] }
+        intercropId: { type: [string, 'null'] }
+        boundary: { oneOf: [{ $ref: '#/components/schemas/GeoJSON' }, { type: 'null' }] }
+        source: { type: string, enum: [manual, in-agristack, provider] }
+        providerId: { type: [string, 'null'] }
+        parcelRef: { type: [string, 'null'] }
+      additionalProperties: false
+    PlotPatch:
+      type: object
+      required: [version]
+      properties:
+        version: { type: integer, minimum: 1 }
+        name: { type: string, minLength: 1, maxLength: 120 }
+        area: { type: number, exclusiveMinimum: 0 }
+        areaUnit: { type: string, enum: [acre, hectare, guntha, sqm, sqft] }
+        areaHectares: { type: number, exclusiveMinimum: 0 }
+        village: { type: [string, 'null'] }
+        primaryCropId: { type: [string, 'null'] }
+        intercropId: { type: [string, 'null'] }
+        boundary: { oneOf: [{ $ref: '#/components/schemas/GeoJSON' }, { type: 'null' }] }
+      additionalProperties: false
+    Plot:
+      allOf:
+        - { $ref: '#/components/schemas/PlotCreate' }
+        - type: object
+          required: [id, ownerId, isVerified, version, createdAt, updatedAt]
+          properties:
+            id: { type: string, format: uuid }
+            ownerId: { type: string, format: uuid }
+            isVerified: { type: boolean }
+            verifiedAt: { type: [string, 'null'], format: date-time }
+            externalId: { type: [string, 'null'] }
+            provenance: { type: object, additionalProperties: true }
+            version: { type: integer }
+            createdAt: { type: string, format: date-time }
+            updatedAt: { type: string, format: date-time }
+            deletedAt: { type: [string, 'null'], format: date-time }
+    PlotPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Plot' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    PlotSeasonCreate:
+      type: object
+      required: [seasonCode, year, cropId, status]
+      properties:
+        seasonCode: { type: string, enum: [Rabi, Kharif, Zaid] }
+        year: { type: integer }
+        cropId: { type: string }
+        previousCropId: { type: [string, 'null'] }
+        status: { type: string, enum: [planned, active, harvested, cancelled] }
+        sourceRecommendationId: { type: [string, 'null'], format: uuid }
+    PlotSeasonPatch:
+      type: object
+      required: [version]
+      properties:
+        version: { type: integer }
+        cropId: { type: string }
+        status: { type: string, enum: [planned, active, harvested, cancelled] }
+        previousCropId: { type: [string, 'null'] }
+      additionalProperties: false
+    PlotSeason:
+      allOf:
+        - { $ref: '#/components/schemas/PlotSeasonCreate' }
+        - type: object
+          required: [id, plotId, version, updatedAt]
+          properties:
+            id: { type: string, format: uuid }
+            plotId: { type: string, format: uuid }
+            version: { type: integer }
+            updatedAt: { type: string, format: date-time }
+    PlotSeasonPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/PlotSeason' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    RegistryProvider:
+      type: object
+      required: [id, name, authMethod, available, scopes]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        authMethod: { type: string, enum: [oauth, idNumber, otp, unavailable] }
+        available: { type: boolean }
+        scopes: { type: array, items: { type: string } }
+        requirements: { type: array, items: { type: string } }
+    ProviderPage:
+      type: object
+      required: [providers]
+      properties:
+        providers: { type: array, items: { $ref: '#/components/schemas/RegistryProvider' } }
+    ConsentCreate:
+      type: object
+      required: [providerId, countryCode, scopes, purpose, noticeVersion]
+      properties:
+        providerId: { type: string }
+        countryCode: { type: string }
+        scopes: { type: array, minItems: 1, items: { type: string } }
+        purpose: { type: string }
+        noticeVersion: { type: string }
+        returnUrl: { type: string, format: uri }
+    ConsentStartResponse:
+      type: object
+      required: [consent, authorizationUrl]
+      properties:
+        consent: { $ref: '#/components/schemas/LandRegistryConsent' }
+        authorizationUrl: { type: [string, 'null'], format: uri }
+    LandRegistryConsent:
+      type: object
+      required: [id, providerId, countryCode, scopes, purpose, status, noticeVersion, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        providerId: { type: string }
+        countryCode: { type: string }
+        scopes: { type: array, items: { type: string } }
+        purpose: { type: string }
+        status: { type: string, enum: [initiated, granted, denied, revoked, expired] }
+        providerConsentRef: { type: [string, 'null'] }
+        noticeVersion: { type: string }
+        createdAt: { type: string, format: date-time }
+        grantedAt: { type: [string, 'null'], format: date-time }
+        revokedAt: { type: [string, 'null'], format: date-time }
+    ProviderCallback:
+      type: object
+      required: [state, code]
+      properties:
+        state: { type: string }
+        code: { type: string }
+        error: { type: string }
+    LandRegistryParcel:
+      type: object
+      required: [id, providerId, countryCode, parcelRef, geometry, isVerified]
+      properties:
+        id: { type: string }
+        providerId: { type: string }
+        countryCode: { type: string }
+        parcelRef: { type: string }
+        geometry: { $ref: '#/components/schemas/GeoJSON' }
+        areaHectares: { type: number }
+        landUse: { type: string }
+        cropDeclared: { type: string }
+        ownerStatus: { type: string, enum: [owner, tenant, unknown] }
+        source: { type: string }
+        isVerified: { type: boolean }
+        verifiedAt: { type: [string, 'null'], format: date-time }
+        registryUrl: { type: [string, 'null'], format: uri }
+    ParcelPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/LandRegistryParcel' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    ParcelImportRequest:
+      type: object
+      required: [consentId, parcelIds]
+      properties:
+        consentId: { type: string, format: uuid }
+        parcelIds: { type: array, minItems: 1, items: { type: string } }
+    ParcelImportResponse:
+      type: object
+      required: [plots, importedCount, skippedCount]
+      properties:
+        plots: { type: array, items: { $ref: '#/components/schemas/Plot' } }
+        importedCount: { type: integer }
+        skippedCount: { type: integer }
+    RecommendationRequest:
+      type: object
+      required: [plotId, seasonCode, year, locale]
+      properties:
+        plotId: { type: string, format: uuid }
+        seasonCode: { type: string, enum: [Rabi, Kharif, Zaid] }
+        year: { type: integer }
+        previousCropId: { type: [string, 'null'] }
+        soilRecordId: { type: [string, 'null'], format: uuid }
+        locale: { type: string }
+        weatherContext: { type: object, additionalProperties: true }
+    RecommendationItem:
+      type: object
+      required: [cropId, rank, score, reason]
+      properties:
+        cropId: { type: string }
+        rank: { type: integer, minimum: 1 }
+        score: { type: number }
+        reason: { type: string }
+        estimatedNetReturn: { type: [number, 'null'] }
+        currency: { type: [string, 'null'] }
+        baselineReturn: { type: [number, 'null'] }
+        fertilizerReductionKg: { type: [number, 'null'] }
+        waterSavingsPct: { type: [number, 'null'] }
+    Recommendation:
+      type: object
+      required: [id, plotId, seasonCode, modelVersion, generatedAt, results]
+      properties:
+        id: { type: string, format: uuid }
+        plotId: { type: string, format: uuid }
+        seasonCode: { type: string }
+        modelVersion: { type: string }
+        generatedAt: { type: string, format: date-time }
+        results: { type: array, items: { $ref: '#/components/schemas/RecommendationItem' } }
+        selectedCropId: { type: [string, 'null'] }
+    SoilRecordCreate:
+      type: object
+      properties:
+        clientMutationId: { type: string, format: uuid }
+        plotId: { type: [string, 'null'], format: uuid }
+        ph: { type: [number, 'null'], minimum: 0, maximum: 14 }
+        nitrogen: { type: [number, 'null'], minimum: 0 }
+        phosphorus: { type: [number, 'null'], minimum: 0 }
+        potassium: { type: [number, 'null'], minimum: 0 }
+        organicCarbon: { type: [number, 'null'], minimum: 0 }
+        ec: { type: [number, 'null'], minimum: 0 }
+        sampledAt: { type: [string, 'null'], format: date-time }
+        source: { type: string, enum: [manual, ocr, import] }
+        assetId: { type: [string, 'null'], format: uuid }
+      required: [source]
+      additionalProperties: false
+    SoilRecordPatch:
+      allOf:
+        - { $ref: '#/components/schemas/SoilRecordCreate' }
+        - type: object
+          required: [version]
+          properties:
+            version: { type: integer }
+    SoilRecord:
+      allOf:
+        - { $ref: '#/components/schemas/SoilRecordCreate' }
+        - type: object
+          required: [id, ownerId, createdAt, updatedAt, version]
+          properties:
+            id: { type: string, format: uuid }
+            ownerId: { type: string, format: uuid }
+            hasPhoto: { type: boolean, deprecated: true, description: Use assetId instead. }
+            ocrStatus: { type: [string, 'null'], enum: [queued, processing, done, failed, null] }
+            ocrConfidence: { type: [number, 'null'], minimum: 0, maximum: 1 }
+            version: { type: integer }
+            createdAt: { type: string, format: date-time }
+            updatedAt: { type: string, format: date-time }
+    SoilRecordPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/SoilRecord' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    SoilOcrRequest:
+      type: object
+      required: [assetId, locale]
+      properties:
+        assetId: { type: string, format: uuid }
+        locale: { type: string }
+        plotId: { type: [string, 'null'], format: uuid }
+    PestScanRequest:
+      type: object
+      required: [assetId, locale]
+      properties:
+        assetId: { type: string, format: uuid }
+        plotId: { type: [string, 'null'], format: uuid }
+        cropId: { type: [string, 'null'] }
+        locale: { type: string }
+    PestScan:
+      type: object
+      required: [id, assetId, status, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        assetId: { type: string, format: uuid }
+        plotId: { type: [string, 'null'], format: uuid }
+        cropId: { type: [string, 'null'] }
+        status: { type: string, enum: [queued, processing, done, failed] }
+        diseaseCode: { type: [string, 'null'] }
+        diseaseName: { type: [string, 'null'] }
+        confidence: { type: [number, 'null'], minimum: 0, maximum: 1 }
+        severity: { type: [string, 'null'], enum: [low, moderate, high, unknown, null] }
+        description: { type: [string, 'null'] }
+        advice: { type: array, items: { type: string } }
+        modelVersion: { type: [string, 'null'] }
+        createdAt: { type: string, format: date-time }
+    PestScanPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/PestScan' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    JobAccepted:
+      type: object
+      required: [jobId, status]
+      properties:
+        jobId: { type: string, format: uuid }
+        status: { type: string, enum: [queued, processing] }
+    Job:
+      type: object
+      required: [id, status]
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, enum: [queued, processing, done, failed] }
+        progress: { type: [number, 'null'], minimum: 0, maximum: 1 }
+        result: { type: [object, 'null'], additionalProperties: true }
+        error: { $ref: '#/components/schemas/ErrorEnvelope' }
+    MarketPrice:
+      type: object
+      required: [id, countryCode, market, cropId, unit, currency, observedOn, source, fetchedAt]
+      properties:
+        id: { type: string, format: uuid }
+        countryCode: { type: string }
+        stateCode: { type: [string, 'null'] }
+        district: { type: [string, 'null'] }
+        market: { type: string }
+        cropId: { type: string }
+        variety: { type: [string, 'null'] }
+        grade: { type: [string, 'null'] }
+        minPrice: { type: [number, 'null'] }
+        maxPrice: { type: [number, 'null'] }
+        modalPrice: { type: [number, 'null'] }
+        unit: { type: string }
+        currency: { type: string, minLength: 3, maxLength: 3 }
+        observedOn: { type: string, format: date }
+        source: { type: string }
+        fetchedAt: { type: string, format: date-time }
+    MarketPricePage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/MarketPrice' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+        sourceUpdatedAt: { type: [string, 'null'], format: date-time }
+    WeatherForecast:
+      type: object
+      required: [provider, fetchedAt, stale, latitude, longitude]
+      properties:
+        provider: { type: string }
+        fetchedAt: { type: string, format: date-time }
+        stale: { type: boolean }
+        latitude: { type: number }
+        longitude: { type: number }
+        current: { type: object, additionalProperties: true }
+        hourly: { type: object, additionalProperties: true }
+        daily: { type: object, additionalProperties: true }
+        advisories: { type: array, items: { type: object, additionalProperties: true } }
+        attribution: { type: string }
+    Scheme:
+      type: object
+      required: [id, countryCode, name, description, updatedAt]
+      properties:
+        id: { type: string }
+        countryCode: { type: string }
+        name: { type: string }
+        focus: { type: string }
+        description: { type: string }
+        benefit: { type: object, additionalProperties: true }
+        eligibility: { type: object, additionalProperties: true }
+        applicationUrl: { type: [string, 'null'], format: uri }
+        sourceUrl: { type: [string, 'null'], format: uri }
+        updatedAt: { type: string, format: date-time }
+    SchemePage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Scheme' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    EligibilityResult:
+      type: object
+      required: [eligible, missingRequirements, assessedAt]
+      properties:
+        eligible: { type: boolean }
+        missingRequirements: { type: array, items: { type: string } }
+        assessedAt: { type: string, format: date-time }
+        sourceUpdatedAt: { type: [string, 'null'], format: date-time }
+    Dealer:
+      type: object
+      required: [id, name, active]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        phone: { type: [string, 'null'] }
+        address: { type: [string, 'null'] }
+        location:
+          oneOf:
+            - { $ref: '#/components/schemas/Point' }
+            - { type: 'null' }
+        distanceKm: { type: [number, 'null'] }
+        stockItems: { type: array, items: { $ref: '#/components/schemas/DealerStock' } }
+        inventoryUpdatedAt: { type: [string, 'null'], format: date-time }
+        active: { type: boolean }
+    Point:
+      type: object
+      required: [type, coordinates]
+      properties:
+        type: { type: string, const: Point }
+        coordinates:
+          type: array
+          prefixItems: [{ type: number, minimum: -180, maximum: 180 }, { type: number, minimum: -90, maximum: 90 }]
+          minItems: 2
+          maxItems: 2
+    DealerStock:
+      type: object
+      required: [label, availability]
+      properties:
+        label: { type: string }
+        availability: { type: string, enum: [in_stock, low_stock, out_of_stock, unknown] }
+    DealerPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Dealer' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    Notification:
+      type: object
+      required: [id, type, title, body, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        type: { type: string }
+        title: { type: string, maxLength: 120 }
+        body: { type: string, maxLength: 1000 }
+        icon: { type: [string, 'null'] }
+        severity: { type: [string, 'null'], enum: [info, warning, success, null] }
+        locale: { type: [string, 'null'] }
+        data: { type: object, additionalProperties: true }
+        createdAt: { type: string, format: date-time }
+        readAt: { type: [string, 'null'], format: date-time }
+        dismissedAt: { type: [string, 'null'], format: date-time }
+    NotificationPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Notification' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    PushSubscription:
+      type: object
+      required: [endpoint, keys]
+      properties:
+        endpoint: { type: string, format: uri }
+        keys:
+          type: object
+          required: [p256dh, auth]
+          properties:
+            p256dh: { type: string }
+            auth: { type: string }
+    Group:
+      type: object
+      required: [id, name, active]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        countryCode: { type: [string, 'null'] }
+        state: { type: [string, 'null'] }
+        district: { type: [string, 'null'] }
+        active: { type: boolean }
+    GroupPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Group' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    GroupDashboard:
+      type: object
+      required: [group, kpis, updatedAt]
+      properties:
+        group: { $ref: '#/components/schemas/Group' }
+        kpis:
+          type: object
+          properties:
+            registeredFarmers: { type: integer }
+            cultivatedAreaHectares: { type: number }
+            onTrack: { type: integer }
+            needsAttention: { type: integer }
+            inputDemand: { type: array, items: { type: object, additionalProperties: true } }
+          additionalProperties: true
+        updatedAt: { type: string, format: date-time }
+    FarmerSummary:
+      type: object
+      required: [userId, displayName]
+      properties:
+        userId: { type: string, format: uuid }
+        displayName: { type: string }
+        village: { type: [string, 'null'] }
+        primaryCropId: { type: [string, 'null'] }
+        areaHectares: { type: [number, 'null'] }
+        status: { type: [string, 'null'] }
+    FarmerPage:
+      type: object
+      required: [items, limit]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/FarmerSummary' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    Crop:
+      type: object
+      required: [id, family, active]
+      properties:
+        id: { type: string }
+        family: { type: string }
+        emoji: { type: [string, 'null'] }
+        defaultSeason: { type: [string, 'null'] }
+        rootDepth: { type: [string, 'null'], enum: [shallow, medium, deep, null] }
+        waterNeed: { type: [number, 'string', 'null'] }
+        thumbUrl: { type: [string, 'null'] }
+        cardUrl: { type: [string, 'null'] }
+        names: { type: object, additionalProperties: { type: string } }
+        active: { type: boolean }
+        updatedAt: { type: [string, 'null'], format: date-time }
+    CropPage:
+      type: object
+      required: [items, limit, version]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Crop' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+        version: { type: string }
+    CropRule:
+      type: object
+      required: [id, cropFamily, seasons, ruleVersion, updatedAt]
+      properties:
+        id: { type: string }
+        cropId: { type: [string, 'null'] }
+        cropFamily: { type: string }
+        rootDepth: { type: [string, 'null'] }
+        seasons: { type: array, items: { type: string } }
+        durationDaysMin: { type: [integer, 'null'] }
+        durationDaysMax: { type: [integer, 'null'] }
+        waterNeed: { type: [number, 'string', 'null'] }
+        nitrogenEffect: { type: [number, 'null'] }
+        baseReturnPerHectare: { type: [number, 'null'] }
+        ruleVersion: { type: string }
+        updatedAt: { type: string, format: date-time }
+    CropRulePage:
+      type: object
+      required: [items, limit, version]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/CropRule' } }
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+        version: { type: string }
+    TranslationBundle:
+      type: object
+      required: [locale, version, messages]
+      properties:
+        locale: { type: string }
+        version: { type: string }
+        messages: { type: object, additionalProperties: true }
+    FilePresignRequest:
+      type: object
+      required: [purpose, mimeType, sizeBytes]
+      properties:
+        purpose: { type: string, enum: [soil-card, pest-scan, registry-document] }
+        mimeType: { type: string, enum: [image/jpeg, image/png, image/webp, application/pdf] }
+        sizeBytes: { type: integer, minimum: 1 }
+        sha256: { type: string }
+    FilePresignResponse:
+      type: object
+      required: [fileId, uploadUrl, expiresAt, requiredHeaders]
+      properties:
+        fileId: { type: string, format: uuid }
+        uploadUrl: { type: string, format: uri }
+        expiresAt: { type: string, format: date-time }
+        requiredHeaders: { type: object, additionalProperties: { type: string } }
+    FileAsset:
+      type: object
+      required: [id, purpose, mimeType, sizeBytes, status, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        purpose: { type: string }
+        mimeType: { type: string }
+        sizeBytes: { type: integer }
+        status: { type: string, enum: [pending, uploaded, scanned, rejected] }
+        createdAt: { type: string, format: date-time }
+    SyncMutation:
+      type: object
+      required: [clientMutationId, entityType, operation, payload, createdAt]
+      properties:
+        clientMutationId: { type: string, format: uuid }
+        entityType: { type: string, enum: [plot, soilRecord, plotSeason, preference] }
+        entityLocalId: { type: [string, integer] }
+        operation: { type: string, enum: [create, update, delete] }
+        baseVersion: { type: [integer, 'null'] }
+        payload: { type: object, additionalProperties: true }
+        attachmentIds: { type: array, items: { type: string, format: uuid } }
+        createdAt: { type: string, format: date-time }
+    SyncPushRequest:
+      type: object
+      required: [deviceId, mutations]
+      properties:
+        deviceId: { type: string, format: uuid }
+        mutations:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items: { $ref: '#/components/schemas/SyncMutation' }
+    SyncMutationResult:
+      type: object
+      required: [clientMutationId, status]
+      properties:
+        clientMutationId: { type: string, format: uuid }
+        status: { type: string, enum: [acked, conflict, retry, rejected] }
+        entityType: { type: [string, 'null'] }
+        entityId: { type: [string, 'null'], format: uuid }
+        version: { type: [integer, 'null'] }
+        serverVersion: { type: [integer, 'null'] }
+        serverRecord: { type: [object, 'null'], additionalProperties: true }
+        error: { $ref: '#/components/schemas/ErrorEnvelope' }
+    SyncPushResponse:
+      type: object
+      required: [results]
+      properties:
+        results: { type: array, items: { $ref: '#/components/schemas/SyncMutationResult' } }
+    SyncChange:
+      type: object
+      required: [cursor, entityType, entityId, operation, version, updatedAt]
+      properties:
+        cursor: { type: string }
+        entityType: { type: string }
+        entityId: { type: string, format: uuid }
+        operation: { type: string, enum: [upsert, delete] }
+        version: { type: integer }
+        updatedAt: { type: string, format: date-time }
+        record: { type: [object, 'null'], additionalProperties: true }
+    SyncPullResponse:
+      type: object
+      required: [changes, serverTime]
+      properties:
+        changes: { type: array, items: { $ref: '#/components/schemas/SyncChange' } }
+        nextCursor: { type: [string, 'null'] }
+        serverTime: { type: string, format: date-time }
+

@@ -1,0 +1,302 @@
+{
+  "$defs": {
+    "CostItem": {
+      "properties": {
+        "cost_per_acre": {
+          "minimum": 0,
+          "title": "Cost Per Acre",
+          "type": "number"
+        },
+        "crop": {
+          "title": "Crop",
+          "type": "string"
+        },
+        "expected_yield_q_per_acre": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Yield Q Per Acre"
+        }
+      },
+      "required": [
+        "crop",
+        "cost_per_acre"
+      ],
+      "title": "CostItem",
+      "type": "object"
+    },
+    "HistoryItem": {
+      "properties": {
+        "crop": {
+          "title": "Crop",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        }
+      },
+      "required": [
+        "season",
+        "crop"
+      ],
+      "title": "HistoryItem",
+      "type": "object"
+    },
+    "Location": {
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "title": "Location",
+      "type": "object"
+    },
+    "Preferences": {
+      "properties": {
+        "flags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Flags",
+          "type": "array"
+        },
+        "weights": {
+          "$ref": "#/$defs/Weights"
+        }
+      },
+      "title": "Preferences",
+      "type": "object"
+    },
+    "PriceItem": {
+      "properties": {
+        "crop": {
+          "title": "Crop",
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "price": {
+          "exclusiveMinimum": 0,
+          "title": "Price",
+          "type": "number"
+        },
+        "source": {
+          "default": "market",
+          "enum": [
+            "msp",
+            "market"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "unit": {
+          "default": "INR/quintal",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "crop",
+        "price"
+      ],
+      "title": "PriceItem",
+      "type": "object"
+    },
+    "Soil": {
+      "properties": {
+        "organic_carbon": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Organic Carbon"
+        },
+        "ph": {
+          "anyOf": [
+            {
+              "maximum": 14,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ph"
+        },
+        "texture": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Texture"
+        }
+      },
+      "title": "Soil",
+      "type": "object"
+    },
+    "Weights": {
+      "additionalProperties": false,
+      "properties": {
+        "pest": {
+          "default": 0.15,
+          "minimum": 0,
+          "title": "Pest",
+          "type": "number"
+        },
+        "return": {
+          "default": 0.3,
+          "minimum": 0,
+          "title": "Return",
+          "type": "number"
+        },
+        "soil": {
+          "default": 0.3,
+          "minimum": 0,
+          "title": "Soil",
+          "type": "number"
+        },
+        "water_risk": {
+          "default": 0.25,
+          "minimum": 0,
+          "title": "Water Risk",
+          "type": "number"
+        }
+      },
+      "title": "Weights",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "costs": {
+      "items": {
+        "$ref": "#/$defs/CostItem"
+      },
+      "title": "Costs",
+      "type": "array"
+    },
+    "crop_history": {
+      "items": {
+        "$ref": "#/$defs/HistoryItem"
+      },
+      "title": "Crop History",
+      "type": "array"
+    },
+    "fertilizer_n_price_per_kg": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fertilizer N Price Per Kg"
+    },
+    "horizon_seasons": {
+      "anyOf": [
+        {
+          "maximum": 3,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Horizon Seasons"
+    },
+    "irrigation": {
+      "default": "rainfed",
+      "enum": [
+        "rainfed",
+        "limited",
+        "full"
+      ],
+      "title": "Irrigation",
+      "type": "string"
+    },
+    "language": {
+      "default": "en",
+      "title": "Language",
+      "type": "string"
+    },
+    "location": {
+      "$ref": "#/$defs/Location"
+    },
+    "preferences": {
+      "$ref": "#/$defs/Preferences"
+    },
+    "prices": {
+      "items": {
+        "$ref": "#/$defs/PriceItem"
+      },
+      "title": "Prices",
+      "type": "array"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "soil": {
+      "$ref": "#/$defs/Soil"
+    }
+  },
+  "required": [
+    "location",
+    "season"
+  ],
+  "title": "RecommendRequest",
+  "type": "object"
+}

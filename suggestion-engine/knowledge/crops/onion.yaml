@@ -1,0 +1,22 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: onion
+name: "Onion"
+family: Amaryllidaceae
+seasons: ['kharif', 'rabi']
+duration_days: 130
+root_depth: shallow
+n_effect: demands
+n_credit_kg_per_acre: 0
+n_requirement_kg_per_acre: 40
+residue: low
+water_need_mm: 450
+temp_c: [8, 13, 28, 35]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [300, 350, 700, 1000]     # effective water supply: rain + stored soil water at sowing
+ph: [5.5, 6.0, 7.5, 8.5]
+heat_stress_days_tolerance: 15
+min_gap_same_family_seasons: 2
+typical_yield_q_per_acre: 40
+pests: ['thrips', 'purple blotch']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null

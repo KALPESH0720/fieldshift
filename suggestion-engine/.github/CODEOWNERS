@@ -1,0 +1,25 @@
+# Replace @dev-a and @dev-b with the real GitHub handles. Shared folders need the other person's review.
+/contracts/ @dev-a
+/src/fieldshift/api/ @dev-a
+/src/fieldshift/engine/ @dev-a
+/src/fieldshift/grid/ @dev-a
+/src/fieldshift/optimizer/ @dev-a
+/knowledge/rules/ @dev-a
+/knowledge/crops/ @dev-a
+/tests/scenarios/ @dev-a
+
+/src/fieldshift/data/ @dev-b
+/src/fieldshift/features/ @dev-b
+/src/fieldshift/simulation/ @dev-b
+/src/fieldshift/monitor/ @dev-b
+/src/fieldshift/learning/ @dev-b
+/pipelines/ @dev-b
+/docker/ @dev-b
+/infra/ @dev-b
+/knowledge/simulation/ @dev-b
+/knowledge/regions/ @dev-b
+
+# shared: either author writes, the other reviews
+/src/fieldshift/store/ @dev-a @dev-b
+/src/fieldshift/common/ @dev-a @dev-b
+/docs/ @dev-a @dev-b

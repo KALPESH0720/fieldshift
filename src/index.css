@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  background-color: #f9fafb;
+  color: #0f172a;
+  font-family: var(--script-font, 'Plus Jakarta Sans'), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html[data-script]:not([data-script='Latin']) {
+  font-variant-ligatures: contextual;
+}
+
+.language-picker-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+}
+
+.language-picker-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.language-picker-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.language-picker-scrollbar::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background-clip: padding-box;
+  background-color: #94a3b8;
+}
+
+.dark .language-picker-scrollbar {
+  scrollbar-color: #475569 transparent;
+}
+
+.dark .language-picker-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #475569;
+}
+
+html[data-script]:not([data-script='Latin']) .uppercase {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+html[data-script]:not([data-script='Latin']) body,
+html[data-script]:not([data-script='Latin']) button,
+html[data-script]:not([data-script='Latin']) input,
+html[data-script]:not([data-script='Latin']) select,
+html[data-script]:not([data-script='Latin']) textarea {
+  line-height: 1.65;
+}
+
+html.dark body {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  color-scheme: dark;
+}
+
+select,
+select option,
+select optgroup {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+select option:checked {
+  background-color: #d1fae5;
+  color: #064e3b;
+}
+
+select option:disabled {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+html.dark select,
+html.dark select option,
+html.dark select optgroup {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+html.dark select option:checked {
+  background-color: #064e3b;
+  color: #d1fae5;
+}
+
+html.dark select option:disabled {
+  background-color: #1e293b;
+  color: #94a3b8;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+:root {
+  --z-map: 0;
+  --z-bottom-nav: 40;
+  --z-header: 50;
+  --z-expanded-map: 9998;
+  --z-modal: 9999;
+  --z-toast: 10000;
+}
+
+.app-map-layer {
+  z-index: var(--z-map);
+  isolation: isolate;
+}
+
+.app-expanded-map-layer {
+  z-index: var(--z-expanded-map);
+}
+
+.app-modal-layer {
+  z-index: var(--z-modal);
+}
+
+.leaflet-container img.leaflet-tile {
+  max-width: none !important;
+}
+
+.leaflet-container {
+  background: #0f172a;
+}
+
+html[dir='rtl'] .leaflet-control,
+html[dir='rtl'] .leaflet-popup-content,
+html[dir='rtl'] .leaflet-tooltip {
+  direction: ltr;
+  text-align: start;
+}
+
+html[dir='rtl'] .leaflet-control-zoom {
+  direction: ltr;
+}

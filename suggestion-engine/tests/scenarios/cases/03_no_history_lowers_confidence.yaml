@@ -1,0 +1,10 @@
+name: Without crop history the answer cannot be high confidence
+request:
+  location: {lat: 18.52, lon: 73.85}
+  season: kharif-2027
+  irrigation: rainfed
+  soil: {ph: 7.2}
+expect:
+  missing_includes: [crop_history]
+  confidence_at_most: medium
+  min_options: 1

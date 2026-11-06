@@ -1,0 +1,12 @@
+# DEMO region around the synthetic fixture cells. Replace with the real pilot district once chosen.
+id: pune_demo
+name: "Pune area (demo, not the confirmed pilot district)"
+status: draft
+bbox: [73.3, 18.0, 74.7, 18.9]     # [min_lon, min_lat, max_lon, max_lat]
+cell_size_deg: 0.1
+climate_years: [2005, 2024]
+scenarios: [ssp245]
+crops: [soybean, pigeonpea, maize, sorghum, groundnut, wheat, chickpea, onion, tomato]
+seasons:                            # sowing-to-harvest window used to aggregate climate features
+  kharif: {start: [6, 1], end: [10, 31]}
+  rabi:   {start: [11, 1], end: [3, 31]}

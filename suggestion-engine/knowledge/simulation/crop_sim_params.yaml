@@ -1,0 +1,17 @@
+# DRAFT - approximate general values (FAO-56 crop coefficients, FAO-33 yield response factors),
+# NOT calibrated for local varieties and NOT agronomist-reviewed. Calibrate against ICAR / local
+# yield data before using simulated numbers in advice. Changing this file changes params_version,
+# which invalidates cached simulation results.
+version: 1
+status: draft
+reviewed_by: null
+crops:
+  soybean:   {kc: [0.40, 1.15, 0.50], stage_days: [15, 20, 40, 25], root_depth_m: 0.8, depletion_fraction: 0.50, ky: 0.85, sowing: {kharif: [6, 25]}}
+  pigeonpea: {kc: [0.40, 1.15, 0.35], stage_days: [25, 35, 60, 40], root_depth_m: 1.2, depletion_fraction: 0.50, ky: 0.80, sowing: {kharif: [6, 25]}}
+  maize:     {kc: [0.30, 1.20, 0.60], stage_days: [20, 30, 35, 20], root_depth_m: 1.0, depletion_fraction: 0.55, ky: 1.25, sowing: {kharif: [6, 25], rabi: [11, 5]}}
+  sorghum:   {kc: [0.30, 1.00, 0.55], stage_days: [20, 30, 35, 25], root_depth_m: 1.0, depletion_fraction: 0.55, ky: 0.90, sowing: {kharif: [6, 25], rabi: [10, 15]}}
+  groundnut: {kc: [0.40, 1.15, 0.60], stage_days: [20, 30, 35, 25], root_depth_m: 0.5, depletion_fraction: 0.50, ky: 0.70, sowing: {kharif: [6, 25]}}
+  wheat:     {kc: [0.30, 1.15, 0.25], stage_days: [20, 25, 45, 25], root_depth_m: 1.0, depletion_fraction: 0.55, ky: 1.05, sowing: {rabi: [11, 5]}}
+  chickpea:  {kc: [0.40, 1.15, 0.35], stage_days: [20, 30, 35, 20], root_depth_m: 0.9, depletion_fraction: 0.50, ky: 0.80, sowing: {rabi: [10, 25]}}
+  onion:     {kc: [0.70, 1.05, 0.75], stage_days: [15, 25, 60, 30], root_depth_m: 0.4, depletion_fraction: 0.30, ky: 1.10, sowing: {kharif: [7, 1], rabi: [11, 10]}}
+  tomato:    {kc: [0.60, 1.15, 0.80], stage_days: [25, 35, 40, 20], root_depth_m: 0.8, depletion_fraction: 0.40, ky: 1.05, sowing: {kharif: [7, 1], rabi: [11, 10]}}

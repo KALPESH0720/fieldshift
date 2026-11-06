@@ -1,0 +1,6 @@
+# Intended schedules. This file is documentation: nothing reads it yet.
+# Create the real schedules in Vertex AI (PipelineJobSchedule) or Cloud Scheduler once the pipelines are deployed.
+p1_grid_layers:
+  cron: "0 3 1 1 *"          # once a year, 1 January 03:00 UTC, plus manually for a new region
+p3_monitor:
+  cron: "0 4 * * 1"          # weekly (Monday) during the growing season; not built yet

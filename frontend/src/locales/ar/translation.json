@@ -1,0 +1,1202 @@
+{
+  "language": {
+    "english": "الإنجليزية",
+    "marathi": "الماراثية",
+    "hindi": "الهندية"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "اضبط تطبيق فيلد شيفت بالطريقة التي تناسبك",
+    "languageTitle": "لغتك",
+    "languageBody": "اختر اللغة الأكثر راحة لك في القراءة والاستماع.",
+    "remindersTitle": "تذكيرات المزرعة",
+    "remindersBody": "احصل على تنبيهات في الوقت المناسب للأعمال الزراعية المهمة.",
+    "sowing": "تنبيهات موعد الزراعة",
+    "sowingBody": "تذكير عندما يحين الوقت المناسب لزراعة محصولك القادم.",
+    "fertilizer": "تذكيرات التسميد",
+    "fertilizerBody": "تذكير مبسط قبل أن يحتاج محصولك إلى العناصر الغذائية.",
+    "channels": "إرسال التذكيرات عبر",
+    "sms": "رسالة نصية SMS",
+    "whatsapp": "واتساب",
+    "listen": "استماع",
+    "stop": "إيقاف",
+    "saved": "تم حفظ التفضيلات على هذا الجهاز",
+    "unavailable": "التشغيل الصوتي غير متاح في هذا المتصفح.",
+    "offline": "وضع عدم الاتصال",
+    "offlineBody": "جميع بياناتك محفوظة على هذا الهاتف وتتم مزامنتها تلقائياً عند الاتصال.",
+    "online": "متصل بالإنترنت",
+    "onlineBody": "أنت متصل الآن • ستتم مزامنة البيانات الجديدة في الخلفية.",
+    "logOut": "تسجيل الخروج",
+    "logOutBody": "سيتم تسجيل خروجك والعودة إلى شاشة الدخول.",
+    "about": "حول فيلد شيفت",
+    "version": "الإصدار 0.1.0 • تجريبي",
+    "featureLanguage": "الميزة 1 • طبقة اللغات",
+    "featureReminders": "الميزة 6 • التذكيرات",
+    "appVersion": "إصدار التطبيق",
+    "privacy": "الخصوصية والبيانات",
+    "privacyBody": "بياناتك تبقى محفوظة على هذا الهاتف",
+    "confirmLogout": "اضغط مرة أخرى لتأكيد تسجيل الخروج",
+    "textMessage": "رسالة نصية قصيرة",
+    "chatMessage": "رسالة محادثة",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "تلقائي",
+    "back": "رجوع",
+    "noLanguages": "لم يتم العثور على لغات",
+    "searchLanguages": "البحث عن اللغات",
+    "recentlyUsed": "المستخدمة مؤخرًا",
+    "imageCredits": "مصادر الصور",
+    "imageCreditsBody": "Original crop illustrations made for Field Shift (CC0-equivalent).",
+    "imageCreditsIntro": "صور المحاصيل مأخوذة من ويكيميديا كومنز وأنسبلاش بموجب تراخيص مفتوحة.",
+    "viewSource": "المصدر",
+    "accountTitle": "الحساب ورقم الهاتف",
+    "accountSubtitle": "ملف المزارع",
+    "phoneLabel": "رقم الهاتف",
+    "unsyncedLogoutWarning": "لديك {count} تغييرات غير متزامنة على هذا الجهاز. تسجيل الخروج الآن سيمسحها.",
+    "cancelLogout": "البقاء قيد تسجيل الدخول"
+  },
+  "auth": {
+    "brandTagline": "منصة الزراعة الدقيقة",
+    "brandQuote": "محاصيل أذكى. تربة أصح. إنتاجية أقوى.",
+    "brandDescription": "سجّل الدخول برقم هاتفك المحمول للحصول على نصائح المحاصيل وصحة التربة وأسعار السوق.",
+    "statOffline": "يعمل بدون إنترنت",
+    "statOneTimeCode": "دخول برمز SMS",
+    "statProtected": "بيانات محمية",
+    "pillWeather": "تنبيهات الطقس",
+    "pillCrops": "تناوب المحاصيل",
+    "pillSoil": "صحة التربة",
+    "brandFooter": "Field Shift • مصمم للمزارعين في كل مكان",
+    "demoBadge": "تجريبي",
+    "demoHint": "الوضع التجريبي: استخدم الرمز 123456",
+    "listenPrompt": "استماع",
+    "offlineLoginNotice": "أنت غير متصل بالإنترنت. اتصل بالشبكة لتلقي رمز التحقق عبر الرسائل القصيرة.",
+    "sessionLoading": "جارٍ التحقق من جلستك…",
+    "signedInAs": "مسجل الدخول باسم",
+    "continueToFarm": "المتابعة إلى المزرعة",
+    "notYouSwitch": "لست أنت؟ تبديل المستخدم",
+    "step1Badge": "الخطوة 1 من 2 • رقم الهاتف",
+    "phoneStepTitle": "أدخل رقم هاتفك",
+    "phoneStepSubtitle": "سنرسل رمزًا مكونًا من 6 أرقام عبر رسالة نصية لتسجيل الدخول. لا حاجة لكلمة مرور.",
+    "phoneLabel": "رقم الهاتف المحمول",
+    "phonePlaceholder": "98765 43210",
+    "countryCodeLabel": "اختر رمز الدولة",
+    "searchCountry": "ابحث عن الدولة أو الرمز",
+    "noCountryFound": "لم يتم العثور على دولة",
+    "sendCode": "إرسال الرمز",
+    "sendingCode": "جارٍ إرسال الرمز…",
+    "step2Badge": "الخطوة 2 من 2 • رمز الرسالة",
+    "otpStepTitle": "أدخل الرمز المكون من 6 أرقام",
+    "otpStepSubtitle": "اكتب الرمز لمرة واحدة المرسل إلى هاتفك.",
+    "codeSentTo": "تم إرسال الرمز إلى {phone}",
+    "changeNumber": "تغيير الرقم",
+    "otpLabel": "رمز التحقق المكون من 6 أرقام",
+    "otpDigitAria": "الرقم {index} من {total}",
+    "verifyCode": "تحقق",
+    "verifyingCode": "جارٍ التحقق…",
+    "resendIn": "إعادة إرسال الرمز خلال {seconds} ثانية",
+    "resendCode": "إعادة إرسال الرمز",
+    "resendReadyAnnouncement": "يمكنك الآن طلب رمز تحقق جديد.",
+    "codeResentAnnouncement": "تم إرسال رمز جديد مكون من 6 أرقام إلى {phone}.",
+    "callMeWithCode": "اتصل بي لإبلاغي بالرمز",
+    "phoneVerifiedBadge": "تم تأكيد الهاتف • مزارع جديد",
+    "profileStepTitle": "أخبرنا باسمك",
+    "profileStepSubtitle": "تم التحقق من هاتفك. أضف اسمك لتخصيص خطة مزرعتك.",
+    "nameLabel": "اسمك",
+    "namePlaceholder": "مثال: راميش نايك",
+    "preferredLanguageLabel": "اللغة المفضلة",
+    "consentCheckboxLabel": "أوافق على تلقي رموز الدخول والتنبيهات الزراعية عبر SMS وأقبل",
+    "privacyPolicyLink": "إشعار الخصوصية",
+    "privacyNotice": "بالمتابعة، فإنك توافق على تلقي رموز دخول لمرة واحدة عبر الرسائل القصيرة.",
+    "privacyModalTitle": "إشعار الخصوصية والرسائل القصيرة",
+    "privacyModalPoint1": "يُستخدم رقم هاتفك فقط لتسجيل الدخول برموز لمرة واحدة وإرسال التنبيهات الزراعية التي تفعلها.",
+    "privacyModalPoint2": "يتم حفظ بيانات حقولك وتربتك بأمان ولا يتم بيعها لأي طرف ثالث.",
+    "privacyModalPoint3": "على هاتف مشترك، اضغط على \"تبديل المستخدم\" في أي وقت لمسح بياناتك من هذا الجهاز.",
+    "completeSignUp": "ابدأ استخدام Field Shift",
+    "savingProfile": "جارٍ الحفظ…",
+    "errors": {
+      "phoneRequired": "يرجى إدخال رقم هاتفك المحمول.",
+      "phoneTooShort": "رقم الهاتف هذا قصير جدًا بالنسبة إلى {country}.",
+      "phoneTooLong": "رقم الهاتف هذا طويل جدًا بالنسبة إلى {country}.",
+      "phoneInvalidForCountry": "يرجى إدخال رقم هاتف محمول صالح لـ {country}.",
+      "codeIncomplete": "يرجى إدخال جميع الأرقام الستة للرمز.",
+      "wrongCode": "هذا الرمز غير متطابق. يرجى التحقق من الرسالة والمحاولة مرة أخرى.",
+      "wrongCodeWithAttempts": "رمز خاطئ. تبقى {remaining} محاولات.",
+      "expiredCode": "انتهت صلاحية هذا الرمز. اضغط على \"إعادة إرسال الرمز\" للحصول على رمز جديد.",
+      "tooManyAttempts": "محاولات كثيرة جدًا. يرجى الانتظار {minutes} دقيقة قبل المحاولة مرة أخرى.",
+      "maxResendsReached": "تم الوصول إلى الحد الأقصى لإعادة الإرسال حاليًا. يرجى الانتظار بضع دقائق.",
+      "noNetwork": "لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة والمحاولة مرة أخرى.",
+      "timeout": "الشبكة بطيئة وانتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
+      "serverError": "تعذر الاتصال بالخادم الآن. يرجى المحاولة بعد قليل.",
+      "nameRequired": "يرجى إدخال اسمك للمتابعة.",
+      "consentRequired": "يرجى الموافقة على إشعار الخصوصية والرسائل للمتابعة."
+    }
+  },
+  "recommender": {
+    "listen": "استماع",
+    "explainScreen": "شرح الشاشة",
+    "listenSummary": "الاستماع للملخص",
+    "stopListening": "إيقاف الاستماع",
+    "loadingHeader": "جاري إعداد خطتك الزراعية المخصصة…",
+    "steps": [
+      [
+        "Analysing your soil history...",
+        "Checking nitrogen levels, previous crop residue & drainage"
+      ],
+      [
+        "Checking live APMC mandi prices...",
+        "Pulling today's rates from Panaji, Mapusa & Margao mandis"
+      ],
+      [
+        "Generating your optimal rotation plan...",
+        "Ranking crops by soil benefit, water need & expected profit"
+      ]
+    ],
+    "previousCrop": "المحصول المحصود سابقًا",
+    "analysingPlot": "تحليل هذا الحقل",
+    "yourPlot": "حقلك",
+    "defaultAreaUnit": "هكتار",
+    "regionFallback": "منطقتك",
+    "stepProgress": "الخطوة {current} من {total}",
+    "seasons": {
+      "Rabi": "الشتاء",
+      "Kharif": "الموسم المطير",
+      "Zaid": "الصيف"
+    },
+    "stepTitles": {
+      "fieldDetails": "قراءة تفاصيل حقلك",
+      "soilHistory": "تحليل تاريخ التربة",
+      "weather": "فحص الطقس",
+      "cropFamilies": "مقارنة عائلات المحاصيل",
+      "market": "فحص أسعار السوق",
+      "rotationPlan": "بناء خطة التناوب"
+    },
+    "stepDetails": {
+      "fieldDetails": "فحص {plotName}، {area} {unit}، والمحصول السابق {previousCrop}",
+      "soilHistory": "دراسة العناصر الغذائية التي تركها {previousCrop} وما تحتاجه تربتك",
+      "weather": "قراءة الأمطار ودرجة الحرارة لموسم {season}",
+      "cropFamilies": "البحث عن محصول من عائلة مختلفة لإراحة التربة",
+      "market": "مراجعة الأسعار الحالية قرب {region}",
+      "rotationPlan": "ترتيب المحاصيل حسب الربح واستخدام المياه وصحة التربة"
+    },
+    "fewResults": "تم العثور على {count} محاصيل مناسبة فقط لهذا الموسم والمحصول السابق.",
+    "backToPlots": "العودة إلى حقول المزرعة",
+    "pageTitle": "مستشار الدورة الزراعية",
+    "offlineReady": "يعمل بدون إنترنت",
+    "pageSubtitle": "مدعوم بإرشادات الهندسة الزراعية ونماذج تجديد خصوبة التربة",
+    "screenOverviewSpeech": "مستشار الدورة الزراعية. اختر حقلك والموسم القادم والمحصول الذي حصدته سابقاً لاكتشاف أفضل المحاصيل التي تعيد خصوبة التربة وتقلل تكلفة الأسمدة وتزيد صافي دخلك.",
+    "step1Badge": "الخطوة 1 • بيانات الحقل",
+    "tellUsTitle": "أخبرنا عن حقلك",
+    "tellUsSubtitle": "مدخلات بسيطة بدون مصطلحات زراعية معقدة.",
+    "formInstructionsSpeech": "الخطوة الأولى. اختر الحقل الذي تخطط لزراعته، ثم حدد الموسم القادم والمحصول الذي حصدته في المرة السابقة. سيقوم المحرك المحلي بترتيب أذكى المحاصيل التالية.",
+    "selectPlotLabel": "اختر الحقل الزراعي",
+    "plotsSavedCount": "{count} محفوظة محلياً",
+    "noPlotsTitle": "لا توجد حقول محفوظة على الجهاز",
+    "noPlotsSubtitle": "أضف حقلاً تجريبياً سريعاً لمعاينة محرك التوصيات.",
+    "quickAddDemoPlot": "+ إضافة حقل تجريبي سريع",
+    "standardAcre": "فدان قياسي",
+    "localVillage": "قرية محلية",
+    "upcomingSeasonLabel": "موسم الزراعة القادم",
+    "seasonNames": {
+      "Rabi": "رابي (الشتاء)",
+      "Kharif": "خريف (الأمطار)",
+      "Zaid": "زايد (الصيف)"
+    },
+    "seasonRanges": {
+      "Rabi": "الشتاء (أكتوبر – مارس)",
+      "Kharif": "موسم الأمطار (يوليو – أكتوبر)",
+      "Zaid": "الصيف (مارس – يونيو)"
+    },
+    "chooseFromList": "اختر من القائمة",
+    "otherCropBtn": "+ محصول آخر",
+    "customCropPlaceholder": "اكتب اسم المحصول السابق (مثل الدخن أو الشعير)…",
+    "buildingPlan": "جاري إعداد خطتك…",
+    "calculateBestRotations": "احسب أفضل دورة زراعية",
+    "recommendedNextCrops": "المحاصيل التالية الموصى بها",
+    "optionsCount": "{count} خيارات",
+    "tailoredContext": "مخصص لـ {plot} • بعد محصول {previousCrop} في موسم {season}",
+    "resultsSummaryIntro": "إليك أفضل توصيات الدورة الزراعية لحقل {plot} بعد {previousCrop} في موسم {season}.",
+    "resultsSummaryTop": "المرتبة الأولى هي {crop}. {reason} يوفر هذا المحصول {weight} من سماد {fertilizer} في هذا الحقل ويحقق عائداً صافياً تقديرياً قدره {netReturn}.",
+    "optimalBalance": "توازن مثالي",
+    "whyThisCrop": "لماذا هذا المحصول؟ — بكلمات بسيطة",
+    "estimatedNetReturn": "صافي العائد التقديري",
+    "monoCropBase": "تكرار نفس المحصول",
+    "thisRotation": "هذه الدورة الزراعية",
+    "fertilizerReduction": "توفير الأسمدة",
+    "soilRestored": "استعادة خصوبة التربة",
+    "chemicalBillCut": "الوفر في فاتورة الأسمدة:",
+    "selectCropBtn": "اختر هذا المحصول للدورة الزراعية",
+    "selectedForPlotBtn": "تم الاختيار لـ {plot} (محفوظ للمزامنة)",
+    "demoPlotSavedToast": "تم تسجيل الحقل التجريبي بدون إنترنت!",
+    "cropSelectedToast": "تم اختيار {crop}! حُفظت الخطة على الجهاز.",
+    "cropSelectedFallbackToast": "تم اختيار {crop} لهذا الموسم.",
+    "durationRangeDays": "{min} – {max} يوماً",
+    "plotUnit": "حقل",
+    "perPlot": "لكل حقل",
+    "netReturnDelta": "+{pct}% مقارنة بتكرار المحصول",
+    "savesFertilizerKg": "يوفر {kg} كجم من {fertilizer}",
+    "estimatedFertilizerSavings": "توفير تقديري {amount}",
+    "cardReturnSpeech": "صافي العائد التقديري هو {netReturn}، بزيادة {gain} مقارنة بتكرار نفس المحصول.",
+    "cardFertilizerSpeech": "توفير الأسمدة: {weight} من {fertilizer}، مما يوفر حوالي {savings}.",
+    "cardWaterSpeech": "مدة النمو {duration}، واحتياج المياه: {waterNeed}.",
+    "fertilizerUrea": "اليوريا",
+    "pmfbyInsuredRabi": "مؤمَّن عبر PMFBY (قسط 1.5%)",
+    "pmfbyInsuredKharif": "مؤمَّن عبر PMFBY (قسط 2%)",
+    "nfsmSubsidyEligible": "مؤهل لدعم NFSM",
+    "includesSubsidyAndPmfby": "يشمل +{subsidy} دعم NFSM و−{premium} قسط PMFBY",
+    "includesPmfbyPremium": "يشمل −{premium} قسط تأمين المزارع PMFBY",
+    "includesNfsmSubsidy": "يشمل +{subsidy} دعم البقوليات NFSM",
+    "rankTags": {
+      "bestFit": "#{rank} أفضل توافق للدورة الزراعية",
+      "soilBalance": "#{rank} توازن ممتاز للتربة",
+      "lowInput": "#{rank} خيار منخفض التكلفة"
+    },
+    "badges": {
+      "soilBalance": "أفضل توازن للتربة",
+      "marketChoice": "طلب قوي في السوق",
+      "lowWater": "موفر للمياه"
+    },
+    "families": {
+      "legume": "بقوليات",
+      "oilseed": "محصول زيتي",
+      "cereal": "حبوب",
+      "cash": "محصول نقدي",
+      "unknown": "محصول متنوع"
+    },
+    "rootDepths": {
+      "shallow": "السطحية",
+      "medium": "متوسطة العمق",
+      "deep": "العميقة"
+    },
+    "waterNeeds": {
+      "low1to2": "منخفض — يحتاج فقط من رية إلى ريتين خفيفتين",
+      "low2": "منخفض — حوالي ريتين طوال الموسم",
+      "veryLowResidual": "منخفض جداً — ينمو جيداً على رطوبة التربة المتبقية",
+      "veryLow2": "منخفض جداً — حتى ريتين خفيفتين",
+      "moderate3": "متوسط — حوالي 3 ريات منتظمة",
+      "moderate3to4": "متوسط — من 3 إلى 4 ريات في مراحل النمو الرئيسية",
+      "moderate4": "متوسط — حوالي 4 ريات خلال الموسم"
+    },
+    "reasons": {
+      "afterLegume": "يستفيد محصول {crop} من النيتروجين الطبيعي الذي تركه المحصول البقولي السابق في التربة، مما يقلل حاجتك من {fertilizer} بمقدار {kg} كجم.",
+      "afterCereal": "يعيد محصول {crop} النيتروجين الطبيعي إلى التربة بعد حصاد الحبوب المجهد، مما يقلل استهلاك {fertilizer} بمقدار {kg} كجم.",
+      "differentFamily": "تغيير العائلة النباتية بزراعة {crop} يكسر دورة الآفات والأمراض ويوفر {kg} كجم من {fertilizer}.",
+      "alternateRoots": "جذوره {currDepth} تمتص الرطوبة والغذاء من طبقة تربة مختلفة عن المحصول السابق ذي الجذور {prevDepth}.",
+      "coverSoil": "يظلل غطاؤه النباتي سطح التربة جيداً فيحافظ على الرطوبة ويدعم الكائنات الدقيقة النافعة."
+    }
+  },
+  "voice": {
+    "marathiFallback": "صوت اللغة الماراثية غير مثبت. يتم استخدام الصوت الهندي بدلاً منه.",
+    "noVoice": "لا يوجد صوت مناسب مثبت على هذا الجهاز.",
+    "testSample": "هذا اختبار صوتي لتطبيق فيلد شيفت. لغتك المختارة جاهزة للإرشاد الزراعي الصوتي.",
+    "testMarathi": "हा फील्ड शिफ्टसाठी आवाज चाचणी संदेश आहे. तुमची निवडलेली भाषा शेतीच्या मार्गदर्शनासाठी तयार आहे.",
+    "testHindi": "यह फील्ड शिफ्ट के लिए आवाज़ परीक्षण संदेश है। आपकी चुनी हुई भाषा खेती के मार्गदर्शन के लिए तैयार है।",
+    "voiceTest": "اختبار الصوت",
+    "testVoice": "تجربة الصوت",
+    "usingVoice": "الصوت المستخدم",
+    "dismiss": "إغلاق",
+    "unsupported": "التشغيل الصوتي غير مدعوم على هذا الجهاز.",
+    "playbackError": "تعذر متابعة التشغيل الصوتي. يمكنك الاستمرار في استخدام الشاشة.",
+    "noVoiceForLanguage": "لا يوجد صوت للغة {language} مثبت على هذا الجهاز.",
+    "fallbackVoiceNotice": "صوت {requested} غير مثبت على هذا الجهاز. يتم استخدام صوت {fallback} بدلاً منه.",
+    "languageCodeLabel": "رمز اللغة",
+    "availableVoicesLabel": "الأصوات المتاحة"
+  },
+  "nav": {
+    "farm": "المزرعة",
+    "suggest": "اقتراحات",
+    "soil": "التربة",
+    "market": "السوق",
+    "scan": "فحص",
+    "schemes": "البرامج"
+  },
+  "header": {
+    "demoRole": "وضع العرض",
+    "farmer": "المزارع",
+    "extension": "الإرشاد",
+    "lightMode": "التبديل إلى الوضع الفاتح",
+    "darkMode": "التبديل إلى الوضع الداكن",
+    "settings": "الإعدادات"
+  },
+  "screenTitles": {
+    "farm": "مزرعتي",
+    "recommender": "مستشار الدورة الزراعية",
+    "soil": "بطاقة صحة التربة",
+    "market": "أسعار السوق",
+    "pest": "فاحص الآفات والأمراض",
+    "group": "نظرة عامة على الجمعية",
+    "schemes": "البرامج الحكومية",
+    "settings": "الإعدادات"
+  },
+  "common": {
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "loading": "جاري تحميل اللغة",
+    "languageLoadError": "تعذر تحميل هذه اللغة. يتم عرض الإنجليزية.",
+    "areaUnit": "وحدة المساحة",
+    "primaryCrop": "المحصول الرئيسي",
+    "selectPrimaryCrop": "اختر المحصول الرئيسي",
+    "selectIntercrop": "اختر المحصول البيني أو الغطائي"
+  },
+  "addField": {
+    "title": "إضافة حقل",
+    "subtitle": "أدخل بيانات حقلك والمحاصيل.",
+    "closeDialog": "إغلاق نافذة إضافة الحقل",
+    "fieldNameLabel": "اسم الحقل",
+    "fieldNamePlaceholder": "مثال: الحقل الشمالي",
+    "drawAreaOnMap": "رسم المساحة على الخريطة",
+    "boundaryCaptured": "تم تحديد الحدود · {count} نقاط",
+    "areaSizeLabel": "مساحة الحقل",
+    "areaPlaceholder": "e.g. 2.5",
+    "areaInvalid": "يرجى إدخال مساحة صحيحة أكبر من 0.",
+    "addIntercrop": "إضافة محصول بيني",
+    "removeIntercrop": "إزالة المحصول المتداخل",
+    "recommendedCompanions": "المحاصيل المرافقة الموصى بها",
+    "recommendedCompanionsHint": "أفضل التوليفات الزراعية لمحصول {crop}:",
+    "matchScore": "توافق {score}%",
+    "selectedPairingBenefit": "{primary} + {companion} · {benefit} (توافق {score}%)",
+    "saveField": "حفظ الحقل",
+    "unitShortAc": "فدان",
+    "unitFullAcres": "أفدنة",
+    "unitShortHa": "هـ",
+    "unitFullHectares": "هكتار",
+    "unitShortGuntha": "غونثا",
+    "unitFullGuntha": "غونثا",
+    "unitShortBigha": "بيغا",
+    "unitFullBigha": "بيغا",
+    "unitShortSqm": "م²",
+    "unitFullSqm": "متر مربع",
+    "unitShortSqft": "قدم²",
+    "unitFullSqft": "قدم مربع"
+  },
+  "landRegistry": {
+    "consentLabel": "سجلات الأراضي الرسمية",
+    "importTitle": "استيراد أراضٍ موثقة",
+    "country": "بلد الحقل",
+    "scopes": "سيشارك هذا المزود",
+    "authorize": "تفويض ومزامنة",
+    "syncing": "جاري المزامنة…",
+    "retry": "إعادة المحاولة",
+    "syncError": "تعذرت مزامنة سجلات الأراضي الموثقة. يرجى المحاولة مرة أخرى.",
+    "authorizeMessage": "فوّض تطبيق فيلد شيفت لجلب سجلات القطع الموثقة من {agency}. يمكنك إلغاء الصلاحية لاحقاً.",
+    "genericMessage": "التحقق الرسمي غير متاح بعد في بلدك. لا يزال بإمكانك رسم حقلك يدوياً.",
+    "uploadDocument": "رفع صك ملكية أو عقد إيجار",
+    "documentRequired": "اختر وثيقة الأرض أولاً.",
+    "documentUploaded": "تم رفع الوثيقة وهي قيد المراجعة",
+    "providers": {
+      "agristack": "AgriStack",
+      "car": "CAR / SICAR",
+      "lpis": "LPIS / IACS",
+      "usda": "USDA FSA",
+      "australia": "State Cadastre",
+      "kenya": "National Land Information System",
+      "nigeria": "National Land Registry",
+      "indonesia": "National Land Agency",
+      "philippines": "Land Management Bureau",
+      "bangladesh": "Land Ministry Records",
+      "vietnam": "Land Registration Office",
+      "argentina": "Provincial Cadastre",
+      "generic": "السجل العقاري الرسمي"
+    }
+  },
+  "verification": {
+    "verified": "موثق عبر AgriStack",
+    "verifiedBy": "موثق من {agency}",
+    "unverified": "مُدخل يدوياً (غير موثق)",
+    "verifiedTitle": "تتطابق الحدود مع سجل الأراضي الحكومي",
+    "unverifiedTitle": "مُحدد يدوياً. غير صالح لمطالبات الدعم أو التأمين."
+  },
+  "schemes": {
+    "linkToUnlock": "اربط حساب AgriStack لتفعيل الأهلية الموثقة",
+    "eligibleFields": "الحقول المؤهلة: {count} حقول موثقة",
+    "eyebrow": "الدعم المالي والمنح الزراعية",
+    "title": "البرامج الحكومية للمزارعين",
+    "subtitle": "دعم مباشر للدخل وتأمين على المحاصيل ومنح للزراعة العضوية.",
+    "financialBenefit": "المنفعة المالية",
+    "perYear": "سنوياً",
+    "perHectare": "لكل هكتار",
+    "items": {
+      "pmKisan": {
+        "name": "برنامج دعم دخل المزارعين PM-KISAN",
+        "focus": "دعم مباشر للدخل",
+        "badge": "تحويل بنكي مباشر",
+        "benefit": "₹6,000 / سنوياً",
+        "description": "يقدم 6,000 روبية سنوياً على ثلاث دفعات متساوية تُحوّل مباشرة إلى الحسابات البنكية لأسر المزارعين المؤهلين.",
+        "action": "التحقق من الأهلية"
+      },
+      "pmfby": {
+        "name": "برنامج التأمين على المحاصيل PMFBY",
+        "focus": "تأمين ضد خسائر المحاصيل",
+        "badge": "قسط مخفض للمزارع",
+        "benefit": "تغطية بقسط منخفض 1.5% – 2%",
+        "description": "يحمي محصولك من الجفاف والأمطار غير الموسمية والفيضانات وتفشي الآفات بأقساط موسمية ميسّرة.",
+        "action": "حساب التغطية"
+      },
+      "pkvy": {
+        "name": "برنامج تنمية الزراعة العضوية PKVY",
+        "focus": "منحة الزراعة العضوية",
+        "badge": "صحة التربة والزراعة العضوية",
+        "benefit": "₹50,000 / هكتار (3 سنوات)",
+        "description": "يدعم المزارعين المتحولين إلى المدخلات العضوية والأسمدة الحيوية والتوثيق والتسويق المباشر.",
+        "action": "التقديم على المنحة"
+      }
+    },
+    "modal": {
+      "closeAria": "إغلاق نافذة الأهلية",
+      "eligibleBannerTitle": "مؤهل — تم استيفاء شروط البرنامج",
+      "eligibleBannerSubtitle": "{count} قطعة أرض موثقة بإجمالي {area} هكتار مؤهلة لهذا البرنامج.",
+      "pendingBannerTitle": "الأهلية غير مكتملة",
+      "pendingBannerSubtitle": "أكمل المعايير المتبقية أدناه لتفعيل المزايا الموثقة.",
+      "criteriaHeading": "قائمة التحقق من الأهلية",
+      "matchedPlotsHeading": "الحقول الموثقة المؤهلة",
+      "verifiedPlotPill": "موثق",
+      "plotAreaHa": "{area} هكتار",
+      "noVerifiedPlotsHint": "اربط سجل الأرض الرسمي في صفحة مزرعتي لتوثيق الملكية وتفاصيل المحصول.",
+      "goToFarmLink": "الذهاب إلى مزرعتي",
+      "openOfficialPortal": "زيارة البوابة الرسمية ({domain})",
+      "critVerifiedTitle": "سجل أرض موثق (AgriStack)",
+      "critVerifiedPass": "تم العثور على {count} حقل موثق في سجلاتك المحلية.",
+      "critVerifiedFail": "لم يتم العثور على حقل موثق. قم باستيراد سجل AgriStack في صفحة مزرعتي.",
+      "critCropPmfbyTitle": "محصول موسمي مشمول بالتأمين (الأرز، البقوليات، البذور الزيتية، الحبوب)",
+      "critCropPmfbyPass": "المحاصيل المطابقة المزروعة: {crops}.",
+      "critCropPmfbyFail": "حدد محصولاً موسمياً مشمولاً مثل الأرز أو القمح أو الماش أو الخردل.",
+      "critCropPkvyTitle": "محصول مؤهل للزراعة العضوية أو زراعة متداخلة",
+      "critCropPkvyPass": "محاصيل التحول العضوي المطابقة: {crops}.",
+      "critCropPkvyFail": "أضف حقول البستنة أو البقوليات أو الدخن أو الزراعة المتداخلة المؤهلة للتحول العضوي.",
+      "critCropPmKisanTitle": "حيازة أرض زراعية صالحة للزراعة",
+      "critCropPmKisanPass": "تم تسجيل {count} حقل صالح للزراعة (إجمالي {area} هكتار).",
+      "critCropPmKisanFail": "أضف أو استورد حقلاً زراعياً واحداً على الأقل بمساحة صالحة.",
+      "critCombinedPmfbyTitle": "حقل موثق مرتبط بمحصول مشمول",
+      "critCombinedPmfbyPass": "{count} حقل موثق جاهز للتغطية المدعومة (1.5% ربيع / 2% خريف).",
+      "critCombinedPmfbyFail": "يتطلب حقلاً موثقاً يزرع محصولاً مشمولاً في PMFBY.",
+      "critCombinedPkvyTitle": "مساحة مجموعة عضوية موثقة (حتى سقف 20 هكتاراً)",
+      "critCombinedPkvyPass": "تم توثيق {area} هكتار ضمن سقف منحة PKVY البالغ 20 هكتاراً.",
+      "critCombinedPkvyFail": "يتطلب حقلاً موثقاً واحداً على الأقل (حتى 20 هكتاراً) بمحصول مؤهل.",
+      "critCombinedPmKisanTitle": "قطعة أرض جاهزة للتحويل المباشر للمنافع (DBT)",
+      "critCombinedPmKisanPass": "{count} قطعة أرض موثقة جاهزة لتوثيق دعم ₹6,000 سنوياً.",
+      "critCombinedPmKisanFail": "اربط قطعة أرض موثقة لتأكيد أهلية التحويل المباشر."
+    }
+  },
+  "weather": {
+    "title": "الطقس",
+    "locationFallback": "الموقع المحدد",
+    "selectPlot": "اختر الحقل",
+    "listen": "الاستماع إلى ملخص الطقس",
+    "offline": "غير متصل · يتم عرض بيانات الطقس المحفوظة",
+    "updated": "آخر تحديث {time}",
+    "refresh": "تحديث",
+    "retry": "إعادة المحاولة",
+    "error": "تعذر تحميل بيانات الطقس",
+    "humidity": "الرطوبة",
+    "pressureUnit": "هكتوباسكال",
+    "temperatureUnit": "وحدة الحرارة",
+    "windUnit": "وحدة سرعة الرياح",
+    "hourly": "الساعات القادمة",
+    "daily": "توقعات 7 أيام",
+    "farmingHint": "ظروف العمل الزراعي",
+    "now": "الآن",
+    "feelsLike": "الشعور الفعلي",
+    "rainChance": "احتمال المطر",
+    "metricTemperature": "درجة الحرارة",
+    "metricRain": "المطر",
+    "metricWind": "الرياح",
+    "metricHumidity": "الرطوبة",
+    "metricSoilMoisture": "رطوبة التربة",
+    "lowShort": "أدنى",
+    "highShort": "أعلى",
+    "emptyHourly": "توقعات الطقس بالساعة غير متاحة حالياً.",
+    "loadSampleForecast": "تحميل توقعات تجريبية",
+    "chartSummary": "اليوم: {minTemp} عند {minTime} ترتفع إلى {maxTemp} عند {maxTime}، واحتمال مطر {rainChance}% حوالي {rainTime}.",
+    "clear": "صافٍ",
+    "cloudy": "غائم",
+    "rain": "مطر",
+    "snow": "ثلوج",
+    "storm": "عاصفة",
+    "unknown": "أحوال جوية غير معروفة",
+    "adviceSpray": "وقت مناسب لرش المحاصيل",
+    "adviceAvoidSpray": "تجنب الرش حالياً بسبب الرياح أو الأمطار أو الرطوبة العالية",
+    "adviceIrrigate": "قد تحتاج الحقول إلى الري",
+    "adviceIrrigationWait": "يمكن تأجيل الري في الوقت الحالي",
+    "adviceHeavyRain": "احتمال هطول أمطار غزيرة قريباً",
+    "adviceSowing": "الأجواء مناسبة للأعمال الحقلية والزراعة"
+  },
+  "dashboard": {
+    "farmOperations": "العمليات الزراعية",
+    "location": "ديتشولي، غوا",
+    "totalFields": "إجمالي الحقول",
+    "totalFieldsNote": "+2 هذا الشهر",
+    "activeCrops": "المحاصيل النشطة",
+    "activeCropsNote": "نمو صحي",
+    "soilMoisture": "رطوبة التربة",
+    "soilMoistureNote": "مستوى مثالي",
+    "temperature": "درجة الحرارة",
+    "temperatureNote": "ضمن المعدل الطبيعي",
+    "fieldOverview": "نظرة عامة على الحقول",
+    "fieldsAtGlance": "حقولك في لمحة سريعة",
+    "expandMap": "تكبير خريطة الحقول",
+    "openMap": "فتح خريطة الحقول بملء الشاشة",
+    "addField": "إضافة حقل",
+    "noFields": "لا توجد حقول بعد. استورد سجلات الأراضي الموثقة للبدء.",
+    "cropPairLabel": "{primary} + {intercrop}",
+    "intercropBadge": "+ {crop} متداخل",
+    "recentAlerts": "التنبيهات الأخيرة",
+    "alertsAttention": "أمور تحتاج إلى انتباهك",
+    "today": "اليوم",
+    "brand": "فيلد شيفت",
+    "closeMap": "إغلاق الخريطة",
+    "actionsCount": "{count} إجراءات",
+    "timeframe": {
+      "weekly": "هذا الأسبوع",
+      "monthly": "هذا الشهر"
+    },
+    "alerts": {
+      "moistureTitle": "انخفاض رطوبة التربة في القطاع الشمالي",
+      "moistureDetail": "انخفضت رطوبة الطبقة السطحية إلى أقل من 32%. راجع سجل التربة أو جدول رياً خفيفاً.",
+      "moistureAction": "مراجعة صحة التربة",
+      "tempTitle": "ارتفاع درجات الحرارة بعد الظهر",
+      "tempDetail": "يُتوقع وصول الحرارة العظمى إلى 34 درجة مئوية. اروِ المحاصيل الحساسة في الصباح الباكر.",
+      "tempAction": "عرض توقعات الطقس",
+      "irrigationTitle": "اكتمل فحص شبكة الري بالتنقيط",
+      "irrigationDetail": "ضغط الصمام الرئيسي وخطوط الري في حالة ممتازة في جميع الحقول النشطة.",
+      "irrigationAction": "عرض خريطة الحقول"
+    }
+  },
+  "market": {
+    "live": "سوق الجملة الزراعي المباشر",
+    "place": "سوق مارغاو · كاجو خام",
+    "grade": "كاجو · درجة قياسية",
+    "open": "السوق مفتوح",
+    "updated": "أسعار إرشادية · محدّث اليوم",
+    "title": "أسعار السوق",
+    "subtitle": "أسواق الجملة الإقليمية · أسعار مباشرة",
+    "searchPlaceholder": "ابحث عن محصول أو سوق…",
+    "sortByLabel": "ترتيب المحاصيل",
+    "sortByChange": "الترتيب: الأكبر تغيّراً",
+    "sortByPrice": "الترتيب: الأعلى سعراً",
+    "sortByName": "الترتيب: حسب الاسم",
+    "myCropsFirst": "محاصيلي أولاً",
+    "myCropBadge": "محصولي",
+    "allMarkets": "جميع الأسواق",
+    "priceVsLastWeek": "السعر مقارنة بالأسبوع الماضي",
+    "cropsCount": "{count} محاصيل",
+    "aiInsightHeading": "رؤية السوق الذكية",
+    "aiSummaryRising": "ارتفعت أسعار {crop} بنسبة {pct}% في {market}. وقت مناسب للبيع — فكر في تسويق مخزونك هذا الأسبوع.",
+    "aiSummaryFalling": "انخفضت أسعار {crop} بنسبة {pct}% في {market}. احتفظ بالمخزون إذا توفر تخزين جاف فقد تتحسن الأسعار الأسبوع القادم.",
+    "aiDataSourceNote": "استناداً إلى واردات الأسواق الإقليمية · محدّث اليوم",
+    "alertSettingsLink": "تنبيهات الأسعار وإعدادات الإشعارات",
+    "unitPerQuintal": "لكل قنطار",
+    "units": {
+      "shortQuintal": "₹/قنطار",
+      "perQuintal": "لكل قنطار",
+      "shortKg": "₹/كجم",
+      "perKg": "لكل كيلوغرام",
+      "short100Nuts": "₹/100 حبة",
+      "per100Nuts": "لكل 100 حبة",
+      "shortDozen": "₹/دستة",
+      "perDozen": "لكل دستة"
+    }
+  },
+  "marketDetail": {
+    "viewCropAnalysis": "تحليل السوق الكامل",
+    "backToMarket": "العودة إلى أسعار السوق",
+    "loadError": "تعذر تحميل تفاصيل السوق الآن.",
+    "sampleDataBadge": "بيانات نموذجية",
+    "vsYesterday": "مقارنة بأمس",
+    "vsLastWeek": "مقارنة بالأسبوع الماضي",
+    "gradeLabel": "الدرجة",
+    "priceHistoryTitle": "تاريخ الأسعار",
+    "averageLineLabel": "متوسط الفترة",
+    "avgShort": "المتوسط",
+    "compareLastYear": "مقارنة بالعام الماضي",
+    "modalPrice": "السعر السائد",
+    "dayRange": "الأدنى – الأعلى",
+    "lastYear": "العام الماضي",
+    "keyStatsTitle": "إحصاءات السوق الرئيسية",
+    "todayModal": "السعر السائد اليوم",
+    "avg30d": "متوسط 30 يوماً",
+    "highLow52w": "أدنى – أعلى سعر في 52 أسبوعاً",
+    "yearlySpread": "النطاق السنوي",
+    "volatility": "تذبذب الأسعار",
+    "volatility_stable": "مستقر",
+    "volatility_moderate": "متوسط",
+    "volatility_volatile": "متقلب",
+    "priceStability": "الاستقرار خلال 30 يوماً",
+    "arrivalsToday": "واردات السوق",
+    "quintals": "قنطار",
+    "nearbyMarketsTitle": "مقارنة الأسواق القريبة",
+    "nearbyMarketsSubtitle": "مرتبة حسب أعلى سعر سائد",
+    "bestPriceBadge": "أفضل سعر",
+    "analysisTitle": "تحليل السوق بلغة مبسطة",
+    "analysisSubtitle": "ملخص مبسط مبني على اتجاهات الأسعار الأخيرة",
+    "recSellNow": "بع الآن",
+    "recHold": "احتفظ",
+    "recWait": "انتظر",
+    "analysisRising": "ارتفعت أسعار {crop} بنسبة {pct}% خلال الأيام السبعة الماضية.",
+    "analysisFalling": "تراجعت أسعار {crop} بنسبة {pct}% خلال الأيام السبعة الماضية.",
+    "analysisSteady": "ظلت أسعار {crop} مستقرة خلال الأيام السبعة الماضية.",
+    "analysisAboveAvg": "الأسعار الحالية أعلى بنسبة {pct}% من متوسط 30 يوماً.",
+    "analysisBelowAvg": "الأسعار الحالية أقل بنسبة {pct}% من متوسط 30 يوماً.",
+    "recSellNowReason": "الأسعار قوية مقارنة بالمتوسط الشهري — بيع جزء من المحصول الجاهز الآن يضمن عائداً جيداً.",
+    "recHoldReason": "الأسعار قريبة من مستواها المعتاد — يمكنك البيع على دفعات أو التخزين في مكان جاف.",
+    "recWaitReason": "الأسعار منخفضة حالياً — إذا أمكن تخزين المحصول بأمان فقد يتحسن السعر عند انخفاض الواردات.",
+    "seasonalTitle": "النمط الموسمي للأسعار (12 شهراً)",
+    "bestMonthsToSell": "أفضل أشهر البيع: {months}",
+    "forecast7dTitle": "توقعات الأسعار للأيام السبعة القادمة",
+    "estimateBadge": "تقديري",
+    "forecastRangeBody": "السعر السائد المتوقع حوالي {mid} (النطاق المتوقع: من {low} إلى {high}).",
+    "financialDisclaimer": "إرشادات تقديرية مبنية على حركة الأسواق التاريخية. يرجى التأكد من الأسعار النهائية في سوقك المحلي قبل الشحن.",
+    "farmingInfoTitle": "معلومات الزراعة والدخل المتوقع",
+    "farmingInfoSubtitle": "مرجع زراعي والعائد التقديري بالسعر الحالي",
+    "personalizedIncomeBanner": "مساحة {area} هكتار من {crop} قد تحقق حوالي {amount} بسعر السوق اليوم.",
+    "growingSeason": "موسم الزراعة",
+    "season_kharif": "خريف (موسم الأمطار)",
+    "season_rabi": "ربيع/شتاء (رابي)",
+    "season_zaid": "صيفي (زايد)",
+    "season_annual": "طوال العام",
+    "season_perennial": "معمر",
+    "cropDuration": "مدة المحصول",
+    "durationDaysValue": "{days} يوماً",
+    "typicalYield": "الإنتاجية المعتادة",
+    "expectedIncomeHa": "الدخل الإجمالي المتوقع/هـ",
+    "storageTipsTitle": "ما بعد الحصاد والتخزين",
+    "storageTipsBody": "جفف المحصول إلى مستوى رطوبة آمن، وافرز الحبوب التالفة، وخزّنه في أكياس نظيفة جيدة التهوية مرتفعة عن الأرض.",
+    "harvestTimingTitle": "أفضل وقت للحصاد",
+    "harvestTimingBody": "احصد في ساعات الصباح الجافة عند النضج الكامل للحصول على أعلى درجة سعرية في السوق.",
+    "inputsAndHelpTitle": "المستلزمات والدعم القريب",
+    "inputsAndHelpSubtitle": "موزعو البذور والأسمدة المعتمدون ودعم الأسعار",
+    "mspTitle": "الحد الأدنى لسعر الدعم (MSP)",
+    "mspBody": "سعر الدعم المرجعي الرسمي: {msp} لكل قنطار",
+    "dealerStockSeedsFertilizer": "تتوفر بذور معتمدة وأسمدة NPK وعناصر صغرى",
+    "dealerStockBioInputs": "أسمدة عضوية ووقاية نباتات وأكياس تخزين",
+    "callDealer": "الاتصال بالموزع",
+    "setAlertTitle": "ضبط تنبيه السعر",
+    "setAlertSubtitle": "احصل على إشعار على هذا الجهاز عندما يتجاوز {crop} سعرك المستهدف",
+    "alertCondition": "شرط التنبيه",
+    "whenPriceAbove": "عندما يرتفع السعر فوق",
+    "whenPriceBelow": "عندما ينخفض السعر دون",
+    "targetPriceLabel": "السعر المستهدف",
+    "saveAlertBtn": "تفعيل التنبيه",
+    "alertSaved": "تم حفظ تنبيه السعر على هذا الجهاز.",
+    "invalidTargetPrice": "يرجى إدخال سعر مستهدف صالح أكبر من 0.",
+    "alertTriggeredTitle": "تم الوصول إلى السعر المستهدف لمحصول {crop}: {price}",
+    "alertTriggeredBody": "السعر الحالي {direction} هدفك البالغ {target} في سوق {market}.",
+    "alertTriggeredShort": "تحقق الهدف {target}",
+    "directionAbove": "يساوي أو أعلى من",
+    "directionBelow": "يساوي أو أقل من",
+    "addToFavourites": "إضافة إلى المفضلة",
+    "removeFromFavourites": "إزالة من المفضلة",
+    "share": "مشاركة السعر",
+    "copiedToClipboard": "تم نسخ ملخص السوق إلى الحافظة",
+    "relatedCropsTitle": "محاصيل ذات صلة",
+    "viewPrice": "عرض السعر"
+  },
+  "alerts": {
+    "sowingCritical": "موعد الزراعة حرج: تأخر الأمطار الموسمية",
+    "actionNeeded": "إجراء مطلوب",
+    "sowingDetail": "لقد تجاوزت موعد الزراعة الأمثل للأرز بـ 14 يوماً. لتجنب خسارة الإنتاج، فكر في زراعة محصول قصير الدورة مثل الدخن أو اللوبيا.",
+    "dismiss": "تجاهل",
+    "updateCropPlan": "تحديث خطة المحصول"
+  },
+  "crops": {
+    "search": "البحث عن المحاصيل",
+    "noResults": "لم يتم العثور على محاصيل",
+    "listenTo": "استمع إلى {name}",
+    "rice": {
+      "name": "الأرز",
+      "localName": "الأرز"
+    },
+    "wheat": {
+      "name": "القمح",
+      "localName": "القمح"
+    },
+    "maize": {
+      "name": "ذرة",
+      "localName": "ذرة صفراء"
+    },
+    "sorghum": {
+      "name": "ذرة رفيعة",
+      "localName": "سورغم"
+    },
+    "millet": {
+      "name": "دخن",
+      "localName": "دخن لؤلؤي"
+    },
+    "barley": {
+      "name": "شعير",
+      "localName": "شعير"
+    },
+    "oats": {
+      "name": "شوفان",
+      "localName": "شوفان"
+    },
+    "chickpea": {
+      "name": "الحمص",
+      "localName": "الحمص"
+    },
+    "lentil": {
+      "name": "العدس",
+      "localName": "العدس"
+    },
+    "pigeon-pea": {
+      "name": "بسلة هندية",
+      "localName": "بازلاء الحمام"
+    },
+    "moong": {
+      "name": "فاصوليا المونج",
+      "localName": "ماش أخضر"
+    },
+    "cowpea": {
+      "name": "لوبيا",
+      "localName": "لوبيا بلدية"
+    },
+    "soybean": {
+      "name": "فول الصويا",
+      "localName": "صويا"
+    },
+    "beans": {
+      "name": "فاصوليا",
+      "localName": "فاصوليا خضراء"
+    },
+    "peas": {
+      "name": "بازلاء",
+      "localName": "بسلة خضراء"
+    },
+    "groundnut": {
+      "name": "فول سوداني",
+      "localName": "فستق العبيد"
+    },
+    "mustard": {
+      "name": "الخردل",
+      "localName": "الخردل"
+    },
+    "sunflower": {
+      "name": "دوار الشمس",
+      "localName": "عباد الشمس"
+    },
+    "sesame": {
+      "name": "سمسم",
+      "localName": "جلجلان / سمسم"
+    },
+    "rapeseed": {
+      "name": "سلجم",
+      "localName": "كانولا"
+    },
+    "potato": {
+      "name": "بطاطس",
+      "localName": "بطاطا"
+    },
+    "sweet-potato": {
+      "name": "بطاطا حلوة",
+      "localName": "بطاطا حلوة"
+    },
+    "cassava": {
+      "name": "كسافا",
+      "localName": "منيهوت"
+    },
+    "yam": {
+      "name": "يام",
+      "localName": "درنات اليام"
+    },
+    "onion": {
+      "name": "بصل",
+      "localName": "بصل"
+    },
+    "garlic": {
+      "name": "ثوم",
+      "localName": "ثوم"
+    },
+    "tomato": {
+      "name": "طماطم",
+      "localName": "بندورة"
+    },
+    "brinjal": {
+      "name": "باذنجان",
+      "localName": "باذنجان"
+    },
+    "chilli": {
+      "name": "فلفل حار",
+      "localName": "فلفل أخضر حار"
+    },
+    "cabbage": {
+      "name": "ملفوف",
+      "localName": "كرنب"
+    },
+    "cauliflower": {
+      "name": "قرنبيط",
+      "localName": "زهرة"
+    },
+    "okra": {
+      "name": "بامية",
+      "localName": "بامية"
+    },
+    "cucumber": {
+      "name": "خيار",
+      "localName": "خيار"
+    },
+    "pumpkin": {
+      "name": "يقطين",
+      "localName": "قرع عسلي"
+    },
+    "cotton": {
+      "name": "قطن",
+      "localName": "قطن"
+    },
+    "sugarcane": {
+      "name": "قصب السكر",
+      "localName": "قصب السكر"
+    },
+    "jute": {
+      "name": "جوت",
+      "localName": "ألياف الجوت"
+    },
+    "tea": {
+      "name": "شاي",
+      "localName": "أوراق الشاي"
+    },
+    "coffee": {
+      "name": "قهوة",
+      "localName": "بن"
+    },
+    "tobacco": {
+      "name": "تبغ",
+      "localName": "تبغ"
+    },
+    "coconut": {
+      "name": "جوز الهند",
+      "localName": "نارجيل"
+    },
+    "cashew": {
+      "name": "كاجو",
+      "localName": "كاجو خام"
+    },
+    "arecanut": {
+      "name": "جوز الأريكا",
+      "localName": "فوفل / أريكا"
+    },
+    "banana": {
+      "name": "موز",
+      "localName": "موز"
+    },
+    "mango": {
+      "name": "مانجو",
+      "localName": "مانجو"
+    },
+    "papaya": {
+      "name": "بابايا",
+      "localName": "بابايا"
+    },
+    "citrus": {
+      "name": "حمضيات",
+      "localName": "برتقال / ليمون"
+    },
+    "apple": {
+      "name": "تفاح",
+      "localName": "تفاح"
+    },
+    "cocoa": {
+      "name": "كاكاو",
+      "localName": "حبوب الكاكاو"
+    },
+    "oil-palm": {
+      "name": "نخيل الزيت",
+      "localName": "نخيل الزيت"
+    },
+    "rubber": {
+      "name": "مطاط",
+      "localName": "شجر المطاط"
+    },
+    "alfalfa": {
+      "name": "برسيم حجازي",
+      "localName": "فصة علفية"
+    },
+    "napier-grass": {
+      "name": "عشب نابير",
+      "localName": "عشب الفيل"
+    },
+    "paddy": {
+      "name": "أرز غير مقشور",
+      "localName": "أرز الحقل"
+    },
+    "areca-nut": {
+      "name": "جوز الأريكا",
+      "localName": "فوفل"
+    },
+    "vegetables": {
+      "name": "خضروات",
+      "localName": "خضروات موسمية"
+    },
+    "other": {
+      "name": "محصول آخر",
+      "localName": "محصول آخر"
+    },
+    "black-gram": {
+      "name": "ماش أسود",
+      "localName": "عدس أسود"
+    },
+    "fenugreek": {
+      "name": "حلبة",
+      "localName": "حلبة خضراء"
+    },
+    "grape": {
+      "name": "عنب",
+      "localName": "عنب"
+    },
+    "unavailableTitle": "المحصول غير متاح",
+    "unavailableBody": "هذا المحصول غير متاح في التطبيق حالياً. اختر محصولاً آخر من قائمة السوق.",
+    "backToMarket": "العودة إلى أسعار السوق"
+  },
+  "advisory": {
+    "title": "الإرشاد الزراعي الصوتي اليومي",
+    "badge": "تحديث زراعي",
+    "summary": "اضغط تشغيل للاستماع إلى إرشادات الحقل والطقس والسوق اليوم بلغتك المختارة.",
+    "fullScript": "طاب يومكم! ساعات الصباح الصافية اليوم مناسبة جداً لفحص رطوبة التربة ومعاينة الأوراق لاكتشاف أي علامات مبكرة للآفات. أسعار الكاجو والبقوليات مستقرة في الأسواق الإقليمية، لذا احفظ المحصول الجاف في أكياس نظيفة وجيدة التهوية قبل النقل.",
+    "playAria": "الاستماع إلى الإرشاد الزراعي الصوتي اليومي",
+    "stopAria": "إيقاف الإرشاد الزراعي الصوتي اليومي"
+  },
+  "notifications": {
+    "ariaRegion": "إشعارات المزرعة",
+    "types": {
+      "market": "السوق",
+      "weather": "الطقس",
+      "plot": "الحقل"
+    },
+    "marketRiseTitle": "ارتفاع أسعار {crop} بنسبة {pct}% في سوق {market}",
+    "marketRiseBody": "سعر اليوم هو {price} {unit}، بزيادة {diff} عن يوم أمس.",
+    "clearSkiesTitle": "سماء صافية خلال الأيام الـ {days} القادمة",
+    "clearSkiesBody": "انخفاض احتمال الأمطار يجعلها فترة ممتازة لإزالة الأعشاب أو تجفيف المحصول أو الرش الورقي.",
+    "soilHealthGoodTitle": "رطوبة التربة مثالية عند {moisture}%",
+    "soilHealthGoodBody": "تتوفر في حقولك رطوبة جيدة قبل موسم زراعة {season}.",
+    "ureaSubsidyTitle": "وصول مخزون الأسمدة إلى مركز {market}",
+    "ureaSubsidyBody": "تتوفر أكياس بوزن {bagKg} كجم في المتجر التعاوني بسعر {price} للكيس."
+  },
+  "soil": {
+    "title": "بطاقة صحة التربة",
+    "subtitle": "استورد أو أدخل بيانات العناصر الغذائية لتربتك",
+    "overviewSpeech": "ارفع صورة لبطاقة صحة التربة المطبوعة لاستخراج القيم الغذائية تلقائياً، أو املأ نموذج التربة اللاتيريتية التجريبي، أو أدخل قراءات النيتروجين والفوسفور والبوتاسيوم والحموضة يدوياً.",
+    "currentReadingsIntro": "قراءات التربة الحالية المعروضة على الشاشة",
+    "populateLateriteTitle": "تعبئة نموذج التربة اللاتيريتية",
+    "populateLateriteDesc": "تعبئة تلقائية لقيم واقعية لتربة لاتيريتية (حموضة 5.5، نيتروجين منخفض، بوتاسيوم متوسط).",
+    "lateriteActionsHeading": "الإجراءات الموصى بها للتربة اللاتيريتية",
+    "lateriteTip1": "يُوصى بإضافة الجير الزراعي بمعدل 500 إلى 800 كجم للهكتار لرفع درجة حموضة التربة.",
+    "lateriteTip2": "أضف السماد العضوي المتحلل أو الكمبوست قبل الزراعة لرفع نسبة الكربون العضوي.",
+    "lateriteTip3": "قسّم جرعات السماد النيتروجيني على دفعات لتقليل فقده مع مياه الأمطار.",
+    "cardPhotoLabel": "صورة بطاقة صحة التربة",
+    "ocrBadge": "استخراج تلقائي عبر المسح الضوئي",
+    "extractingValues": "جاري استخراج قيم التربة…",
+    "extractingSubtext": "تتم قراءة النيتروجين والفوسفور والبوتاسيوم والحموضة في النموذج أدناه",
+    "removePhoto": "إزالة الصورة",
+    "valuesExtracted": "تم استخراج القيم",
+    "dropToUpload": "أفلت الصورة للرفع",
+    "uploadCardTitle": "رفع بطاقة صحة التربة",
+    "uploadCardSubtitle": "اضغط لاختيار صورة أو اسحبها وأفلتها هنا",
+    "supportedFormats": "يدعم صيغ JPG و PNG و HEIC",
+    "ocrExplain": "يؤدي رفع الصورة إلى قراءة قيم النيتروجين والفوسفور والبوتاسيوم ودرجة الحموضة تلقائياً من بطاقتك المطبوعة لمراجعتها أدناه.",
+    "manualEntryTitle": "الإدخال اليدوي",
+    "manualEntrySubtitle": "أدخل القيم من بطاقة تحليل التربة الخاصة بك",
+    "primaryMacrosBadge": "العناصر الكبرى",
+    "saveRecordBtn": "حفظ سجل التربة بدون إنترنت",
+    "storedLocallyNote": "محفوظ محلياً على جهازك · ستتم مزامنته عند الاتصال بالإنترنت",
+    "savedOfflineToast": "تم حفظ سجل التربة بدون إنترنت!",
+    "units": {
+      "kgPerHa": "كيلوغرام لكل هكتار",
+      "dsPerM": "ديسي سيمنز لكل متر"
+    },
+    "fields": {
+      "nitrogen": {
+        "label": "النيتروجين (N)",
+        "tip": "النيتروجين المتاح؛ منخفض أقل من 280 كجم/هـ"
+      },
+      "phosphorus": {
+        "label": "الفوسفور (P)",
+        "tip": "الفوسفور المتاح؛ منخفض أقل من 25 كجم/هـ"
+      },
+      "potassium": {
+        "label": "البوتاسيوم (K)",
+        "tip": "البوتاسيوم المتاح؛ متوسط 150–250 كجم/هـ"
+      },
+      "ph": {
+        "label": "درجة حموضة التربة (pH)",
+        "tip": "المستوى المثالي 6.0–7.5 لمعظم المحاصيل"
+      },
+      "organicCarbon": {
+        "label": "الكربون العضوي",
+        "tip": "مرتفع أعلى من 0.75%؛ منخفض أقل من 0.5%"
+      },
+      "ec": {
+        "label": "الملوحة والتوصيل الكهربائي (EC)",
+        "tip": "آمن أقل من 2 dS/m لمعظم المحاصيل"
+      }
+    }
+  },
+  "pest": {
+    "title": "فاحص الآفات والأمراض",
+    "subtitle": "تشخيص أمراض المحاصيل بالذكاء الاصطناعي",
+    "overviewSpeech": "التقط أو ارفع صورة واضحة للأوراق أو السيقان أو الثمار المصابة لتحديد الآفات والأمراض الزراعية والاستماع فوراً لخطوات العلاج العضوي والكيميائي.",
+    "scanAnotherAria": "فحص صورة أخرى",
+    "takeOrUploadTitle": "التقط أو ارفع صورة",
+    "takeOrUploadSubtitle": "وجّه الكاميرا نحو الأوراق أو السيقان أو الثمار المصابة",
+    "partLeaves": "الأوراق",
+    "partStems": "السيقان",
+    "partInsects": "الحشرات",
+    "tapToOpenCamera": "اضغط لفتح الكاميرا",
+    "trySampleScan": "تجربة فحص ورقة نموذجية",
+    "cropPhotoAlt": "صورة المحصول للتحليل",
+    "analysingOverlay": "جاري التحليل بنموذج الذكاء الاصطناعي…",
+    "analysisComplete": "اكتمل التحليل",
+    "removePhotoAria": "إزالة الصورة",
+    "scanningStatusTitle": "يقوم الذكاء الاصطناعي بفحص صورتك…",
+    "scanningStatusSubtitle": "مقارنة مع أكثر من 4,000 بصمة لأمراض المحاصيل",
+    "howItWorksTitle": "كيف يعمل",
+    "howStep1": "التقط صورة واضحة للجزء المصاب من النبات",
+    "howStep2": "يفحص الذكاء الاصطناعي الأمراض والآفات ونقص العناصر الشائعة",
+    "howStep3": "احصل على نصائح علاجية فورية خطوة بخطوة حتى بدون إنترنت",
+    "severity": {
+      "moderate": "متوسطة",
+      "high": "شديدة"
+    },
+    "severityBadge": "إصابة {severity}",
+    "detectedOn": "تم رصده على:",
+    "confidenceLabel": "دقة {pct}%",
+    "immediateActions": "إجراءات فورية",
+    "treatmentOptions": "خيارات العلاج",
+    "organicTreatment": "العلاج العضوي",
+    "chemicalTreatment": "العلاج الكيميائي",
+    "disclaimer": "تشخيص إرشادي بالذكاء الاصطناعي — استشر المرشد الزراعي المحلي قبل الرش الكيميائي المكثف.",
+    "resultSpeechIntro": "نتيجة التشخيص: تم رصد {disease} على محصول {crop}. شدة الإصابة {severity}، بنسبة ثقة {confidence}.",
+    "diseases": {
+      "leafBlight": {
+        "name": "لفحة الأوراق البكتيرية",
+        "description": "مرض لفحة الأوراق البكتيرية الناتج عن بكتيريا زانثوموناس. يبدأ باصفرار أطراف الأوراق مع حواف مائية متموجة وجفاف المجموع الخضري.",
+        "immediate1": "صرّف المياه الراكدة من الحقل لمدة 3 إلى 4 أيام لتقليل الرطوبة.",
+        "immediate2": "تجنب الري بالرش العلوي والإفراط في التسميد النيتروجيني.",
+        "immediate3": "أزل الأوراق شديدة الإصابة وتخلص منها بعيداً عن قنوات الري.",
+        "organic1": "رش مستحلب زيت النيم بتركيز 3% (30 مل لكل لتر ماء) كل 7 أيام.",
+        "organic2": "أضف فطر تريكوديرما فيريدي بمعدل 5 غرامات لكل لتر حول منطقة الجذور.",
+        "organic3": "عزز مناعة النبات بالبوتاسيوم أو رماد الخشب بمعدل 500 كجم للهكتار.",
+        "chemical1": "رش أوكسي كلوريد النحاس 50% بمعدل 2.5 إلى 3 غرامات لكل لتر ماء.",
+        "chemical2": "عند توصية المهندس الزراعي، امزجه مع مبيد بكتيري زراعي بالجرعة المقررة.",
+        "chemical3": "نفّذ الرش في ساعات الصباح الجافة أو المساء فقط إذا تجاوزت الإصابة 25% من الأوراق."
+      },
+      "powderyMildew": {
+        "name": "البياض الدقيقي",
+        "description": "عدوى فطرية تصيب النموات الحديثة والعناقيد الزهرية والثمار الصغيرة وتترك طبقة بيضاء دقيقية على سطح الأوراق.",
+        "immediate1": "قلّم الأفرع والعناقيد المصابة بشدة وتخلص منها بأمان.",
+        "immediate2": "حسّن حركة الهواء ودخول ضوء الشمس عبر تخفيف الأفرع المتشابكة.",
+        "immediate3": "نفّذ الرش في الصباح الباكر أو المساء لتجنب احتراق الأوراق.",
+        "organic1": "رش الكبريت القابل للبلل 80% بمعدل 2 غرام لكل لتر ماء.",
+        "organic2": "استخدم محلول بيكربونات الصوديوم بتركيز 0.5% (5 غرامات لكل لتر) على البقع المبكرة.",
+        "organic3": "تابع بالرش بمستخلص النيم النباتي كل 5 إلى 7 أيام.",
+        "chemical1": "رش مبيد هيكساكونازول 5% بمعدل 2 مل لكل لتر ماء.",
+        "chemical2": "كبديل، رش بروبيكونازول 25% بمعدل 1 مل لكل لتر ماء.",
+        "chemical3": "بدّل بين مجموعات المبيدات الفطرية لمنع تكوّن مقاومة لدى الفطر."
+      }
+    }
+  },
+  "dealers": {
+    "title": "موزعو البذور والأسمدة القريبون",
+    "subtitle": "تحقق من توفر المخزون المباشر في متاجر المستلزمات الزراعية المرخصة بالقرب من قريتك.",
+    "searchAria": "البحث عن الموزعين أو المواقع أو المخزون",
+    "searchPlaceholder": "ابحث عن بذور أو يوريا أو مدينة…",
+    "distanceAway": "على بُعد {km} كم",
+    "callDealer": "الاتصال بالمتجر",
+    "getDirections": "عرض الاتجاهات",
+    "noResults": "لا يوجد موزع يطابق \"{query}\". جرّب البحث عن البذور أو اليوريا أو اسم المدينة.",
+    "items": {
+      "mapusaKendra": {
+        "name": "مركز مابوسا للخدمات الزراعية",
+        "location": "طريق السوق، مابوسا، شمال غوا"
+      },
+      "dicholiAgro": {
+        "name": "مركز ديتشولي الزراعي",
+        "location": "دوار محطة الحافلات، بيتشوليم، غوا"
+      },
+      "goaSeedCoop": {
+        "name": "تعاونية غوا للبذور والأسمدة",
+        "location": "طريق بوندا السريع، باناجي، غوا"
+      }
+    },
+    "stock": {
+      "inStockRagi": "بذور الدخن والبقوليات: متوفرة",
+      "outOfStockUrea": "اليوريا: غير متوفرة حالياً",
+      "lowStockNeem": "زيت النيم: كمية محدودة",
+      "inStockUrea": "اليوريا: متوفرة"
+    }
+  },
+  "group": {
+    "eyebrow": "مساحة الإرشاد الزراعي",
+    "title": "نظرة عامة على جمعية المزارعين",
+    "coopName": "جمعية ديتشولي التعاونية",
+    "roleBadge": "مشرف / مرشد زراعي",
+    "listenSummaryAria": "الاستماع إلى ملخص الطلب المجمع للجمعية",
+    "totalFarmers": "إجمالي المزارعين",
+    "totalFarmersDetail": "{plots} حقول في {villages} قرى",
+    "mappedArea": "المساحة المسجلة",
+    "hectaresUnit": "هكتار",
+    "hectaresSpoken": "هكتار",
+    "mappedAreaDetail": "{plots} حقول نشطة للأعضاء",
+    "bulkSeedDemand": "الطلب الجماعي للبذور",
+    "kgUnit": "كغ",
+    "topSeedDetail": "{firstCrop} {firstKg} كغ · {secondCrop} {secondKg} كغ",
+    "singleSeedDetail": "{firstCrop} {firstKg} كغ",
+    "bulkUreaDemand": "الطلب الجماعي لليوريا",
+    "ureaBagsDetail": "{bags} أكياس (45 كغ) مطلوبة لهذه الدورة",
+    "cropDemandTitle": "طلب البذور واليوريا حسب المحصول",
+    "cropDemandSubtitle": "مجمّع من مساحات حقول الأعضاء ومعدلات البذار والتسميد القياسية",
+    "cropAreaLabel": "{ha} هكتار مسجل",
+    "cropSeedRate": "بذور: {kg} كغ ({rate} كغ/هكتار)",
+    "cropUreaRate": "يوريا: {kg} كغ ({rate} كغ/هكتار)",
+    "directoryTitle": "دليل المزارعين",
+    "directorySubtitle": "متابعة حقول الأعضاء وتنسيق الطلبات الجماعية للبذور والأسمدة.",
+    "onTrackCount": "{count} في المسار الصحيح",
+    "attentionCount": "{count} بحاجة إلى متابعة",
+    "colFarmerName": "اسم المزارع",
+    "colVillage": "القرية",
+    "colPrimaryCrops": "المحاصيل الرئيسية",
+    "colMappedArea": "المساحة المسجلة",
+    "colInputDemand": "طلب المدخلات",
+    "colStatus": "الحالة",
+    "plotCountSingle": "حقل {count}",
+    "plotCountPlural": "{count} حقول",
+    "rowSeedUrea": "{seed} كغ بذور · {urea} كغ يوريا",
+    "procurementTitle": "تقدير المشتريات",
+    "procurementDetail": "القيمة المتوقعة للشراء الجماعي للبذور واليوريا",
+    "attentionPlotsTitle": "مزارعون بحاجة إلى متابعة",
+    "attentionPlotsDetail": "تأخر الزراعة أو انتظار تسليم المدخلات",
+    "activeVillagesTitle": "القرى النشطة",
+    "activeVillagesDetail": "المشاركة في هذه الدورة التعاونية",
+    "summarySpeech": "{title}، {coop}. يوجد {farmers} مزارعين أعضاء في {villages} قرى بمساحة {area} {areaUnit} موزعة على {plots} حقول. يبلغ الطلب الجماعي للبذور {seed} ويتصدره محصول {topCrop} بكمية {topCropSeed}. ويبلغ الطلب الجماعي لليوريا {urea} أي {bags} أكياس. القيمة التقديرية للشراء الجماعي هي {procurement}.",
+    "status": {
+      "onTrack": "منتظم",
+      "sowingDelayed": "زراعة متأخرة",
+      "inputsPending": "مدخلات معلقة"
+    },
+    "members": {
+      "ramesh": "راميش نايك",
+      "savitri": "سافيتري غاونكار",
+      "mohan": "موهان كورغاونكار",
+      "anita": "أنيتا شيرودكار",
+      "vishnu": "فيشنو نايك",
+      "laxmi": "لاكشمي باراب",
+      "prakash": "براكاش ديساي"
+    },
+    "villages": {
+      "dicholi": "ديتشولي",
+      "amona": "أمونا",
+      "sanquelim": "سانكليم",
+      "mulgao": "مولغاو",
+      "honda": "هوندا",
+      "mayem": "مايم",
+      "narva": "نارفا"
+    }
+  },
+  "intercrop": {
+    "benefits": {
+      "nitrogenFixation": "تثبيت النيتروجين",
+      "weedSuppression": "مكافحة الأعشاب الضارة",
+      "canopyMoisture": "حفظ الرطوبة والمظلة النباتية",
+      "shadeSynergy": "تكامل الظل",
+      "moistureCover": "غطاء الرطوبة المتبقية",
+      "pestDeterrence": "مكافحة طبيعية للآفات"
+    }
+  }
+}

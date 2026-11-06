@@ -1,0 +1,425 @@
+{
+  "$defs": {
+    "Economics": {
+      "properties": {
+        "fertilizer_saved_kg_per_acre": {
+          "default": 0.0,
+          "title": "Fertilizer Saved Kg Per Acre",
+          "type": "number"
+        },
+        "fertilizer_saving_inr_per_acre": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fertilizer Saving Inr Per Acre"
+        },
+        "net_return_per_acre": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Net Return Per Acre"
+        },
+        "net_return_pessimistic_per_acre": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Net Return Pessimistic Per Acre"
+        },
+        "price_basis": {
+          "items": {
+            "$ref": "#/$defs/PriceBasis"
+          },
+          "title": "Price Basis",
+          "type": "array"
+        }
+      },
+      "title": "Economics",
+      "type": "object"
+    },
+    "Excluded": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "crop": {
+          "title": "Crop",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "title": "Params",
+          "type": "object"
+        }
+      },
+      "required": [
+        "crop",
+        "code"
+      ],
+      "title": "Excluded",
+      "type": "object"
+    },
+    "Option": {
+      "properties": {
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "crop_sequence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Sequence",
+          "type": "array"
+        },
+        "economics": {
+          "$ref": "#/$defs/Economics"
+        },
+        "rank": {
+          "title": "Rank",
+          "type": "integer"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ReasonCodeOut"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "scores": {
+          "$ref": "#/$defs/ScoreSet"
+        },
+        "seasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Seasons",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "trade_off_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReasonCodeOut"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/Uncertainty"
+        }
+      },
+      "required": [
+        "rank",
+        "crop_sequence",
+        "seasons",
+        "scores",
+        "uncertainty",
+        "economics",
+        "reason_codes",
+        "confidence",
+        "sources"
+      ],
+      "title": "Option",
+      "type": "object"
+    },
+    "PriceBasis": {
+      "properties": {
+        "crop": {
+          "title": "Crop",
+          "type": "string"
+        },
+        "market": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Market"
+        },
+        "msp": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Msp"
+        },
+        "used": {
+          "anyOf": [
+            {
+              "enum": [
+                "msp",
+                "market"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Used"
+        }
+      },
+      "required": [
+        "crop"
+      ],
+      "title": "PriceBasis",
+      "type": "object"
+    },
+    "ReasonCodeOut": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "title": "Params",
+          "type": "object"
+        },
+        "text_en": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text En"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "ReasonCodeOut",
+      "type": "object"
+    },
+    "ScoreSet": {
+      "properties": {
+        "pest": {
+          "title": "Pest",
+          "type": "number"
+        },
+        "return": {
+          "title": "Return",
+          "type": "number"
+        },
+        "soil": {
+          "title": "Soil",
+          "type": "number"
+        },
+        "total": {
+          "title": "Total",
+          "type": "number"
+        },
+        "water_risk": {
+          "title": "Water Risk",
+          "type": "number"
+        }
+      },
+      "required": [
+        "soil",
+        "return",
+        "water_risk",
+        "pest",
+        "total"
+      ],
+      "title": "ScoreSet",
+      "type": "object"
+    },
+    "Uncertainty": {
+      "properties": {
+        "pessimistic_total": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pessimistic Total"
+        },
+        "top3_stability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top3 Stability"
+        }
+      },
+      "title": "Uncertainty",
+      "type": "object"
+    },
+    "Versions": {
+      "properties": {
+        "layer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layer"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "params": {
+          "title": "Params",
+          "type": "string"
+        },
+        "rules": {
+          "title": "Rules",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "rules",
+        "params"
+      ],
+      "title": "Versions",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "excluded_first_season": {
+      "items": {
+        "$ref": "#/$defs/Excluded"
+      },
+      "title": "Excluded First Season",
+      "type": "array"
+    },
+    "grid_cell_id": {
+      "title": "Grid Cell Id",
+      "type": "string"
+    },
+    "job_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job Id"
+    },
+    "missing_inputs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Inputs",
+      "type": "array"
+    },
+    "needs_human_review": {
+      "title": "Needs Human Review",
+      "type": "boolean"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "options": {
+      "items": {
+        "$ref": "#/$defs/Option"
+      },
+      "title": "Options",
+      "type": "array"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "fast",
+        "refined"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "versions": {
+      "$ref": "#/$defs/Versions"
+    }
+  },
+  "required": [
+    "request_id",
+    "status",
+    "grid_cell_id",
+    "versions",
+    "options",
+    "confidence",
+    "needs_human_review"
+  ],
+  "title": "RecommendResponse",
+  "type": "object"
+}

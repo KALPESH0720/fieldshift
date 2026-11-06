@@ -1,0 +1,22 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: groundnut
+name: "Groundnut"
+family: Fabaceae
+seasons: ['kharif']
+duration_days: 110
+root_depth: shallow
+n_effect: fixes
+n_credit_kg_per_acre: 8
+n_requirement_kg_per_acre: 0
+residue: medium
+water_need_mm: 500
+temp_c: [12, 22, 32, 38]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [400, 500, 800, 1200]     # effective water supply: rain + stored soil water at sowing
+ph: [5.0, 5.8, 7.0, 8.0]
+heat_stress_days_tolerance: 20
+min_gap_same_family_seasons: 2
+typical_yield_q_per_acre: 6
+pests: ['leaf miner', 'tikka disease']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null

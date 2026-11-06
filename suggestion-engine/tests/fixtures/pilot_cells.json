@@ -1,0 +1,107 @@
+{
+  "_note": "SYNTHETIC development fixtures. Developer B replaces these with real P1 output.",
+  "cells": [
+    {
+      "cell_id": "g0.1_185_738",
+      "layer_version": "synthetic-0",
+      "synthetic": true,
+      "soil_class": "clay_loam",
+      "soil_ph": 7.2,
+      "drought_frequency": 0.18,
+      "ndvi_cv": 0.12,
+      "seasons": {
+        "kharif": {
+          "rain_mm_median": 620,
+          "rain_mm_dry_year": 430,
+          "stored_water_mm_at_sowing": 40,
+          "tmean_c": 25.5,
+          "heat_stress_days": 5,
+          "longest_dry_spell_days": 14
+        },
+        "rabi": {
+          "rain_mm_median": 70,
+          "rain_mm_dry_year": 25,
+          "stored_water_mm_at_sowing": 150,
+          "tmean_c": 22.0,
+          "heat_stress_days": 2,
+          "longest_dry_spell_days": 60
+        }
+      },
+      "future": {
+        "ssp245": {
+          "temp_delta_c": 1.2,
+          "rain_change_pct": 5.0
+        }
+      },
+      "_comment": "SYNTHETIC development values for pune-like; NOT NASA data. Replace with pipeline P1 output."
+    },
+    {
+      "cell_id": "g0.1_181_745",
+      "layer_version": "synthetic-0",
+      "synthetic": true,
+      "soil_class": "clay",
+      "soil_ph": 7.8,
+      "drought_frequency": 0.35,
+      "ndvi_cv": 0.12,
+      "seasons": {
+        "kharif": {
+          "rain_mm_median": 480,
+          "rain_mm_dry_year": 320,
+          "stored_water_mm_at_sowing": 45,
+          "tmean_c": 26.5,
+          "heat_stress_days": 10,
+          "longest_dry_spell_days": 20
+        },
+        "rabi": {
+          "rain_mm_median": 55,
+          "rain_mm_dry_year": 15,
+          "stored_water_mm_at_sowing": 120,
+          "tmean_c": 23.0,
+          "heat_stress_days": 3,
+          "longest_dry_spell_days": 70
+        }
+      },
+      "future": {
+        "ssp245": {
+          "temp_delta_c": 1.2,
+          "rain_change_pct": 5.0
+        }
+      },
+      "_comment": "SYNTHETIC development values for drier-interior; NOT NASA data. Replace with pipeline P1 output."
+    },
+    {
+      "cell_id": "g0.1_187_734",
+      "layer_version": "synthetic-0",
+      "synthetic": true,
+      "soil_class": "loam",
+      "soil_ph": 6.4,
+      "drought_frequency": 0.08,
+      "ndvi_cv": 0.12,
+      "seasons": {
+        "kharif": {
+          "rain_mm_median": 1150,
+          "rain_mm_dry_year": 850,
+          "stored_water_mm_at_sowing": 60,
+          "tmean_c": 24.0,
+          "heat_stress_days": 1,
+          "longest_dry_spell_days": 8
+        },
+        "rabi": {
+          "rain_mm_median": 90,
+          "rain_mm_dry_year": 40,
+          "stored_water_mm_at_sowing": 170,
+          "tmean_c": 21.0,
+          "heat_stress_days": 0,
+          "longest_dry_spell_days": 50
+        }
+      },
+      "future": {
+        "ssp245": {
+          "temp_delta_c": 1.2,
+          "rain_change_pct": 5.0
+        }
+      },
+      "_comment": "SYNTHETIC development values for wetter-ghat-side; NOT NASA data. Replace with pipeline P1 output."
+    }
+  ]
+}

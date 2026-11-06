@@ -1,0 +1,21 @@
+# DRAFT - illustrative placeholder values, NOT agronomist-reviewed.
+# An agronomist must confirm every value and fill `reviewed_by` before any pilot release.
+id: pigeonpea
+name: "Pigeonpea (tur)"
+family: Fabaceae
+seasons: ['kharif']
+duration_days: 160
+root_depth: deep
+n_effect: fixes
+n_credit_kg_per_acre: 12
+n_requirement_kg_per_acre: 0
+residue: high
+water_need_mm: 600
+temp_c: [14, 20, 32, 38]      # [abs_min, opt_min, opt_max, abs_max], season mean
+rain_mm: [400, 600, 1000, 1500]     # effective water supply: rain + stored soil water at sowing
+ph: [5.0, 6.0, 7.5, 8.5]
+heat_stress_days_tolerance: 25
+typical_yield_q_per_acre: 3
+pests: ['pod borer', 'wilt']
+source: "placeholder; to be replaced by ICAR / state agricultural university package"
+reviewed_by: null
