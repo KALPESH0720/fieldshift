@@ -128,6 +128,16 @@ Soil-card upload/OCR review, private storage and malware scanning, weather units
 
 NASA AppEEARS/SMAP account setup, `.env` settings, on-demand sampling API, quality fields and provenance are documented in [docs/backend-integrations.md](docs/backend-integrations.md#nasa-smap-setup).
 
+Frontend endpoint mapping, auth/session differences, automatic recommendation inputs, and provider-dependent feature gates are documented in [docs/frontend-backend-handoff.md](docs/frontend-backend-handoff.md).
+
+The full method-by-method endpoint reference, with request/response contracts and workflow notes, is available as [Field Shift Backend API Reference](docs/FieldShift_Backend_API_Reference.pdf).
+
+### Frontend integration quick start
+
+With Docker running, the frontend should use `http://localhost:8000/api/v1` as its API base URL and `http://localhost:8000/docs` to inspect request/response schemas. Set `VITE_USE_MOCKS=false` and `VITE_API_BASE_URL=http://localhost:8000/api/v1` in the frontend environment to enable real API integration. Farmer-owned API requests must send `Authorization: Bearer <access_token>`; the current backend issues bearer tokens from `POST /auth/otp/verify`.
+
+The frontend's current real auth adapter expects a cookie/CSRF session API (`/auth/otp/request`, `/auth/refresh`, `/auth/logout`, and `/me`) that this backend does not expose. It must be adapted to the backend's `/auth/otp/send`, `/auth/otp/verify`, and `/farmers/me` contract before real auth works. Likewise, update frontend market calls to `/market/prices` and `/market/prices/curve`; `/market/markets` and `/market/prices/{crop}/history` are not backend routes. Recommendations are requested from `POST /recommendations`; backend fills supported plot, soil, crop-history, and market inputs automatically. See the handoff guide for the full onboarding sequence, soil-test flow, payload examples, offline sync behavior, and provider gates.
+
 ## Health and configuration
 
 - `GET /health/live` reports that the API process is running and does not contact dependencies.

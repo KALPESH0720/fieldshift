@@ -13,9 +13,11 @@ from app.models.plot import Plot
 from app.models.crop_record import CropRecord
 from app.models.soil_test import SoilTest
 from app.models.alert import Alert
+from app.models.recommendation import RecommendationRun
 from app.models.sync import SyncChange, SyncOperationLog
 from app.redis.client import get_redis
 from app.schemas.farmer import FarmerCreate, FarmerResponse, FarmerUpdate
+from app.services.suggestion_engine import suggestion_engine
 from config.settings import settings
 from redis.asyncio import Redis
 
@@ -95,6 +97,14 @@ async def delete_my_account(
     session: AsyncSession = Depends(get_db),
     redis: Redis = Depends(get_redis),
 ) -> Response:
+    # The engine stores pseudonymous action logs outside PostgreSQL. Remove those
+    # records before deleting their owning backend account/plots.
+    run_rows = (await session.execute(select(RecommendationRun.plot_id, RecommendationRun.request_snapshot).where(
+        RecommendationRun.farmer_id == farmer.id,
+    ))).all()
+    plot_ids = {plot_id for plot_id, snapshot in run_rows if snapshot.get("engine_request")}
+    for plot_id in plot_ids:
+        await suggestion_engine.request("DELETE", f"/actions/{plot_id}")
     # JWTs expire after 60 minutes by default; this subject revocation makes
     # deletion and incident response effective immediately for outstanding tokens.
     await redis.set(f"auth:revoked_before:{farmer.phone}", str(int(datetime.now(UTC).timestamp())),

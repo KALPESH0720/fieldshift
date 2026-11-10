@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     debug: bool = False
     database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5433/field_shift"
     redis_url: str = "redis://localhost:6379/0"
+    suggestion_engine_url: str | None = None
+    suggestion_engine_api_key: SecretStr | None = None
+    suggestion_engine_timeout_seconds: float = Field(default=15.0, gt=0, le=120)
     jwt_secret_key: SecretStr = Field(default=SecretStr("change-this-development-secret"), alias="JWT_SECRET_KEY")
     admin_api_key: SecretStr | None = None
     agronomist_reviewer_keys: dict[str, SecretStr] = Field(default_factory=dict)
@@ -121,12 +124,16 @@ class Settings(BaseSettings):
             if not all((self.object_storage_bucket, self.object_storage_access_key_id,
                         self.object_storage_secret_access_key, self.clamav_host)):
                 raise ValueError("Private object storage and ClamAV are required for production soil-card uploads")
+            if (not self.suggestion_engine_url or not self.suggestion_engine_api_key
+                    or len(self.suggestion_engine_api_key.get_secret_value()) < 32):
+                raise ValueError("Suggestion engine URL and API key are required in production")
         if self.otp_provider == "development" and self.environment.strip().lower() not in {
             "development", "dev", "test", "testing"
         }:
             raise ValueError("The development OTP provider is only available in development or test")
 
         provider_settings = {
+            "Suggestion engine": (self.suggestion_engine_url, self.suggestion_engine_api_key),
             "Bhashini": (self.bhashini_user_id, self.bhashini_api_key, self.bhashini_pipeline_id),
             "SMS gateway": (self.sms_gateway_url, self.sms_gateway_api_key),
             "WhatsApp gateway": (self.whatsapp_gateway_url, self.whatsapp_gateway_api_key),
@@ -139,7 +146,10 @@ class Settings(BaseSettings):
             "ClamAV scanner": (self.clamav_host,),
             "Agmarknet": (self.agmarknet_api_url, self.agmarknet_resource_id),
         }
-        return [name for name, values in provider_settings.items() if not all(values)]
+        missing = [name for name, values in provider_settings.items() if not all(values)]
+        if self.suggestion_engine_api_key and not self.suggestion_engine_api_key.get_secret_value():
+            missing.append("Suggestion engine")
+        return missing
 
 
 @lru_cache

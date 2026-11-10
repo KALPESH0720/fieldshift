@@ -49,6 +49,14 @@ class RecommendationResponse(StrictSchema):
     plot_id: PositiveId
     season: str
     generated_at: datetime
+    engine_request_id: str | None = None
+    engine_job_id: str | None = None
+    engine_status: Literal["fast", "refined"] | None = None
+    engine_confidence: Literal["low", "medium", "high"] | None = None
+    needs_human_review: bool = False
+    missing_inputs: list[str] = Field(default_factory=list)
+    excluded_first_season: list[dict] = Field(default_factory=list)
+    refinement_url: str | None = None
     ruleset_version: str = "ruleset-v1"
     scorer_version: str = "weighted-v1"
     scoring_weights: dict[str, float] = Field(default_factory=dict)
@@ -63,3 +71,22 @@ class RecommendationOutcomeCreate(StrictSchema):
     actual_yield_kg: float | None = Field(default=None, ge=0)
     actual_input_cost: float | None = Field(default=None, ge=0)
     outcome_notes: str | None = None
+
+
+class SuggestionWeights(StrictSchema):
+    soil: float = Field(ge=0)
+    return_score: float = Field(alias="return", ge=0)
+    water_risk: float = Field(ge=0)
+    pest: float = Field(ge=0)
+
+    def engine_dict(self) -> dict[str, float]:
+        total = self.soil + self.return_score + self.water_risk + self.pest
+        if total <= 0:
+            raise ValueError("At least one suggestion weight must be greater than zero")
+        return {"soil": self.soil / total, "return": self.return_score / total,
+                "water_risk": self.water_risk / total, "pest": self.pest / total}
+
+
+class RecommendationRescoreCreate(StrictSchema):
+    weights: SuggestionWeights | None = None
+    flags: list[str] | None = Field(default=None, max_length=32)
