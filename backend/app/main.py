@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 import asyncio
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
@@ -20,6 +21,16 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Field Shift API", lifespan=lifespan)
+
+# Enable CORS for frontend clients (Vite dev server, PWA, mobile)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(api_router)
 
 

@@ -61,3 +61,17 @@ def test_submit_script_parameters_match_the_p1_pipeline(tmp_path):
     params = mod.build_parameters(args, "gs://b/data")
     compiled = yaml.safe_load(open(compile_pipeline(str(tmp_path / "p1.yaml"))).read())
     assert set(params) == set(compiled["root"]["inputDefinitions"]["parameters"])
+
+
+def test_submit_p2_script_parses_args_correctly():
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location("submit_p2", Path(__file__).resolve().parents[2] / "scripts" / "submit_p2.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    args = mod.parser().parse_args(["--region-id", "pune_demo", "--layer-version", "2026a", "--engine-url", "http://localhost:8080"])
+    assert args.region_id == "pune_demo"
+    assert args.layer_version == "2026a"
+    assert args.engine_url == "http://localhost:8080"
+

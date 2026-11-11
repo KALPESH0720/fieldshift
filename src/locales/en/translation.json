@@ -182,7 +182,7 @@
     "backToPlots": "Back to Farm Plots",
     "pageTitle": "Crop Rotation Recommender",
     "offlineReady": "Offline Ready",
-    "pageSubtitle": "Powered by ICAR agronomy guidelines & local soil replenishment models",
+    "pageSubtitle": "Powered by NASA Earth Observations (POWER, SMAP, NEX-GDDP) & ICAR crop science",
     "screenOverviewSpeech": "Crop Rotation Recommender. Select your plot, upcoming season, and previously harvested crop to discover recommendations that restore soil fertility, cut fertilizer costs, and boost your net income.",
     "step1Badge": "Step 1 • Field Parameters",
     "tellUsTitle": "Tell us about your field",

@@ -34,6 +34,7 @@ import StartupNotifications from './StartupNotifications';
 import useScrollLock from '../hooks/useScrollLock';
 import VerificationBadge from './VerificationBadge';
 import { getProviderForCountry, getSavedCountry } from '../services/landRegistry/registry';
+import { createBackendPlot, syncPlotsWithServer } from '../api/plots';
 import { useTranslation } from '../context/LanguageContext';
 import ListenButton from './ui/ListenButton';
 import {
@@ -306,6 +307,11 @@ export default function PlotList() {
         }
     }, [savedPlots]);
 
+    // Synchronize local plots with backend on load
+    useEffect(() => {
+        void syncPlotsWithServer();
+    }, []);
+
     useEffect(() => {
         if (!isMapExpanded) return undefined;
         const handleEscape = (event) => {
@@ -350,11 +356,25 @@ export default function PlotList() {
                 provenance: { providerId: 'manual', verified: false, evidenceType: 'user-entered' },
             };
 
+            let serverId = null;
+            if (typeof navigator !== 'undefined' && navigator.onLine) {
+                try {
+                    const remote = await createBackendPlot(plotToSave);
+                    if (remote?.id) {
+                        serverId = remote.id;
+                        plotToSave.serverId = serverId;
+                        plotToSave.isVerified = true;
+                    }
+                } catch (apiErr) {
+                    console.warn('Backend plot creation deferred to offline sync queue:', apiErr);
+                }
+            }
+
             const localId = await db.plots.add(plotToSave);
             await db.syncQueue.add({
                 action: 'CREATE_PLOT',
                 payload: { ...plotToSave, localId },
-                status: 'pending',
+                status: serverId ? 'synced' : 'pending',
                 timestamp: Date.now(),
             });
         } catch (error) {

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLiveQuery } from 'dexie-react-hooks';
 import {
   Camera,
   CheckCircle2,
@@ -12,6 +13,7 @@ import {
   X,
 } from 'lucide-react';
 import { db } from '../db/db';
+import { apiRequest } from '../api/client';
 import { useTranslation } from '../context/LanguageContext';
 import ListenButton from './ui/ListenButton';
 import {
@@ -247,6 +249,8 @@ export default function SoilImport() {
   const { t, languageInfo } = useTranslation();
   const speechLocale = languageInfo.speechLang;
 
+  const plots = useLiveQuery(() => db.plots.toArray(), []);
+  const [selectedPlotId, setSelectedPlotId] = useState('');
   const [form, setForm] = useState(EMPTY_FORM);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -317,13 +321,16 @@ export default function SoilImport() {
     return parts;
   }, [form, lateriteSpeechParts, lateriteTipsVisible, speechLocale, t]);
 
-  /* Save to Dexie */
+  /* Save to Dexie and sync with backend if online */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
     try {
+      const selectedPlot = plots?.find((p) => String(p.id) === String(selectedPlotId)) || plots?.[0] || null;
+      const plotId = selectedPlot?.id || null;
+
       await db.soilRecords.add({
-        plotId: null,
+        plotId,
         ph: parseFloat(form.ph) || null,
         nitrogen: parseFloat(form.nitrogen) || null,
         phosphorus: parseFloat(form.phosphorus) || null,
@@ -333,6 +340,28 @@ export default function SoilImport() {
         hasPhoto: Boolean(imageFile),
         timestamp: new Date().toISOString(),
       });
+
+      const USE_MOCKS = String(import.meta.env.VITE_USE_MOCKS ?? 'true').toLowerCase() === 'true';
+      if (!USE_MOCKS && selectedPlot?.serverId && typeof navigator !== 'undefined' && navigator.onLine) {
+        try {
+          await apiRequest(`/plots/${selectedPlot.serverId}/soil-tests`, {
+            method: 'POST',
+            body: {
+              n_val: parseFloat(form.nitrogen) || null,
+              p_val: parseFloat(form.phosphorus) || null,
+              k_val: parseFloat(form.potassium) || null,
+              ph: parseFloat(form.ph) || null,
+              organic_matter: parseFloat(form.organicCarbon) || null,
+              nutrient_unit: 'kg/ha',
+              organic_matter_unit: 'percent',
+              provenance: 'manual',
+            },
+          });
+        } catch (apiErr) {
+          console.warn('Backend soil test sync deferred:', apiErr);
+        }
+      }
+
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
       setForm(EMPTY_FORM);
@@ -471,6 +500,25 @@ export default function SoilImport() {
           </div>
 
           <form id="soil-form" onSubmit={handleSubmit} noValidate>
+            {plots && plots.length > 0 && (
+              <div className="mb-4">
+                <label htmlFor="soil-plot-select" className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                  {t('soil.selectPlot', { defaultValue: 'Associated Plot' })}
+                </label>
+                <select
+                  id="soil-plot-select"
+                  value={selectedPlotId || (plots[0]?.id ?? '')}
+                  onChange={(e) => setSelectedPlotId(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                >
+                  {plots.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name} {p.village ? `(${p.village})` : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {NUTRIENT_FIELDS.map((field) => (
                 <NutrientInput

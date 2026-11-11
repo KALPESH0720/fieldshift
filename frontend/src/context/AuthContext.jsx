@@ -5,6 +5,8 @@ import { realAuthAdapter } from '../api/auth';
 import { mockAuthAdapter, SESSION_STORAGE_KEY } from '../services/auth/mockAuthAdapter';
 import { saveCountry } from '../services/landRegistry/registry';
 import { AUTH_COUNTRY_STORAGE_KEY } from '../utils/phone';
+import { drainSyncQueue } from '../api/sync';
+import { syncPlotsWithServer } from '../api/plots';
 
 const AuthContext = createContext(null);
 
@@ -131,6 +133,12 @@ export function AuthProvider({ children }) {
     writeCachedSessionUser(authenticatedUser);
     setUser(authenticatedUser);
     setStatus('authenticated');
+
+    if (!IS_MOCK_AUTH && typeof navigator !== 'undefined' && navigator.onLine) {
+      Promise.all([drainSyncQueue(), syncPlotsWithServer()]).catch((err) => {
+        console.warn('Background sync on login failed:', err);
+      });
+    }
   }, []);
 
   const refreshSession = useCallback(async () => {
@@ -338,6 +346,29 @@ export function AuthProvider({ children }) {
     setStatus('anonymous');
   }, [adapter]);
 
+  useEffect(() => {
+    if (IS_MOCK_AUTH || typeof window === 'undefined') return undefined;
+
+    const handleOnline = () => {
+      if (status === 'authenticated') {
+        Promise.all([drainSyncQueue(), syncPlotsWithServer()]).catch((err) => {
+          console.warn('Online sync failed:', err);
+        });
+      }
+    };
+
+    window.addEventListener('online', handleOnline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+    };
+  }, [status]);
+
+  const syncNow = useCallback(async () => {
+    if (IS_MOCK_AUTH) return { synced: 0, failed: 0, skipped: 0 };
+    const [syncStats] = await Promise.all([drainSyncQueue(), syncPlotsWithServer()]);
+    return syncStats;
+  }, []);
+
   const hasRole = useCallback(
     (roleCode) => userHasRole(user, roleCode),
     [user],
@@ -354,6 +385,7 @@ export function AuthProvider({ children }) {
       logout,
       refreshSession,
       getUnsyncedCount,
+      syncNow,
       hasRole,
     }),
     [
@@ -365,6 +397,7 @@ export function AuthProvider({ children }) {
       logout,
       refreshSession,
       getUnsyncedCount,
+      syncNow,
       hasRole,
     ],
   );

@@ -1,8 +1,10 @@
 import { db } from '../db/db';
+import { apiRequest } from '../api/client';
 
 const WEATHER_CACHE_ID = 'dashboard-weather';
 const OPEN_METEO = 'https://api.open-meteo.com/v1/forecast';
 const AIR_QUALITY = 'https://air-quality-api.open-meteo.com/v1/air-quality';
+const USE_MOCKS = String(import.meta.env.VITE_USE_MOCKS ?? 'true').toLowerCase() === 'true';
 
 function getCentroid(plot) {
     const points = plot?.coordinates || plot?.boundaryCoordinates || [];
@@ -130,6 +132,60 @@ export function buildSampleWeather(plot) {
     return sample;
 }
 
+/**
+ * Map a backend WeatherForecastResponse into the same normalized shape
+ * that the Open-Meteo path produces, so components don't need two code paths.
+ */
+function normalizeBackendWeather(resp, latitude, longitude) {
+    // Backend returns { current, daily, hourly, alerts }
+    const current = resp.current || {};
+    const daily = resp.daily || {};
+    const hourly = resp.hourly || {};
+
+    // Build minimal Open-Meteo-compatible shape
+    const normalized = {
+        current: {
+            temperature_2m: current.temperature_2m ?? null,
+            relative_humidity_2m: current.relative_humidity_2m ?? null,
+            apparent_temperature: current.apparent_temperature ?? null,
+            weather_code: current.weather_code ?? 2,
+            wind_speed_10m: current.wind_speed_10m ?? null,
+            wind_direction_10m: current.wind_direction_10m ?? null,
+            precipitation: current.precipitation ?? null,
+            rain: current.rain ?? null,
+            soil_moisture_0_to_1cm: current.soil_moisture_0_to_1cm ?? null,
+            uv_index: current.uv_index ?? null,
+        },
+        hourly: {
+            time: hourly.time || [],
+            temperature_2m: hourly.temperature_2m || [],
+            apparent_temperature: hourly.apparent_temperature || [],
+            relative_humidity_2m: hourly.relative_humidity_2m || [],
+            precipitation_probability: hourly.precipitation_probability || [],
+            precipitation: hourly.precipitation || [],
+            rain: hourly.rain || [],
+            wind_speed_10m: hourly.wind_speed_10m || [],
+            soil_moisture_0_to_1cm: hourly.soil_moisture_0_to_1cm || [],
+        },
+        daily: {
+            time: daily.time || [],
+            temperature_2m_min: daily.temperature_2m_min || [],
+            temperature_2m_max: daily.temperature_2m_max || [],
+            precipitation_sum: daily.precipitation_sum || [],
+            weather_code: daily.weather_code || [],
+        },
+        air: null,
+        conditionKey: conditionFromCode(current.weather_code ?? 2),
+        advisories: [],
+        latitude,
+        longitude,
+        fetchedAt: new Date().toISOString(),
+        fromBackend: true,
+    };
+    normalized.advisories = buildAdvisories(normalized);
+    return normalized;
+}
+
 export async function fetchWeather(plot) {
     let coordinates = getCentroid(plot);
     if (!coordinates && typeof navigator !== 'undefined' && navigator.geolocation) {
@@ -140,6 +196,22 @@ export async function fetchWeather(plot) {
         ));
     }
     const [latitude, longitude] = coordinates || [20, 0];
+
+    // --- Try backend first when the plot has been synced (has a serverId) ---
+    if (!USE_MOCKS && plot?.serverId) {
+        try {
+            const resp = await apiRequest(`/weather/plots/${plot.serverId}/forecast`);
+            if (resp && (resp.current || resp.daily)) {
+                const normalized = normalizeBackendWeather(resp, latitude, longitude);
+                await db.weatherCache.put({ id: WEATHER_CACHE_ID, updatedAt: normalized.fetchedAt, data: normalized });
+                return { data: normalized, stale: false };
+            }
+        } catch {
+            // Backend unavailable — fall through to Open-Meteo
+        }
+    }
+
+    // --- Fallback: fetch directly from Open-Meteo ---
     const params = new URLSearchParams({
         latitude,
         longitude,

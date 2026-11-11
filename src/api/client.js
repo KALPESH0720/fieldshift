@@ -1,8 +1,10 @@
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/+$/, '');
 const DEFAULT_TIMEOUT_MS = 15000;
 const DEVICE_ID_KEY = 'fieldshift-device-id';
+const AUTH_TOKEN_KEY = 'fieldshift-access-token';
 
 let csrfTokenMemory = null;
+let authTokenMemory = null;
 let refreshPromise = null;
 
 export class ApiClientError extends Error {
@@ -30,6 +32,32 @@ export function setCsrfToken(token) {
 
 export function getCsrfToken() {
   return csrfTokenMemory;
+}
+
+export function setAuthToken(token) {
+  authTokenMemory = token || null;
+  if (typeof window !== 'undefined') {
+    try {
+      if (token) {
+        window.localStorage.setItem(AUTH_TOKEN_KEY, token);
+      } else {
+        window.localStorage.removeItem(AUTH_TOKEN_KEY);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }
+}
+
+export function getAuthToken() {
+  if (!authTokenMemory && typeof window !== 'undefined') {
+    try {
+      authTokenMemory = window.localStorage.getItem(AUTH_TOKEN_KEY) || null;
+    } catch {
+      authTokenMemory = null;
+    }
+  }
+  return authTokenMemory;
 }
 
 export function getDeviceId() {
@@ -73,16 +101,30 @@ async function parseErrorResponse(response) {
 
   let fallbackCode = 'server_error';
   if (response.status === 401) fallbackCode = 'unauthenticated';
+  else if (response.status === 404) fallbackCode = 'not_found';
+  else if (response.status === 409) fallbackCode = 'conflict';
   else if (response.status === 410) fallbackCode = 'otp_expired';
   else if (response.status === 429) fallbackCode = 'rate_limited';
   else if (response.status === 400 || response.status === 422) fallbackCode = 'validation_error';
 
+  let message = envelope.message;
+  if (!message && envelope.detail) {
+    if (typeof envelope.detail === 'string') {
+      message = envelope.detail;
+    } else if (Array.isArray(envelope.detail)) {
+      message = envelope.detail.map((d) => d.msg || d.message || JSON.stringify(d)).join('; ');
+    }
+  }
+  if (!message) {
+    message = response.statusText || 'Request failed';
+  }
+
   return new ApiClientError({
-    message: envelope.message || response.statusText || 'Request failed',
+    message,
     code: envelope.code || fallbackCode,
     status: response.status,
     retryAfterSeconds,
-    details: envelope.details || null,
+    details: envelope.details || envelope.detail || null,
     requestId: envelope.requestId || null,
   });
 }
@@ -116,6 +158,11 @@ export async function apiRequest(
     'X-Request-Id': generateRequestId(),
     ...headers,
   };
+
+  const authToken = getAuthToken();
+  if (authToken && !requestHeaders['Authorization']) {
+    requestHeaders['Authorization'] = `Bearer ${authToken}`;
+  }
 
   if (body !== undefined && !(body instanceof FormData)) {
     requestHeaders['Content-Type'] = 'application/json';
@@ -217,7 +264,10 @@ async function attemptTokenRefresh() {
         if (data?.csrfToken) {
           setCsrfToken(data.csrfToken);
         }
-        return Boolean(data?.user);
+        if (data?.access_token) {
+          setAuthToken(data.access_token);
+        }
+        return Boolean(data?.user || data?.access_token);
       })
       .catch(() => {
         setCsrfToken(null);

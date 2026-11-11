@@ -16,6 +16,8 @@ import {
     isRealCropId,
 } from '../data/crops';
 import { getPlotAreaHectares, runOfflineRotationEngine } from '../services/rotationEngine';
+import { fetchBackendRecommendations } from '../api/recommendations';
+import { createBackendPlot } from '../api/plots';
 import {
     RECOMMENDER_LOADING_STEPS,
     TOTAL_MOCK_DELAY_MS,
@@ -77,6 +79,7 @@ export default function Recommender() {
     // Engine calculation state
     const [isCalculating, setIsCalculating] = useState(false);
     const [customCalculations, setCustomCalculations] = useState(null);
+    const [engineMetadata, setEngineMetadata] = useState(null);
     const [selectedCropRecord, setSelectedCropRecord] = useState(null);
     const [toastMessage, setToastMessage] = useState(null);
 
@@ -301,7 +304,7 @@ export default function Recommender() {
         }
     };
 
-    const handleCalculate = (e) => {
+    const handleCalculate = async (e) => {
         if (e) e.preventDefault();
         const activePrev = activePreviousCropRaw;
 
@@ -319,19 +322,72 @@ export default function Recommender() {
             stepTimersRef.current.push(timer);
         });
 
-        const finalTimer = setTimeout(() => {
-            const results = runOfflineRotationEngine(
+        // 1. Fetch from live Suggestion Engine backend if available
+        const fetchPromise = (async () => {
+            try {
+                let targetPlotId = currentPlot?.serverId;
+                if (!targetPlotId && currentPlot && typeof navigator !== 'undefined' && navigator.onLine) {
+                    try {
+                        const registered = await createBackendPlot(currentPlot);
+                        if (registered?.id) {
+                            targetPlotId = registered.id;
+                            await db.plots.update(currentPlot.id, { serverId: registered.id });
+                        }
+                    } catch (syncErr) {
+                        console.warn('Could not auto-register plot with backend:', syncErr);
+                    }
+                }
+
+                if (targetPlotId) {
+                    const response = await fetchBackendRecommendations({
+                        plotId: targetPlotId,
+                        season,
+                        farmerPreferences: ['low_water', 'soil_health'],
+                    });
+                    if (response?.results && response.results.length > 0) {
+                        return { results: response.results, meta: response };
+                    }
+                }
+            } catch (err) {
+                console.warn('Backend suggestion engine unavailable, falling back to local agronomy rules:', err);
+            }
+
+            // 2. Offline fallback engine
+            const offlineResults = runOfflineRotationEngine(
                 season,
                 activePrev,
                 getPlotAreaHectares(currentPlot),
                 isRealCropId,
                 isCurrentPlotVerified,
             );
+            return { results: offlineResults, meta: { isRealEngine: false } };
+        })();
+
+        // 2. Minimum animation delay so the user perceives the calculation stages
+        const timerPromise = new Promise((resolve) => {
+            const timer = setTimeout(resolve, Math.min(TOTAL_MOCK_DELAY_MS, 2200));
+            stepTimersRef.current.push(timer);
+        });
+
+        try {
+            const [{ results, meta }] = await Promise.all([fetchPromise, timerPromise]);
             setCustomCalculations(results);
+            setEngineMetadata(meta);
+        } catch (err) {
+            console.error('Calculation error:', err);
+            const fallback = runOfflineRotationEngine(
+                season,
+                activePrev,
+                getPlotAreaHectares(currentPlot),
+                isRealCropId,
+                isCurrentPlotVerified,
+            );
+            setCustomCalculations(fallback);
+            setEngineMetadata({ isRealEngine: false });
+        } finally {
             setIsCalculating(false);
             setLoadingStepIndex(-1);
-        }, TOTAL_MOCK_DELAY_MS);
-        stepTimersRef.current.push(finalTimer);
+        }
     };
 
     // User chooses a recommended crop: Offline-first Dexie Sync Queue entry
@@ -689,6 +745,39 @@ export default function Recommender() {
                                     season: t(`recommender.seasonNames.${season}`),
                                 })}
                             </p>
+
+                            {/* NASA Suggestion Engine Live Status Badge */}
+                            {engineMetadata?.isRealEngine && (
+                                <div className="flex flex-wrap items-center gap-2 mt-2">
+                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/80 bg-sky-50 px-2.5 py-0.5 text-[11px] font-bold text-sky-800 dark:border-sky-800 dark:bg-sky-500/15 dark:text-sky-200">
+                                        <Sparkles size={11} className="text-sky-600 dark:text-sky-400" />
+                                        <span>NASA Suggestion Engine</span>
+                                        <span>•</span>
+                                        <span className="uppercase text-[10px]">{engineMetadata.engineStatus || 'fast'}</span>
+                                        <span>({engineMetadata.confidence || 'high'} confidence)</span>
+                                    </span>
+                                    {engineMetadata.rulesetVersion && (
+                                        <span className="text-[10px] text-slate-400 dark:text-slate-500">
+                                            {engineMetadata.rulesetVersion}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Data Quality & Agronomy Notes */}
+                            {engineMetadata?.dataQualityNotes?.length > 0 && (
+                                <div className="rounded-xl border border-amber-200/80 bg-amber-50/90 p-2.5 text-xs text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200 mt-2">
+                                    <p className="font-semibold flex items-center gap-1.5">
+                                        <Info size={13} className="text-amber-600 shrink-0" />
+                                        <span>{t('recommender.dataQualityNotes') || 'Data Quality Notes'}:</span>
+                                    </p>
+                                    <ul className="list-disc list-inside mt-0.5 text-[11px] space-y-0.5 text-amber-800 dark:text-amber-300">
+                                        {engineMetadata.dataQualityNotes.map((note, i) => (
+                                            <li key={i}>{note.replace(/_/g, ' ')}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
 
                         {recommendations && recommendations.length > 0 && (
@@ -1029,6 +1118,26 @@ export default function Recommender() {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {/* NASA Earth Observation Sources */}
+                                            {crop.nasaSources && crop.nasaSources.length > 0 && (
+                                                <div className="mb-4 rounded-xl border border-sky-200/70 bg-gradient-to-r from-sky-50/80 to-blue-50/50 p-3 text-xs text-sky-950 dark:border-sky-800/50 dark:from-sky-950/40 dark:to-blue-950/30 dark:text-sky-200">
+                                                    <div className="flex items-center gap-1.5 font-bold text-sky-900 dark:text-sky-300 mb-1.5">
+                                                        <Sparkles size={13} className="text-sky-600 dark:text-sky-400 shrink-0" />
+                                                        <span>NASA Earth Data Verification:</span>
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-1.5">
+                                                        {crop.nasaSources.map((src, sIdx) => (
+                                                            <span
+                                                                key={sIdx}
+                                                                className="inline-flex items-center gap-1 rounded-md bg-white/90 dark:bg-slate-900/90 border border-sky-200 dark:border-sky-800 px-2 py-0.5 text-[11px] font-semibold text-sky-800 dark:text-sky-300 shadow-2xs"
+                                                            >
+                                                                {src}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
 
                                             {/* Action Button: Select This Crop */}
                                             <div className="pt-1">

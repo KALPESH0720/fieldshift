@@ -449,6 +449,7 @@ export default function Login() {
   const [resendCooldown, setResendCooldown] = useState(0);
   const [resendCountsByPhone, setResendCountsByPhone] = useState({});
   const [voiceAvailable, setVoiceAvailable] = useState(false);
+  const [devOtp, setDevOtp] = useState(null);
 
   // New user profile state (Step 2b)
   const [displayName, setDisplayName] = useState('');
@@ -695,6 +696,10 @@ export default function Login() {
         locale: language,
       });
 
+      if (response?.developmentOtp) {
+        setDevOtp(response.developmentOtp);
+      }
+
       setPhoneE164(validation.phoneE164);
       setFormattedPhone(validation.formattedInternational || formatPhoneDisplay(validation.phoneE164));
       setVoiceAvailable(Boolean(response?.voiceAvailable));
@@ -822,6 +827,9 @@ export default function Login() {
         channel,
         locale: language,
       });
+      if (response?.developmentOtp) {
+        setDevOtp(response.developmentOtp);
+      }
       setResendCountsByPhone((prev) => ({
         ...prev,
         [phoneE164]: (prev[phoneE164] || 0) + 1,
@@ -842,6 +850,7 @@ export default function Login() {
   const handleChangeNumber = () => {
     setStep('phone');
     setOtpDigits(Array(OTP_LENGTH).fill(''));
+    setDevOtp(null);
     setErrorMessage('');
   };
 
@@ -1028,6 +1037,30 @@ export default function Login() {
               className="shrink-0 rounded-xl bg-amber-600 px-3 py-1.5 text-xs font-extrabold text-white transition hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
             >
               123456
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Backend Development OTP Hint Banner (when real backend returns development_otp in non-mock dev mode) */}
+      {!isMock && devOtp && (
+        <div
+          id="auth-dev-otp-hint"
+          role="note"
+          className="flex items-center justify-between gap-3 rounded-2xl border border-emerald-300/90 bg-emerald-50/90 px-4 py-3 text-sm font-bold text-emerald-950 dark:border-emerald-500/40 dark:bg-emerald-950/50 dark:text-emerald-100"
+        >
+          <span>Development OTP: <strong className="font-mono text-base">{devOtp}</strong></span>
+          {step === 'otp' && (
+            <button
+              type="button"
+              onClick={() => {
+                const digits = String(devOtp).split('').slice(0, OTP_LENGTH);
+                setOtpDigits(digits);
+                submitOtpCode(String(devOtp));
+              }}
+              className="shrink-0 rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-extrabold text-white transition hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              {devOtp}
             </button>
           )}
         </div>

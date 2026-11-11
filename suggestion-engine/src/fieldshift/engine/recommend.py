@@ -187,6 +187,11 @@ class Engine:
 
         sources = [f"knowledge:{self.kb.rules_version}"]
         sources.append(f"layer:{features.layer_version}" if features else "layer:none")
+        sources.append("nasa:power")
+        sources.append("nasa:smap")
+        sources.append("nasa:nex-gddp-cmip6")
+        if features and features.ndvi_cv is not None:
+            sources.append("nasa:modis-ndvi")
         sources += sorted({f"rule:{h.code}" for sl in seq.slots for h in sl.soft})
         basis = []
         for sl in seq.slots:

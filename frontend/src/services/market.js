@@ -1,6 +1,7 @@
 import { db } from '../db/db';
 import { CROPS, getCropById, resolveKnownCrop } from '../data/crops';
 import { getSavedCountry } from './landRegistry/registry';
+import { apiRequest } from '../api/client';
 
 const FAVOURITES_KEY = 'fieldshift-market-favourites';
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS !== 'false';
@@ -378,23 +379,17 @@ export async function getCropMarketDetail(cropId, range = '30D', { countryCode }
   const normalizedCrop = getCropById(cropId);
   const cacheKey = `detail:${normalizedCrop.id}:${range}`;
 
+  let backendPriceData = null;
   if (!USE_MOCKS) {
     try {
-      const response = await fetch(
-        `${API_BASE}/market/prices/${encodeURIComponent(normalizedCrop.id)}/history?range=${encodeURIComponent(range)}`,
+      const data = await apiRequest(
+        `/market/prices?crop=${encodeURIComponent(normalizedCrop.id)}&district=North Goa&limit=30`,
       );
-      if (response.ok) {
-        const data = await response.json();
-        await db.marketCache.put({
-          id: cacheKey,
-          updatedAt: new Date().toISOString(),
-          data,
-        });
-        return data;
+      if (data?.items?.length) {
+        backendPriceData = data.items;
       }
     } catch {
-      const cached = await db.marketCache.get(cacheKey);
-      if (cached?.data) return { ...cached.data, stale: true };
+      // Fallback to cache or generative model
     }
   }
 
@@ -413,6 +408,14 @@ export async function getCropMarketDetail(cropId, range = '30D', { countryCode }
       : sliced;
 
   const todayPt = fullYear[fullYear.length - 1];
+  if (backendPriceData && backendPriceData[0]?.price) {
+    const serverModal = Number(backendPriceData[0].price);
+    if (Number.isFinite(serverModal) && serverModal > 0) {
+      todayPt.price = Math.round(serverModal);
+      todayPt.minPrice = backendPriceData[0].min_price ? Math.round(Number(backendPriceData[0].min_price)) : Math.round(serverModal * 0.95);
+      todayPt.maxPrice = backendPriceData[0].max_price ? Math.round(Number(backendPriceData[0].max_price)) : Math.round(serverModal * 1.05);
+    }
+  }
   const yesterdayPt = fullYear[fullYear.length - 2] || todayPt;
   const weekAgoPt = fullYear[fullYear.length - 8] || fullYear[0];
   const last30 = fullYear.slice(-30);

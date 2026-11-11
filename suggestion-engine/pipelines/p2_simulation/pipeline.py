@@ -15,7 +15,7 @@ def simulate_job_op(job_json: str, region_id: str, data_root: str, layer_version
 
 
 @dsl.pipeline(name="fieldshift-p2-simulation", description="Deep-tier simulation for one engine job")
-def p2_pipeline(job_json: str, region_id: str, data_root: str, layer_version: str, engine_url: str,
+def p2_pipeline(job_json: str, region_id: str, data_root: str, layer_version: str = "2026a", engine_url: str = "",
                 api_key_secret: str = ""):
     simulate_job_op(job_json=job_json, region_id=region_id, data_root=data_root, layer_version=layer_version,
                     engine_url=engine_url, api_key_secret=api_key_secret)
