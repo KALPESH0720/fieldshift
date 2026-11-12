@@ -44,12 +44,20 @@ export function coordinatesToGeoJson(coordinates) {
 
 export function geoJsonToCoordinates(location) {
   if (!location) return [];
-  if (location.type === 'Polygon' && Array.isArray(location.coordinates?.[0])) {
-    // GeoJSON ring is [lon, lat] -> Leaflet wants [lat, lon]
-    return location.coordinates[0].map(([lon, lat]) => [lat, lon]);
+  let parsed = location;
+  if (typeof location === 'string') {
+    try {
+      parsed = JSON.parse(location);
+    } catch {
+      return [];
+    }
   }
-  if (location.type === 'Point' && Array.isArray(location.coordinates)) {
-    const [lon, lat] = location.coordinates;
+  if (parsed?.type === 'Polygon' && Array.isArray(parsed.coordinates?.[0])) {
+    // GeoJSON ring is [lon, lat] -> Leaflet wants [lat, lon]
+    return parsed.coordinates[0].map(([lon, lat]) => [lat, lon]);
+  }
+  if (parsed?.type === 'Point' && Array.isArray(parsed.coordinates)) {
+    const [lon, lat] = parsed.coordinates;
     return [[lat, lon]];
   }
   return [];
@@ -61,19 +69,21 @@ export async function fetchPlots({ limit = 50, offset = 0 } = {}) {
   return apiRequest(`/plots?limit=${limit}&offset=${offset}`, { method: 'GET' });
 }
 
-export async function createBackendPlot(plotData) {
-  const numericArea = Math.max(
-    0.01,
-    Number(plotData.areaValue ?? String(plotData.area || '1').replace(/[^\d.]/g, '') || 1),
-  );
-  const areaUnit = (plotData.areaUnit || 'acres').toLowerCase().includes('ha')
+export async function createBackendPlot(plotData = {}) {
+  if (!plotData || typeof plotData !== 'object') {
+    throw new Error('createBackendPlot requires a plot data object');
+  }
+
+  const rawArea = plotData.areaValue ?? (String(plotData.area || '1').replace(/[^\d.]/g, '') || '1');
+  const numericArea = Math.max(0.01, Number(rawArea) || 1);
+  const areaUnit = String(plotData.areaUnit || 'acres').toLowerCase().includes('ha')
     ? 'hectare'
     : 'acre';
 
   const location = coordinatesToGeoJson(plotData.coordinates || plotData.boundaryCoordinates);
 
   const payload = {
-    name: (plotData.name || plotData.fieldName || 'My Plot').trim(),
+    name: String(plotData.name || plotData.fieldName || 'My Plot').trim(),
     area_value: numericArea,
     area_unit: areaUnit,
     district: plotData.district || plotData.village || 'North Goa',
@@ -108,14 +118,19 @@ export async function syncPlotsWithServer() {
     // 1. Upsert remote plots into Dexie
     for (const rPlot of remotePlots) {
       const match = localPlots.find(
-        (lp) => lp.serverId === rPlot.id || (lp.name === rPlot.name && !lp.serverId),
+        (lp) => (lp.serverId && String(lp.serverId) === String(rPlot.id)) || (lp.name === rPlot.name && !lp.serverId),
       );
 
       const coords = geoJsonToCoordinates(rPlot.location);
+      const numericArea = Number(rPlot.area_value) || 1;
+      const isHectare = rPlot.area_unit === 'hectare';
+      const areaHectares = Number((numericArea * (isHectare ? 1 : 0.404686)).toFixed(4));
+
       const plotDoc = {
         name: rPlot.name,
         area: `${rPlot.area_value} ${rPlot.area_unit}s`,
-        areaUnit: rPlot.area_unit === 'hectare' ? 'hectares' : 'acres',
+        areaUnit: isHectare ? 'hectares' : 'acres',
+        areaHectares,
         village: rPlot.district || '',
         serverId: rPlot.id,
         isVerified: true,
