@@ -1,4 +1,4 @@
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/+$/, '');
+const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL || '/api/v1').replace(/\/+$/, '');
 const DEFAULT_TIMEOUT_MS = 15000;
 const DEVICE_ID_KEY = 'fieldshift-device-id';
 const AUTH_TOKEN_KEY = 'fieldshift-access-token';
