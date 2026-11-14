@@ -40,3 +40,12 @@ class TokenResponse(StrictSchema):
     access_token: str = Field(min_length=1)
     token_type: str = "bearer"
     expires_in: int = Field(gt=0, description="Token lifetime in seconds")
+
+
+class FirebaseTokenVerify(StrictSchema):
+    id_token: str = Field(min_length=1, description="Firebase ID token from client SDK")
+
+
+class EmailLoginRequest(StrictSchema):
+    email: str = Field(min_length=3, max_length=120)
+    password: str = Field(min_length=6, max_length=128)

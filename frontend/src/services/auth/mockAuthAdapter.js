@@ -1,15 +1,9 @@
 import { ApiClientError } from '../../api/client';
 
-export const MOCK_OTP_CODE = '123456';
-export const MOCK_USERS_STORAGE_KEY = 'fieldshift-mock-users';
 export const SESSION_STORAGE_KEY = 'fieldshift-session';
-const MOCK_CHALLENGES_STORAGE_KEY = 'fieldshift-mock-challenges';
+export const MOCK_USERS_STORAGE_KEY = 'fieldshift-mock-users';
 
-const DEFAULT_EXPIRES_IN_SECONDS = 300; // 5 minutes
-const DEFAULT_RESEND_AFTER_SECONDS = 30;
-const MAX_ATTEMPTS_PER_CHALLENGE = 5;
-const LOCKOUT_SECONDS = 60;
-const MOCK_DELAY_MS = 350;
+const MOCK_DELAY_MS = 300;
 
 function delay(ms = MOCK_DELAY_MS) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -40,27 +34,7 @@ function writeMockUsers(usersMap) {
   }
 }
 
-function readChallenges() {
-  try {
-    const raw = window.sessionStorage.getItem(MOCK_CHALLENGES_STORAGE_KEY);
-    const parsed = raw ? JSON.parse(raw) : {};
-    return parsed && typeof parsed === 'object' ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function writeChallenges(challengesMap) {
-  try {
-    window.sessionStorage.setItem(MOCK_CHALLENGES_STORAGE_KEY, JSON.stringify(challengesMap));
-  } catch {
-    // Ignore storage quota errors
-  }
-}
-
-function getRolesForPhone() {
-  // In demo/mock mode, grant both 'farmer' and 'extension' roles by default
-  // so the Farmer / Extension workspace toggle is always active during demos.
+function getRolesForUser() {
   return [
     {
       code: 'farmer',
@@ -89,261 +63,141 @@ function ensureMockUserRoles(user) {
   if (hasFarmer && hasExtension) return user;
   return {
     ...user,
-    roles: getRolesForPhone(user.phoneE164),
+    roles: getRolesForUser(),
   };
 }
 
 export const mockAuthAdapter = {
-  async requestOtp(phoneE164) {
+  async login(email, password) {
     await delay();
 
-    const ttlEnv = Number(import.meta.env.VITE_MOCK_OTP_TTL_SECONDS);
-    const expiresInSeconds = Number.isFinite(ttlEnv) && ttlEnv > 0 ? ttlEnv : DEFAULT_EXPIRES_IN_SECONDS;
-    const resendAfterSeconds = DEFAULT_RESEND_AFTER_SECONDS;
-    const challengeId = generateId();
-
-    const challenges = readChallenges();
-    // Invalidate any previous active challenges for the same phone number
-    Object.values(challenges).forEach((entry) => {
-      if (entry && entry.phoneE164 === phoneE164 && !entry.consumedAt) {
-        entry.invalidated = true;
-      }
-    });
-
-    challenges[challengeId] = {
-      challengeId,
-      phoneE164,
-      createdAt: Date.now(),
-      expiresAt: Date.now() + expiresInSeconds * 1000,
-      attempts: 0,
-      maxAttempts: MAX_ATTEMPTS_PER_CHALLENGE,
-      lockedUntil: null,
-      verified: false,
-      consumedAt: null,
-    };
-    writeChallenges(challenges);
-
-    // Identical response whether or not the phone number is already registered
-    return {
-      challengeId,
-      expiresInSeconds,
-      resendAfterSeconds,
-      voiceAvailable: import.meta.env.VITE_MOCK_VOICE_OTP === 'true',
-    };
-  },
-
-  async verifyOtp({ challengeId, phoneE164, code, profile = null }) {
-    await delay();
-
-    const challenges = readChallenges();
-    let challenge = challengeId ? challenges[challengeId] : null;
-
-    if (!challenge && phoneE164) {
-      // Fall back to the most recent challenge for this phone number
-      const matching = Object.values(challenges)
-        .filter((c) => c && c.phoneE164 === phoneE164 && !c.invalidated)
-        .sort((a, b) => b.createdAt - a.createdAt);
-      challenge = matching[0] || null;
-    }
-
-    if (!challenge || challenge.invalidated) {
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    if (!normalizedEmail) {
       throw new ApiClientError({
-        status: 410,
-        code: 'otp_expired',
-        message: 'Verification code has expired. Please request a new code.',
+        status: 400,
+        code: 'email_required',
+        message: 'Email is required',
       });
     }
 
-    const now = Date.now();
-    if (now > challenge.expiresAt) {
-      throw new ApiClientError({
-        status: 410,
-        code: 'otp_expired',
-        message: 'Verification code has expired. Please request a new code.',
-      });
-    }
-
-    if (challenge.lockedUntil && now < challenge.lockedUntil) {
-      const retryAfterSeconds = Math.max(1, Math.ceil((challenge.lockedUntil - now) / 1000));
-      throw new ApiClientError({
-        status: 429,
-        code: 'otp_attempts_exceeded',
-        message: 'Too many incorrect attempts.',
-        retryAfterSeconds,
-      });
-    }
-
-    const normalizedCode = String(code || '').trim();
-    if (!challenge.verified) {
-      if (normalizedCode !== MOCK_OTP_CODE) {
-        challenge.attempts = (challenge.attempts || 0) + 1;
-        const attemptsRemaining = Math.max(0, challenge.maxAttempts - challenge.attempts);
-
-        if (challenge.attempts >= challenge.maxAttempts) {
-          challenge.lockedUntil = now + LOCKOUT_SECONDS * 1000;
-          writeChallenges(challenges);
-          throw new ApiClientError({
-            status: 429,
-            code: 'otp_attempts_exceeded',
-            message: 'Too many incorrect attempts.',
-            retryAfterSeconds: LOCKOUT_SECONDS,
-            details: { attemptsRemaining: 0 },
-          });
-        }
-
-        writeChallenges(challenges);
-        throw new ApiClientError({
-          status: 400,
-          code: 'otp_invalid',
-          message: 'Incorrect verification code.',
-          details: { attemptsRemaining },
-        });
-      }
-
-      challenge.verified = true;
-      writeChallenges(challenges);
-    }
-
-    const targetPhone = challenge.phoneE164 || phoneE164;
-    const users = readMockUsers();
-    const existingUser = users[targetPhone];
-
-    // Existing registered user -> log in immediately
-    if (existingUser && existingUser.displayName && existingUser.profileComplete !== false) {
-      const updatedUser = ensureMockUserRoles({
-        ...existingUser,
-        preferredLocale: profile?.preferredLocale || existingUser.preferredLocale || 'en',
-        updatedAt: new Date().toISOString(),
-        lastLoginAt: new Date().toISOString(),
-      });
-      users[targetPhone] = updatedUser;
-      writeMockUsers(users);
-      challenge.consumedAt = Date.now();
-      writeChallenges(challenges);
-
-      try {
-        window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(updatedUser));
-      } catch {
-        // Ignore storage errors
-      }
-
-      return {
-        user: updatedUser,
-        isNewUser: false,
-        csrfToken: 'mock-csrf-token',
-      };
-    }
-
-    // New user: if profile.displayName is already supplied, complete sign-up right away
-    if (profile && String(profile.displayName || '').trim()) {
-      const nowIso = new Date().toISOString();
-      const createdUser = {
-        id: existingUser?.id || generateId(),
-        displayName: String(profile.displayName).trim(),
-        phoneE164: targetPhone,
-        status: 'active',
-        countryCode: profile.countryCode || 'IN',
-        preferredLocale: profile.preferredLocale || 'en',
+    if (normalizedEmail === 'demo@fieldshift.org' && password === 'demo1234') {
+      const demoUser = {
+        id: 'mock-demo-farmer-01',
+        uid: 'mock-demo-farmer-01',
+        email: 'demo@fieldshift.org',
+        displayName: 'Demo Farmer',
+        preferredLocale: 'en',
+        countryCode: 'IN',
         profileComplete: true,
-        consents: profile.consents || {
-          privacyNoticeVersion: '2026-10',
-          dataProcessing: true,
-          smsMessages: true,
-          acceptedAt: nowIso,
-        },
-        roles: getRolesForPhone(targetPhone),
-        createdAt: existingUser?.createdAt || nowIso,
-        updatedAt: nowIso,
-        lastLoginAt: nowIso,
+        roles: getRolesForUser(),
+        isDemo: true,
       };
-
-      users[targetPhone] = createdUser;
-      writeMockUsers(users);
-      challenge.consumedAt = Date.now();
-      writeChallenges(challenges);
-
       try {
-        window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(createdUser));
+        window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(demoUser));
       } catch {
         // Ignore storage errors
       }
-
-      return {
-        user: createdUser,
-        isNewUser: false,
-        csrfToken: 'mock-csrf-token',
-      };
+      return { user: demoUser, csrfToken: 'mock-csrf-token' };
     }
 
-    // New user verified OTP, now needs to provide displayName & consent
-    const pendingUser = {
-      id: existingUser?.id || generateId(),
-      displayName: null,
-      phoneE164: targetPhone,
-      status: 'pending',
-      countryCode: profile?.countryCode || 'IN',
-      preferredLocale: profile?.preferredLocale || 'en',
-      profileComplete: false,
-      roles: getRolesForPhone(targetPhone),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    return {
-      user: pendingUser,
-      isNewUser: true,
-      csrfToken: 'mock-csrf-token',
-    };
-  },
-
-  async completeProfile({ phoneE164, displayName, preferredLocale, countryCode, consents }) {
-    await delay(250);
-
-    const nowIso = new Date().toISOString();
     const users = readMockUsers();
-    const existing = phoneE164 ? users[phoneE164] : null;
-    const resolvedPhone = phoneE164 || existing?.phoneE164;
+    const existing = users[normalizedEmail];
 
-    if (!resolvedPhone) {
+    if (!existing || existing.password !== password) {
       throw new ApiClientError({
         status: 401,
-        code: 'unauthenticated',
-        message: 'Phone verification session not found.',
+        code: 'invalid_credentials',
+        message: 'Invalid email or password.',
       });
     }
 
-    const completedUser = {
-      id: existing?.id || generateId(),
-      displayName: String(displayName || '').trim(),
-      phoneE164: resolvedPhone,
-      status: 'active',
-      countryCode: countryCode || existing?.countryCode || 'IN',
-      preferredLocale: preferredLocale || existing?.preferredLocale || 'en',
-      profileComplete: true,
-      consents: consents || {
-        privacyNoticeVersion: '2026-10',
-        dataProcessing: true,
-        smsMessages: true,
-        acceptedAt: nowIso,
-      },
-      roles: getRolesForPhone(resolvedPhone),
-      createdAt: existing?.createdAt || nowIso,
-      updatedAt: nowIso,
-      lastLoginAt: nowIso,
-    };
-
-    users[resolvedPhone] = completedUser;
+    const hydrated = ensureMockUserRoles(existing);
+    hydrated.lastLoginAt = new Date().toISOString();
+    users[normalizedEmail] = hydrated;
     writeMockUsers(users);
 
+    const safeUser = { ...hydrated };
+    delete safeUser.password;
+
     try {
-      window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(completedUser));
+      window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(safeUser));
     } catch {
       // Ignore storage errors
     }
 
-    return {
-      user: completedUser,
+    return { user: safeUser, csrfToken: 'mock-csrf-token' };
+  },
+
+  async signup(email, password, displayName, profileOptions = {}) {
+    await delay();
+
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    if (!normalizedEmail) {
+      throw new ApiClientError({
+        status: 400,
+        code: 'email_required',
+        message: 'Email is required',
+      });
+    }
+    if (!password || password.length < 6) {
+      throw new ApiClientError({
+        status: 400,
+        code: 'weak_password',
+        message: 'Password must be at least 6 characters.',
+      });
+    }
+
+    const users = readMockUsers();
+    if (users[normalizedEmail]) {
+      throw new ApiClientError({
+        status: 409,
+        code: 'email_in_use',
+        message: 'An account with this email already exists.',
+      });
+    }
+
+    const nowIso = new Date().toISOString();
+    const newUser = {
+      id: generateId(),
+      uid: generateId(),
+      email: normalizedEmail,
+      displayName: String(displayName || '').trim() || normalizedEmail.split('@')[0],
+      password,
+      preferredLocale: profileOptions.preferredLocale || 'en',
+      countryCode: profileOptions.countryCode || 'IN',
+      profileComplete: true,
+      roles: getRolesForUser(),
+      createdAt: nowIso,
+      updatedAt: nowIso,
+      lastLoginAt: nowIso,
     };
+
+    users[normalizedEmail] = newUser;
+    writeMockUsers(users);
+
+    const safeUser = { ...newUser };
+    delete safeUser.password;
+
+    try {
+      window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(safeUser));
+    } catch {
+      // Ignore storage errors
+    }
+
+    return { user: safeUser, csrfToken: 'mock-csrf-token' };
+  },
+
+  async resetPassword(email) {
+    await delay();
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    if (!normalizedEmail) {
+      throw new ApiClientError({
+        status: 400,
+        code: 'email_required',
+        message: 'Email is required',
+      });
+    }
+    return { success: true };
   },
 
   async getSession() {
@@ -351,7 +205,7 @@ export const mockAuthAdapter = {
       const raw = window.localStorage.getItem(SESSION_STORAGE_KEY);
       if (!raw) return { user: null, csrfToken: null };
       const parsed = JSON.parse(raw);
-      if (parsed && parsed.phoneE164 && parsed.displayName) {
+      if (parsed && (parsed.email || parsed.uid) && parsed.displayName) {
         const hydratedUser = ensureMockUserRoles(parsed);
         if (hydratedUser !== parsed) {
           window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(hydratedUser));
@@ -376,4 +230,3 @@ export const mockAuthAdapter = {
     }
   },
 };
-

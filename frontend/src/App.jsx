@@ -40,7 +40,6 @@ import { useTheme } from './context/ThemeContext';
 import { useTranslation } from './context/LanguageContext';
 import { useRole } from './context/RoleContext';
 import { useAuth } from './context/AuthContext';
-import { maskPhoneE164 } from './utils/phone';
 import useVoice, { stopAllSpeech } from './hooks/useVoice';
 
 // Lazy-load LandingPage and MarketCropDetail
@@ -133,7 +132,7 @@ function AppHeader({
   const [unsyncedCount, setUnsyncedCount] = useState(0);
   const menuRef = useRef(null);
 
-  const maskedPhone = maskPhoneE164(user?.phoneE164);
+  const userLabel = user?.email || user?.displayName || 'Farmer';
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -235,8 +234,8 @@ function AppHeader({
               className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
             >
               <User size={14} className="text-emerald-600 dark:text-emerald-400" />
-              <span dir="ltr" className="hidden xs:inline sm:inline">
-                {maskedPhone}
+              <span dir="ltr" className="hidden max-w-[140px] truncate xs:inline sm:inline">
+                {userLabel}
               </span>
             </button>
 
@@ -249,12 +248,14 @@ function AppHeader({
                   <p className="truncate text-sm font-extrabold text-slate-900 dark:text-white">
                     {user.displayName}
                   </p>
-                  <p
-                    dir="ltr"
-                    className="mt-0.5 text-xs font-semibold text-slate-500 dark:text-slate-400"
-                  >
-                    {maskedPhone}
-                  </p>
+                  {user.email && (
+                    <p
+                      dir="ltr"
+                      className="mt-0.5 truncate text-xs font-semibold text-slate-500 dark:text-slate-400"
+                    >
+                      {user.email}
+                    </p>
+                  )}
                 </div>
 
                 {unsyncedCount > 0 ? (

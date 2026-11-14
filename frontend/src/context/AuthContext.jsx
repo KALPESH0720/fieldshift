@@ -1,19 +1,20 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../config/firebase';
 import { db } from '../db/db';
 import { realAuthAdapter } from '../api/auth';
 import { mockAuthAdapter, SESSION_STORAGE_KEY } from '../services/auth/mockAuthAdapter';
 import { saveCountry } from '../services/landRegistry/registry';
-import { AUTH_COUNTRY_STORAGE_KEY } from '../utils/phone';
+import { setAuthToken } from '../api/client';
 import { drainSyncQueue } from '../api/sync';
 import { syncPlotsWithServer } from '../api/plots';
 
 const AuthContext = createContext(null);
 
-const LEGACY_USER_KEY = 'fieldshift-user';
 const DATA_OWNER_KEY = 'fieldshift-data-owner';
+const AUTH_COUNTRY_STORAGE_KEY = 'fieldshift-auth-country';
 const USER_SCOPED_LOCAL_KEYS = [
-  LEGACY_USER_KEY,
   SESSION_STORAGE_KEY,
   'fieldshift-role',
   'fieldshift-land-document',
@@ -22,7 +23,7 @@ const USER_SCOPED_LOCAL_KEYS = [
   DATA_OWNER_KEY,
 ];
 
-export const IS_MOCK_AUTH = String(import.meta.env.VITE_USE_MOCKS ?? 'true').toLowerCase() === 'true';
+export const IS_MOCK_AUTH = String(import.meta.env.VITE_USE_MOCKS ?? 'false').toLowerCase() === 'true';
 
 function getAdapter() {
   return IS_MOCK_AUTH ? mockAuthAdapter : realAuthAdapter;
@@ -31,16 +32,10 @@ function getAdapter() {
 function readCachedSessionUser() {
   if (typeof window === 'undefined') return null;
   try {
-    // Clean up any legacy email-based marker from older versions
-    const legacy = window.localStorage.getItem(LEGACY_USER_KEY);
-    if (legacy) {
-      window.localStorage.removeItem(LEGACY_USER_KEY);
-    }
-
     const raw = window.localStorage.getItem(SESSION_STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    if (parsed && typeof parsed === 'object' && parsed.phoneE164 && parsed.displayName) {
+    if (parsed && typeof parsed === 'object' && (parsed.email || parsed.uid || parsed.phoneE164) && parsed.displayName) {
       return parsed;
     }
     return null;
@@ -52,7 +47,7 @@ function readCachedSessionUser() {
 function writeCachedSessionUser(user) {
   if (typeof window === 'undefined') return;
   try {
-    if (user && user.phoneE164 && user.displayName) {
+    if (user && (user.email || user.uid) && user.displayName) {
       window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(user));
     } else {
       window.localStorage.removeItem(SESSION_STORAGE_KEY);
@@ -99,11 +94,6 @@ export function AuthProvider({ children }) {
     }
     return 'loading';
   }); // 'loading' | 'authenticated' | 'anonymous'
-  const activeChallengeRef = useRef({
-    challengeId: null,
-    phoneE164: null,
-    lastVerifiedCode: null,
-  });
 
   const adapter = getAdapter();
 
@@ -114,13 +104,17 @@ export function AuthProvider({ children }) {
       return;
     }
 
+    const ownerId = authenticatedUser.uid || authenticatedUser.email || authenticatedUser.id;
+
     if (typeof window !== 'undefined') {
       try {
         const previousOwner = window.localStorage.getItem(DATA_OWNER_KEY);
-        if (previousOwner && previousOwner !== authenticatedUser.phoneE164) {
+        if (previousOwner && previousOwner !== ownerId) {
           await clearUserDatabaseAndCaches();
         }
-        window.localStorage.setItem(DATA_OWNER_KEY, authenticatedUser.phoneE164);
+        if (ownerId) {
+          window.localStorage.setItem(DATA_OWNER_KEY, ownerId);
+        }
         if (authenticatedUser.countryCode) {
           saveCountry(authenticatedUser.countryCode);
           window.localStorage.setItem(AUTH_COUNTRY_STORAGE_KEY, authenticatedUser.countryCode);
@@ -134,182 +128,77 @@ export function AuthProvider({ children }) {
     setUser(authenticatedUser);
     setStatus('authenticated');
 
-    if (!IS_MOCK_AUTH && typeof navigator !== 'undefined' && navigator.onLine) {
+    if (typeof navigator !== 'undefined' && navigator.onLine) {
       Promise.all([drainSyncQueue(), syncPlotsWithServer()]).catch((err) => {
         console.warn('Background sync on login failed:', err);
       });
     }
   }, []);
 
-  const refreshSession = useCallback(async () => {
-    try {
-      const cachedUser = readCachedSessionUser();
-
-      if (IS_MOCK_AUTH) {
-        if (cachedUser) {
-          setUser(cachedUser);
-          setStatus('authenticated');
-        } else {
-          setUser(null);
-          setStatus('anonymous');
-        }
-        return;
-      }
-
-      // Offline startup: preserve already signed-in user so cached farm data remains accessible
-      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
-        if (cachedUser) {
-          setUser(cachedUser);
-          setStatus('authenticated');
-        } else {
-          setUser(null);
-          setStatus('anonymous');
-        }
-        return;
-      }
-
-      const data = await adapter.getSession();
-      if (data?.user && data.user.displayName && data.user.profileComplete !== false) {
-        await activateAuthenticatedUser(data.user);
-      } else {
-        writeCachedSessionUser(null);
-        setUser(null);
-        setStatus('anonymous');
-      }
-    } catch (error) {
-      // If network error while offline or flaky connection, keep cached user signed in
-      const cachedUser = readCachedSessionUser();
-      if (cachedUser && (error?.code === 'network' || error?.code === 'timeout')) {
-        setUser(cachedUser);
-        setStatus('authenticated');
-        return;
-      }
-      writeCachedSessionUser(null);
-      setUser(null);
-      setStatus('anonymous');
-    }
-  }, [activateAuthenticatedUser, adapter]);
-
+  // Listen to Firebase auth state changes in production & non-mock mode
   useEffect(() => {
-    if (IS_MOCK_AUTH || (typeof navigator !== 'undefined' && navigator.onLine === false)) {
+    if (IS_MOCK_AUTH) {
       return undefined;
     }
-    let cancelled = false;
-    adapter
-      .getSession()
-      .then(async (data) => {
-        if (cancelled) return;
-        if (data?.user && data.user.displayName && data.user.profileComplete !== false) {
-          await activateAuthenticatedUser(data.user);
+
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const token = await firebaseUser.getIdToken();
+        setAuthToken(token);
+        const authUser = {
+          id: firebaseUser.uid,
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName:
+            firebaseUser.displayName ||
+            (firebaseUser.email ? firebaseUser.email.split('@')[0] : 'Farmer'),
+          preferredLocale:
+            (typeof window !== 'undefined' && window.localStorage.getItem('fieldshift-language')) ||
+            'en',
+          village: '',
+          countryCode: 'IN',
+          profileComplete: true,
+          roles: [
+            {
+              code: 'farmer',
+              scope: 'global',
+              groupId: null,
+              permissions: ['plots:read', 'plots:write', 'soil:read', 'soil:write'],
+            },
+            {
+              code: 'extension',
+              scope: 'group',
+              groupId: 'fpo-dicholi-01',
+              permissions: ['group:read', 'farmers:read'],
+            },
+          ],
+        };
+        await activateAuthenticatedUser(authUser);
+      } else {
+        const cached = readCachedSessionUser();
+        // If offline, preserve cached user so offline farm data remains accessible
+        if (cached && typeof navigator !== 'undefined' && navigator.onLine === false) {
+          setUser(cached);
+          setStatus('authenticated');
+        } else if (cached?.isDemo) {
+          setUser(cached);
+          setStatus('authenticated');
         } else {
           writeCachedSessionUser(null);
           setUser(null);
           setStatus('anonymous');
         }
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        const cachedUser = readCachedSessionUser();
-        if (cachedUser && (error?.code === 'network' || error?.code === 'timeout')) {
-          setUser(cachedUser);
-          setStatus('authenticated');
-          return;
-        }
-        writeCachedSessionUser(null);
-        setUser(null);
-        setStatus('anonymous');
-      });
+      }
+    });
+
     return () => {
-      cancelled = true;
+      unsubscribe();
     };
-  }, [activateAuthenticatedUser, adapter]);
+  }, [activateAuthenticatedUser]);
 
-  const requestOtp = useCallback(
-    async (phoneE164, options = {}) => {
-      const result = await adapter.requestOtp(phoneE164, options);
-      activeChallengeRef.current = {
-        challengeId: result.challengeId,
-        phoneE164,
-        lastVerifiedCode: null,
-      };
-      return result;
-    },
-    [adapter],
-  );
-
-  /**
-   * Supports both:
-   *   verifyOtp(phoneE164, code, profile?)
-   * and:
-   *   verifyOtp(code, profile?)
-   */
-  const verifyOtp = useCallback(
-    async (phoneOrCode, codeOrProfile = undefined, maybeProfile = undefined) => {
-      let phoneE164 = activeChallengeRef.current.phoneE164;
-      let code;
-      let profile;
-
-      if (typeof phoneOrCode === 'string' && phoneOrCode.startsWith('+')) {
-        phoneE164 = phoneOrCode;
-        code = codeOrProfile;
-        profile = maybeProfile || null;
-      } else {
-        code = phoneOrCode;
-        profile = codeOrProfile && typeof codeOrProfile === 'object' ? codeOrProfile : null;
-      }
-
-      const challengeId = activeChallengeRef.current.challengeId;
-      const result = await adapter.verifyOtp({
-        challengeId,
-        phoneE164,
-        code,
-        profile,
-      });
-
-      activeChallengeRef.current = {
-        challengeId,
-        phoneE164: result?.user?.phoneE164 || phoneE164,
-        lastVerifiedCode: String(code || '').trim(),
-      };
-
-      const needsProfile = Boolean(
-        result.isNewUser && (!profile || !String(profile.displayName || '').trim()),
-      );
-
-      if (!needsProfile && result.user) {
-        await activateAuthenticatedUser(result.user);
-      }
-
-      return {
-        ...result,
-        isNewUser: needsProfile,
-      };
-    },
-    [activateAuthenticatedUser, adapter],
-  );
-
-  const completeProfile = useCallback(
-    async (profile) => {
-      const { phoneE164, lastVerifiedCode, challengeId } = activeChallengeRef.current;
-
-      if (IS_MOCK_AUTH && challengeId && lastVerifiedCode) {
-        const result = await adapter.verifyOtp({
-          challengeId,
-          phoneE164,
-          code: lastVerifiedCode,
-          profile,
-        });
-        if (result?.user) {
-          await activateAuthenticatedUser(result.user);
-        }
-        return result;
-      }
-
-      const result = await adapter.completeProfile({
-        phoneE164,
-        ...profile,
-      });
-
+  const login = useCallback(
+    async (email, password) => {
+      const result = await adapter.login(email, password);
       if (result?.user) {
         await activateAuthenticatedUser(result.user);
       }
@@ -317,6 +206,60 @@ export function AuthProvider({ children }) {
     },
     [activateAuthenticatedUser, adapter],
   );
+
+  const signup = useCallback(
+    async (email, password, displayName, profileOptions = {}) => {
+      const result = await adapter.signup(email, password, displayName, profileOptions);
+      if (result?.user) {
+        await activateAuthenticatedUser(result.user);
+      }
+      return result;
+    },
+    [activateAuthenticatedUser, adapter],
+  );
+
+  const resetPassword = useCallback(
+    async (email) => {
+      return adapter.resetPassword(email);
+    },
+    [adapter],
+  );
+
+  const loginWithDemo = useCallback(async () => {
+    const result = await mockAuthAdapter.login('demo@fieldshift.org', 'demo1234');
+    if (result?.user) {
+      await activateAuthenticatedUser(result.user);
+    }
+    return result;
+  }, [activateAuthenticatedUser]);
+
+  const logout = useCallback(async () => {
+    try {
+      await adapter.logout();
+    } catch (err) {
+      console.warn('Logout request error (continuing local cleanup):', err);
+    }
+
+    await clearUserDatabaseAndCaches();
+    setUser(null);
+    setStatus('anonymous');
+  }, [adapter]);
+
+  const refreshSession = useCallback(async () => {
+    try {
+      const cachedUser = readCachedSessionUser();
+      if (cachedUser) {
+        setUser(cachedUser);
+        setStatus('authenticated');
+      } else {
+        setUser(null);
+        setStatus('anonymous');
+      }
+    } catch {
+      setUser(null);
+      setStatus('anonymous');
+    }
+  }, []);
 
   const getUnsyncedCount = useCallback(async () => {
     try {
@@ -328,26 +271,8 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const logout = useCallback(async () => {
-    try {
-      await adapter.logout();
-    } catch (err) {
-      console.warn('Logout request error (continuing local cleanup):', err);
-    }
-
-    activeChallengeRef.current = {
-      challengeId: null,
-      phoneE164: null,
-      lastVerifiedCode: null,
-    };
-
-    await clearUserDatabaseAndCaches();
-    setUser(null);
-    setStatus('anonymous');
-  }, [adapter]);
-
   useEffect(() => {
-    if (IS_MOCK_AUTH || typeof window === 'undefined') return undefined;
+    if (typeof window === 'undefined') return undefined;
 
     const handleOnline = () => {
       if (status === 'authenticated') {
@@ -379,9 +304,10 @@ export function AuthProvider({ children }) {
       user,
       status,
       isMock: IS_MOCK_AUTH,
-      requestOtp,
-      verifyOtp,
-      completeProfile,
+      login,
+      signup,
+      resetPassword,
+      loginWithDemo,
       logout,
       refreshSession,
       getUnsyncedCount,
@@ -391,9 +317,10 @@ export function AuthProvider({ children }) {
     [
       user,
       status,
-      requestOtp,
-      verifyOtp,
-      completeProfile,
+      login,
+      signup,
+      resetPassword,
+      loginWithDemo,
       logout,
       refreshSession,
       getUnsyncedCount,

@@ -10,11 +10,11 @@ import {
   Globe2,
   MessageCircle,
   MessageSquareText,
-  Phone,
   Settings as SettingsIcon,
   UserCheck,
   Volume2,
   LogOut,
+  Mail,
   Wifi,
   WifiOff,
   ShieldCheck,
@@ -29,7 +29,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../db/db';
-import { maskPhoneE164, getCountryName } from '../utils/phone';
+import { getCountryName } from '../utils/phone';
 import { CROP_CREDITS, CROPS, getCropDisplayName } from '../data/crops';
 import CropImage from './CropImage';
 import ListenButton from './ui/ListenButton';
@@ -404,8 +404,8 @@ export default function Settings() {
                   </h2>
                   <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600 dark:text-slate-300">
                     <span className="inline-flex items-center gap-1.5 font-semibold" dir="ltr">
-                      <Phone size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-                      {maskPhoneE164(user.phoneE164)}
+                      <Mail size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                      {user.email || user.displayName}
                     </span>
                     {user.country && (
                       <span className="text-xs font-medium text-slate-400 dark:text-slate-500">

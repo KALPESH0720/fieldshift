@@ -30,7 +30,6 @@ dist-ssr
 
 # Crop photos hidden by npm run crops:audit -- --move-removed
 public/crops-removed/
-node_modules
-node_modules
-node_modules
-node_modules
+dev-dist/
+frontend/dev-dist/
+

@@ -94,46 +94,24 @@ async def api_client(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_dev_otp_to_authenticated_farmer_creation_and_single_use(api_client):
+async def test_email_login_to_authenticated_farmer_creation(api_client):
     client, _, _ = api_client
-    sent = await client.post("/api/v1/auth/otp/send", json={"phone": "9876543210"})
-    assert sent.status_code == 202
-    code = sent.json()["development_otp"]
-    verified = await client.post("/api/v1/auth/otp/verify", json={"phone": "+919876543210", "otp": code})
-    assert verified.status_code == 200
-    headers = {"Authorization": f"Bearer {verified.json()['access_token']}"}
+    login_resp = await client.post("/api/v1/auth/login", json={"email": "farmer@fieldshift.org", "password": "password123"})
+    assert login_resp.status_code == 200
+    token = login_resp.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
     created = await client.post("/api/v1/farmers/me", json={"name": "Test farmer"}, headers=headers)
     assert created.status_code == 201, created.text
-    assert created.json()["phone"] == "+919876543210"
-    replay = await client.post("/api/v1/auth/otp/verify", json={"phone": "9876543210", "otp": code})
-    assert replay.status_code == 400
+    assert created.json()["phone"] == "farmer@fieldshift.org"
 
 
 @pytest.mark.asyncio
-async def test_otp_resend_cooldown_invalid_and_attempt_throttle(api_client):
+async def test_malformed_and_expired_jwt_are_rejected(api_client):
     client, _, _ = api_client
-    sent = await client.post("/api/v1/auth/otp/send", json={"phone": "+14155552671"})
-    assert sent.status_code == 202
-    assert "development_otp" in sent.json()
-    assert (await client.post("/api/v1/auth/otp/send", json={"phone": "+14155552671"})).status_code == 429
-    wrong_code = "000000" if sent.json()["development_otp"] != "000000" else "000001"
-    for _ in range(settings.otp_attempt_limit - 1):
-        assert (await client.post("/api/v1/auth/otp/verify", json={"phone": "+14155552671", "otp": wrong_code})).status_code == 400
-    limited = await client.post("/api/v1/auth/otp/verify", json={"phone": "+14155552671", "otp": wrong_code})
-    assert limited.status_code == 429
-
-
-@pytest.mark.asyncio
-async def test_expired_code_malformed_and_expired_jwt_are_rejected(api_client):
-    client, redis, _ = api_client
-    sent = await client.post("/api/v1/auth/otp/send", json={"phone": "+447911123456"})
-    redis.elapse(settings.otp_expire_seconds + 1)
-    expired = await client.post("/api/v1/auth/otp/verify", json={"phone": "+447911123456", "otp": sent.json()["development_otp"]})
-    assert expired.status_code == 400
     assert (await client.get("/api/v1/farmers/me")).status_code == 401
     malformed = await client.get("/api/v1/farmers/me", headers={"Authorization": "Bearer not.a.jwt"})
     assert malformed.status_code == 401
-    expired_token = create_access_token("+14155552671", expires_delta=timedelta(seconds=-1))
+    expired_token = create_access_token("farmer@fieldshift.org", expires_delta=timedelta(seconds=-1))
     expired_auth = await client.get("/api/v1/farmers/me", headers={"Authorization": f"Bearer {expired_token}"})
     assert expired_auth.status_code == 401
 
