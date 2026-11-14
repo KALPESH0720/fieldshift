@@ -11,6 +11,11 @@ FIELDSHIFT_KNOWLEDGE_DIR: "knowledge"
 FIELDSHIFT_ENGINE_URL: "https://fieldshift-suggestion-engine-32936898580.asia-south1.run.app"
 EOC
 
+echo "==> Building container image pipeline:0.2..."
+gcloud builds submit \
+  --tag asia-south1-docker.pkg.dev/fieldshift-514614/fieldshift/pipeline:0.2 .
+
+echo "==> Deploying to Cloud Run..."
 gcloud run deploy fieldshift-suggestion-engine \
   --image asia-south1-docker.pkg.dev/fieldshift-514614/fieldshift/pipeline:0.2 \
   --region asia-south1 \
@@ -26,3 +31,4 @@ gcloud run deploy fieldshift-suggestion-engine \
   --set-secrets "FIELDSHIFT_API_KEY=fieldshift-api-key:latest" \
   --command "uvicorn" \
   --args "fieldshift.api.main:app,--host,0.0.0.0,--port,8080"
+
