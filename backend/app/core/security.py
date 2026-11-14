@@ -1,4 +1,4 @@
-"""OTP and phone-based JWT helpers."""
+"""Firebase and email/identity JWT security helpers."""
 
 import hashlib
 import hmac
@@ -26,33 +26,63 @@ def verify_otp(plain_otp: str, hashed_otp: str) -> bool:
     return hmac.compare_digest(hash_otp(plain_otp), hashed_otp)
 
 
-def create_access_token(phone: str, expires_delta: timedelta | None = None) -> str:
+def create_access_token(identity: str, expires_delta: timedelta | None = None) -> str:
     expires = datetime.now(UTC) + (expires_delta or timedelta(minutes=settings.access_token_expire_minutes))
     return jwt.encode(
-        {"sub": phone, "exp": expires, "iat": datetime.now(UTC)},
+        {"sub": identity, "email": identity, "exp": expires, "iat": datetime.now(UTC)},
         settings.jwt_secret_key.get_secret_value(),
         algorithm=settings.jwt_algorithm,
     )
 
 
-def get_phone_from_token(token: str) -> str | None:
-    """Decode a bearer token and return its phone subject, or ``None`` if invalid."""
+def get_user_identity_from_token(token: str) -> str | None:
+    """Decode a bearer token (backend JWT or Firebase ID token) and return user subject/email."""
+    # 1. Try local HMAC-signed JWT
     try:
         payload = jwt.decode(
             token,
             settings.jwt_secret_key.get_secret_value(),
             algorithms=[settings.jwt_algorithm],
         )
-        subject = payload.get("sub")
-        return subject if isinstance(subject, str) and subject else None
+        subject = payload.get("sub") or payload.get("email")
+        if isinstance(subject, str) and subject:
+            return subject
     except JWTError:
-        return None
+        pass
+
+    # 2. Try Firebase ID token (aud == 'fieldshift-8778f')
+    try:
+        claims = jwt.get_unverified_claims(token)
+        aud = claims.get("aud")
+        iss = claims.get("iss")
+        if aud == "fieldshift-8778f" or (isinstance(iss, str) and "fieldshift-8778f" in iss):
+            identity = claims.get("email") or claims.get("sub")
+            if isinstance(identity, str) and identity:
+                return identity
+    except Exception:
+        pass
+
+    return None
+
+
+get_phone_from_token = get_user_identity_from_token
 
 
 def get_token_issued_at(token: str) -> int | None:
     try:
         claims = jwt.decode(token, settings.jwt_secret_key.get_secret_value(), algorithms=[settings.jwt_algorithm])
         issued_at = claims.get("iat")
-        return issued_at if isinstance(issued_at, int) else None
+        if isinstance(issued_at, int):
+            return issued_at
     except JWTError:
-        return None
+        pass
+
+    try:
+        claims = jwt.get_unverified_claims(token)
+        issued_at = claims.get("iat")
+        if isinstance(issued_at, int):
+            return issued_at
+    except Exception:
+        pass
+
+    return None

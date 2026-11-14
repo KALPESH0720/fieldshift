@@ -1,15 +1,27 @@
-import { apiRequest, getAuthToken, setAuthToken, setCsrfToken } from './client';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signOut,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+import { auth } from '../config/firebase';
+import { setAuthToken, setCsrfToken, apiRequest } from './client';
 
-function formatFarmerUser(farmer, phoneFallback = '') {
-  if (!farmer) return null;
+function formatFarmerUser(firebaseUser, extra = {}) {
+  if (!firebaseUser) return null;
   return {
-    id: farmer.id,
-    phoneE164: farmer.phone || phoneFallback,
-    displayName: farmer.name || '',
-    preferredLocale: farmer.language || 'en',
-    village: farmer.village || '',
+    id: firebaseUser.uid,
+    uid: firebaseUser.uid,
+    email: firebaseUser.email,
+    displayName:
+      firebaseUser.displayName ||
+      extra.name ||
+      (firebaseUser.email ? firebaseUser.email.split('@')[0] : 'Farmer'),
+    preferredLocale: extra.language || 'en',
+    village: extra.village || '',
     countryCode: 'IN',
-    profileComplete: Boolean(farmer.name && farmer.name.trim()),
+    profileComplete: true,
     roles: [
       {
         code: 'farmer',
@@ -28,143 +40,83 @@ function formatFarmerUser(farmer, phoneFallback = '') {
 }
 
 export const realAuthAdapter = {
-  async requestOtp(phoneE164) {
-    const data = await apiRequest('/auth/otp/send', {
-      method: 'POST',
-      body: {
-        phone: phoneE164,
-      },
-    });
+  async login(email, password) {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+    setAuthToken(idToken);
+
+    let farmer = null;
+    try {
+      farmer = await apiRequest('/farmers/me', { method: 'GET' });
+    } catch {
+      // Backend may be offline or in mock mode; continue with Firebase profile
+    }
 
     return {
-      challengeId: phoneE164,
-      expiresInSeconds: 300,
-      resendAfterSeconds: 60,
-      voiceAvailable: false,
-      developmentOtp: data?.development_otp || null,
+      user: formatFarmerUser(userCredential.user, farmer || {}),
+      csrfToken: null,
     };
   },
 
-  async verifyOtp({ challengeId, phoneE164, code, profile = null }) {
-    const phone = phoneE164 || challengeId;
-    const data = await apiRequest('/auth/otp/verify', {
-      method: 'POST',
-      body: {
-        phone,
-        otp: String(code || '').trim(),
-      },
-    });
+  async signup(email, password, displayName, profileOptions = {}) {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    if (displayName && displayName.trim()) {
+      await updateProfile(userCredential.user, {
+        displayName: displayName.trim(),
+      });
+    }
 
-    if (data?.access_token) {
-      setAuthToken(data.access_token);
-    }
-    if (data?.csrfToken) {
-      setCsrfToken(data.csrfToken);
-    }
+    const idToken = await userCredential.user.getIdToken();
+    setAuthToken(idToken);
 
     let farmer = null;
-    let isNewUser = false;
-
     try {
-      farmer = await apiRequest('/farmers/me', { method: 'GET' });
-    } catch (err) {
-      if (err.status === 404) {
-        isNewUser = true;
-      } else {
-        throw err;
-      }
-    }
-
-    if (farmer) {
-      isNewUser = !farmer.name || !farmer.name.trim();
-      return {
-        user: formatFarmerUser(farmer, phone),
-        isNewUser,
-        csrfToken: data?.csrfToken || null,
-      };
-    }
-
-    // Farmer record doesn't exist yet (404)
-    if (profile && profile.displayName && profile.displayName.trim()) {
       farmer = await apiRequest('/farmers/me', {
         method: 'POST',
         body: {
-          name: String(profile.displayName).trim(),
-          language: profile.preferredLocale || 'en',
-          village: profile.village || null,
+          name: String(displayName || '').trim() || (email ? email.split('@')[0] : 'Farmer'),
+          language: profileOptions.preferredLocale || 'en',
+          village: profileOptions.village || null,
         },
       });
-      return {
-        user: formatFarmerUser(farmer, phone),
-        isNewUser: false,
-        csrfToken: data?.csrfToken || null,
-      };
+    } catch {
+      // Backend may be optional; continue
     }
 
     return {
-      user: {
-        id: null,
-        phoneE164: phone,
-        displayName: '',
-        preferredLocale: profile?.preferredLocale || 'en',
-        village: '',
-        countryCode: 'IN',
-        profileComplete: false,
-        roles: [],
-      },
-      isNewUser: true,
-      csrfToken: data?.csrfToken || null,
+      user: formatFarmerUser(
+        userCredential.user,
+        farmer || { name: displayName, language: profileOptions.preferredLocale },
+      ),
+      csrfToken: null,
     };
   },
 
-  async completeProfile({ phoneE164, displayName, preferredLocale, village }) {
-    let farmer = null;
-    const body = {
-      name: String(displayName || '').trim(),
-      language: preferredLocale || 'en',
-      village: village || null,
-    };
-
-    try {
-      farmer = await apiRequest('/farmers/me', {
-        method: 'PATCH',
-        body,
-      });
-    } catch (err) {
-      if (err.status === 404) {
-        farmer = await apiRequest('/farmers/me', {
-          method: 'POST',
-          body,
-        });
-      } else {
-        throw err;
-      }
-    }
-
-    return {
-      user: formatFarmerUser(farmer, phoneE164),
-    };
+  async resetPassword(email) {
+    await sendPasswordResetEmail(auth, email);
+    return { success: true };
   },
 
   async getSession() {
-    const token = getAuthToken();
-    if (!token) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
       return { user: null, csrfToken: null };
     }
 
+    const idToken = await currentUser.getIdToken();
+    setAuthToken(idToken);
+
+    let farmer = null;
     try {
-      const farmer = await apiRequest('/farmers/me', { method: 'GET' });
-      return {
-        user: formatFarmerUser(farmer),
-        csrfToken: null,
-      };
-    } catch (err) {
-      if (err.status === 401 || err.status === 404) {
-        setAuthToken(null);
-        return { user: null, csrfToken: null };
-      }
-      throw err;
+      farmer = await apiRequest('/farmers/me', { method: 'GET' });
+    } catch {
+      // Backend optional
     }
+
+    return {
+      user: formatFarmerUser(currentUser, farmer || {}),
+      csrfToken: null,
+    };
   },
 
   async refreshSession() {
@@ -172,6 +124,11 @@ export const realAuthAdapter = {
   },
 
   async logout() {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.warn('Firebase signOut error:', err);
+    }
     setAuthToken(null);
     setCsrfToken(null);
   },
