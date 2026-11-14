@@ -39,8 +39,8 @@ export function parseSoilReportText(text = '') {
 
   // 2. Detect Horizons & Depth (e.g. USDA horizon card)
   const hasHorizonA = /horizon\s*a|\bA\b[\s\S]{0,10}12/i.test(normalized);
-  const hasHorizonB = /horizon\s*b|\bB\b[\s\S]{0,10}24/i.test(normalized);
-  const hasHorizonC = /horizon\s*c|\bC\b[\s\S]{0,10}48/i.test(normalized);
+  const hasHorizonB = /horizon\s*b|\b[B8]\b[\s\S]{0,15}(?:24|36)/i.test(normalized);
+  const hasHorizonC = /horizon\s*c|\b[Cc]\b[\s\S]{0,15}(?:48|60|72)/i.test(normalized);
   if (hasHorizonA || hasHorizonB || hasHorizonC) {
     const horizons = [];
     if (hasHorizonA) horizons.push('Horizon A (0–12″)');
@@ -53,7 +53,7 @@ export function parseSoilReportText(text = '') {
   const nameMatch = normalized.match(/soil\s*name\s*[:_]*\s*([^\r\n_]{2,35})/i);
   if (nameMatch && nameMatch[1]) {
     const rawVal = nameMatch[1].trim();
-    if (rawVal && !/^(horizon|sample|date|id|card|survey|table)$/i.test(rawVal)) {
+    if (rawVal && !/^(horizon|sample|date|id|card|survey|table|soil\s*name)$/i.test(rawVal)) {
       result.detectedInfo.soilName = rawVal;
     }
   }
@@ -138,14 +138,32 @@ export function parseSoilReportText(text = '') {
 
 /**
  * Runs client-side OCR using Tesseract.js worker with safety timeout.
+ * Automatically tries local pre-bundled tessdata for fast offline OCR, with CDN fallback.
  */
 export async function recognizeSoilReport(imageFile) {
   let worker = null;
   try {
-    worker = await createWorker('eng');
+    const isBrowser = typeof window !== 'undefined';
+    const workerOptions = isBrowser
+      ? {
+          langPath: `${window.location.origin}/tessdata`,
+          gzip: true,
+        }
+      : {
+          langPath: 'c:/Users/manas/OneDrive/Desktop/nasa/fieldshift',
+          gzip: false,
+        };
+
+    try {
+      worker = await createWorker('eng', 1, workerOptions);
+    } catch (optErr) {
+      console.warn('Custom worker options failed, falling back to standard createWorker:', optErr);
+      worker = await createWorker('eng');
+    }
+
     const ret = await Promise.race([
       worker.recognize(imageFile),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('OCR Timeout')), 20000)),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('OCR Timeout')), 25000)),
     ]);
     const text = ret?.data?.text || '';
     return parseSoilReportText(text);
