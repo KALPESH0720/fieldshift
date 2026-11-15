@@ -130,6 +130,16 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          // ── 3b. Tesseract OCR worker, WASM core & traineddata assets ─────────
+          {
+            urlPattern: /^https:\/\/(?:cdn\.jsdelivr\.net|tessdata\.projectnaptha\.com)\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'tesseract-ocr-assets-v1',
+              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 180 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
           // ── 4. Field Shift backend API (stale-while-revalidate) ──────────────
           {
             urlPattern: /^https:\/\/.*\/api\/v1\/.*/i,

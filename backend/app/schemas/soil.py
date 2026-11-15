@@ -1,5 +1,5 @@
 from datetime import UTC, datetime
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import ConfigDict, Field, model_validator
 
@@ -33,6 +33,22 @@ class SoilTestCreate(SoilMeasurements):
         if self.tested_at.tzinfo is None or self.tested_at.utcoffset() is None:
             raise ValueError("tested_at must include a timezone")
         return self
+
+
+class SoilCardExtractRequest(StrictSchema):
+    image_base64: str | None = Field(default=None, alias="image")
+    content_type: str = "image/png"
+    raw_text: str | None = None
+
+
+class SoilCardExtractResponse(StrictSchema):
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    raw_values: dict[str, str | None] = Field(default_factory=dict)
+    units: dict[str, str | None] = Field(default_factory=dict)
+    ratings: dict[str, str | None] = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    confidence: dict[str, float] = Field(default_factory=dict)
+
 
 
 class SoilTestUpdate(StrictSchema):
@@ -110,3 +126,19 @@ class SoilCardReview(SoilMeasurements):
         if self.tested_at.tzinfo is None or self.tested_at.utcoffset() is None:
             raise ValueError("tested_at must include a timezone")
         return self
+
+
+class SoilCardExtractRequest(StrictSchema):
+    image_base64: str | None = Field(default=None, alias="image")
+    content_type: str = "image/png"
+    raw_text: str | None = None
+
+
+class SoilCardExtractResponse(StrictSchema):
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    raw_values: dict[str, str | None] = Field(default_factory=dict)
+    units: dict[str, str | None] = Field(default_factory=dict)
+    ratings: dict[str, str | None] = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    confidence: dict[str, float] = Field(default_factory=dict)
+

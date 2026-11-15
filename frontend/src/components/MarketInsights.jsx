@@ -375,7 +375,7 @@ export default function MarketInsights() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('market.searchPlaceholder')}
-                className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 ps-10 pe-3.5 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+                className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 ps-10 pe-3.5 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:bg-slate-900"
               />
             </label>
 

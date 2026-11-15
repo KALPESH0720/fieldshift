@@ -27,11 +27,27 @@ def content_sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+NUMERIC_SOIL_METRIC_FIELDS = {
+    "n_val",
+    "p_val",
+    "k_val",
+    "ph",
+    "organic_matter",
+    "ec",
+    "s_val",
+    "zn_val",
+    "b_val",
+    "fe_val",
+    "mn_val",
+    "cu_val",
+}
+
+
 def low_confidence_fields(metrics: dict, confidence: dict[str, float]) -> list[str]:
     threshold = settings.soil_card_ocr_confidence_threshold
     return sorted(
         field for field, value in metrics.items()
-        if value is not None and confidence.get(field, 0.0) < threshold
+        if field in NUMERIC_SOIL_METRIC_FIELDS and value is not None and confidence.get(field, 0.0) < threshold
     )
 
 

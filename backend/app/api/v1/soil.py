@@ -1,3 +1,4 @@
+import base64
 from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
@@ -13,9 +14,11 @@ from app.models.plot import Plot
 from app.models.soil_card_upload import SoilCardUpload
 from app.models.soil_test import SoilTest
 from app.schemas.soil import (
-    SoilCardReview, SoilCardUploadResponse, SoilTestCreate, SoilTestPage,
-    SoilTestResponse, SoilTestUpdate,
+    SoilCardExtractRequest, SoilCardExtractResponse, SoilCardReview,
+    SoilCardUploadResponse, SoilTestCreate, SoilTestPage, SoilTestResponse, SoilTestUpdate,
 )
+from app.services.integrations.http import IntegrationUnavailable
+from app.services.integrations.ocr_service import SoilCardOCRAdapter, parse_soil_health_card_text
 from app.services.soil_cards import content_sha256, low_confidence_fields, sniff_image
 from app.services.storage.malware import MalwareDetected, ScannerUnavailable, get_malware_scanner
 from app.services.storage.objects import ObjectStore, ObjectStoreUnavailable, get_object_store
@@ -282,3 +285,35 @@ async def review_soil_card(
         raise HTTPException(status_code=409, detail="This Soil Health Card already has a reviewed soil record") from exc
     await session.refresh(row)
     return SoilTestResponse.model_validate(row, from_attributes=True)
+
+
+@router.post("/soil-cards/extract", response_model=SoilCardExtractResponse, status_code=status.HTTP_200_OK)
+async def extract_soil_card_synchronous(payload: SoilCardExtractRequest) -> SoilCardExtractResponse:
+    """Synchronously extract soil parameters, ratings, units, and card metadata from
+    an uploaded Soil Health Card image (via Vision LLM / OCR adapter) or raw OCR text.
+    Never injects placeholder or mock data; absent fields remain `None`.
+    """
+    if payload.raw_text:
+        parsed = parse_soil_health_card_text(payload.raw_text)
+    else:
+        try:
+            raw_b64 = (payload.image_base64 or "").split(",")[-1]
+            image_bytes = base64.b64decode(raw_b64, validate=False)
+        except Exception as exc:
+            raise HTTPException(status_code=422, detail="Invalid base64 image payload") from exc
+        if not image_bytes:
+            raise HTTPException(status_code=422, detail="Uploaded image is empty")
+        try:
+            parsed = await SoilCardOCRAdapter().extract_metrics(image_bytes, content_type=payload.content_type)
+        except IntegrationUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    return SoilCardExtractResponse(
+        metrics=parsed.model_dump(exclude={"raw", "confidence"}),
+        raw_values=parsed.raw_values,
+        units=parsed.units,
+        ratings=parsed.ratings,
+        metadata=parsed.metadata,
+        confidence=parsed.confidence,
+    )
+
