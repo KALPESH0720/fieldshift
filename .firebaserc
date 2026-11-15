@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "fieldshift-8778f"
+  },
+  "targets": {
+    "fieldshift-8778f": {
+      "hosting": {
+        "fieldshift-8778f": [
+          "fieldshift-8778f"
+        ]
+      }
+    }
   }
 }
