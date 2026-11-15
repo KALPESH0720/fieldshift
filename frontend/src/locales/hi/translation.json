@@ -56,7 +56,7 @@
     "cancelLogout": "लॉग इन रहें"
   },
   "auth": {
-    "brandTagline": "सटीक कृषि मंच",
+    "brandTagline": "फ़सल चक्र सुझाव प्रणाली (Rotara)",
     "brandQuote": "बेहतर फ़सलें। स्वस्थ मिट्टी। अधिक उपज।",
     "brandDescription": "फ़सल सलाह, मिट्टी स्वास्थ्य कार्ड और मंडी भाव पाने के लिए अपने मोबाइल नंबर से लॉग इन करें।",
     "statOffline": "ऑफ़लाइन तैयार",
@@ -65,7 +65,7 @@
     "pillWeather": "मौसम अलर्ट",
     "pillCrops": "फ़सल चक्र",
     "pillSoil": "मिट्टी स्वास्थ्य",
-    "brandFooter": "Field Shift • किसानों के लिए निर्मित",
+    "brandFooter": "Rotara by Field Shift • किसानों के लिए निर्मित",
     "demoBadge": "डेमो",
     "demoHint": "डेमो मोड: कोड 123456 दर्ज करें",
     "listenPrompt": "सुनें",
@@ -544,7 +544,7 @@
     "recentAlerts": "हाल की चेतावनियाँ",
     "alertsAttention": "वे बातें जिन पर ध्यान देना ज़रूरी है",
     "today": "आज",
-    "brand": "फ़ील्ड शिफ़्ट",
+    "brand": "रोतारा (Rotara)",
     "closeMap": "नक्शा बंद करें",
     "actionsCount": "{count} कार्य",
     "timeframe": {

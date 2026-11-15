@@ -60,10 +60,10 @@ export default function LandingPage() {
           {/* Top specular reflection glare for authentic glass look */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/15 to-transparent" />
 
-          {/* Leaf Glass Icon */}
-          <div className="relative flex justify-center mb-5">
-            <div className="relative flex items-center justify-center p-4 rounded-2xl border border-white/25 bg-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(16,185,129,0.35),inset_0_1px_1px_0_rgba(255,255,255,0.3)]">
-              <Leaf size={44} className="text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+          {/* Logo */}
+          <div className="relative flex justify-center mb-4">
+            <div className="relative flex items-center justify-center p-3 rounded-3xl border border-white/25 bg-white/20 backdrop-blur-xl shadow-[0_0_35px_rgba(16,185,129,0.35),inset_0_1px_1px_0_rgba(255,255,255,0.4)]">
+              <img src="/logo-mark.svg" alt="Rotara" className="h-14 w-14 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]" />
             </div>
           </div>
 
@@ -74,11 +74,16 @@ export default function LandingPage() {
           </div>
 
           {/* Title */}
-          <h1 className="relative text-4xl md:text-5xl font-black tracking-tight mb-4 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
-            Field Shift
+          <h1 className="relative text-4xl md:text-5xl font-black tracking-tight mb-2 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+            Rotara
           </h1>
 
-          {/* Subtitle */}
+          {/* Brand Subtitle */}
+          <p className="relative text-emerald-300 font-extrabold text-xs uppercase tracking-widest mb-3">
+            Field Shift • Crop Rotation Suggestion Engine
+          </p>
+
+          {/* Description */}
           <p className="relative text-slate-200 text-base md:text-lg mb-8 leading-relaxed font-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
             Adapting Farms with NASA Data. Smart crop rotations, soil health tracking, and precise insights for better yields.
           </p>

@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "fieldshift-8778f",
     "public": "frontend/dist",
     "ignore": [
       "firebase.json",

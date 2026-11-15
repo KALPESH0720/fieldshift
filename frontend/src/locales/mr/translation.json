@@ -56,7 +56,7 @@
     "cancelLogout": "लॉग इन राहा"
   },
   "auth": {
-    "brandTagline": "अचूक शेती प्लॅटफॉर्म",
+    "brandTagline": "पीक फेरपालट सल्ला प्रणाली (Rotara)",
     "brandQuote": "हुशार पिके. निरोगी माती. अधिक उत्पन्न.",
     "brandDescription": "पीक सल्ला, माती आरोग्य कार्ड आणि बाजारभाव मिळवण्यासाठी तुमच्या मोबाईल नंबरने लॉग इन करा.",
     "statOffline": "ऑफलाइन तयार",
@@ -65,7 +65,7 @@
     "pillWeather": "हवामान सूचना",
     "pillCrops": "पीक फेरपालट",
     "pillSoil": "माती आरोग्य",
-    "brandFooter": "Field Shift • शेतकऱ्यांसाठी तयार केलेले",
+    "brandFooter": "Rotara by Field Shift • शेतकऱ्यांसाठी तयार केलेले",
     "demoBadge": "डेमो",
     "demoHint": "डेमो मोड: कोड 123456 वापरा",
     "listenPrompt": "ऐका",
@@ -544,7 +544,7 @@
     "recentAlerts": "अलीकडील सूचना",
     "alertsAttention": "ज्या गोष्टींकडे लक्ष देणे गरजेचे आहे",
     "today": "आज",
-    "brand": "फील्ड शिफ्ट",
+    "brand": "रोतारा (Rotara)",
     "closeMap": "नकाशा बंद करा",
     "actionsCount": "{count} कृती",
     "timeframe": {

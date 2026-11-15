@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" width="350" height="350">
+  <defs>
+    <mask id="quad-mask">
+      <rect width="350" height="350" fill="white" />
+      <rect x="0" y="171" width="350" height="8" fill="black" />
+      <rect x="171" y="0" width="8" height="350" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- 4 Quadrants -->
+  <g mask="url(#quad-mask)">
+    <!-- Top-Left (Forest Green) -->
+    <path d="M 175 175 L 49 175 A 126 126 0 0 1 175 49 Z" fill="#2f7a3e" />
+    <!-- Top-Right (Sun/Amber Gold) -->
+    <path d="M 175 175 L 175 49 A 126 126 0 0 1 301 175 Z" fill="#e0a526" />
+    <!-- Bottom-Right (Soil Brown) -->
+    <path d="M 175 175 L 301 175 A 126 126 0 0 1 175 301 Z" fill="#8a5a2b" />
+    <!-- Bottom-Left (Sprout Light Green) -->
+    <path d="M 175 175 L 175 301 A 126 126 0 0 1 49 175 Z" fill="#8dbf5a" />
+  </g>
+
+  <!-- Center Hub: White ring and green center dot -->
+  <circle cx="175" cy="175" r="30" fill="#ffffff" />
+  <circle cx="175" cy="175" r="14" fill="#2f7a3e" />
+
+  <!-- Outer curved arrow -->
+  <path d="M 240 37 A 153 153 0 1 1 22 175" fill="none" stroke="#2f7a3e" stroke-width="14" stroke-linecap="round" />
+  
+  <!-- Arrow Head pointing up at (22, scy) -->
+  <polygon points="22,142 6,178 38,178" fill="#2f7a3e" />
+</svg>

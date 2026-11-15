@@ -72,8 +72,8 @@ function BrandPanel({ reduceMotion }) {
       <div className="relative z-10 mx-auto w-full max-w-lg px-10">
         {/* Logo */}
         <div className="mb-10 flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-lg shadow-emerald-500/30">
-            <Sprout size={24} className="text-white" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-lg shadow-emerald-500/20 p-1.5 backdrop-blur-md">
+            <img src="/logo-mark.svg" alt="Rotara" className="h-9 w-9 object-contain" />
           </div>
           <div>
             <p className="text-xl font-extrabold tracking-tight text-white">{t('dashboard.brand')}</p>

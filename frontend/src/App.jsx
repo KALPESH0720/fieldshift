@@ -172,8 +172,15 @@ function AppHeader({
 
   return (
     <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white px-3 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] dark:border-slate-800 dark:bg-slate-900 sm:px-6">
-      <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
-        <span className="truncate text-sm font-black tracking-tight text-slate-900 dark:text-white sm:text-base">
+      <div className="flex min-w-0 items-center gap-2 sm:gap-2.5">
+        <Link to="/farm" className="flex shrink-0 items-center gap-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" title="Rotara">
+          <img src="/logo-mark.svg" alt="Rotara" className="h-7 w-7 object-contain" />
+          <span className="hidden font-black tracking-tight text-slate-900 dark:text-white sm:inline text-sm">
+            Rotara
+          </span>
+        </Link>
+        <span className="hidden text-slate-300 dark:text-slate-700 sm:inline">/</span>
+        <span className="truncate text-sm font-bold tracking-tight text-slate-700 dark:text-slate-200 sm:text-base">
           {title}
         </span>
         {isMock && (

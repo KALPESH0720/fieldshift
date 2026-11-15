@@ -56,7 +56,7 @@
     "cancelLogout": "Keep signed in"
   },
   "auth": {
-    "brandTagline": "Precision Agriculture Platform",
+    "brandTagline": "Crop Rotation Suggestion Engine",
     "brandQuote": "Smarter crops. Healthier soil. Stronger yields.",
     "brandDescription": "Sign in with your email to get crop advice, soil health cards, and live market prices.",
     "statOffline": "Offline Ready",
@@ -65,7 +65,7 @@
     "pillWeather": "Weather Alerts",
     "pillCrops": "Crop Rotation",
     "pillSoil": "Soil Health",
-    "brandFooter": "Field Shift • Built for farmers everywhere",
+    "brandFooter": "Rotara by Field Shift • Built for farmers everywhere",
     "demoBadge": "Demo",
     "demoHint": "Demo mode: use demo@fieldshift.org / demo1234",
     "listenPrompt": "Listen",
@@ -580,7 +580,7 @@
     "recentAlerts": "Recent Alerts",
     "alertsAttention": "Things that need your attention",
     "today": "Today",
-    "brand": "Field Shift",
+    "brand": "Rotara",
     "closeMap": "Close map",
     "actionsCount": "{count} actions",
     "timeframe": {

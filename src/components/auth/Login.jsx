@@ -517,13 +517,16 @@ export default function Login() {
       {/* Top Bar: Brand + Language Picker + Theme Toggle */}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-md shadow-emerald-500/20">
-            <Sprout size={22} />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white shadow-md shadow-emerald-500/10 border border-slate-100 p-1 dark:bg-slate-800 dark:border-slate-700">
+            <img src="/logo-mark.svg" alt="Rotara" className="h-9 w-9 object-contain" />
           </span>
           <div>
             <div className="flex items-center gap-2">
               <span className="text-lg font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-                {t('dashboard.brand') || 'Field Shift'}
+                Rotara
+              </span>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                Field Shift
               </span>
             </div>
           </div>

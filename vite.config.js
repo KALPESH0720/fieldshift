@@ -41,9 +41,9 @@ export default defineConfig({
 
       // ── Web App Manifest ─────────────────────────────────────────────────
       manifest: {
-        name: 'Field Shift',
-        short_name: 'Field Shift',
-        description: 'Offline-first smart crop rotation and soil management for Indian farmers.',
+        name: 'Rotara — Crop Rotation Suggestion Engine',
+        short_name: 'Rotara',
+        description: 'Rotara by Field Shift — Offline-first smart crop rotation and soil management for Indian farmers.',
         start_url: '/farm',
         display: 'standalone',
         background_color: '#0f172a',
@@ -59,9 +59,21 @@ export default defineConfig({
             purpose: 'any',
           },
           {
+            src: '/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
             src: '/icon-512.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
+            purpose: 'any maskable',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
             purpose: 'any maskable',
           },
         ],
