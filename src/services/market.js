@@ -4,7 +4,7 @@ import { getSavedCountry } from './landRegistry/registry';
 import { apiRequest } from '../api/client';
 
 const FAVOURITES_KEY = 'fieldshift-market-favourites';
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS !== 'false';
+const USE_MOCKS = String(import.meta.env.VITE_USE_MOCKS ?? 'false').toLowerCase() === 'true';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 
 const REGIONAL_MARKETS = {

@@ -18,10 +18,15 @@ import {
 import { getPlotAreaHectares, runOfflineRotationEngine } from '../services/rotationEngine';
 import { fetchBackendRecommendations } from '../api/recommendations';
 import { createBackendPlot } from '../api/plots';
-import {
-    RECOMMENDER_LOADING_STEPS,
-    TOTAL_MOCK_DELAY_MS,
-} from '../services/mockEngine';
+const RECOMMENDER_LOADING_STEPS = [
+    { id: 'field-details', titleKey: 'recommender.stepTitles.fieldDetails', detailKey: 'recommender.stepDetails.fieldDetails', icon: 'Microscope', durationMs: 400 },
+    { id: 'soil-history', titleKey: 'recommender.stepTitles.soilHistory', detailKey: 'recommender.stepDetails.soilHistory', icon: 'Leaf', durationMs: 400 },
+    { id: 'weather', titleKey: 'recommender.stepTitles.weather', detailKey: 'recommender.stepDetails.weather', icon: 'CloudRain', durationMs: 400 },
+    { id: 'crop-families', titleKey: 'recommender.stepTitles.cropFamilies', detailKey: 'recommender.stepDetails.cropFamilies', icon: 'Layers', durationMs: 400 },
+    { id: 'market', titleKey: 'recommender.stepTitles.market', detailKey: 'recommender.stepDetails.market', icon: 'TrendingUp', durationMs: 400 },
+    { id: 'rotation-plan', titleKey: 'recommender.stepTitles.rotationPlan', detailKey: 'recommender.stepDetails.rotationPlan', icon: 'Sprout', durationMs: 400 },
+];
+const TOTAL_MOCK_DELAY_MS = RECOMMENDER_LOADING_STEPS.reduce((acc, s) => acc + s.durationMs, 0);
 import {
     formatSpeakableCurrency,
     formatSpeakableNumber,
@@ -284,26 +289,6 @@ export default function Recommender() {
         }, 3600);
     }, []);
 
-    // Quick seed demo plot if Dexie DB has no plots yet (Zero-friction onboarding)
-    const handleAddDemoPlot = async () => {
-        try {
-            const demoId = await db.plots.add({
-                name: 'East Canal Block',
-                area: '3.5 Acres',
-                areaUnit: 'acres',
-                areaHectares: 1.4164,
-                village: 'Rampur',
-                serverId: null,
-                isVerified: false,
-                source: 'manual',
-            });
-            setSelectedPlotId(String(demoId));
-            showToast(t('recommender.demoPlotSavedToast'));
-        } catch (err) {
-            console.error('Failed to create demo plot:', err);
-        }
-    };
-
     const handleCalculate = async (e) => {
         if (e) e.preventDefault();
         const activePrev = activePreviousCropRaw;
@@ -548,13 +533,12 @@ export default function Recommender() {
                                             </p>
                                         </div>
                                     </div>
-                                    <button
-                                        type="button"
-                                        onClick={handleAddDemoPlot}
-                                        className="shrink-0 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-sm transition-colors"
+                                    <Link
+                                        to="/farm"
+                                        className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-sm transition-colors"
                                     >
-                                        {t('recommender.quickAddDemoPlot')}
-                                    </button>
+                                        {t('addField.title') || 'Add Field'}
+                                    </Link>
                                 </div>
                             ) : (
                                 /* Plot Selector Carousel / Grid */

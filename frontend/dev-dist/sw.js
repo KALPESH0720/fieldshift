@@ -81,7 +81,7 @@ define(['./workbox-b1bafff1'], (function (workbox) { 'use strict';
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
     "url": "index.html",
-    "revision": "0.a3t42ko45bo"
+    "revision": "0.a9gt7u3m74o"
   }], {
     "ignoreURLParametersMatching": [/^v$/, /^utm_/, /^fbclid$/]
   });
@@ -130,6 +130,15 @@ define(['./workbox-b1bafff1'], (function (workbox) { 'use strict';
     plugins: [new workbox.ExpirationPlugin({
       maxEntries: 10,
       maxAgeSeconds: 2592000
+    }), new workbox.CacheableResponsePlugin({
+      statuses: [0, 200]
+    })]
+  }), 'GET');
+  workbox.registerRoute(/^https:\/\/(?:cdn\.jsdelivr\.net|tessdata\.projectnaptha\.com)\/.*/i, new workbox.CacheFirst({
+    "cacheName": "tesseract-ocr-assets-v1",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 20,
+      maxAgeSeconds: 15552000
     }), new workbox.CacheableResponsePlugin({
       statuses: [0, 200]
     })]

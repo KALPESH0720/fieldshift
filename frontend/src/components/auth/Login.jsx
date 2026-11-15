@@ -262,7 +262,6 @@ export default function Login() {
     login,
     signup,
     resetPassword,
-    loginWithDemo,
     logout,
     getUnsyncedCount,
   } = useAuth();
@@ -464,20 +463,7 @@ export default function Login() {
     }
   };
 
-  // Demo Login Handler
-  const handleDemoLogin = async () => {
-    if (loading) return;
-    setLoading(true);
-    setErrorMessage('');
-    try {
-      await loginWithDemo();
-      navigate(redirectTo, { replace: true });
-    } catch (err) {
-      setErrorMessage(translateAuthError(err));
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   // "Not you? Switch user" action
   const handleSwitchUser = async (forceConfirm = false) => {
@@ -539,14 +525,6 @@ export default function Login() {
               <span className="text-lg font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                 {t('dashboard.brand') || 'Field Shift'}
               </span>
-              {isMock && (
-                <span
-                  id="auth-demo-badge"
-                  className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-2.5 py-0.5 text-xs font-extrabold uppercase tracking-wider text-amber-900 dark:border-amber-500/50 dark:bg-amber-950 dark:text-amber-200"
-                >
-                  {t('auth.demoBadge') || 'Demo'}
-                </span>
-              )}
             </div>
           </div>
         </div>
@@ -995,20 +973,6 @@ export default function Login() {
               </>
             )}
           </button>
-
-          {/* Quick Demo Account Button (Convenient for evaluation) */}
-          {mode === 'signIn' && (
-            <button
-              type="button"
-              id="auth-demo-login-btn"
-              disabled={loading}
-              onClick={handleDemoLogin}
-              className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-2xl border border-amber-300/80 bg-amber-50/70 px-4 text-sm font-extrabold text-amber-900 transition hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:border-amber-700/60 dark:bg-amber-950/40 dark:text-amber-200"
-            >
-              <Sparkles size={16} className="text-amber-600 dark:text-amber-400" />
-              <span>{t('auth.demoLoginBtn') || 'Try Demo Account'}</span>
-            </button>
-          )}
 
           {/* Mode Switcher Footer Links */}
           <div className="pt-2 text-center text-sm">

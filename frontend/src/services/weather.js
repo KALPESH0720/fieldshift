@@ -4,7 +4,7 @@ import { apiRequest } from '../api/client';
 const WEATHER_CACHE_ID = 'dashboard-weather';
 const OPEN_METEO = 'https://api.open-meteo.com/v1/forecast';
 const AIR_QUALITY = 'https://air-quality-api.open-meteo.com/v1/air-quality';
-const USE_MOCKS = String(import.meta.env.VITE_USE_MOCKS ?? 'true').toLowerCase() === 'true';
+const USE_MOCKS = String(import.meta.env.VITE_USE_MOCKS ?? 'false').toLowerCase() === 'true';
 
 function getCentroid(plot) {
     const points = plot?.coordinates || plot?.boundaryCoordinates || [];
@@ -44,93 +44,7 @@ function buildAdvisories(data) {
     ];
 }
 
-export function buildSampleWeather(plot) {
-    const [latitude, longitude] = getCentroid(plot) || [15.49, 73.82];
-    const now = new Date();
-    now.setMinutes(0, 0, 0);
-    const startHour = new Date(now.getTime() - 2 * 3600 * 1000);
-    const times = [];
-    const temperature_2m = [];
-    const apparent_temperature = [];
-    const relative_humidity_2m = [];
-    const precipitation_probability = [];
-    const precipitation = [];
-    const rain = [];
-    const wind_speed_10m = [];
-    const soil_moisture_0_to_1cm = [];
-
-    for (let i = 0; i < 36; i += 1) {
-        const dt = new Date(startHour.getTime() + i * 3600 * 1000);
-        const hourOfDay = dt.getHours();
-        times.push(dt.toISOString());
-        const diurnal = Math.sin(((hourOfDay - 6) / 24) * Math.PI * 2);
-        const temp = Number((28.5 + diurnal * 4.8).toFixed(1));
-        const feels = Number((temp + 2.4 - diurnal * 0.4).toFixed(1));
-        const hum = Math.round(Math.max(46, Math.min(92, 72 - diurnal * 18)));
-        const rainProb = hourOfDay >= 15 && hourOfDay <= 19 ? 55 + ((hourOfDay - 15) * 8) : Math.max(8, 22 - Math.abs(hourOfDay - 16) * 2);
-        const rainMm = rainProb >= 55 ? Number(((rainProb - 45) * 0.12).toFixed(1)) : 0;
-        const wind = Number((9 + Math.max(0, diurnal) * 9.5).toFixed(1));
-        const soilM = Number((0.28 + (rainMm > 0 ? 0.04 : 0) - Math.max(0, diurnal) * 0.03).toFixed(3));
-
-        temperature_2m.push(temp);
-        apparent_temperature.push(feels);
-        relative_humidity_2m.push(hum);
-        precipitation_probability.push(Math.min(95, Math.round(rainProb)));
-        precipitation.push(rainMm);
-        rain.push(rainMm);
-        wind_speed_10m.push(wind);
-        soil_moisture_0_to_1cm.push(soilM);
-    }
-
-    const dailyTime = [];
-    const temperature_2m_min = [];
-    const temperature_2m_max = [];
-    const precipitation_sum = [];
-    for (let d = 0; d < 7; d += 1) {
-        const dayDate = new Date(now.getTime() + d * 86400 * 1000);
-        dailyTime.push(dayDate.toISOString().slice(0, 10));
-        temperature_2m_min.push(24 + (d % 2));
-        temperature_2m_max.push(32 + ((d + 1) % 3));
-        precipitation_sum.push(d === 2 || d === 4 ? 4.2 : 0.6);
-    }
-
-    const sample = {
-        current: {
-            temperature_2m: temperature_2m[2],
-            apparent_temperature: apparent_temperature[2],
-            relative_humidity_2m: relative_humidity_2m[2],
-            wind_speed_10m: wind_speed_10m[2],
-            pressure_msl: 1011,
-            weather_code: 2,
-            soil_moisture_0_to_1cm: soil_moisture_0_to_1cm[2],
-        },
-        hourly: {
-            time: times,
-            temperature_2m,
-            apparent_temperature,
-            relative_humidity_2m,
-            precipitation_probability,
-            precipitation,
-            rain,
-            wind_speed_10m,
-            soil_moisture_0_to_1cm,
-        },
-        daily: {
-            time: dailyTime,
-            temperature_2m_min,
-            temperature_2m_max,
-            precipitation_sum,
-        },
-        air: { hourly: { us_aqi: [42] } },
-        conditionKey: 'weather.cloudy',
-        latitude,
-        longitude,
-        fetchedAt: new Date().toISOString(),
-        isSample: true,
-    };
-    sample.advisories = buildAdvisories(sample);
-    return sample;
-}
+export function buildSampleWeather() { return null; }
 
 /**
  * Map a backend WeatherForecastResponse into the same normalized shape

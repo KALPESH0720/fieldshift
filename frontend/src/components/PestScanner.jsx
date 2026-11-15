@@ -354,19 +354,6 @@ export default function PestScanner() {
     setScanCount((c) => c + 1);
   }, [scanCount]);
 
-  const handleSampleScan = useCallback(async () => {
-    const sampleResult = DISEASE_RESULTS[scanCount % DISEASE_RESULTS.length];
-    const sampleCrop = getCrop(sampleResult.cropId);
-    setImagePreview(sampleCrop?.card || '/crops/paddy-card.webp');
-    setIsObjectUrl(false);
-    setResult(null);
-    setScanning(true);
-    await new Promise((r) => setTimeout(r, 950));
-    setScanning(false);
-    setResult(sampleResult);
-    setScanCount((c) => c + 1);
-  }, [scanCount]);
-
   const reset = () => {
     if (imagePreview && isObjectUrl) URL.revokeObjectURL(imagePreview);
     setImagePreview(null);
@@ -473,16 +460,7 @@ export default function PestScanner() {
                 </div>
               </motion.button>
 
-              <div className="flex justify-center">
-                <button
-                  type="button"
-                  onClick={handleSampleScan}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 shadow-xs transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-rose-700 dark:hover:bg-rose-500/10"
-                >
-                  <Sparkles size={13} className="text-rose-500" />
-                  {t('pest.trySampleScan')}
-                </button>
-              </div>
+
             </div>
           ) : (
             <motion.div

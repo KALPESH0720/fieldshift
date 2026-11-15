@@ -1,3 +1,5 @@
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from '../db/db';
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -39,78 +41,30 @@ const DEFAULT_CROP_RATE = {
   ureaCostInrPerKg: 6.5,
 };
 
-// Mock dataset of 7 FPO member farmers with multi-plot holdings
-const FPO_MEMBERS = [
-  {
-    id: 'fpo-member-1',
-    nameKey: 'group.members.ramesh',
-    villageKey: 'group.villages.dicholi',
-    status: 'onTrack',
-    plots: [
-      { id: 'plot-101', areaHectares: 1.4, primaryCrop: 'cashew' },
-      { id: 'plot-102', areaHectares: 0.8, primaryCrop: 'moong' },
-    ],
-  },
-  {
-    id: 'fpo-member-2',
-    nameKey: 'group.members.savitri',
-    villageKey: 'group.villages.amona',
-    status: 'sowingDelayed',
-    plots: [
-      { id: 'plot-201', areaHectares: 1.5, primaryCrop: 'paddy' },
-      { id: 'plot-202', areaHectares: 0.6, primaryCrop: 'moong' },
-    ],
-  },
-  {
-    id: 'fpo-member-3',
-    nameKey: 'group.members.mohan',
-    villageKey: 'group.villages.sanquelim',
-    status: 'onTrack',
-    plots: [
-      { id: 'plot-301', areaHectares: 2.0, primaryCrop: 'sugarcane' },
-      { id: 'plot-302', areaHectares: 0.9, primaryCrop: 'paddy' },
-    ],
-  },
-  {
-    id: 'fpo-member-4',
-    nameKey: 'group.members.anita',
-    villageKey: 'group.villages.mulgao',
-    status: 'onTrack',
-    plots: [
-      { id: 'plot-401', areaHectares: 1.2, primaryCrop: 'cashew' },
-      { id: 'plot-402', areaHectares: 0.5, primaryCrop: 'cowpea' },
-    ],
-  },
-  {
-    id: 'fpo-member-5',
-    nameKey: 'group.members.vishnu',
-    villageKey: 'group.villages.honda',
-    status: 'sowingDelayed',
-    plots: [
-      { id: 'plot-501', areaHectares: 1.8, primaryCrop: 'paddy' },
-      { id: 'plot-502', areaHectares: 0.7, primaryCrop: 'groundnut' },
-    ],
-  },
-  {
-    id: 'fpo-member-6',
-    nameKey: 'group.members.laxmi',
-    villageKey: 'group.villages.mayem',
-    status: 'onTrack',
-    plots: [
-      { id: 'plot-601', areaHectares: 1.1, primaryCrop: 'moong' },
-      { id: 'plot-602', areaHectares: 0.8, primaryCrop: 'paddy' },
-    ],
-  },
-  {
-    id: 'fpo-member-7',
-    nameKey: 'group.members.prakash',
-    villageKey: 'group.villages.narva',
-    status: 'inputsPending',
-    plots: [
-      { id: 'plot-701', areaHectares: 1.3, primaryCrop: 'groundnut' },
-    ],
-  },
-];
+function plotsToFpoMembers(plots) {
+  if (!plots || plots.length === 0) return [];
+  const groups = new Map();
+  plots.forEach((p, idx) => {
+    const villageName = p.village || 'Local Village';
+    const key = p.farmerName || p.village || p.name || `Holding ${idx + 1}`;
+    if (!groups.has(key)) {
+      groups.set(key, {
+        id: `member-${groups.size + 1}`,
+        name: p.farmerName || p.name || `Farmer ${groups.size + 1}`,
+        village: villageName,
+        status: p.isVerified ? 'onTrack' : 'inputsPending',
+        plots: [],
+      });
+    }
+    const areaHa = p.areaHectares ? Number(p.areaHectares) : (Number(p.area) || 1) * 0.4047;
+    groups.get(key).plots.push({
+      id: `plot-${p.id || idx}`,
+      areaHectares: Number(areaHa.toFixed(2)),
+      primaryCrop: p.primaryCrop || 'paddy',
+    });
+  });
+  return Array.from(groups.values());
+}
 
 function aggregateFpoDemand(members) {
   const cropMap = new Map();
@@ -176,7 +130,9 @@ function aggregateFpoDemand(members) {
 
     return {
       id: farmer.id,
+      name: farmer.name,
       nameKey: farmer.nameKey,
+      village: farmer.village,
       villageKey: farmer.villageKey,
       status: farmer.status,
       plotCount: farmer.plots.length,
@@ -233,7 +189,9 @@ export default function GroupDashboard() {
   const { t, languageInfo } = useTranslation();
   const locale = languageInfo.speechLang || 'en-IN';
 
-  const summary = useMemo(() => aggregateFpoDemand(FPO_MEMBERS), []);
+  const plots = useLiveQuery(() => db.plots.toArray()) || [];
+  const members = useMemo(() => plotsToFpoMembers(plots), [plots]);
+  const summary = useMemo(() => aggregateFpoDemand(members), [members]);
 
   const formatNum = (value, maxDecimals = 0) =>
     formatSpeakableNumber(value, locale, maxDecimals);
@@ -520,7 +478,14 @@ export default function GroupDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {summary.farmerRows.map(
+                {summary.farmerRows.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-12 text-center text-sm font-medium text-slate-500">
+                        {t('group.noPlotsRegistered') || 'No member fields registered yet. Register your plots in the Farm tab to see collective input aggregation.'}
+                      </td>
+                    </tr>
+                  ) : (
+                    summary.farmerRows.map(
                   ({
                     id,
                     nameKey,
@@ -532,7 +497,7 @@ export default function GroupDashboard() {
                     seedKg,
                     ureaKg,
                   }) => {
-                    const farmerName = t(nameKey);
+                    const farmerName = nameKey ? t(nameKey) : (name || "Farmer");
                     const initial = Array.from(farmerName)[0] || 'F';
                     const plotCountLabel =
                       plotCount === 1
@@ -555,7 +520,7 @@ export default function GroupDashboard() {
                           </div>
                         </td>
                         <td className="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400">
-                          {t(villageKey)}
+                          {villageKey ? t(villageKey) : (village || "Local")}
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-wrap items-center gap-2">
@@ -595,7 +560,7 @@ export default function GroupDashboard() {
                         </td>
                       </tr>
                     );
-                  },
+                  })
                 )}
               </tbody>
             </table>

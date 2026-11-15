@@ -7,7 +7,7 @@ import {
   Package,
   X,
 } from 'lucide-react';
-import { getMockStartupNotifications } from '../services/mockEngine';
+
 import { useTranslation } from '../context/LanguageContext';
 import { getCropById, getCropDisplayName } from '../data/crops';
 import ListenButton from './ui/ListenButton';
@@ -205,7 +205,7 @@ function NotificationToast({ notif, onDismiss, onPinnedChange }) {
 
 export default function StartupNotifications() {
   const { t } = useTranslation();
-  const [queue] = useState(() => (hasShownThisSession() ? [] : getMockStartupNotifications()));
+  const [queue] = useState([]);
   const [visible, setVisible] = useState([]);
   const pinnedIdsRef = useRef(new Set());
 

@@ -22,7 +22,7 @@ import {
   YAxis,
 } from 'recharts';
 import { useTranslation } from '../context/LanguageContext';
-import { buildSampleWeather, fetchWeather, getCachedWeather } from '../services/weather';
+import { fetchWeather, getCachedWeather } from '../services/weather';
 import Select from './ui/Select';
 import ListenButton from './ui/ListenButton';
 import {
@@ -191,12 +191,7 @@ export default function WeatherPanel({ plots = [] }) {
     localStorage.setItem(UNIT_KEY, JSON.stringify(next));
   };
 
-  const handleLoadSample = () => {
-    const sample = buildSampleWeather(selectedPlot);
-    setWeather(sample);
-    setStale(true);
-    setError('');
-  };
+
 
   const hourlySeries = useMemo(() => {
     const rawTimes = weather?.hourly?.time || [];
@@ -376,13 +371,6 @@ export default function WeatherPanel({ plots = [] }) {
           >
             <RefreshCw size={15} />
             {t('weather.retry')}
-          </button>
-          <button
-            type="button"
-            onClick={handleLoadSample}
-            className="inline-flex items-center gap-2 rounded-lg border border-rose-300 bg-white px-3.5 py-2 text-sm font-semibold text-rose-800 hover:bg-rose-100 dark:border-rose-800 dark:bg-slate-900 dark:text-rose-200"
-          >
-            {t('weather.loadSampleForecast')}
           </button>
         </div>
       </div>

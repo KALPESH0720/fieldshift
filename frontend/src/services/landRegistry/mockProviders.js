@@ -81,24 +81,7 @@ function createMockProvider([id, countryCodes, name, agencyName]) {
         consentScopes: ['parcel boundary', 'land-use record', 'eligibility status'],
         isAvailable: () => true,
         async fetchVerifiedParcels() {
-            await new Promise((resolve) => setTimeout(resolve, 1200));
-            const countryCode = countryCodes[0];
-            const center = CENTERS[countryCode] || [0, 0];
-            const crops = pickAvailableCrops(COUNTRY_PARCEL_CROPS[countryCode] || ['rice', 'wheat', 'maize']);
-            return [0, 1, 2].map((index) => ({
-                id: `${id}-${index + 1}`,
-                parcelRef: `${countryCode}-${145 + index}/2A`,
-                countryCode,
-                geometry: { type: 'Polygon', coordinates: [polygonAround(center, index)] },
-                areaHa: Number((1.1 + index * 0.45).toFixed(2)),
-                landUse: PARCEL_LAND_USES[index] || 'Field Parcel',
-                cropDeclared: crops[index],
-                ownerStatus: index === 2 ? 'tenant' : 'owner',
-                source: id,
-                isVerified: true,
-                verifiedAt: new Date().toISOString(),
-                registryUrl: `https://example.org/registry/${id}/${index + 1}`,
-            }));
+            throw new Error('Official government registry synchronization requires verified API credentials. Please map your field manually using the satellite map.');
         },
     };
 }
